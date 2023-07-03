@@ -19,7 +19,7 @@
         <div class="col-lg-12">
           <form id="search-form" name="gs" method="submit" role="search" action="#">
             <div class="row">
-              <div class="col-lg-3 align-self-center">
+              <div class="col-lg-4 align-self-center">
                   <fieldset>
                       <select name="area" class="form-select" aria-label="Area" id="chooseCategory" onchange="this.form.click()">
                           <option selected>All Areas</option>
@@ -29,12 +29,12 @@
                       </select>
                   </fieldset>
               </div>
-              <div class="col-lg-3 align-self-center">
+              <div class="col-lg-4 align-self-center">
                   <fieldset>
                       <input type="address" name="address" class="searchText" placeholder="Enter a location" autocomplete="on" required>
                   </fieldset>
               </div>
-              <div class="col-lg-3 text-right">                        
+              <div class="col-lg-4 text-right">                        
                   <fieldset>
                       <button class="main-button" style="background-color: #FFA63C;"><i class="fa fa-search"></i> Search Now</button>
                   </fieldset>
