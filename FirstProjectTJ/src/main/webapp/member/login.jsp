@@ -16,23 +16,10 @@ margin : 0px auto;
 width:500px;
 }
 </style>
-<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-Shadowbox.init({
-   players:['iframe']
-});
 
-$(function(){
-   $('#joinBtn').click(function(){
-      Shadowbox.open({
-         content:'../member/join.do',
-         player:'iframe',
-         width:800,
-         height:700,
-         title:'회원가입'
-      })
-   });
+$(function(){ 
 
    $('#loginBtn').click(function(){
       let id = $('#id').val();
@@ -68,6 +55,12 @@ $(function(){
          }
       });
    });
+   $('#joinBtn').click(function() {
+	   // 회원가입 페이지로 이동
+	   parent.location.href = "../member/join.do";
+	   // Shadowbox 닫기
+	   Shadowbox.close();
+	 });
 });
 </script>
 </head>

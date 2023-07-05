@@ -13,6 +13,10 @@
   margin: 0px auto;
   width:100%;
 }
+.header-signup {
+  background-color: white; /* 원하는 색상으로 변경 */
+}
+
 </style>
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -31,27 +35,31 @@ $(function(){
          player:'iframe',
          width:800,
          height:600,
-         title:'  '
+         title:'로그인'
       })
    })
+  let currentUrl = window.location.href;
+  if (currentUrl.indexOf("join.do") > -1) {
+    $('.header-area').addClass('header-signup');
+  }
 })
 </script>
 </head>
 <body>
 <!-- ***** Header Area Start ***** -->
 <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
-  <div class="container">
+  <div class="container"	>
     <div class="row">
       <div class="col-12">
         <nav class="main-nav">
           <!-- ***** Logo Start ***** -->
-          <a href="main.jsp" class="logo">
+          <a href="../main/main.do" class="logo">
           </a>
           <!-- ***** Logo End ***** -->
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
 			<li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="../category.html" role="button" data-bs-toggle="dropdown">Travel</a>
+			  <a class="nav-link dropdown-toggle" href="../category.html" role="button" data-bs-toggle="dropdown" style="color:gray">Travel</a>
 			  <ul class="dropdown-menu">
 			    <li><a class="dropdown-item" href="#">Travel Search</a></li>
 			    <li><a class="dropdown-item" href="#">Travel Course</a></li>
@@ -59,7 +67,7 @@ $(function(){
 			  </ul>
 			</li> 
 			<li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="../listing.html" role="button" data-bs-toggle="dropdown">Reservation</a>
+			  <a class="nav-link dropdown-toggle" href="../listing.html" role="button" data-bs-toggle="dropdown"style="color:gray">Reservation</a>
 			  <ul class="dropdown-menu">
 			    <li><a class="dropdown-item" href="#">Activity</a></li>
 			    <li><a class="dropdown-item" href="#">Hotel</a></li>
@@ -68,7 +76,7 @@ $(function(){
 			  </ul>
 			</li> 
 			<li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="../contact.html" role="button" data-bs-toggle="dropdown">Community</a>
+			  <a class="nav-link dropdown-toggle" href="../contact.html" role="button" data-bs-toggle="dropdown"style="color:gray">Community</a>
 			  <ul class="dropdown-menu">
 			    <li><a class="dropdown-item" href="#">Notice</a></li>
 			    <li><a class="dropdown-item" href="#">QnA</a></li>
