@@ -42,6 +42,10 @@ $(function(){
   if (currentUrl.indexOf("join.do") > -1) {
     $('.header-area').addClass('header-signup');
   }
+  let currentUrl1 = window.location.href;
+  if (currentUrl.indexOf("list.do") > -1) {
+    $('.header-area').addClass('header-signup');
+  }
 })
 </script>
 </head>
@@ -62,7 +66,7 @@ $(function(){
 			  <a class="nav-link dropdown-toggle" href="../category.html" role="button" data-bs-toggle="dropdown" style="color:gray">Travel</a>
 			  <ul class="dropdown-menu">
 			    <li><a class="dropdown-item" href="#">Travel Search</a></li>
-			    <li><a class="dropdown-item" href="#">Travel Course</a></li>
+			    <li><a class="dropdown-item" href="../travel/course_list.do">Travel Course</a></li>
 			    <li> </li>
 			  </ul>
 			</li> 
