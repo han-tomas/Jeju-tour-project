@@ -73,7 +73,7 @@ $(function(){
 				<li><input type="button" class="btn btn-outline-dark" id="loginBtn" value="Login"/></li>
 			</c:if>
 			<c:if test="${sessionScope.id!=null }">
-				<li><input type="button" class="btn btn-outline-dark" id="myPage" value="${sessionScope.admin=='Y'?"AdminPage":"MyPage" }"/></li>
+				<li><input type="button" class="btn btn-outline-dark" id="myPage" value="${sessionScope.admin=='y'?"AdminPage":"MyPage" }"/></li>
 				<li style="padding:0px 12px 0px 12px"><input type="button" class="btn btn-outline-dark" id="logoutBtn" value="Logout"/></li>
 			</c:if>
           </ul>
