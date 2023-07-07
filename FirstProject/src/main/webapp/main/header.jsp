@@ -17,14 +17,14 @@ $(function(){
 	$('#logoutBtn').click(function(){
 		location.href="../member/logout.do"
 	})
-	$('#loginBtn').click(function(){
-		Shadowbox.open({
-			content : '../member/login.do',
-			player : 'iframe',
-			width : 500,
-			height : 370,
-			title : 'LOGIN'
-		})
+	$('#logBtn').click(function(){
+	   Shadowbox.open({
+	      content:'../member/login.do',
+	      player:'iframe',
+	      width:600,
+	      height:370,
+	      title:'로그인'
+	   })
 	})
 	
 })
@@ -47,7 +47,7 @@ $(function(){
 			  <a class="nav-link dropdown-toggle" href="../category.html" role="button" data-bs-toggle="dropdown" style="color:black;">Travel</a>
 			  <ul class="dropdown-menu">
 			    <li><a class="dropdown-item" href="#">Travel Search</a></li>
-			    <li><a class="dropdown-item" href="#">Travel Course</a></li>
+			    <li><a class="dropdown-item" href="../travel/course_list.do">Travel Course</a></li>
 			    <li> </li>
 			  </ul>
 			</li> 
@@ -70,7 +70,7 @@ $(function(){
 			  </ul>
 			</li> 
 			<c:if test="${sessionScope.id==null }">
-				<li><input type="button" class="btn btn-outline-dark" id="loginBtn" value="Login"/></li>
+				<li><input type="button" class="btn btn-outline-dark" id="logBtn" value="Login"/></li>
 			</c:if>
 			<c:if test="${sessionScope.id!=null }">
 				<li><input type="button" class="btn btn-outline-dark" id="myPage" value="${sessionScope.admin=='y'?"AdminPage":"MyPage" }"/></li>

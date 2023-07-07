@@ -25,7 +25,7 @@
 	margin-top:5px;
 }
 .row {
-	width: 480px;
+	width: 580px;
 	height: 350px;
 	margin:5px;
 }
@@ -72,6 +72,12 @@ $(function(){
 		})
 		
 	})
+	$('#joinBtn').click(function() {
+	  // 회원가입 페이지로 이동
+	  parent.location.href = "../member/join.do";
+	  // Shadowbox 닫기
+	  Shadowbox.close();
+	});
 })
 </script>
 </head>
@@ -81,12 +87,12 @@ $(function(){
           <div class="inner-content" style="padding:0px">
               <div class="col-sm-12 align-self-center" id="contact">
                   <div class="row row1">
-                    <div class="col-sm-6" style="margin-top:10px">
+                    <div class="col-sm-12" style="margin-top:10px">
                       <fieldset>
                         아이디<input type=text name="id" id="id" placeholder="id" autocomplete="on" required>
                       </fieldset>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                       <fieldset>
                         비밀번호<input type="password" name="pwd" id="pwd" placeholder="pwd" autocomplete="on" required>
                       </fieldset>
@@ -95,6 +101,11 @@ $(function(){
                       <fieldset>
                         <button type="submit" id="logBtn" class="main-button">로그인</button>
                         <button type="submit" id="joinBtn" class="main-button">회원가입</button>
+                        <button type="submit" id="#" class="main-button">아이디 찾기</button>
+                        <button type="submit" id="#" class="main-button">비밀번호 찾기</button>
+                        <!-- <a href="#" class="btn btn-xs btn-primary">아이디 찾기</a>
+					<a href="#" class="btn btn-xs btn-primary">비밀번호 찾기</a> -->
+                        
                       </fieldset>
                     </div>
                   </div>

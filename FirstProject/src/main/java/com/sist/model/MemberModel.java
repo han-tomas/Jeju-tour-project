@@ -49,113 +49,87 @@ public class MemberModel {
 		
 		return "redirect:../main/main.do";
 	}
-//	@RequestMapping("member/join.do")
-//	public String memberJoin(HttpServletRequest request, HttpServletResponse response) {
-//		request.setAttribute("main_jsp", "../member/join.jsp");
-//		return "../main/main.jsp";
-//	}
-//	@RequestMapping("member/idCheck.do")
-//	public String memberIdCheck(HttpServletRequest request, HttpServletResponse response) {
-//		return "../member/idCheck.jsp";
-//	}
-//	@RequestMapping("member/idCheck_ok.do")
-//	public void memberIdCheckOk(HttpServletRequest request, HttpServletResponse response) {
-//		String id = request.getParameter("id");
-//		MemberDAO dao = MemberDAO.newInstance();
-//		int count = dao.memberIdCheck(id);
-//		// 데이터를 Ajax로 전송 ==> success:function(result)
-//		try {
-//			PrintWriter out = response.getWriter();
-//			out.println(count);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	@RequestMapping("member/postFind.do")
-//	public String memberPostFind(HttpServletRequest request, HttpServletResponse response) {
-//		return "../member/postFind.jsp"; // 화면출력
-//	}
-//	@RequestMapping("member/postFind_result.do")
-//	public String memberPostFindResult(HttpServletRequest request, HttpServletResponse response) {
-//		try {
-//			request.setCharacterEncoding("UTF-8");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		String dong = request.getParameter("dong");
-//		MemberDAO dao = MemberDAO.newInstance();
-//		int count = dao.postFindCount(dong);
-//		List<ZipCodeVO> list = dao.postFindData(dong);
-//		
-//		request.setAttribute("count", count);
-//		request.setAttribute("list", list);
-//		
-//		return "../member/postFind_result.jsp";
-//	}
-//	@RequestMapping("member/join_ok.do")
-//	public String memberJoinOk(HttpServletRequest request, HttpServletResponse response) {
-//		try {
-//			request.setCharacterEncoding("UTF-8");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		String id = request.getParameter("id");
-//		String pwd = request.getParameter("pwd");
-//		String name = request.getParameter("name");
-//		String sex = request.getParameter("sex");
-//		String birth = request.getParameter("birth");
-//		String email = request.getParameter("email");
-//		String post = request.getParameter("post");
-//		String addr1 = request.getParameter("addr1");
-//		String addr2 = request.getParameter("addr2");
-//		String phone1 = request.getParameter("phone1");
-//		String phone = request.getParameter("phone");
-//		String content = request.getParameter("content");
-//		
-//		MemberVO vo = new MemberVO();
-//		vo.setId(id);
-//		vo.setPwd(pwd);
-//		vo.setName(name);
-//		vo.setSex(sex);
-//		vo.setBirth(birth);
-//		vo.setEmail(email);
-//		vo.setPost(post);
-//		vo.setAddr1(addr1);
-//		vo.setAddr2(addr2);
-//		vo.setPhone(phone1+"-"+phone);
-//		vo.setContent(content);
-//		
-//		MemberDAO dao = MemberDAO.newInstance();
-//		dao.memberInsert(vo);
-//		
-//		// 이동
-//		return "redirect:../main/main.do";
-//	}
-//	@RequestMapping("member/login2.do")
-//	public void memberLogin2(HttpServletRequest request, HttpServletResponse response) {
-//		String id = request.getParameter("id");
-//		String pwd = request.getParameter("pwd");
-//		MemberDAO dao = MemberDAO.newInstance();
-//		MemberVO vo = dao.memberLogin(id, pwd);
-//		HttpSession session = request.getSession();
-//		
-//		// 로그인 => 사용자의 일부 정보를 저장
-//		if (vo.getMsg().equals("OK")) {
-//			session.setAttribute("id", vo.getId());
-//			session.setAttribute("name", vo.getName());
-//			session.setAttribute("sex", vo.getSex());
-//			session.setAttribute("admin", vo.getAdmin());
-//			// 전역변수 => 모든 JSP에서 사용이 가능
-//		}
-//		// => 결과값을 전송 => Ajax
-//		try {
-//			// 사용자 브라우저에 읽어가는 메모리 공간
-//			PrintWriter out = response.getWriter();
-//			
-//			out.println(vo.getMsg()); // NOID, NOPWD, OK			
-//			
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	@RequestMapping("member/join.do")
+	public String memberJoin(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("main_jsp", "../member/join.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("member/idcheck.do")
+	public String memberIdCheck(HttpServletRequest request, HttpServletResponse response) {
+		return "../member/idcheck.jsp";
+	}
+	@RequestMapping("member/idcheck_ok.do")
+	public void memberIdCheckOk(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		MemberDAO dao = MemberDAO.newInstance();
+		int count = dao.memberIdCheck(id);
+		// 데이터를 Ajax로 전송 ==> success:function(result)
+		try {
+			PrintWriter out = response.getWriter();
+			out.println(count);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@RequestMapping("member/postfind.do")
+	public String memberPostFind(HttpServletRequest request, HttpServletResponse response) {
+		return "../member/postfind.jsp"; // 화면출력
+	}
+	@RequestMapping("member/postfind_result.do")
+	public String memberPostFindResult(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String dong = request.getParameter("dong");
+		MemberDAO dao = MemberDAO.newInstance();
+		int count = dao.postFindCount(dong);
+		List<ZipCodeVO> list = dao.postFindData(dong);
+		
+		request.setAttribute("count", count);
+		request.setAttribute("list", list);
+		
+		return "../member/postfind_result.jsp";
+	}
+	@RequestMapping("member/join_ok.do")
+	public String memberJoinOk(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String name = request.getParameter("name");
+		String sex = request.getParameter("sex");
+		String birth = request.getParameter("birth");
+		String email = request.getParameter("email");
+		String post = request.getParameter("post");
+		String addr1 = request.getParameter("addr1");
+		String addr2 = request.getParameter("addr2");
+		String phone1 = request.getParameter("phone1");
+		String phone = request.getParameter("phone");
+		String content = request.getParameter("content");
+		
+		MemberVO vo = new MemberVO();
+		vo.setId(id);
+		vo.setPwd(pwd);
+		vo.setName(name);
+		vo.setSex(sex);
+		vo.setBirth(birth);
+		vo.setEmail(email);
+		vo.setPost(post);
+		vo.setAddr1(addr1);
+		vo.setAddr2(addr2);
+		vo.setPhone(phone1+"-"+phone);
+		vo.setContent(content);
+		
+		MemberDAO dao = MemberDAO.newInstance();
+		dao.memberInsert(vo);
+		
+		// 이동
+		return "redirect:../main/main.do";
+	}
+
 }
