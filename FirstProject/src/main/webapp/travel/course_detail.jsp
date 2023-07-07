@@ -6,7 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+.row1 {
+	margin: 0px auto;
+  	width: 1100px;
+}
+</style>
 </head>
 <body>
 <div class="page-heading">
@@ -21,7 +26,8 @@
 </div>
 <div class="popular-categories">
     <div class="container">
-    	<div class="col-sm-6">
+    <div class="row row1">
+    	<div class="col-lg-6">
     	<table class="table">
     	<tr>
     		<td>
@@ -30,7 +36,7 @@
     	</tr>
     	</table>
     	</div>
-    	<div class="col-sm-6">
+    	<div class="col-lg-6">
     		<div id="map" style="width:100%;height:350px;"></div>
     		<script>
 			// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
@@ -87,6 +93,8 @@
 			}
 			</script>
     	</div>
+    	</div>
+    	<div class="row row1">
     	<table class="table">
     	<tr>
     		<td class="text-center inline" style="color: white;background-color: orange"><h2>${cvo.title }</h2></td>
@@ -139,7 +147,7 @@
         </tr>  
         </c:if>
     	</table>
-    	
+    	</div>
     </div>
 </div>   
 </body>

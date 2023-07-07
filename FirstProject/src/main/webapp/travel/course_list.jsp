@@ -6,7 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+.btn-sm {
+	font-size:0.5rem;
+}
+</style>
 </head>
 <body>
 <div class="page-heading">
@@ -24,18 +28,18 @@
       <div class="row">
       <c:forEach var="vo" items="${list }">
       <div class="col-md-4">
-	     <div class="thumbnail" style="width: 350px;">
+	     <div class="thumbnail" style="width: 350px; margin-bottom:15px;">
 	      <a href="course_detail.do?cno=${vo.cno }">
-	        <img src="${vo.poster }" alt="Lights" style="width:350px; height: 250px">
+	        <img src="${vo.poster }" alt="Lights" style="width:350px; height: 250px; border-radius:3px;">
 	        <div class="caption">
 	        
-	          <p class="text-right">
-	          	<input type=button class="btn btn-xs btn-warning" value="추천수(${vo.recommend })">
-	          	<input type=button class="btn btn-xs btn-danger" value="찜한수(${vo.jjim })">
-	          	<input type=button class="btn btn-xs btn-info" value="복사한수(${vo.copy })">
-	          	<input type=button class="btn btn-xs btn-success" value="조회수(${vo.views })">
+	          <p class="text-center" style="margin-top:2px;">
+	          	<input type=button class="btn btn-sm btn-warning" value="추천수(${vo.recommend })">
+	          	<input type=button class="btn btn-sm btn-danger" value="찜한수(${vo.jjim })">
+	          	<input type=button class="btn btn-sm btn-info" value="복사한수(${vo.copy })">
+	          	<input type=button class="btn btn-sm btn-success" value="조회수(${vo.views })">
 	          </p>
-	          <p>${vo.title }</p>
+	          <p class="text-center">${vo.title }</p>
 	        </div>
 	      </a>
     	 </div>
