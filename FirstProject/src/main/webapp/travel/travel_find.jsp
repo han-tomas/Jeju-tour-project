@@ -41,6 +41,7 @@ $(function(){
   			<a href ="../travel/travel_find.do?lno=1&fd=${fd }" class="btn btn-sm btn-info">관광지</a><!-- lno=1 -->
   			<a href ="../travel/travel_find.do?lno=2&fd=${fd }" class="btn btn-sm btn-warning">음식점</a><!-- lno=2 -->
   			<a href ="../travel/travel_find.do?lno=3&fd=${fd }" class="btn btn-sm btn-success">숙박</a><!-- lno=3 -->
+  			<a href ="../travel/travel_find.do?lno=4&fd=${fd }" class="btn btn-sm btn-primary">행사/축제</a><!-- lno=3 -->
   		</div>
   	</div>
    		<div class="row">
@@ -52,7 +53,7 @@ $(function(){
 		          	<c:if test="${lno!=null }">
 		          	<input type=hidden name=lno value="${lno }">
 		          	</c:if>
-		          	<input type=button value="검색" class="btn btn-sm btn-danger" id="findBtn">
+		          	<input type=button value="검색" class="btn btn-sm btn-secondary" id="findBtn">
 		          	</form>
   				</td>
   			</tr>

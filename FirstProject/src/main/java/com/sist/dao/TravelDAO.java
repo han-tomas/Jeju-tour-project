@@ -61,9 +61,13 @@ public class TravelDAO {
 				{
 					label="음식점";
 				}
-				else
+				else if(rs.getInt(6)==3)
 				{
 					label="숙박";
+				}
+				else
+				{
+					label="행사/축제";
 				}
 				vo.setLabel(label);
 				list.add(vo);
@@ -125,9 +129,13 @@ public class TravelDAO {
 				{
 					label="음식점";
 				}
-				else
+				else if(rs.getInt(6)==3)
 				{
 					label="숙박";
+				}
+				else
+				{
+					label="행사/축제";
 				}
 				vo.setLabel(label);
 				list.add(vo);
