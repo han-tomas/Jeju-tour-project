@@ -49,7 +49,9 @@ $(function(){
   				<td>
   					<form method="get" action="../travel/travel_find.do" class="inline" id="locFrm">
 		          	<input type=text name=fd id=fd size=20 class="input-sm" value="${fd }">
+		          	<c:if test="${lno!=null }">
 		          	<input type=hidden name=lno value="${lno }">
+		          	</c:if>
 		          	<input type=button value="검색" class="btn btn-sm btn-danger" id="findBtn">
 		          	</form>
   				</td>
