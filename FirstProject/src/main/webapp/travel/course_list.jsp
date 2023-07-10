@@ -30,7 +30,7 @@
       <div class="col-md-4">
 	     <div class="thumbnail" style="width: 350px; margin-bottom:15px;">
 	      <a href="course_detail.do?cno=${vo.cno }">
-	        <img src="${vo.poster }" alt="Lights" style="width:350px; height: 250px; border-radius:3px;">
+	        <img src="${vo.poster }" alt="Lights" style="width:350px; height: 250px; border-radius:10px;">
 	        <div class="caption">
 	        
 	          <p class="text-center" style="margin-top:2px;">

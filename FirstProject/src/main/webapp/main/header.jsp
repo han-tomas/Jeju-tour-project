@@ -46,8 +46,8 @@ $(function(){
 			<li class="nav-item dropdown">
 			  <a class="nav-link dropdown-toggle" href="../category.html" role="button" data-bs-toggle="dropdown" style="color:black;">Travel</a>
 			  <ul class="dropdown-menu">
-			    <li><a class="dropdown-item" href="#">Travel Search</a></li>
-			    <li><a class="dropdown-item" href="#">Travel Course</a></li>
+			    <li><a class="dropdown-item" href="../travel/travel_find.do">Travel Search</a></li>
+			    <li><a class="dropdown-item" href="../travel/course_list.do">Travel Course</a></li>
 			    <li> </li>
 			  </ul>
 			</li> 
