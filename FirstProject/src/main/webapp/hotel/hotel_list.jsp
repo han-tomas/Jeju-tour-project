@@ -195,7 +195,7 @@
 <script type="text/javascript">
 $(function () {
 	$('#category_1').click(function(){
-		location.replace('../hotel/activity_list.do')
+		location.replace('../activity/activity_list.do')
 	})
 	$('#category_2').click(function(){
 		location.replace('../hotel/hotel_list.do')

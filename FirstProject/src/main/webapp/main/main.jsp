@@ -9,7 +9,7 @@
 <meta name="author" content="">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5d083c9d550235410fca470511de91b0&libraries=services"></script>
 <title>Jeju Project</title>
 
 <!-- Bootstrap core CSS -->
