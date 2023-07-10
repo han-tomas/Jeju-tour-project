@@ -99,7 +99,7 @@ li {
 				success : function(result) {
 					$('#result').html(result);
 				}
-			})x
+			})
 		})
 	})
 </script>

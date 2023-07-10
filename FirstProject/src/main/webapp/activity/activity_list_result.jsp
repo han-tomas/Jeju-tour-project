@@ -11,7 +11,7 @@
 <body>
 <c:forEach var="vo" items="${ list}">
 						<div class="col-md-4" style="padding: 8px;">
-							<section class="panel" s>
+							<section class="panel">
 								<div class="pro-img-box">
 									<a
 										href="../activity/activity_detail_before.do?acino=${vo.acino }">
