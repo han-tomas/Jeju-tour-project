@@ -10,8 +10,13 @@ import com.sist.dao.*;
 import com.sist.vo.*;
 import java.sql.*;
 public class ActivityModel {
-	@RequestMapping("activity/activity_list.do")
+	@RequestMapping("activity/activity_list.do") 
 	public String activity_list(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("main_jsp", "../activity/activity_list.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("activity/activity_list_result.do")
+	public String activity_list_result(HttpServletRequest request, HttpServletResponse response) {
 		
 		String page=request.getParameter("page");
 		if(page==null)
@@ -41,8 +46,7 @@ public class ActivityModel {
 		request.setAttribute("cList", cList);
 		request.setAttribute("list", list);
 		
-		request.setAttribute("main_jsp", "../activity/activity_list.jsp");
-		return "../main/main.jsp";
+		return "../activity/activity_list_result.jsp";
 	}
 	
 	@RequestMapping("activity/activity_detail_before.do")
