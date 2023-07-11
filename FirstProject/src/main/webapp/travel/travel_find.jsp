@@ -36,7 +36,7 @@ $(function(){
 <div class="popular-categories">
    <div class="container">
    <div class="row">
-  		<div class="text-left">
+  		<div style="text-align: right">
   			<a href ="../travel/travel_find.do" class="btn btn-sm btn-danger">전체</a>
   			<a href ="../travel/travel_find.do?lno=1&fd=${fd }" class="btn btn-sm btn-info">관광지</a><!-- lno=1 -->
   			<a href ="../travel/travel_find.do?lno=2&fd=${fd }" class="btn btn-sm btn-warning">음식점</a><!-- lno=2 -->
@@ -47,9 +47,9 @@ $(function(){
    		<div class="row">
   		<table class="table">
   			<tr>
-  				<td>
+  				<td style="text-align: right">
   					<form method="post" action="../travel/travel_find.do" class="inline" id="locFrm">
-		          	<input type=text name=fd id=fd size=20 class="input-sm" value="${fd }">
+		          	<input type=text name=fd id=fd size=26 class="input-sm" value="${fd }">
 		          	<c:if test="${lno!=null }">
 		          	<input type=hidden name=lno value="${lno }">
 		          	</c:if>
