@@ -103,7 +103,7 @@ public class MemberModel {
 		String pwd = request.getParameter("pwd");
 		String name = request.getParameter("name");
 		String sex = request.getParameter("sex");
-		String birth = request.getParameter("birth");
+		String birth = request.getParameter("birthday");
 		String email = request.getParameter("email");
 		String post = request.getParameter("post");
 		String addr1 = request.getParameter("addr1");

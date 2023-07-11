@@ -37,10 +37,7 @@ h4 {
 .buyBox {
 	position: fixed;
 	width: 400px;
-}
-.buyBoxContent {
-    max-height: 300px; 
-    overflow: auto;
+
 }
 </style>
 <script type="text/javascript">
@@ -56,6 +53,17 @@ h4 {
 			showMoreImagesBtn.textContent = "더 보기";
 		}
 	}
+	$(window).scroll(function() {
+	    // 스크롤 이벤트 발생 시 실행되는 코드 작성
+		var scrollPosition = $(window).scrollTop(); // 현재 스크롤 위치
+
+	    if (scrollPosition > 200) { // 스크롤 위치가 200px 이상인 경우
+	        $('.buybox').addClass('sticky'); // buybox 테이블에 sticky 클래스 추가
+	    } else {
+	        $('.buybox').removeClass('sticky'); // buybox 테이블에서 sticky 클래스 제거
+	    }
+	});
+	});
 </script>
 </head>
 <body>
@@ -186,9 +194,7 @@ h4 {
 							</tr>
 							<tr>
 								<td>
-									<button class="btn btn-block btn-info">
-										<h4>⚡️ 티켓 선택</h4>
-									</button>
+								<a href="../activity/activity_" class="btn btn-block btn-info"><h4>⚡️ 티켓 선택</h4></a>
 								</td>
 							</tr>
 							<tr>
