@@ -11,7 +11,8 @@
 <meta name="author" content="">
 <title>Insert title here</title>
 <!-- Bootstrap core CSS -->
-<link href="../assets/css/bootstrap.css" rel="stylesheet">
+ <!-- <link href="../assets/css/bootstrap.css" rel="stylesheet">  -->
+ <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Fontawesome core CSS -->
 <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
 <!--GOOGLE FONT -->
@@ -73,10 +74,14 @@ li {
 	vertical-align: middle;
 	margin-top: -5px;
 }
+.container1{
+	width:1000px;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 	$(function() {
+		let accno=1;		
 		$.ajax({
 			type : 'GET',
 			url : '../activity/activity_list_result.do',
@@ -115,7 +120,7 @@ li {
 		</div>
 	</div>
 	<div style="height: 100px"></div>
-	<div class="container">
+	<div class="container container1">
 		<div class="row">
 			<div class="col-md-3">
 				<div>

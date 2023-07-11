@@ -12,6 +12,33 @@ import java.sql.*;
 public class ActivityModel {
 	@RequestMapping("activity/activity_list.do") 
 	public String activity_list(HttpServletRequest request, HttpServletResponse response) {
+		String page=request.getParameter("page");
+		if(page==null)
+			page="1";
+		String accno=request.getParameter("accno");
+		if(accno==null)
+			accno="1";
+		ActivityDAO dao=ActivityDAO.newInstance();
+		List<ActivityCategoryVO> cList=dao.activityCategoryListData();
+		List<ActivityVO> list=dao.activityListData(Integer.parseInt(page), Integer.parseInt(accno));
+		int totalCategory=dao.totalCategoryCount(Integer.parseInt(accno));
+		int curpage=Integer.parseInt(page);
+		int totalpage=dao.activityTotalPage(Integer.parseInt(accno));
+		final int BLOCK=5;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		if(endPage>totalpage) {
+			endPage=totalpage;
+		}
+		
+		request.setAttribute("accno", accno);
+		request.setAttribute("totalCategory", totalCategory);
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("cList", cList);
+		request.setAttribute("list", list);
 		request.setAttribute("main_jsp", "../activity/activity_list.jsp");
 		return "../main/main.jsp";
 	}

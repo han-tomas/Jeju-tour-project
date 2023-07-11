@@ -49,16 +49,15 @@ h4 {
 </script>
 </head>
 <body>
-<div class="page-heading">
-	    <div class="container">
-	      <div class="row">
-	        <div class="col-lg-8">
-	          <div class="top-text header-text">
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+	<div class="page-heading">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="top-text header-text"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div style="height: 120px;"></div>
 	<div class="container">
 		<div class="row">
@@ -159,19 +158,17 @@ h4 {
 										}
 									});
 				</script>
-			</div>
 			<h4 class="text-left">사용 방법</h4>
 			<pre style="background-color: white;">${vo.how_use }</pre>
-
+			</div>
+			<div class="col-sm-4">
+				<table class="table">
+					<tr>
+						<td>구매하기 들어갈 자리</td>
+					</tr>
+				</table>
+			</div>
 		</div>
-		<div class="col-sm-4">
-			<table class="table">
-				<tr>
-					<td>구매하기 들어갈 자리</td>
-				</tr>
-			</table>
-		</div>
-	</div>
 	</div>
 </body>
 </html>
