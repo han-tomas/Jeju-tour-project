@@ -8,7 +8,7 @@
 <style type="text/css">
 .row1 {
 	margin: 0px auto;
-  	width: 1200px;
+  	width: 900px;
 }
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -63,8 +63,8 @@
     <div class="container">
 	    <div class="row row1">
 	    	<div style="text-align:right;">
-	    		<a href ="../travel/course_list.do" class="btn btn-sm btn-warning">목록</a>
-	    	</div>
+    			<a href="javascript:history.back()" class="btn btn-sm btn-warning">목록</a>
+			</div>
 	    	<div style="height: 20px"></div>
 	    </div>
 	    <div class="row row1">
@@ -109,7 +109,7 @@
 						var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 						
 						// 키워드로 장소를 검색합니다
-						searchPlaces('${vo.addr} 맛집');
+						searchPlaces('${vo.road} 맛집');
 						
 						// 키워드 검색을 요청하는 함수입니다
 						function searchPlaces(keyword) {
@@ -303,10 +303,43 @@
 	    	</div>
 	    	<div class="row row1">
     			<table class="table">
+    			<!-- no,title,tag,introduction,loc,addr,road,tel,"
+					+ "poster,info,lno " -->
     				<tr>
-    					<th width=20%></th>
-    					<td width=80%></td>
+    					<th width=20% style="text-align:right;">제목</th>
+    					<td width=80%>${vo.title }</td>
     				</tr>
+    				<tr>
+    					<th width=20% style="text-align:right;">태그</th>
+    					<td width=80%>${vo.tag }</td>
+    				</tr>
+    				<tr>
+    					<th width=20% style="text-align:right;">소개</th>
+    					<td width=80%>${vo.introduction }</td>
+    				</tr>
+    				<tr>
+    					<th width=20% style="text-align:right;">위치</th>
+    					<td width=80%>${vo.loc }</td>
+    				</tr>
+    				<tr>
+    					<th width=20% style="text-align:right;">상세주소</th>
+    					<td width=80%>${vo.addr }</td>
+    				</tr>
+    				<tr>
+    					<th width=20% style="text-align:right;">지번</th>
+    					<td width=80%>${vo.road }</td>
+    				</tr>
+    				<tr>
+    					<th width=20% style="text-align:right;">전화</th>
+    					<td width=80%>${vo.tel }</td>
+    				</tr>
+    				<tr>
+    					<th width=20% style="text-align:right;">상세 설명</th>
+    					<td width=80%>
+    						<pre style="white-space: pre-wrap;">${vo.info }</pre>
+    					</td>
+    				</tr>
+    				
     			</table>
     		</div>	
 	    </div>
