@@ -10,7 +10,7 @@ import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.*;
 public class NoticeModel{
-	@RequestMapping("notice/list.do")
+	@RequestMapping("notice/notice_list.do")
 	public String notice_list(HttpServletRequest request, HttpServletResponse response) {
 	    // JSP 첫줄에 나오는 코드 <%  %>
 	    String page = request.getParameter("page");
@@ -43,18 +43,18 @@ public class NoticeModel{
 	    request.setAttribute("today", today);
 	    request.setAttribute("list", list);
 	    // notice / list.jsp로 전송
-	    request.setAttribute("main_jsp", "../notice/list.jsp");
+	    request.setAttribute("main_jsp", "../notice/notice_list.jsp");
 	    return "../main/main.jsp";
 	}
 
 	// 데이터 추가
-	@RequestMapping("notice/insert.do")
+	@RequestMapping("notice/notice_insert.do")
 	public String notice_insert(HttpServletRequest request,HttpServletResponse response) {
-		request.setAttribute("main_jsp", "../notice/insert.jsp");
+		request.setAttribute("main_jsp", "../notice/notice_insert.jsp");
 		return "../main/main.jsp";
 	}
 	
-	@RequestMapping("notice/insert_ok.do")
+	@RequestMapping("notice/notice_insert_ok.do")
 	public String notice_insert_ok(HttpServletRequest request,HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -67,7 +67,7 @@ public class NoticeModel{
 		NoticeDAO dao=NoticeDAO.newInstance();
 		dao.noticeInsert(vo);
 			
-		return "redirect:../notice/list.do"; // 실행을 다시 하도록!(.jsp 안되고, .do를 호출해야해 _ 데이터를 가져와야하니까)
+		return "redirect:../notice/notice_list.do"; // 실행을 다시 하도록!(.jsp 안되고, .do를 호출해야해 _ 데이터를 가져와야하니까)
 	}
 	
 	// 상세보기
@@ -76,20 +76,20 @@ public class NoticeModel{
 	// Model : Model / DAO / VO (세개를 묶어서 다 모델이라고 한다)
 	// 화면출력 => main / ajax => 일반jsp / _ok.do => redirect / 
 		
-	@RequestMapping("notice/detail.do")
+	@RequestMapping("notice/notice_detail.do")
 	public String notice_detail(HttpServletRequest request,HttpServletResponse response) {
 		String no=request.getParameter("no");
 		NoticeDAO dao=NoticeDAO.newInstance();
 		NoticeVO vo=dao.noticeDetailData(Integer.parseInt(no));
 		
 		request.setAttribute("vo", vo);
-		request.setAttribute("main_jsp", "../notice/detail.jsp");
+		request.setAttribute("main_jsp", "../notice/notice_detail.jsp");
 		
 		return "../main/main.jsp";
 	}
 		
 	//Ajax
-	@RequestMapping("notice/delete.do")
+	@RequestMapping("notice/notice_delete.do")
 	public void notice_delete(HttpServletRequest request,HttpServletResponse response) {
 		String no=request.getParameter("no");
 		String pwd=request.getParameter("pwd");
@@ -102,7 +102,7 @@ public class NoticeModel{
 		} catch (Exception e) {}
 	}
 	
-		@RequestMapping("notice/update.do")
+		@RequestMapping("notice/notice_update.do")
 	public String notice_update(HttpServletRequest request,HttpServletResponse response) {
 		String no=request.getParameter("no");
 		// db연동
@@ -111,12 +111,12 @@ public class NoticeModel{
 		
 		// request를 통해 값을 보낸다
 		request.setAttribute("vo", vo);
-		request.setAttribute("main_jsp", "../notice/update.jsp");
+		request.setAttribute("main_jsp", "../notice/notice_update.jsp");
 		
 		return "../main/main.jsp";
 	}
 	
-	@RequestMapping("notice/update_ok.do")
+	@RequestMapping("notice/notice_update_ok.do")
 	public String notice_update_ok(HttpServletRequest request,HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -132,6 +132,6 @@ public class NoticeModel{
 		
 		request.setAttribute("bCheck", bCheck);
 		request.setAttribute("no", vo.getNo());
-		return "../notice/update_ok.jsp";
+		return "../notice/notice_update_ok.jsp";
 	}
 }

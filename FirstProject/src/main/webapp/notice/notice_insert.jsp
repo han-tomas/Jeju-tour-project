@@ -22,7 +22,7 @@
   <div class="popular-categories">
   <div class="row1">
   <h2 class="sectiontitle">글쓰기</h2>
-  <form method=post action="../notice/insert_ok.do">
+  <form method=post action="../notice/notice_insert_ok.do">
   <table class="table">
     <tr>
       <th width=15%>이름</th>
@@ -58,6 +58,5 @@
   </form>
   </div>
   </div>
-</div>
 </body>
 </html>

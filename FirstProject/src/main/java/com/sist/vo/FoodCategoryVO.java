@@ -1,6 +1,6 @@
 package com.sist.vo;
 
-public class MangoCategoryVO {
+public class FoodCategoryVO {
 	private int mcno,hit,like_count;
 	private String title,link;
 	public int getMcno() {

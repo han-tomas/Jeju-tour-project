@@ -39,7 +39,7 @@ $(function(){
 		// delete.do?no=1$pwd=1111
 		$.ajax({
 			type: 'post',
-			url:'../notice/delete.do',
+			url:'../notice/notice_delete.do',
 			data: {"no":no,"pwd":pwd},
 			success: function(result){
 				let res=result.trim()
@@ -48,7 +48,7 @@ $(function(){
 					$('#pwd1').val("")
 					$('#pwd1').focus()
 				} else {
-					location.href="../notice/list.do"
+					location.href="../notice/notice_list.do"
 				}
 			}
 		})
@@ -85,10 +85,10 @@ $(function(){
       <tr>
         <td colspan=4 class="text-right">
           <c:if test="${sessionScope.admin=='y' }">
-          <a href="../notice/update.do?no=${vo.no }" class="btn btn-xs btn-info">수정</a>
+          <a href="../notice/notice_update.do?no=${vo.no }" class="btn btn-xs btn-info">수정</a>
           <span class="btn btn-xs btn-danger" id="del">삭제</span>
           </c:if>
-          <a href="../notice/list.do" class="btn btn-xs btn-warning">목록</a>
+          <a href="../notice/notice_list.do" class="btn btn-xs btn-warning">목록</a>
         </td>
       </tr>
       <tr style="display: none" id="delTr">

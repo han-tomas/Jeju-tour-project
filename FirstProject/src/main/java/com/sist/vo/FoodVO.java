@@ -15,7 +15,7 @@ MENU
 HIT
 LIK_COUNT
  */
-public class MangoVO {
+public class FoodVO {
 	private int fino,mcno,hit,like_count;
 	private double score;
 	private String poster,name,address,phone,type,price,parking,time,menu;

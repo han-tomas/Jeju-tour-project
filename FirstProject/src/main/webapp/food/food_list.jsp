@@ -36,27 +36,27 @@
         <div class="floating">
           <ul>
             <li style="display: inline">
-              <a href="../mango/mango_list.do?mcno=1">
+              <a href="../food/food_list.do?mcno=1">
                 <img src="image/한식.png" class="foodtype"><span style="color: black;font-size: 18px;">한식</span>
               </a>
             </li>
             <li style="display: inline">
-              <a href="../mango/mango_list.do?mcno=11">
+              <a href="../food/food_list.do?mcno=11">
                 <img src="image/양식.png" class="foodtype"><span style="color: black;font-size: 18px;">양식</span>
               </a>
             </li>
             <li style="display: inline">
-              <a href="../mango/mango_list.do?mcno=21">
+              <a href="../food/food_list.do?mcno=21">
                 <img src="image/디저트.png" class="foodtype"><span style="color: black;font-size: 18px;">디저트</span>
               </a>
             </li>
             <li style="display: inline">
-              <a href="../mango/mango_list.do?mcno=31">
+              <a href="../food/food_list.do?mcno=31">
                 <img src="image/카페.png" class="foodtype"><span style="color: black;font-size: 18px;">카페</span>
               </a>
             </li>
             <li style="display: inline">
-              <a href="../mango/mango_list.do?mcno=41">
+              <a href="../food/food_list.do?mcno=41">
                 <img src="image/치킨1.png" class="foodtype"><span style="color: black;font-size: 18px;">치킨</span>
               </a>
             </li>
@@ -67,11 +67,11 @@
       <div class="col-md-9">
         <c:forEach var="fvo" items="${flist }">
           <div class="col-md-6 ">
-	        <a href="../mango/mango_detail_before.do?fino=${fvo.fino }">
+	        <a href="../food/food_detail_before.do?fino=${fvo.fino }">
 			  <img src="${fvo.poster }" style="width: 330px;height: 280px;border-radius: 12px;">
 			</a>
 			<h4>
-			  <a href="../mango/mango_detail_before.do?fino=${fvo.fino }"><span style="color: black;">${fvo.name }</span></a>
+			  <a href="../food/food_detail_before.do?fino=${fvo.fino }"><span style="color: black;">${fvo.name }</span></a>
 			  <span style="color: orange">${fvo.score }</span>
 			</h4>
 			<h5>${fvo.address }</h5>
@@ -84,27 +84,27 @@
     
     <div class="page" style="text-align:center">
       <ul class="text-center pagenation1">
-        <li><a href="../mango/mango_list.do?mcno=${curpage>1?curpage-1:curpage}">&laquo;이전</a></li>
+        <li><a href="../food/food_list.do?mcno=${curpage>1?curpage-1:curpage}">&laquo;이전</a></li>
         <c:forEach var="i" begin="1" end="10">
           <c:if test="${curpage >= 1 && curpage <= 10 }">
             <li ${curpage==i?"class=current":"" } style="display: inline-block">
-              <a href="../mango/mango_list.do?mcno=${i}">${i }</a>
+              <a href="../food/food_list.do?mcno=${i}">${i }</a>
             </li>
           </c:if>
 	      <c:if test="${curpage >= 11 && curpage <= 20  }">
-	        <li ${curpage==i?"class=current":"" }><a href="../mango/mango_list.do?mcno=${i+10}">${i+10 }</a></li>
+	        <li ${curpage==i?"class=current":"" }><a href="../food/food_list.do?mcno=${i+10}">${i+10 }</a></li>
 	      </c:if>
 	      <c:if test="${curpage >= 21 && curpage <= 30  }">
-	        <li ${curpage==i?"class=current":"" }><a href="../mango/mango_list.do?mcno=${i+20}">${i+20}</a></li>
+	        <li ${curpage==i?"class=current":"" }><a href="../food/food_list.do?mcno=${i+20}">${i+20}</a></li>
 	      </c:if>
 		  <c:if test="${curpage >= 31 && curpage <= 40  }">
-		    <li ${curpage==i?"class=current":"" }><a href="../mango/mango_list.do?mcno=${i+30}">${i+30}</a></li>
+		    <li ${curpage==i?"class=current":"" }><a href="../food/food_list.do?mcno=${i+30}">${i+30}</a></li>
 		  </c:if>
 		  <c:if test="${curpage >= 41 && curpage <= 50  }">
-		    <li ${curpage==i?"class=current":"" }><a href="../mango/mango_list.do?mcno=${i+40}">${i+40 }</a></li>
+		    <li ${curpage==i?"class=current":"" }><a href="../food/food_list.do?mcno=${i+40}">${i+40 }</a></li>
 		  </c:if>
 	    </c:forEach>
-        <li><a href="../mango/mango_list.do?mcno=${curpage<totalpage?curpage+1:curpage }">다음&raquo;</a></li>
+        <li><a href="../food/food_list.do?mcno=${curpage<totalpage?curpage+1:curpage }">다음&raquo;</a></li>
       </ul>
     </div>
     

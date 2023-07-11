@@ -4,21 +4,21 @@ import java.sql.*;
 import com.sist.common.*;
 import com.sist.vo.*;
 
-public class MangoDAO {
+public class FoodDAO {
 	private Connection conn;
 	private PreparedStatement ps;
 	private CreateDataBase db=new CreateDataBase();
-	private static MangoDAO dao;
+	private static FoodDAO dao;
 	
-	public static MangoDAO newInstance() {
+	public static FoodDAO newInstance() {
 		if(dao==null)
-			dao=new MangoDAO();
+			dao=new FoodDAO();
 		return dao;
 	}
 	
 	// 1.카테고리 생성
-	public List<MangoCategoryVO> mangoCategoryListData(){
-		List<MangoCategoryVO> list=new ArrayList<MangoCategoryVO>();
+	public List<FoodCategoryVO> foodCategoryListData(){
+		List<FoodCategoryVO> list=new ArrayList<FoodCategoryVO>();
 		try {
 			conn=db.getConnection();
 			String sql="SELECT title,mcno "
@@ -26,7 +26,7 @@ public class MangoDAO {
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
-				MangoCategoryVO vo=new MangoCategoryVO();
+				FoodCategoryVO vo=new FoodCategoryVO();
 				vo.setTitle(rs.getString(1));
 				vo.setMcno(rs.getInt(2));
 				list.add(vo);
@@ -41,8 +41,8 @@ public class MangoDAO {
 	}
 	
 	// 실제 맛집 목록
-	public List<MangoVO> mangoListData(int mcno){
-		List<MangoVO> list=new ArrayList<MangoVO>();
+	public List<FoodVO> foodListData(int mcno){
+		List<FoodVO> list=new ArrayList<FoodVO>();
 		try {
 			conn=db.getConnection();
 			String sql = "SELECT fino, mcno, poster, name, score, address, hit, like_count, num "
@@ -62,7 +62,7 @@ public class MangoDAO {
 //	        ps.setInt(3, end);
 	        ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				MangoVO vo=new MangoVO();
+				FoodVO vo=new FoodVO();
 				vo.setFino(rs.getInt(1));
 				vo.setMcno(rs.getInt(2));
 				String poster=rs.getString(3);
@@ -92,7 +92,7 @@ public class MangoDAO {
 		return list;
 	}
 	
-	public int mangoTotalPage() {
+	public int foodTotalPage() {
 		int total=0;
 		try {
 			conn=db.getConnection();
@@ -113,8 +113,8 @@ public class MangoDAO {
 	}
 	
 	// 맛집 상세보기
-	public MangoVO mangoDetailData(int fino) {
-		MangoVO vo=new MangoVO();
+	public FoodVO foodDetailData(int fino) {
+		FoodVO vo=new FoodVO();
 		try {
 			conn=db.getConnection();
 			String sql="UPDATE food_info SET "

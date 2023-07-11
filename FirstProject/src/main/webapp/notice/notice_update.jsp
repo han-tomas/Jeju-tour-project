@@ -21,7 +21,7 @@
   <main class="container clear">
   <h2 class="sectiontitle">수정하기</h2>
   <div class="row">
-  <form method=post action="../notice/update_ok.do">
+  <form method=post action="../notice/notice_update_ok.do">
   <table class="table">
     <tr>
       <th width=15%>이름</th>

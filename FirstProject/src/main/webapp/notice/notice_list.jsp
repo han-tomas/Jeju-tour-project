@@ -37,7 +37,7 @@
    <c:if test="${sessionScope.admin=='y'}">
     <tr>
       <td>
-        <a href="../notice/insert.do" class="btn btn-sm btn-danger">새글</a>
+        <a href="../notice/notice_insert.do" class="btn btn-sm btn-danger">새글</a>
       </td>
     </tr>
     </c:if>
@@ -55,7 +55,7 @@
       <tr>
         <td width=10% class="text-center">${count }</td>
         <td width=45%>
-          <a href="../notice/detail.do?no=${vo.no}">${vo.subject }</a>
+          <a href="../notice/notice_detail.do?no=${vo.no}">${vo.subject }</a>
           &nbsp;
           <c:if test="${today.equals(vo.dbday) }">
             <sub style="color: red">new</sub>
