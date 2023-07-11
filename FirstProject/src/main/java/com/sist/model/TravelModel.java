@@ -62,4 +62,16 @@ public class TravelModel {
 		request.setAttribute("main_jsp", "../travel/travel_find.jsp");
 		return "../main/main.jsp";
 	}
+	@RequestMapping("travel/travel_find_detail.do")
+	public String travel_find_detail(HttpServletRequest request,HttpServletResponse response)
+	{
+		String no = request.getParameter("no");
+		//DAO 연결
+		TravelDAO dao = TravelDAO.newInstance();
+		TravelVO vo = dao.travelDetailData(Integer.parseInt(no));
+		request.setAttribute("vo", vo);
+		request.setAttribute("main_jsp", "../travel/travel_find_detail.jsp");
+		return "../main/main.jsp";
+	}
+	
 }

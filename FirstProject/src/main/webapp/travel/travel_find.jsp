@@ -48,7 +48,7 @@ $(function(){
   		<table class="table">
   			<tr>
   				<td>
-  					<form method="get" action="../travel/travel_find.do" class="inline" id="locFrm">
+  					<form method="post" action="../travel/travel_find.do" class="inline" id="locFrm">
 		          	<input type=text name=fd id=fd size=20 class="input-sm" value="${fd }">
 		          	<c:if test="${lno!=null }">
 		          	<input type=hidden name=lno value="${lno }">
@@ -63,12 +63,12 @@ $(function(){
   						<table class="table">
   							<tr>
   								<td width=35% class="text-center" rowspan="4">
-  									<a href="#">
+  									<a href="../travel/travel_find_detail.do?no=${vo.no }">
   									<img src="${vo.poster }" style="width:300px;height: 200px" class="img-rounded">
   									</a>
   								</td>
 								<td width=65%>
-									<a href="#">
+									<a href="../travel/travel_find_detail.do?no=${vo.no }">
 									<h3>${vo.title }</h3>
 									</a>
 								</td>

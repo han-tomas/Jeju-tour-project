@@ -9,7 +9,7 @@
 <style type="text/css">
 .row1 {
 	margin: 0px auto;
-  	width: 1100px;
+  	width: 1200px;
 }
 </style>
 </head>
@@ -27,68 +27,69 @@
 <div class="popular-categories">
     <div class="container">
     <div class="row row1">
+    	<div style="text-align:right;">
+    		<a href ="../travel/course_list.do" class="btn btn-sm btn-warning">목록</a>
+    	</div>
+    	<div style="height: 20px"></div>
+    </div>
+    <div class="row row1">
     	<div class="col-lg-6">
     	<table class="table">
     	<tr>
     		<td>
-    			<center><img src="${cvo.poster }" alt="Lights" style="width:100%"></center>
+    			<img src="${cvo.poster }" alt="Lights" style="width:100%;height: 380px;">
     		</td>
     	</tr>
     	</table>
     	</div>
     	<div class="col-lg-6">
-    		<div id="map" style="width:100%;height:350px;"></div>
+    		<div id="map" style="width:100%;height:380px"></div>
     		<script>
-			// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 			var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-			
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    mapOption = {
-			        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-			        level: 3 // 지도의 확대 레벨
-			    };  
-			
-			// 지도를 생성합니다    
-			var map = new kakao.maps.Map(mapContainer, mapOption); 
-			
-			// 장소 검색 객체를 생성합니다
-			var ps = new kakao.maps.services.Places(); 
-			
-			// 키워드로 장소를 검색합니다
-			ps.keywordSearch('이태원 맛집', placesSearchCB); 
-			
-			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-			function placesSearchCB (data, status, pagination) {
-			    if (status === kakao.maps.services.Status.OK) {
-			
-			        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-			        // LatLngBounds 객체에 좌표를 추가합니다
-			        var bounds = new kakao.maps.LatLngBounds();
-			
-			        for (var i=0; i<data.length; i++) {
-			            displayMarker(data[i]);    
-			            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-			        }       
-			
-			        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-			        map.setBounds(bounds);
-			    } 
-			}
-			
-			// 지도에 마커를 표시하는 함수입니다
+			var mapContainer = document.getElementById('map');
+			var mapOption = {
+			    center: new kakao.maps.LatLng(37.566826, 126.9786567),
+			    level: 3
+			};  
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+			var ps = new kakao.maps.services.Places();
+			var markers = []; // 마커를 담을 배열
+
 			function displayMarker(place) {
-			    
-			    // 마커를 생성하고 지도에 표시합니다
 			    var marker = new kakao.maps.Marker({
 			        map: map,
 			        position: new kakao.maps.LatLng(place.y, place.x) 
 			    });
-			
-			    // 마커에 클릭이벤트를 등록합니다
+			    markers.push(marker); // 배열에 마커 추가
+
 			    kakao.maps.event.addListener(marker, 'click', function() {
-			        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
 			        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
 			        infowindow.open(map, marker);
+			    });
+			}
+
+			function removeAllMarkers() {
+			    for (var i = 0; i < markers.length; i++) {
+			        markers[i].setMap(null);
+			    }
+			    markers = [];
+			}
+
+			function showLocationOnMap(coursename) {
+			    removeAllMarkers(); // 이전 마커 제거
+
+			    // 키워드로 장소 검색
+			    ps.keywordSearch(coursename, function(data, status) {
+			        if (status === kakao.maps.services.Status.OK) {
+			            var bounds = new kakao.maps.LatLngBounds();
+
+			            for (var i = 0; i < data.length; i++) {
+			                displayMarker(data[i]);
+			                bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+			            }
+
+			            map.setBounds(bounds);
+			        }
 			    });
 			}
 			</script>
@@ -107,7 +108,11 @@
     	<tr>
     		<c:forEach var="vo" items="${list}">
     			<c:if test="${vo.daytype==1 }">
-    				<td>${vo.coursename }</td>
+    				<td class="text-center">
+    					<a href="#" onclick="showLocationOnMap('${vo.coursename}')">
+    						${vo.coursename}
+    					</a>
+    				</td>
     			</c:if>
             </c:forEach>
         </tr>   
@@ -115,12 +120,25 @@
    			<td><h3>Day2</h3></td>
    		</tr> 
     	<tr>
-    		<c:forEach var="vo" items="${list}">
-    			<c:if test="${vo.daytype==2 }">
-    				<td>${vo.coursename }</td>
-    			</c:if>
-            </c:forEach>
-        </tr> 
+		    <c:forEach var="vo" items="${list}">
+		        <c:if test="${vo.daytype==2 }">
+		            <td class="text-center">
+		                <c:choose>
+		                    <c:when test="${vo.coursename eq '렌터카 페이지로 이동하기'}">
+		                        <a href="#">
+		                            ${vo.coursename}
+		                        </a>
+		                    </c:when>
+		                    <c:otherwise>
+		                        <a href="#" onclick="showLocationOnMap('${vo.coursename}')">
+		                            ${vo.coursename}
+		                        </a>
+		                    </c:otherwise>
+		                </c:choose>
+		            </td>
+		        </c:if>
+		    </c:forEach>
+		</tr>
         <c:if test="${aa[2]!=0 }">
         <tr>
    			<td><h3>Day3</h3></td>
@@ -128,7 +146,11 @@
     	<tr>
     		<c:forEach var="vo" items="${list}">
     			<c:if test="${vo.daytype==3 }">
-    				<td>${vo.coursename }</td>
+    				<td class="text-center">
+    					<a href="#" onclick="showLocationOnMap('${vo.coursename}')">
+    						${vo.coursename}
+    					</a>
+    				</td>
     			</c:if>
             </c:forEach>
         </tr>
@@ -141,7 +163,11 @@
     	<tr>
     		<c:forEach var="vo" items="${list}">
     			<c:if test="${vo.daytype==4 }">
-    				<td>${vo.coursename }</td>
+    				<td class="text-center">
+    					<a href="#" onclick="showLocationOnMap('${vo.coursename}')">
+    						${vo.coursename}
+    					</a>
+    				</td>
     			</c:if>
             </c:forEach>
         </tr>  
