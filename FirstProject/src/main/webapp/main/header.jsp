@@ -43,6 +43,9 @@ $(function(){
           <!-- ***** Logo End ***** -->
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="../mango/mango_list.do" role="button">Food</a>
+          </li>
 			<li class="nav-item dropdown">
 			  <a class="nav-link dropdown-toggle" href="../category.html" role="button" data-bs-toggle="dropdown" style="color:black;">Travel</a>
 			  <ul class="dropdown-menu">

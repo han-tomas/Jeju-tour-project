@@ -6,7 +6,7 @@
 	<bean id="hotel" class="com.sist.model.HotelModel"/>
 	<bean id="course" class="com.sist.model.CourseModel"/>
 	<bean id="rentcar" class="com.sist.model.RentcarModel"/>
-	<bean id="food" class="com.sist.model.FoodModel"/>
+	<bean id="mango" class="com.sist.model.MangoModel"/>
 	<bean id="community" class="com.sist.model.CommunityModel"/>
 	<bean id="travel" class="com.sist.model.TravelModel"/>
 </beans>
