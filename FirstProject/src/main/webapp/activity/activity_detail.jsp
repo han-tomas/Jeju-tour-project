@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +32,15 @@ h4 {
 	font-weight: bold;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+.buyBox {
+	position: fixed;
+	width: 400px;
+}
+.buyBoxContent {
+    max-height: 300px; 
+    overflow: auto;
 }
 </style>
 <script type="text/javascript">
@@ -158,15 +168,39 @@ h4 {
 										}
 									});
 				</script>
-			<h4 class="text-left">사용 방법</h4>
-			<pre style="background-color: white;">${vo.how_use }</pre>
+				<h4 class="text-left">사용 방법</h4>
+				<pre style="background-color: white;">${vo.how_use }</pre>
 			</div>
 			<div class="col-sm-4">
-				<table class="table">
-					<tr>
-						<td>구매하기 들어갈 자리</td>
-					</tr>
-				</table>
+				<div class="buyBox">
+					<div class="buyBoxContent">
+						<table class="table">
+							<tr>
+								<td>
+									<h3>
+										<sup style="color: gray;">구매가</sup>&nbsp;
+										<fmt:formatNumber value="${vo.price }" pattern="#,###" />
+										원
+									</h3>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<button class="btn btn-block btn-info">
+										<h4>⚡️ 티켓 선택</h4>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<button class="btn btn-block btn-default">
+										<h5>🤍 위시리스트에 담기</h5>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
