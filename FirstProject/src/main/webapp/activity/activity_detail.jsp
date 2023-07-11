@@ -7,9 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
 <style type="text/css">
 .row {
 	margin: 0px auto;
@@ -20,7 +17,10 @@ button {
 	border: none;
 	background-color: white;
 }
-
+#thunderImg{
+	width:28px;
+	height: 33px;
+}
 #score_icon {
 	width: 15px;
 	height: 15px;
@@ -38,6 +38,32 @@ h4 {
 	position: fixed;
 	width: 400px;
 
+}
+.btn-buy{
+	width: 300px;
+	height: 50px;	
+}
+.btn-wish{
+	width: 300px;
+	height: 40px;
+}
+.buyTd{
+	stext-align: center;
+	margin:10px;
+}
+.wishTd{
+	stext-align: center;
+	margin:10px;
+}
+.wishTd button {
+    display: block; /* 버튼을 블록 레벨 요소로 설정하여 가운데 정렬을 적용할 수 있도록 함 */
+    margin: 0 auto; /* 수평 가운데 정렬을 위해 왼쪽과 오른쪽 마진을 자동으로 설정 */
+}
+.buyTd a {
+	display: flex; /* 버튼을 flex 컨테이너로 설정 */
+    justify-content: center; /* 가로 방향 가운데 정렬 */
+    align-items: center; /* 세로 방향 가운데 정렬 */
+    margin: 0 auto; /* 수평 가운데 정렬을 위해 왼쪽과 오른쪽 마진을 자동으로 설정 */
 }
 </style>
 <script type="text/javascript">
@@ -63,7 +89,6 @@ h4 {
 	        $('.buybox').removeClass('sticky'); // buybox 테이블에서 sticky 클래스 제거
 	    }
 	});
-	});
 </script>
 </head>
 <body>
@@ -76,7 +101,6 @@ h4 {
 			</div>
 		</div>
 	</div>
-	<div style="height: 120px;"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8">
@@ -95,12 +119,12 @@ h4 {
 						<img alt="" src="${images[i]}">
 					</c:forEach>
 				</div>
-
+<div class="d-grid">
 				<button type="button" id="showMoreImagesBtn"
 					class="btn btn-primary btn-block" onclick="toggleMoreImages()">
-					<h4>더 보기</h4>
+					더 보기
 				</button>
-
+</div>
 				<%-- <c:forTokens items="${vo.poster }" delims="^" var="img">
 						<div>
 							<img src="${img }" style="width:100%">
@@ -122,16 +146,12 @@ h4 {
 				<h3 class="text-left">
 					<strong>이용 안내</strong>
 				</h3>
-				<h4 class="text-left">이용 시간</h4>
+				<h5 class="text-left">이용 시간</h5>
 				<pre class="text-left" style="background-color: white;">${vo.hours_use }</pre>
-				<h4 class="text-left">위치 안내</h4>
+				<h5 class="text-left">위치 안내</h5>
 				<p class="text-left">${vo.location_name }</p>
-
-				카카오 이미지 api..
-
-
 				<div id="map" style="width: 100%; height: 350px;"></div>
-				<script>
+				<script>	//지도 출력
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 					mapOption = {
 						center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -176,7 +196,7 @@ h4 {
 										}
 									});
 				</script>
-				<h4 class="text-left">사용 방법</h4>
+				<h5 class="text-left">사용 방법</h5>
 				<pre style="background-color: white;">${vo.how_use }</pre>
 			</div>
 			<div class="col-sm-4">
@@ -193,15 +213,24 @@ h4 {
 								</td>
 							</tr>
 							<tr>
-								<td>
-								<a href="../activity/activity_" class="btn btn-block btn-info"><h4>⚡️ 티켓 선택</h4></a>
+								<td class="center buyTd">
+								<div class="d-grid">
+								<a href="../activity/activity_reserve.do?acino=${vo.acino }" class="btn btn-block btn-info btn-buy">
+								<img src="image/thunder.png" id="thunderImg">
+								<h5 style="color:white;">️티켓 선택</h5></a>
+								</div>
 								</td>
 							</tr>
 							<tr>
-								<td>
-									<button class="btn btn-block btn-default">
+								<td class="text-center" style="font-size: 10pt; color:gray;">구매 후 즉시 확정됩니다.</td>
+							</tr>
+							<tr>
+								<td class="center wishTd">
+								<div class="d-grid">
+									<button class="btn btn-block btn-light btn-wish">
 										<h5>🤍 위시리스트에 담기</h5>
 									</button>
+								</div>
 								</td>
 							</tr>
 						</table>

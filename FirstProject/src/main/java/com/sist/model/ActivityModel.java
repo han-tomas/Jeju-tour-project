@@ -110,4 +110,18 @@ public class ActivityModel {
 		request.setAttribute("main_jsp", "../activity/activity_detail.jsp");
 		return "../main/main.jsp";
 	}
+	
+	@RequestMapping("activity/activity_reserve.do")
+	public String activity_reserve(HttpServletRequest request, HttpServletResponse response) {
+
+		String acino=request.getParameter("acino");
+		
+		ActivityDAO dao=ActivityDAO.newInstance();
+		ActivityVO vo=dao.activityDetailData(Integer.parseInt(acino));
+		if(vo.getPoster()==null)
+			vo.setPoster(vo.getMain_poster());
+		request.setAttribute("vo", vo);
+		request.setAttribute("main_jsp", "../activity/activity_reserve.jsp");
+		return "../main/main.jsp";
+	}
 }

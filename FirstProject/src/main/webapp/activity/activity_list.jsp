@@ -37,16 +37,17 @@
 
 .aLogo {
 	width: 30px;
-	height: 27px
-}
-
-li:hover {
-	background-color: rgb(245, 246, 247);
-}
-
-li {
+	height: 27px;
 	transition: background-color 0.6s ease;
 }
+
+.aLogo:hover {
+	background-color: rgb(245, 246, 247);
+}
+/* 
+.aLogo li {
+	transition: background-color 0.6s ease;
+} */
 
 .img-fluid {
 	border-radius: 12px;
@@ -119,7 +120,6 @@ li {
 			</div>
 		</div>
 	</div>
-	<div style="height: 100px"></div>
 	<div class="container container1">
 		<div class="row">
 			<div class="col-md-3">
