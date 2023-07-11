@@ -12,12 +12,12 @@
 		<div class="col-md-4" style="padding:15px; border:1px;">
 			<section class="panel">
 				<div class="pro-img-box">
-					<img src="${ vo.poster }" class="img-fluid" style="width:100%; height:70%;" />
+					<img src="${ vo.poster }" class="img-fluid" style="width:100%; height:300px;" />
 				</div>
 
 				<div class="panel-body text-left">
 					<h4>
-						<a href="#" class="pro-title"> ${ vo.name } </a>
+						<a href="../hotel/hotel_detail_before.do?huno=${ vo.huno }" class="pro-title"> ${ vo.name } </a>
 					</h4>
 					<h6> ${ vo.address }</h6>
 				</div>

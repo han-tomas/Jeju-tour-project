@@ -70,8 +70,8 @@
 
 .product-list img {
 	width: 100%;
-	border-radius: 4px 4px 0 0;
-	-webkit-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 4px 4px;
+	-webkit-border-radius: 4px 4px 4px 4px;
 }
 
 .product-list .pro-img-box {
@@ -186,6 +186,10 @@
 .list_tab {
 	border-radius: 7px;
 	background-color:#FFA63C;
+	padding: 0px; width: 70px; height: 40px; display: inline-block; margin:0px;
+}
+.list_tab_2 {
+	width: 70px; height: 40px; display:flex; justify-content: center; align-items: center; margin:0px;
 }
 .curtab {
 	background-color:#FF7F31;
@@ -211,6 +215,7 @@ $(function () {
 				$('#result').html(result);
 			}
 		})
+	$('.list_tab').css("cursor", "pointer")
  	$('.list_tab').click(function(){
  		let type= $(this).attr("data-no")
 		$.ajax({
@@ -228,60 +233,41 @@ $(function () {
 </script>
 </head>
 <body>
-	  <div class="page-heading">
-	    <div class="container">
-	      <div class="row">
-	        <div class="col-lg-8">
-	          <div class="top-text header-text">
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+  <div class="page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="top-text header-text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 	<div class="listing-page">
-		<div class="container">
+		<div class="container" style="text-align:center;">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="naccs">
 						<div class="grid">
 							<div class="row">
-								<div class="col-lg-2">
-									<div id="category_1" style="padding: 0px; height: 50px; margin-bottom:15px;">
-											<div class="category" style="height: 50px; display: flex; justify-content: center; align-items: center;">
-												Activity</div>
-									</div>
-									<div id="category_2" style="padding: 0px; height: 50px; margin-bottom:15px;">
-											<div class="category_active" style="height: 50px; display: flex; justify-content: center; align-items: center;">
-												Hotel</div>
-									</div>
-									<div id="category_3" style="padding: 0px; height: 50px; margin-bottom:15px;">
-											<div class="category" style="height: 50px; display: flex; justify-content: center; align-items: center;">
-												Rentcar</div>
-									</div>
-								</div>
-								<div class="col-lg-10">
+								<div class="col-lg-12">
 									<div class="row">
-									<div class="col-md-9">
-										<div class="list_tab curtab" data-no="1" id="nav_1" style="padding: 0px; width: 70px; height: 40px; display: inline-block; margin:0px;">
-											<div style="width: 70px; height: 40px; display:flex; justify-content: center; align-items: center; margin:0px;">
-												전체</div>
+									<div class="col-md-9" style="text-align:left;">
+										<div class="list_tab curtab" data-no="1" id="nav_1">
+											<div class="list_tab_2">전체</div>
 										</div>
-										<div class="list_tab" data-no="2" id="nav_2" style="padding: 0px; width: 70px; height: 40px; display: inline-block; margin:0px;">
-											<div style="width: 70px; height: 40px; display:flex; justify-content: center; align-items: center; margin:0px;">
-												펜션</div>
+										<div class="list_tab" data-no="2" id="nav_2">
+											<div class="list_tab_2">펜션</div>
 										</div>
-										<div class="list_tab" data-no="3" id="nav_3" style="padding: 0px; width: 70px; height: 40px; display: inline-block; margin:0px;">
-											<div style="width: 70px; height: 40px; display:flex; justify-content: center; align-items: center; margin:0px;">
-												리조트</div>
+										<div class="list_tab" data-no="3" id="nav_3">
+											<div class="list_tab_2">리조트</div>
 										</div>
-										<div class="list_tab" data-no="4" id="nav_4" style="padding: 0px; width: 70px; height: 40px; display: inline-block; margin:0px;">
-											<div style="width: 70px; height: 40px; display:flex; justify-content: center; align-items: center; margin:0px;">
-												호텔</div>
+										<div class="list_tab" data-no="4" id="nav_4">
+											<div class="list_tab_2">호텔</div>
 										</div>
-										<div class="list_tab" data-no="5" id="nav_5" style="padding: 0px; width: 70px; height: 40px; display: inline-block; margin:0px;">
-											<div style="width: 70px; height: 40px; display:flex; justify-content: center; align-items: center; margin:0px;">
-												기타</div>
+										<div class="list_tab" data-no="5" id="nav_5">
+											<div class="list_tab_2">기타</div>
 										</div>
 									</div>
 									<div class="col-md-3">

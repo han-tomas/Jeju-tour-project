@@ -2,8 +2,20 @@ package com.sist.vo;
 
 public class HotelVO {
 	private int hdno, huno, hcno, hit;
-	private String name, address, content, etc, poster;
+	private String name, address, content, etc, poster, addr1, addr2;
 	
+	public String getAddr1() {
+		return addr1;
+	}
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
 	public int getHdno() {
 		return hdno;
 	}

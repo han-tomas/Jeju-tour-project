@@ -6,6 +6,8 @@ import com.sist.common.*;
 import java.util.*;
 import com.sist.vo.*;
 
+import oracle.jdbc.proxy.annotation.Pre;
+
 public class HotelDAO {
 	private Connection conn;
 	private PreparedStatement ps;
@@ -80,5 +82,36 @@ public class HotelDAO {
 			db.disConnection(conn, ps);
 		}
 		return total;
+	}
+	
+	// 상세 페이지
+	public HotelVO hotelDetailData(int huno) {
+		HotelVO vo = new HotelVO();
+		
+		try {
+			conn = db.getConnection();
+			String sql = "SELECT hdno, huno, name, addr, content, etc, poster "
+						+"FROM hotel_detail "
+						+"WHERE huno=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, huno);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			vo.setHdno(rs.getInt(1));
+			vo.setHuno(rs.getInt(2));
+			vo.setName(rs.getString(3));
+			vo.setAddr1(rs.getString(4).substring(0, rs.getString(4).indexOf("/")));
+			vo.setAddr2(rs.getString(4).substring(rs.getString(4).indexOf("/")+1));
+			vo.setContent(rs.getString(5));
+			vo.setEtc(rs.getString(6));
+			vo.setPoster(rs.getString(7));
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		
+		return vo; 
 	}
 }

@@ -862,7 +862,6 @@ Popular Categories
 */
 
 .popular-categories {
-  margin-top: 120px;
 }
 
 .popular-categories .section-heading {
@@ -989,7 +988,6 @@ Recent Listing
 */
 
 .recent-listing {
-  margin-top: 120px;
   padding-top: 120px;
   margin-bottom: 120px;
   border-top: 1px solid #eee;
@@ -1457,6 +1455,7 @@ Page Heading
   padding: 20px 0px 0px 0px;
   position: relative;
   overflow: hidden;
+  margin-top: 120px;
 }
 
 .page-heading .top-text {
@@ -1690,7 +1689,6 @@ Listing Page
 
 
 .listing-page {
-  margin-top: 120px;
   margin-bottom: 120px;
 }
 
