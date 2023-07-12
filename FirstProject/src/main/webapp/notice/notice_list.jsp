@@ -5,34 +5,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <title>Jeju Project</title>
-
-<!-- Bootstrap core CSS -->
-<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Additional CSS Files -->
-<link rel="stylesheet" href="../assets/css/fontawesome.css">
-<link rel="stylesheet" href="../assets/css/templatemo-plot-listing.css">
-<link rel="stylesheet" href="../assets/css/animated.css">
-<link rel="stylesheet" href="../assets/css/owl.css">
 <style type="text/css">
-.popular{
-	margin-top: 100px;
-}
 .row1{
 	margin: 0px auto;
 	width: 800px;	
 }
+.row1 ul li{
+	display: inline;
+}
 </style>
 </head>
 <body>
-  <div class="popular-categories">
+<div class="page-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="top-text header-text">
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<div class="container1">
   <div class="row1">
   <h2 class="sectiontitle">공지사항</h2>
-  <div style="height: 450px">
   <table class="table">
    <c:if test="${sessionScope.admin=='y'}">
     <tr>
@@ -50,10 +47,10 @@
       <th width=20% class="text-center">작성일</th>
       <th width=10% class="text-center">조회수</th>
     </tr>
-    <c:set var="count" value="${count }"/>
+    <c:set var="no" value="${count }"/>
     <c:forEach var="vo" items="${list }">
       <tr>
-        <td width=10% class="text-center">${count }</td>
+        <td width=10% class="text-center">${no}</td>
         <td width=45%>
           <a href="../notice/notice_detail.do?no=${vo.no}">${vo.subject }</a>
           &nbsp;
@@ -65,11 +62,19 @@
         <td width=20% class="text-center">${vo.dbday }</td>
         <td width=10% class="text-center">${vo.hit }</td>
       </tr>
-     <c:set var="count" value="${count-1 }"/>
+     <c:set var="no" value="${no-1 }"/>
     </c:forEach>
   </table>
   </div>
+
   </div>
+    <div class="row1">
+      <ul class="text-center">
+        <li><a href="../notice/notice_list.do?page=${curpage>1?curpage-1:curpage}" class="btn btn-xs btn-success">이전</a></li>
+         <li>${curpage } page / ${totalpage } pages</li>
+        <li><a href="../notice/notice_list.do?page=${curpage<totalpage?curpage+1:curpage}" class="btn btn-xs btn-info">다음</a></li>
+      </ul>
+    </div>
 </div>
 </body>
 </html>

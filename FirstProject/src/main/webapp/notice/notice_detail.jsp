@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <style type="text/css">
-..main{
+.main{
 	margin: 0px auto
 	margin-top: 100px
 	width: 800px
@@ -57,7 +57,17 @@ $(function(){
 </script>
 </head>
 <body>
-  <div class="popular-categories">
+<div class="page-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="top-text header-text">
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+  <div class="container1">
   <main class="container clear">
     <h2 class="sectiontitle">글보기</h2>
     <table class="table">

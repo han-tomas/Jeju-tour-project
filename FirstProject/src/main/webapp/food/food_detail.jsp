@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <style type="text/css">
 .table1{
 	border: none;
@@ -24,30 +25,36 @@
 .table1 th{
 	font-size: 16px;
 }
-/* .table1 img{
-	width: 220px;
-	height: 220px;
-} */
 </style>
 </head>
 <body>
+<div class="page-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="top-text header-text">
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
    <div class="wrapper row3">
      <main class="container">
-       <div style="height: 100px;"></div>
        <table class="table1">
        	  <c:forEach var="i" begin="0" end="4">
 		    <td>
 		      <c:if test="${posters[i]!=null }">
-		      	<img src="${posters[i]}" style="width: 100%; padding: 5px">
+		      	<img src="${posters[i]}" style="width: 100%; padding: 5px;">
 		      </c:if>
 		      <c:if test="${posters[i]==null }">
-		      	<img src="https://innotalk.co.kr/images/error/no-image.png" style="width: 100%; padding: 5px">
+		      	<img src="https://innotalk.co.kr/images/error/no-image.png" style="width: 100%; padding: 5px;">
 		      </c:if>
 		    </td>
 		  </c:forEach>
 		</table>
        <div style="height: 30px"></div>
-       <div class="col-sm-8">
+       <div class="row">
+       <div class="col-sm-7">
        <table class="table1">
          <tr>
            <td colspan=2>
@@ -109,7 +116,7 @@
           </tr>
         </table>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-5">
         <div id="map" style="width:100%;height:350px;"></div>
         <script>
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -149,6 +156,7 @@
 			    } 
 			});    
 		</script>
+        </div>
         </div>
      </main>
    </div>

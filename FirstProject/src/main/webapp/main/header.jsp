@@ -44,7 +44,7 @@ $(function(){
           <!-- ***** Menu Start ***** -->
           <ul class="nav">
           <li class="nav-item dropdown">
-            <a class="nav-link" href="../food/food_list.do" role="button">Food</a>
+            <a class="nav-link" href="../food/food_list.do" role="button" style="color:black;">Food</a>
           </li>
 			<li class="nav-item dropdown">
 			  <a class="nav-link dropdown-toggle" href="../category.html" role="button" data-bs-toggle="dropdown" style="color:black;">Travel</a>

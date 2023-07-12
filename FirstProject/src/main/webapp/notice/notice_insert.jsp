@@ -4,53 +4,82 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <title>Jeju Project</title>
 <style type="text/css">
-.popular{
-	margin-top: 100px;
-}
 .row1{
 	margin: 0px auto;
 	width: 800px
 }
 </style>
+<script type="text/javascript">
+$(function(){
+	$('#notiBtn').click(function(){
+		   // 필수 입력 필드 배열
+		   var requiredFields = ['name','subject','content','pwd'];
+		   var isValid = true;
+		   
+		   // 필수 입력 필드를 순회하며 값이 비어있는지 확인
+		   for (var i = 0; i < requiredFields.length; i++) {
+		      var field = requiredFields[i];
+		      var value = $('#' + field).val();
+		      if (value === '') {
+		         isValid = false;
+		         break;
+		      }
+		   }
+		   
+		   if (!isValid) {
+		      alert("필수 입력 내용을 모두 입력해주세요!");
+		      return; // 입력값이 없을 경우 함수를 종료하고 이후 코드를 실행하지 않음
+		   }
+		   $('#frm').submit();
+		})
+})
+</script>
 </head>
 <body>
-  <div class="popular-categories">
+<div class="page-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="top-text header-text">
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+  <div class="container1">
   <div class="row1">
   <h2 class="sectiontitle">글쓰기</h2>
-  <form method=post action="../notice/notice_insert_ok.do">
+  <form method=post action="../notice/notice_insert_ok.do" id="frm">
   <table class="table">
     <tr>
       <th width=15%>이름</th>
       <td width=85%>
-        <input type=text name=name size=20 class="input-sm">
+        <input type=text name=name id="name" size=20 class="input-sm">
       </td>
     </tr>
     <tr>
       <th width=15%>제목</th>
       <td width=85%>
-        <input type=text name=subject size=50 class="input-sm">
+        <input type=text name=subject id="subject" size=50 class="input-sm">
       </td>
     </tr>
     <tr>
       <th width=15%>내용</th>
       <td width=85%>
-        <textarea rows="10" cols="50" name=content></textarea>
+        <textarea rows="10" cols="50" id="content" name=content></textarea>
       </td> 
     </tr>
     <tr>
       <th width=15%>비밀번호</th>
       <td width=85%>
-        <input type=password name=pwd size=10 class="input-sm">
+        <input type=password name=pwd id="pwd" size=10 class="input-sm">
       </td>
     </tr>
     <tr>
       <td colspan=2 class="text-center">
-        <input type=submit value="글쓰기" class="btn btn-sm btn-success">
+        <input type=button value="글쓰기" class="btn btn-sm btn-success" id="notiBtn">
         <input type=button value="취소" class="btn btn-sm btn-info" onclick="javascript:history.back()">
       </td>
     </tr>

@@ -127,6 +127,7 @@ public class NoticeModel{
 		vo.setContent(request.getParameter("content"));
 		vo.setPwd(request.getParameter("pwd"));
 		vo.setNo(Integer.parseInt(request.getParameter("no")));
+		
 		NoticeDAO dao=NoticeDAO.newInstance();
 		boolean bCheck=dao.noticeUpdate(vo);
 		
