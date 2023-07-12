@@ -12,7 +12,9 @@
 		<div class="col-md-4" style="padding:15px; border:1px;">
 			<section class="panel">
 				<div class="pro-img-box">
-					<img src="${ vo.poster }" class="img-fluid" style="width:100%; height:300px;" />
+					<a href="../hotel/hotel_detail_before.do?huno=${ vo.huno }" class="pro-title">
+						<img src="${ vo.poster }" class="img-fluid" style="width:100%; height:300px;" />
+					</a>
 				</div>
 
 				<div class="panel-body text-left">

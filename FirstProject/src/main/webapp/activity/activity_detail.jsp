@@ -92,7 +92,7 @@ h4 {
 	}
 $(function(){
 	$(window).scroll(function(){
-	    $("#yourDiv").css("margin-top",Math.max(-1200,0-$(this).scrollTop()));
+	    $("#yourDiv").css("margin-top",Math.max(0,0-$(this).scrollTop()));
 	});
 })
 </script>

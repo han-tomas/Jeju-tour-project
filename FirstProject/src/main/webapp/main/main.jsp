@@ -14,12 +14,14 @@
 
 <!-- Bootstrap core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css'>
 
 <!-- Additional CSS Files -->
 <link rel="stylesheet" href="../assets/css/fontawesome.css">
 <link rel="stylesheet" href="../assets/css/templatemo-plot-listing.css">
 <link rel="stylesheet" href="../assets/css/animated.css">
 <link rel="stylesheet" href="../assets/css/owl.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 </head>
 <body id="top">
 <jsp:include page="prepareLoad.jsp"></jsp:include>
@@ -35,5 +37,6 @@
 <script src="../assets/js/animation.js"></script>
 <script src="../assets/js/imagesloaded.js"></script>
 <script src="../assets/js/custom.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js'></script>
 </body>
 </html>
