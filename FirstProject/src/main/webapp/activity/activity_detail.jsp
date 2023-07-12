@@ -65,6 +65,17 @@ h4 {
     align-items: center; /* 세로 방향 가운데 정렬 */
     margin: 0 auto; /* 수평 가운데 정렬을 위해 왼쪽과 오른쪽 마진을 자동으로 설정 */
 }
+   table {
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: none;
+    }
+
+    table td {
+      padding: 10px;
+    }
 </style>
 <script type="text/javascript">
 	function toggleMoreImages() {
@@ -79,16 +90,11 @@ h4 {
 			showMoreImagesBtn.textContent = "더 보기";
 		}
 	}
-	$(window).scroll(function() {
-	    // 스크롤 이벤트 발생 시 실행되는 코드 작성
-		var scrollPosition = $(window).scrollTop(); // 현재 스크롤 위치
-
-	    if (scrollPosition > 200) { // 스크롤 위치가 200px 이상인 경우
-	        $('.buybox').addClass('sticky'); // buybox 테이블에 sticky 클래스 추가
-	    } else {
-	        $('.buybox').removeClass('sticky'); // buybox 테이블에서 sticky 클래스 제거
-	    }
+$(function(){
+	$(window).scroll(function(){
+	    $("#yourDiv").css("margin-top",Math.max(-1200,0-$(this).scrollTop()));
 	});
+})
 </script>
 </head>
 <body>
@@ -199,7 +205,7 @@ h4 {
 				<h5 class="text-left">사용 방법</h5>
 				<pre style="background-color: white;">${vo.how_use }</pre>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4" id="yourDiv">
 				<div class="buyBox">
 					<div class="buyBoxContent">
 						<table class="table">
