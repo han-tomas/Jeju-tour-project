@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -21,6 +22,13 @@ $(function(){
 	})
 })
 </script>
+<style type="text/css">
+.container2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+</style>
 </head>
 <body>
 <div class="page-heading">
@@ -44,7 +52,7 @@ $(function(){
   			<a href ="../travel/travel_find.do?lno=4&fd=${fd }" class="btn btn-sm btn-primary">행사/축제</a><!-- lno=3 -->
   		</div>
   	</div>
-   		<div class="row">
+	<div class="row">
   		<table class="table">
   			<tr>
   				<td style="text-align: right">
@@ -64,7 +72,7 @@ $(function(){
   							<tr>
   								<td width=35% class="text-center" rowspan="4">
   									<a href="../travel/travel_find_detail.do?no=${vo.no }">
-  									<img src="${vo.poster }" style="width:300px;height: 200px" class="img-rounded">
+  									<img src="${vo.poster }" style="width:300px;height: 200px" class="img-thumbnail">
   									</a>
   								</td>
 								<td width=65%>
@@ -96,6 +104,9 @@ $(function(){
   		</table>
   		 
   	</div>
+  	</div>
+  <div class="container2">
+  	<div class="row">
         <ul class="pagination">
           <!-- startPage: 1, 11, 21, 31 ... -->
           <c:if test="${startPage>1 }">
@@ -116,11 +127,12 @@ $(function(){
           </c:if>
           </c:forEach>
          <c:if test="${endPage<totalpage }">
-          <li class="page-item"><a class="page-link" a href="../travel/travel_find.do?page=${endPage+1 }&fd=${fd}&lno=${lno}">Next &raquo;</a></li>
+          <li class="page-item"><a class="page-link" href="../travel/travel_find.do?page=${endPage+1 }&fd=${fd}&lno=${lno}">Next &raquo;</a></li>
          </c:if>
         </ul>
-
-   </div>
+	</div>
+	</div>	
+   
 </div>
 </body>
 </html>

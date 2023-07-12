@@ -67,7 +67,7 @@ $(function(){
 			  <a class="nav-link dropdown-toggle" href="../contact.html" role="button" data-bs-toggle="dropdown" style="color:black;">Community</a>
 			  <ul class="dropdown-menu">
 			    <li><a class="dropdown-item" href="../notice/notice_list.do">Notice</a></li>
-			    <li><a class="dropdown-item" href="#">QnA</a></li>
+			    <li><a class="dropdown-item" href="../qna/qna_list.do">QnA</a></li>
 			    <li><a class="dropdown-item" href="#">Review</a></li>
 			    <li> </li>
 			  </ul>
