@@ -59,7 +59,7 @@ $(function(){
 			  <ul class="dropdown-menu">
 			    <li><a class="dropdown-item" href="../activity/activity_list.do">Activity</a></li>
 			    <li><a class="dropdown-item" href="../hotel/hotel_list.do">Hotel</a></li>
-			    <li><a class="dropdown-item" href="#">Rental car</a></li>
+			    <li><a class="dropdown-item" href="../rentcar/rentcar_main.do">Rental car</a></li>
 			    <li> </li>
 			  </ul>
 			</li> 
