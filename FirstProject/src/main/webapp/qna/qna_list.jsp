@@ -26,8 +26,9 @@
   </div>
 </div>  
 <div class="container mt-3">
-  <h2>QnA 게시판</h2>
-  <p>질문하세요</p>
+  <h1>QnA 게시판</h1>
+  <div style="height: 20px"></div>
+  <p>총<span style="color: orange;font-size: 30pt">${rowtotal }</span>개의 게시글이 있습니다</p>
   <table class="table">
   	 	<tr>
   	 		<td>
@@ -46,14 +47,16 @@
       </tr>
     </thead>
     <tbody>
+    	<c:set var="i" value="${rowtotal }"/>
     	<c:forEach var="vo" items="${list }">
    		<tr>
-  	 		<td width=10% class="text-center">${vo.no }</td>
+  	 		<td width=10% class="text-center">${i }</td>
   	 		<td width=45%>${vo.subject }</td>
   	 		<td width=15% class="text-center">${vo.name }</td>
   	 		<td width=20% class="text-center">${vo.dbday }</td>
   	 		<td width=10% class="text-center">${vo.hit }</td>
   	 	</tr>
+  	 	<c:set var="i" value="${i-1 }"></c:set>
     	</c:forEach>
   </table>
  </div>
