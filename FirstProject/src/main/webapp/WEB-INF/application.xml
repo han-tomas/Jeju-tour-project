@@ -11,4 +11,5 @@
 	<bean id="travel" class="com.sist.model.TravelModel"/>
 	<bean id="notice" class="com.sist.model.NoticeModel"/>
 	<bean id="QnA" class="com.sist.model.QnAModel"/>
+	<bean id="JJimRecommend" class="com.sist.model.CourseJJimRecommendModel"/>
 </beans>

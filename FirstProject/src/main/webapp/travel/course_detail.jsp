@@ -28,7 +28,21 @@
     <div class="container">
     <div class="row row1">
     	<div style="text-align:right;">
-    		<a href ="../travel/course_list.do" class="btn btn-sm btn-warning">목록</a>
+    		<c:if test="${sessionScope.id!=null }">
+    			<c:if test="${jjim_count==0 }">
+	    			<a href="../jjim/jjim_insert.do?cno=${cvo.cno }" class="btn btn-xs btn-outline-danger"><i class="fa fa-heart fa-sm">&nbsp;찜하기</i></a>			
+    			</c:if>
+    			<c:if test="${jjim_count!=0 }">
+	    			<span class="btn btn-xs btn-danger"><i class="fa fa-heart fa-sm" style="color: white; font-style: bold">&nbsp;찜하기</i></span>			
+    			</c:if>
+    			<c:if test="${recommend_count==0 }">
+	  				<a href="../recommend/recommend_insert.do?cno=${cvo.cno }" class="btn btn-xs btn-outline-primary"><i class="fa fa-thumbs-o-up fa-sm">&nbsp;추천</i></a>
+	  			</c:if>
+	  			<c:if test="${recommend_count!=0 }">
+	  				<span class="btn btn-xs btn-primary"><i class="fa fa-thumbs-o-up fa-sm" style="color: white; font-style: bold">&nbsp;추천</i></span>
+	  			</c:if>	
+    		</c:if>
+    		<a href ="../travel/course_list.do" class="btn btn-xs btn-warning"><i class="fa fa-list fa-sm" style="color: white; font-style: bold">&nbsp;목록</i></a>
     	</div>
     	<div style="height: 20px"></div>
     </div>

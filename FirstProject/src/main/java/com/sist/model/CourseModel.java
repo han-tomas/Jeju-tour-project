@@ -3,6 +3,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
@@ -34,6 +35,20 @@ public class CourseModel {
 		request.setAttribute("aa", aa);
 		request.setAttribute("list", list);
 		request.setAttribute("main_jsp", "../travel/course_detail.jsp");
+		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		if(id!=null)
+		{
+			CourseJJimRecommendDAO jdao = CourseJJimRecommendDAO.newInstance();
+			int jjim_count=jdao.courseJJimCount(id, Integer.parseInt(cno));
+			request.setAttribute("jjim_count", jjim_count);
+			int recommend_count=jdao.courseRecommendOk(Integer.parseInt(cno), id);
+			int recommend_total=jdao.courseRecommendCount(Integer.parseInt(cno));
+			request.setAttribute("recommend_count", recommend_count);
+			request.setAttribute("recommend_total", recommend_total);
+		}
+		
 		return "../main/main.jsp";
 	}
 	

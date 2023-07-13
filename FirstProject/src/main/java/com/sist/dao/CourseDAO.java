@@ -99,7 +99,7 @@ public class CourseDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql ="SELECT no, daytype,coursename FROM course_detail where cno=?";
+			String sql ="SELECT no, daytype,coursename,cno FROM course_detail where cno=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, cno);
 			ResultSet rs = ps.executeQuery();
@@ -109,6 +109,7 @@ public class CourseDAO {
 				vo.setNo(rs.getInt(1));
 				vo.setDaytype(rs.getInt(2));
 				vo.setCoursename(rs.getString(3));
+				vo.setCno(rs.getInt(4));
 				list.add(vo);
 			}
 			rs.close();
@@ -129,13 +130,14 @@ public class CourseDAO {
 		try 
 		{
 			conn=db.getConnection();
-			String sql="SELECT title,poster FROM course_category WHERE cno=?";
+			String sql="SELECT title,poster,cno FROM course_category WHERE cno=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, cno);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			vo.setTitle(rs.getString(1));
 			vo.setPoster(rs.getString(2));
+			vo.setCno(rs.getInt(3));
 //			while(rs.next())
 //			{
 //				CourseCategoryVO vo = new CourseCategoryVO();
