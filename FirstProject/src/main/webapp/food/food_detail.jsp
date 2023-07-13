@@ -12,10 +12,10 @@
 .table1{
 	border: none;
 }
-.row1{
+.row1
 	display: inline;
 }
-.table1 sub{
+.table1 sub{f
 	font-size: 12px;
 }
 .table1 tr{
@@ -26,6 +26,11 @@
 	font-size: 16px;
 }
 </style>
+<script type="text/javascript">
+function goBackToList() {
+    window.location.href = "../food/food_list.do";
+}
+</script>
 </head>
 <body>
 <div class="page-heading">
@@ -66,7 +71,15 @@
        <div class="row1">
        <i class="fa fa-eye fa-lg" style="border: 2px;color:gray;"></i>
        &nbsp;<fmt:formatNumber value="${vo.hit }" pattern="###,###"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	   <i class="fa fa-gratipay fa-lg" style="color: #f07070"></i>&nbsp;${vo.like_count}
+	   <c:if test="${sessionScope.id!=null }">
+	   <c:if test="${like_ok==0 }">
+	     <a href="../foodLike/food_like_insert.do?fino=${ vo.fino }">
+	     <i class="fa fa-heart" style="color: gray"></i></a>&nbsp;${like_total}
+	   </c:if>
+	   <c:if test="${like_ok!=0 }">
+	     <i class="fa fa-heart" style="color: #f07070"></i>&nbsp;${like_total}
+	   </c:if>
+	   </c:if>
 	   </div>
        <table class="table1">
          <tr height="20px"></tr>
@@ -114,7 +127,12 @@
               </ul>
             </td>
           </tr>
+          <tr>
+          </tr>
         </table>
+        <div class="d-flex justify-content-end" style="margin: 10px;">
+              <button class="btn btn-sm btn-success" onclick="goBackToList()">목록</button>
+            </div>
         </div>
         <div class="col-sm-5">
         <div id="map" style="width:100%;height:350px;"></div>

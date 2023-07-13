@@ -4,6 +4,7 @@ import java.util.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
@@ -105,9 +106,16 @@ public class FoodModel {
 		String[] posters = vo.getPoster().split("\\^");
 		int posterLength = posters.length;
 		
-		// 사진 1개일 경우
-//		String poster=vo.getPoster();
-//		poster=poster.substring(0,poster.indexOf("^"));
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		if(id!=null) {
+			FoodLikeDAO fdao=FoodLikeDAO.newInstance();
+			int like_ok=fdao.foodLikeOk(Integer.parseInt(fino), id);
+			int like_total=fdao.foodLikeTotalCount(Integer.parseInt(fino));
+			
+			request.setAttribute("like_ok", like_ok);
+			request.setAttribute("like_total", like_total);
+		}
 		
 		
 		// 저장
