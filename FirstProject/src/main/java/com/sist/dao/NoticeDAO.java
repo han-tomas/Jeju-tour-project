@@ -23,9 +23,9 @@ public class NoticeDAO {
 	   try
 	   {
 		   conn=db.getConnection();
-		   String sql="SELECT no,subject,name,TO_CHAR(regdate,'yyyy-mm-dd'),hit,num "
-				     +"FROM (SELECT no,subject,name,regdate,hit,rownum as num "
-				     +"FROM (SELECT /*+ INDEX_DESC(notice noti_no_pk)*/no,subject,name,regdate,hit "
+		   String sql="SELECT no,subject,name,TO_CHAR(regdate,'yyyy-mm-dd'),hit,type,num "
+				     +"FROM (SELECT no,subject,name,regdate,hit,type,rownum as num "
+				     +"FROM (SELECT /*+ INDEX_DESC(notice noti_no_pk)*/no,subject,name,regdate,hit,type "
 				     +"FROM notice)) "
 				     +"WHERE num BETWEEN ? AND ?";
 		   ps=conn.prepareStatement(sql);
@@ -45,7 +45,8 @@ public class NoticeDAO {
 			   vo.setName(rs.getString(3));
 			   vo.setDbday(rs.getString(4));
 			   vo.setHit(rs.getInt(5));
-			   vo.setRownum(rs.getInt(6));
+			   vo.setType(rs.getString(6));
+			   vo.setRownum(rs.getInt(7));
 			   list.add(vo);
 		   }
 		   rs.close();
@@ -92,12 +93,12 @@ public class NoticeDAO {
 	   {
 		   conn=db.getConnection();
 		   String sql="INSERT INTO notice VALUES("
-				     +"noti_no_seq.nextval,0,?,?,?,SYSDATE,?,0)";
+				     +"noti_no_seq.nextval,?,?,?,?,SYSDATE,0)";
 		   ps=conn.prepareStatement(sql);
-		   ps.setString(1, vo.getName());
-		   ps.setString(2, vo.getSubject());
-		   ps.setString(3, vo.getContent());
-		   ps.setString(4, vo.getPwd());
+		   ps.setString(1, vo.getType());
+		   ps.setString(2, vo.getName());
+		   ps.setString(3, vo.getSubject());
+		   ps.setString(4, vo.getContent());
 		   ps.executeUpdate(); // commit => autocommit
 	   }catch(Exception ex)
 	   {
@@ -152,14 +153,14 @@ public class NoticeDAO {
 	   }
 	   return vo;
    }
-   // 5. 수정 ==> Ajax
+   // 5. notice_update.jsp로 보내는 데이터
    public NoticeVO noticeUpdateData(int no)
    {
 	   NoticeVO vo=new NoticeVO();
 	   try
 	   {
 		   conn=db.getConnection();
-		   String sql="SELECT no,subject,name,content "
+		   String sql="SELECT no,subject,name,content,type "
 			  +"FROM notice "
 			  +"WHERE no=?";
 		   
@@ -172,7 +173,7 @@ public class NoticeDAO {
 		   vo.setSubject(rs.getString(2));
 		   vo.setName(rs.getString(3));
 		   vo.setContent(rs.getString(4));
-		   
+		   vo.setType(rs.getString(5));
 		   rs.close();
 			  
 	   }catch(Exception ex)
@@ -185,37 +186,23 @@ public class NoticeDAO {
 	   }
 	   return vo;
    }
-   // 5-1. 수정 
-   public boolean noticeUpdate(NoticeVO vo)
+   // 실제 update
+   public void noticeUpdate(NoticeVO vo)
    {
-	   boolean bCheck=false;
 	   try
 	   {
 		   conn=db.getConnection();
-		   String sql="SELECT pwd FROM notice "
-				     +"WHERE no=?";
+		   String sql="UPDATE notice SET "
+					  +"name=?,subject=?,content=?, type=? "
+					  +"WHERE no=?";
 		   ps=conn.prepareStatement(sql);
-		   ps.setInt(1, vo.getNo());
-		   ResultSet rs=ps.executeQuery();
-		   rs.next();
-		   String db_pwd=rs.getString(1);
-		   rs.close();
+		   ps.setString(1, vo.getName());
+		   ps.setString(2, vo.getSubject());
+		   ps.setString(3, vo.getContent());
+		   ps.setString(4, vo.getType());
+		   ps.setInt(5, vo.getNo());
 		   
-		   if(db_pwd.equals(vo.getPwd()))
-		   {
-			   bCheck=true;
-			   sql="UPDATE notice SET "
-				  +"name=?,subject=?,content=? "
-				  +"WHERE no=?";
-			   
-			   ps=conn.prepareStatement(sql);
-			   ps.setString(1, vo.getName());
-			   ps.setString(2, vo.getSubject());
-			   ps.setString(3, vo.getContent());
-			   ps.setInt(4, vo.getNo());
-			   
-			   ps.executeUpdate();
-		   }
+		   ps.executeUpdate();
 	   }catch(Exception ex)
 	   {
 		   ex.printStackTrace();
@@ -224,34 +211,17 @@ public class NoticeDAO {
 	   {
 		   db.disConnection(conn, ps);
 	   }
-	   return bCheck;
    }
-   
-   // 6. 삭제 ==> Ajax
-   public String noticeDelete(int no,String pwd)
+   // delete
+   public void noticeDelete(int no)
    {
-	   String res="NO";
 	   try
 	   {
 		   conn=db.getConnection();
-		   String sql="SELECT pwd FROM notice "
-				     +"WHERE no=?";
+		   String sql="DELETE FROM notice WHERE no=?";
 		   ps=conn.prepareStatement(sql);
 		   ps.setInt(1, no);
-		   ResultSet rs=ps.executeQuery();
-		   rs.next();
-		   String db_pwd=rs.getString(1);
-		   rs.close();
-		   
-		   if(db_pwd.equals(pwd))
-		   {
-			   res="YES";
-			   sql="DELETE FROM notice "
-				  +"WHERE no=?";
-			   ps=conn.prepareStatement(sql);
-			   ps.setInt(1, no);
-			   ps.executeUpdate();
-		   }
+		   ps.executeUpdate();
 	   }catch(Exception ex)
 	   {
 		   ex.printStackTrace();
@@ -260,7 +230,6 @@ public class NoticeDAO {
 	   {
 		   db.disConnection(conn, ps);
 	   }
-	   return res;
    }
 }
 

@@ -15,7 +15,7 @@
 $(function(){
 	$('#notiBtn').click(function(){
 		   // 필수 입력 필드 배열
-		   var requiredFields = ['name','subject','content','pwd'];
+		   var requiredFields = ['name','subject','content'];
 		   var isValid = true;
 		   
 		   // 필수 입력 필드를 순회하며 값이 비어있는지 확인
@@ -50,13 +50,23 @@ $(function(){
 </div> 
   <div class="container1">
   <div class="row1">
-  <h2 class="sectiontitle">글쓰기</h2>
+  <h2 class="sectiontitle">공지사항</h2>
   <form method=post action="../notice/notice_insert_ok.do" id="frm">
   <table class="table">
     <tr>
       <th width=15%>이름</th>
       <td width=85%>
         <input type=text name=name id="name" size=20 class="input-sm">
+      </td>
+    </tr>
+    <tr>
+      <th width=15%>유형</th>
+      <td width=85%>
+        <select name="type">
+          <option>일반공지</option>
+          <option>긴급공지</option>
+          <option>이벤트 공지</option>
+        </select>
       </td>
     </tr>
     <tr>
@@ -71,12 +81,12 @@ $(function(){
         <textarea rows="10" cols="50" id="content" name=content></textarea>
       </td> 
     </tr>
-    <tr>
+    <!-- <tr>
       <th width=15%>비밀번호</th>
       <td width=85%>
         <input type=password name=pwd id="pwd" size=10 class="input-sm">
       </td>
-    </tr>
+    </tr> -->
     <tr>
       <td colspan=2 class="text-center">
         <input type=button value="글쓰기" class="btn btn-sm btn-success" id="notiBtn">

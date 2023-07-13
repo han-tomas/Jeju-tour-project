@@ -50,6 +50,7 @@ public class NoticeModel{
 	// 데이터 추가
 	@RequestMapping("notice/notice_insert.do")
 	public String notice_insert(HttpServletRequest request,HttpServletResponse response) {
+		
 		request.setAttribute("main_jsp", "../notice/notice_insert.jsp");
 		return "../main/main.jsp";
 	}
@@ -60,21 +61,15 @@ public class NoticeModel{
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) {}
 		NoticeVO vo=new NoticeVO();
+		vo.setType(request.getParameter("type"));
 		vo.setName(request.getParameter("name"));
 		vo.setSubject(request.getParameter("subject"));
 		vo.setContent(request.getParameter("content"));
-		vo.setPwd(request.getParameter("pwd"));
 		NoticeDAO dao=NoticeDAO.newInstance();
 		dao.noticeInsert(vo);
 			
 		return "redirect:../notice/notice_list.do"; // 실행을 다시 하도록!(.jsp 안되고, .do를 호출해야해 _ 데이터를 가져와야하니까)
 	}
-	
-	// 상세보기
-	// JSP -> DispatcherServlet -> Model -> DispatcherSerlet -> JSP
-	//		  -----------------				---------------- spring.jar로 고정
-	// Model : Model / DAO / VO (세개를 묶어서 다 모델이라고 한다)
-	// 화면출력 => main / ajax => 일반jsp / _ok.do => redirect / 
 		
 	@RequestMapping("notice/notice_detail.do")
 	public String notice_detail(HttpServletRequest request,HttpServletResponse response) {
@@ -92,17 +87,12 @@ public class NoticeModel{
 	@RequestMapping("notice/notice_delete.do")
 	public void notice_delete(HttpServletRequest request,HttpServletResponse response) {
 		String no=request.getParameter("no");
-		String pwd=request.getParameter("pwd");
 	
 		NoticeDAO dao=NoticeDAO.newInstance();
-		String res=dao.noticeDelete(Integer.parseInt(no), pwd);
-		try {
-			PrintWriter out=response.getWriter();
-			out.println(res); // => out.println 값을 Ajax에서 읽어서 처리 / res => YES or NO
-		} catch (Exception e) {}
+		dao.noticeDelete(Integer.parseInt(no));
 	}
 	
-		@RequestMapping("notice/notice_update.do")
+	@RequestMapping("notice/notice_update.do")
 	public String notice_update(HttpServletRequest request,HttpServletResponse response) {
 		String no=request.getParameter("no");
 		// db연동
@@ -116,8 +106,9 @@ public class NoticeModel{
 		return "../main/main.jsp";
 	}
 	
+	// Ajax
 	@RequestMapping("notice/notice_update_ok.do")
-	public String notice_update_ok(HttpServletRequest request,HttpServletResponse response) {
+	public void notice_update_ok(HttpServletRequest request,HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) {}
@@ -125,14 +116,10 @@ public class NoticeModel{
 		vo.setName(request.getParameter("name"));
 		vo.setSubject(request.getParameter("subject"));
 		vo.setContent(request.getParameter("content"));
-		vo.setPwd(request.getParameter("pwd"));
+		vo.setType(request.getParameter("type"));
 		vo.setNo(Integer.parseInt(request.getParameter("no")));
-		
 		NoticeDAO dao=NoticeDAO.newInstance();
-		boolean bCheck=dao.noticeUpdate(vo);
-		
-		request.setAttribute("bCheck", bCheck);
-		request.setAttribute("no", vo.getNo());
-		return "../notice/notice_update_ok.jsp";
+		dao.noticeUpdate(vo);
+
 	}
 }

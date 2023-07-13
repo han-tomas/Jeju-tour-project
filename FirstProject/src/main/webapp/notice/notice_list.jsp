@@ -52,7 +52,7 @@
       <tr>
         <td width=10% class="text-center">${no}</td>
         <td width=45%>
-          <a href="../notice/notice_detail.do?no=${vo.no}">${vo.subject }</a>
+          <a href="../notice/notice_detail.do?no=${vo.no}" style="color: black">[${vo.type}]&nbsp;&nbsp;${vo.subject }</a>
           &nbsp;
           <c:if test="${today.equals(vo.dbday) }">
             <sub style="color: red">new</sub>
@@ -66,7 +66,6 @@
     </c:forEach>
   </table>
   </div>
-
   </div>
     <div class="row1">
       <ul class="text-center">
@@ -75,6 +74,5 @@
         <li><a href="../notice/notice_list.do?page=${curpage<totalpage?curpage+1:curpage}" class="btn btn-xs btn-info">다음</a></li>
       </ul>
     </div>
-</div>
 </body>
 </html>

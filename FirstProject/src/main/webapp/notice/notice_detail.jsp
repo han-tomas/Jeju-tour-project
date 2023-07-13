@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <style type="text/css">
 .main{
 	margin: 0px auto
@@ -16,40 +15,17 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-let i=0; // 전역변수
 $(function(){
 	$('#del').click(function(){
-		if(i===0){
-			$(this).text("취소")
-			$('#delTr').show()
-			i=1;
-		} else {
-			$(this).text("삭제")
-			$('#delTr').hide()
-			i=0;
-		}
-	})
-	$('#delBtn').click(function(){
-		let pwd=$('#pwd1').val()
+		alert("정말 삭제하시겠습니까?")
+		
 		let no=$(this).attr('data-no')
-		if(pwd.trim()==""){
-			$('#pwd1').focus()
-			return;
-		}
-		// delete.do?no=1$pwd=1111
 		$.ajax({
-			type: 'post',
-			url:'../notice/notice_delete.do',
-			data: {"no":no,"pwd":pwd},
+			type:'post',
+			url : '../notice/notice_delete.do',
+			data : {"no":no},
 			success: function(result){
-				let res=result.trim()
-				if(res==='NO'){
-					alert("비밀번호가 틀립니다")
-					$('#pwd1').val("")
-					$('#pwd1').focus()
-				} else {
-					location.href="../notice/notice_list.do"
-				}
+				location.href="../notice/notice_list.do"
 			}
 		})
 	})
@@ -96,15 +72,9 @@ $(function(){
         <td colspan=4 class="text-right">
           <c:if test="${sessionScope.admin=='y' }">
           <a href="../notice/notice_update.do?no=${vo.no }" class="btn btn-xs btn-info">수정</a>
-          <span class="btn btn-xs btn-danger" id="del">삭제</span>
+          <span class="btn btn-xs btn-danger" id="del" data-no="${vo.no }">삭제</span>
           </c:if>
           <a href="../notice/notice_list.do" class="btn btn-xs btn-warning">목록</a>
-        </td>
-      </tr>
-      <tr style="display: none" id="delTr">
-        <td colspan=4 class="text-right inline">
-          비밀번호:<input type=password name=pwd id=pwd1 size=10 class="input-sm">
-          <input type=button value="삭제" class="btn btn-sm btn-primary" id=delBtn data-no=${vo.no }>
         </td>
       </tr>
     </table>
