@@ -82,6 +82,12 @@ a {
 	padding: 20px;
 	margin-bottom: 20px;
 }
+.col-md-8 {
+	border: solid 2px #FF7F31;
+	border-radius: 7px;
+	padding: 20px;
+	margin-bottom: 20px;
+}
 
 /* 달력css */
 .input-group-append {
@@ -104,30 +110,39 @@ a {
 </style>
 <script type="text/javascript">
 $(function() {
-	
-const selectTab = element => {
-  const active = document.querySelector('.actived');
-  const visible = document.querySelector('.content-visible');
-  const tabContent = document.getElementById(element.href.split('#')[1]);
-  if (active) {
-    active.classList.remove('actived');
-  }
-  element.classList.add('actived');
-  if (visible) {
-    visible.classList.remove('content-visible');
-  }
-  tabContent.classList.add('content-visible');
-  event.preventDefault();
-}
-document.addEventListener('click', event => {
-  if (event.target.matches('.tab-item a')) {
-    selectTab(event.target);
-  }
-}, false);
+	let huno = $('#getHuno').val()
+	const selectTab = element => {
+	  const active = document.querySelector('.actived');
+	  const visible = document.querySelector('.content-visible');
+	  const tabContent = document.getElementById(element.href.split('#')[1]);
+	  if (active) {
+	    active.classList.remove('actived');
+	  }
+	  element.classList.add('actived');
+	  if (visible) {
+	    visible.classList.remove('content-visible');
+	  }
+	  tabContent.classList.add('content-visible');
+	  event.preventDefault();
+	}
+	document.addEventListener('click', event => {
+	  if (event.target.matches('.tab-item a')) {
+	    selectTab(event.target);
+	  }
+	}, false);
 
 	$(function(){
 		  $('#datepicker').datepicker();
 	});
+	
+	$.ajax({
+		type:'GET',
+		url:'../hotel/room_list.do',
+		data:{"huno":huno},
+		success:function(result){
+			$('#roomResult').html(result);
+		}
+	})
 
 })
 </script>
@@ -201,7 +216,7 @@ document.addEventListener('click', event => {
 				</div>
 				<div class="col-sm-2">
 					<form class="row">
-						<div class="input-group date" id="datepicker" >
+						<div class="input-group date" >
 							<input type="text" class="form-control" id="day" /> 
 						</div>
 					</form>
@@ -209,7 +224,12 @@ document.addEventListener('click', event => {
 			  </div>
 			</div>
 			<div class="col-sm-12">
-				<h4>방정보 표시 장소</h4>
+				<div class="row">
+					<input type="hidden" value="${ vo.huno }" id="getHuno">
+					<div class="col-md-12" id="roomResult">
+					
+					</div>
+				</div>
 			</div>
 			<div class="col-sm-12">
 				<ul class="tabs">

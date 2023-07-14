@@ -114,4 +114,40 @@ public class HotelDAO {
 		
 		return vo; 
 	}
+	
+	// 방 리스트
+	public List<RoomVO> roomListData(int huno) {
+		List<RoomVO> rList = new ArrayList<RoomVO>();
+		try {
+			conn = db.getConnection();
+			String sql = "SELECT rno, huno, rname, account, price, person, rstructure, special, rposter, num "
+						+"FROM (SELECT rno, huno, rname, account, price, person, rstructure, special, rposter, rownum as num "
+						+"FROM (SELECT rno, huno, rname, account, price, person, rstructure, special, rposter "
+						+"FROM room)) "
+						+"WHERE huno = ?";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, huno);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				RoomVO vo = new RoomVO();
+				vo.setRno(rs.getInt(1));
+				vo.setHuno(rs.getInt(2));
+				vo.setRname(rs.getString(3));
+				vo.setAccount(rs.getInt(4));
+				vo.setPrice(rs.getInt(5));
+				vo.setPerson(rs.getString(6));
+				vo.setRstructure(rs.getString(7));
+				vo.setSpecial(rs.getString(8));
+				vo.setRposter(rs.getString(9));
+				rList.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		return rList;
+	}
 }

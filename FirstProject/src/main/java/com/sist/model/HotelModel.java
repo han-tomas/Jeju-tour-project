@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.RequestMapping;
-import com.sist.dao.HotelDAO;
-import com.sist.dao.HotelDAO;
-import com.sist.vo.HotelVO;
-import com.sist.vo.HotelVO;
+import com.sist.dao.*;
+import com.sist.vo.*;
 
 public class HotelModel {
 	private String hotelURL = "http://www.jejutori.com/";
@@ -58,7 +56,7 @@ public class HotelModel {
 	}
 	
 	@RequestMapping("hotel/hotel_detail.do")
-	public String goods_detail(HttpServletRequest request, HttpServletResponse response) {
+	public String hotel_detail(HttpServletRequest request, HttpServletResponse response) {
 		
 		String huno=request.getParameter("huno");
 		// DAO 연결
@@ -76,5 +74,25 @@ public class HotelModel {
 		
 		request.setAttribute("main_jsp", "../hotel/hotel_detail.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("hotel/room_list.do")
+	public String room_list(HttpServletRequest request, HttpServletResponse response) {
+
+		String huno = request.getParameter("huno");
+		
+		// DAO 연동
+		HotelDAO dao = HotelDAO.newInstance();
+		List<RoomVO> rList = dao.roomListData(Integer.parseInt(huno));
+		for(RoomVO vo:rList) {
+			String[] posters = vo.getRposter().split("\\^");
+			for (int i=0; i<posters.length; i++) {
+				posters[i] = hotelURL+posters[i];
+			}
+			vo.setRposters(posters);
+		}
+		
+		request.setAttribute("rList", rList);
+		return "../hotel/room_list.jsp";
 	}
 }
