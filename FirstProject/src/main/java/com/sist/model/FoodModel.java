@@ -111,10 +111,10 @@ public class FoodModel {
 		if(id!=null) {
 			FoodLikeDAO fdao=FoodLikeDAO.newInstance();
 			int like_ok=fdao.foodLikeOk(Integer.parseInt(fino), id);
-			int like_total=fdao.foodLikeTotalCount(Integer.parseInt(fino));
+			//int like_total=fdao.foodLikeTotalCount(Integer.parseInt(fino));
 			
 			request.setAttribute("like_ok", like_ok);
-			request.setAttribute("like_total", like_total);
+			//request.setAttribute("like_total", like_total);
 		}
 		
 		

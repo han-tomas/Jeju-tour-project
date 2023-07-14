@@ -54,13 +54,7 @@ $(function(){
   <form method=post action="../notice/notice_insert_ok.do" id="frm">
   <table class="table">
     <tr>
-      <th width=15%>이름</th>
-      <td width=85%>
-        <input type=text name=name id="name" size=20 class="input-sm">
-      </td>
-    </tr>
-    <tr>
-      <th width=15%>유형</th>
+      <th width=15%>구분</th>
       <td width=85%>
         <select name="type">
           <option>일반공지</option>
@@ -81,12 +75,6 @@ $(function(){
         <textarea rows="10" cols="50" id="content" name=content></textarea>
       </td> 
     </tr>
-    <!-- <tr>
-      <th width=15%>비밀번호</th>
-      <td width=85%>
-        <input type=password name=pwd id="pwd" size=10 class="input-sm">
-      </td>
-    </tr> -->
     <tr>
       <td colspan=2 class="text-center">
         <input type=button value="글쓰기" class="btn btn-sm btn-success" id="notiBtn">

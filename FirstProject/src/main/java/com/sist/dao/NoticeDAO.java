@@ -16,7 +16,7 @@ public class NoticeDAO {
 	   return dao;
    }
    // 기능 
-   // 1. 목록 출력 => 인라인뷰 => 페이징 
+   // notice list
    public List<NoticeVO> noticeListData(int page)
    {
 	   List<NoticeVO> list=new ArrayList<NoticeVO>();
@@ -60,7 +60,8 @@ public class NoticeDAO {
 	   }
 	   return list;
    }
-   // 1-1 총페이지 구하기 
+   
+   // paging
    public int noticeRowCount()
    {
 	   int count=0;
@@ -83,10 +84,8 @@ public class NoticeDAO {
 	   }
 	   return count;
    }
-   // 2. Top7 => rownum (HIT가 많은 위에서 7) => Top-N
-   // 3. 글쓰기 
-   // 1. DI / AOP / security / websocket / restful 
-   // mybatis / MVC 
+   
+   // notice Insert
    public void noticeInsert(NoticeVO vo)
    {
 	   try
@@ -109,7 +108,8 @@ public class NoticeDAO {
 		   db.disConnection(conn, ps);
 	   }
    }
-   // 4. 상세보기 
+   
+   // notice detail 
    public NoticeVO noticeDetailData(int no)
    {
 	   NoticeVO vo=new NoticeVO();
@@ -153,6 +153,7 @@ public class NoticeDAO {
 	   }
 	   return vo;
    }
+   
    // 5. notice_update.jsp로 보내는 데이터
    public NoticeVO noticeUpdateData(int no)
    {
@@ -186,6 +187,7 @@ public class NoticeDAO {
 	   }
 	   return vo;
    }
+   
    // 실제 update
    public void noticeUpdate(NoticeVO vo)
    {
@@ -212,6 +214,7 @@ public class NoticeDAO {
 		   db.disConnection(conn, ps);
 	   }
    }
+   
    // delete
    public void noticeDelete(int no)
    {

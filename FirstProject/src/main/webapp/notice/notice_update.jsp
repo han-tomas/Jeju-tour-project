@@ -24,7 +24,7 @@ $(function(){
 		$.ajax({
 			type: 'post',
 			url : '../notice/notice_update_ok.do',
-			data : {"no":no,"name":name,"subject":subject,"content":content,"type":type},
+			data : {"no":no,"subject":subject,"content":content,"type":type},
 			success : function(result){
 				location.href='../notice/notice_detail.do?no='+no;
 			}
@@ -50,13 +50,6 @@ $(function(){
   <div class="row">
   <table class="table">
     <tr>
-      <th width=15%>이름</th>
-      <td width=85%>
-        <input type=text name=name id=name size=20 class="input-sm" value="${vo.name }">
-        <input type=hidden name=no value="${vo.no }">
-      </td>
-    </tr>
-    <tr>
       <th width=15%>유형</th>
       <td width=85%>
         <select name="type" id="type">
@@ -70,6 +63,7 @@ $(function(){
       <th width=15%>제목</th>
       <td width=85%>
         <input type=text name=subject id=subject size=50 class="input-sm" value="${vo.subject }">
+        <input type=hidden name=no value="${vo.no }">
       </td>
     </tr>
     <tr>

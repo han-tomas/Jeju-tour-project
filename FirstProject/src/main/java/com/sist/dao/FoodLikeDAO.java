@@ -53,23 +53,20 @@ public class FoodLikeDAO {
 		return like_ok;
 	}
 	
-	// like 총 갯수
-	public int foodLikeTotalCount(int fino) {
-		int total=0;
+	// like취소
+	public void foodLikeCancle(String id, int fino) {
 		try {
 			conn=db.getConnection();
-			String sql="SELECT like_count FROM food_info WHERE fino=?";
+			String sql="DELETE FROM jeju_food_like WHERE id=? AND fino=?";
+			
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, fino);
-			ResultSet rs=ps.executeQuery();
-			rs.next();
-			total=rs.getInt(1);
-			rs.close();
+			ps.setString(1, id);
+			ps.setInt(2, fino);
+			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			db.disConnection(conn, ps);
 		}
-		return total;
 	}
 }

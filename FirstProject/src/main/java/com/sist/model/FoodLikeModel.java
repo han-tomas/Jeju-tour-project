@@ -1,5 +1,4 @@
 package com.sist.model;
-import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +20,18 @@ public class FoodLikeModel {
 		
 		FoodLikeDAO dao=FoodLikeDAO.newInstance();
 		dao.foodLikeInsert(vo);
+		
+		return "redirect:../food/food_detail.do?fino="+fino;
+	}
+	
+	@RequestMapping("foodLike/food_like_cancle.do")
+	public String food_like_cancle(HttpServletRequest request,HttpServletResponse response) {
+		String fino=request.getParameter("fino");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		FoodLikeDAO dao=FoodLikeDAO.newInstance();
+		dao.foodLikeCancle(id, Integer.parseInt(fino));
 		
 		return "redirect:../food/food_detail.do?fino="+fino;
 	}

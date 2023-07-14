@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
@@ -60,9 +61,13 @@ public class NoticeModel{
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) {}
+		
+		HttpSession session=request.getSession();
+		String name=(String)session.getAttribute("name");
+		
 		NoticeVO vo=new NoticeVO();
 		vo.setType(request.getParameter("type"));
-		vo.setName(request.getParameter("name"));
+		vo.setName(name);
 		vo.setSubject(request.getParameter("subject"));
 		vo.setContent(request.getParameter("content"));
 		NoticeDAO dao=NoticeDAO.newInstance();
@@ -112,8 +117,12 @@ public class NoticeModel{
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) {}
+		
+		HttpSession session=request.getSession();
+		String name=(String)session.getAttribute("name");
+		
 		NoticeVO vo=new NoticeVO();
-		vo.setName(request.getParameter("name"));
+		vo.setName(name);
 		vo.setSubject(request.getParameter("subject"));
 		vo.setContent(request.getParameter("content"));
 		vo.setType(request.getParameter("type"));

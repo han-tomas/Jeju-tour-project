@@ -27,8 +27,8 @@
 }
 </style>
 <script type="text/javascript">
-function goBackToList() {
-    window.location.href = "../food/food_list.do";
+function goBackList(){
+	location.href="../food/food_list.do";
 }
 </script>
 </head>
@@ -71,15 +71,20 @@ function goBackToList() {
        <div class="row1">
        <i class="fa fa-eye fa-lg" style="border: 2px;color:gray;"></i>
        &nbsp;<fmt:formatNumber value="${vo.hit }" pattern="###,###"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   <c:if test="${sessionScope.id==null }">
+	     <i class="fa fa-gratipay fa-lg" style="color: #f07070"></i>&nbsp;${vo.like_count}
+	   </c:if>
 	   <c:if test="${sessionScope.id!=null }">
 	   <c:if test="${like_ok==0 }">
 	     <a href="../foodLike/food_like_insert.do?fino=${ vo.fino }">
-	     <i class="fa fa-heart" style="color: gray"></i></a>&nbsp;${like_total}
+	     <i class="fa fa-heart" style="color: gray"></i></a>&nbsp;${vo.like_count}
 	   </c:if>
 	   <c:if test="${like_ok!=0 }">
-	     <i class="fa fa-heart" style="color: #f07070"></i>&nbsp;${like_total}
+	     <a href="../foodLike/food_like_cancle.do?fino=${ vo.fino }">
+	     <i class="fa fa-heart" style="color: #f07070"></i></a>&nbsp;${vo.like_count}
 	   </c:if>
 	   </c:if>
+	   
 	   </div>
        <table class="table1">
          <tr height="20px"></tr>
@@ -131,8 +136,8 @@ function goBackToList() {
           </tr>
         </table>
         <div class="d-flex justify-content-end" style="margin: 10px;">
-              <button class="btn btn-sm btn-success" onclick="goBackToList()">목록</button>
-            </div>
+          <button class="btn btn-sm btn-success" onclick="goBackList()">목록</button>
+        </div>
         </div>
         <div class="col-sm-5">
         <div id="map" style="width:100%;height:350px;"></div>
