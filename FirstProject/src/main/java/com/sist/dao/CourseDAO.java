@@ -99,7 +99,15 @@ public class CourseDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql ="SELECT no, daytype,coursename,cno FROM course_detail where cno=?";
+			// 조회수 증가
+			String sql= "UPDATE course_category SET "
+					+ "views = views+1 "
+					+ "WHERE cno=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, cno);
+			ps.executeUpdate();
+			
+			sql ="SELECT no, daytype,coursename,cno FROM course_detail where cno=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, cno);
 			ResultSet rs = ps.executeQuery();
@@ -108,7 +116,9 @@ public class CourseDAO {
 				CourseDetailVO vo = new CourseDetailVO();
 				vo.setNo(rs.getInt(1));
 				vo.setDaytype(rs.getInt(2));
-				vo.setCoursename(rs.getString(3));
+				String coursename=rs.getString(3);
+				coursename=coursename.trim();
+				vo.setCoursename(coursename);
 				vo.setCno(rs.getInt(4));
 				list.add(vo);
 			}

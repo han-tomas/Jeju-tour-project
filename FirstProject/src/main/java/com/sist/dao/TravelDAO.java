@@ -258,5 +258,55 @@ public class TravelDAO {
 		}
 		return vo;
 	}
+	// 해당 검색어
+	public List<TravelVO> coursenameRelated(String coursename)
+	{
+		List<TravelVO> list = new ArrayList<TravelVO>();
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT no, poster,title,lno FROM travel_detail "
+					+ "WHERE title LIKE '%'||?||'%'";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, coursename);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				TravelVO vo  = new TravelVO();
+				vo.setNo(rs.getInt(1));
+				vo.setPoster(rs.getString(2));
+				vo.setTitle(rs.getString(3));
+				int lno =rs.getInt(4);
+				String label="";
+				if(lno==1)
+				{
+					label="관광지";
+				}
+				else if(lno==2)
+				{
+					label="음식점";
+				}
+				else if(lno==3)
+				{
+					label="숙박";
+				}
+				else
+				{
+					label="행사/축제";
+				}
+				vo.setLabel(label);
+				list.add(vo);
+			}
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return list;
+	}
 }
 

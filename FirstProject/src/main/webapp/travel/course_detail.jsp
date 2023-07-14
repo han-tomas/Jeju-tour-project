@@ -6,10 +6,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+function detail(coursename){
+	
+    $.ajax({
+    	type:'post',
+    	url:'../travel/coursename_related.do',
+    	data:{"coursename":coursename},
+    	success:function(result)
+    	{
+    		
+    		$('#coursename_related').html(result);
+    	}
+    })
+}
+</script>
 <style type="text/css">
-.row1 {
+.container1{
+	border: 1px solid orange;
+	border-radius: 10px;
+	width: 1200px;
 	margin: 0px auto;
-  	width: 1200px;
+}
+.row1 {
+	border: 1px solid orange;
+	width: 1200px;
+	margin: 0px auto;
+}
+.row2 {
+	border: 1px solid orange;
+	width: 1200px;
+	margin: 0px auto;
+	background-color: #FFCD28;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.coursename {
+	border-bottom: none;
 }
 </style>
 </head>
@@ -25,8 +59,9 @@
   </div>
 </div>
 <div class="popular-categories">
-    <div class="container">
-    <div class="row row1">
+    <div class="container1">
+    <div class="row row2">
+    	<div style="height: 10px"></div>
     	<div style="text-align:right;">
     		<c:if test="${sessionScope.id!=null }">
     			<c:if test="${jjim_count==0 }">
@@ -42,22 +77,22 @@
 	  				<span class="btn btn-xs btn-primary"><i class="fa fa-thumbs-o-up fa-sm" style="color: white; font-style: bold">&nbsp;추천</i></span>
 	  			</c:if>	
     		</c:if>
-    		<a href ="../travel/course_list.do" class="btn btn-xs btn-warning"><i class="fa fa-list fa-sm" style="color: white; font-style: bold">&nbsp;목록</i></a>
+    		<a href ="../travel/course_list.do" class="btn btn-xs btn-outline-secondary" style="margin-right: 10px" ><i class="fa fa-list fa-sm" style="color: white; font-style: bold;">&nbsp;목록</i></a>
     	</div>
-    	<div style="height: 20px"></div>
+    	<div style="height: 10px"></div>
     </div>
-    <div class="row row1">
-    	<div class="col-lg-6">
+    <div class="row">
+    	<div class="col-lg-6" style="height: 400px; overflow: auto;">
     	<table class="table">
     	<tr>
-    		<td>
+    		<td id="coursename_related">
     			<img src="${cvo.poster }" alt="Lights" style="width:100%;height: 380px;">
     		</td>
     	</tr>
     	</table>
     	</div>
     	<div class="col-lg-6">
-    		<div id="map" style="width:100%;height:380px"></div>
+    		<div id="map" style="width:100%;height:380px; margin-top: 10px"></div>
     		<script>
 			var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 			var mapContainer = document.getElementById('map');
@@ -105,6 +140,7 @@
 			            map.setBounds(bounds);
 			        }
 			    });
+			    
 			}
 			</script>
     	</div>
@@ -112,56 +148,59 @@
     	<div class="row row1">
     	<table class="table">
     	<tr>
-    		<td class="text-center inline" style="color: white;background-color: orange"><h2>${cvo.title }</h2></td>
+    		<td class="text-center inline" style="color: white;background-color: #FFCD28;"><h2>${cvo.title }</h2></td>
     	</tr>
    		</table>
    		<table class="table">
    		<tr>
-   			<td><h3>Day1</h3></td>
+   			<td class="coursename"><h3>Day1</h3></td>
    		</tr>
     	<tr>
-    		<c:forEach var="vo" items="${list}">
+    		
+    		<c:forEach var="vo" items="${list}" varStatus="s">
     			<c:if test="${vo.daytype==1 }">
-    				<td class="text-center">
-    					<a href="#" onclick="showLocationOnMap('${vo.coursename}')">
-    						${vo.coursename}
-    					</a>
-    				</td>
-    			</c:if>
-            </c:forEach>
-        </tr>   
-        <tr>
-   			<td><h3>Day2</h3></td>
-   		</tr> 
-    	<tr>
-		    <c:forEach var="vo" items="${list}">
-		        <c:if test="${vo.daytype==2 }">
-		            <td class="text-center">
-		                <c:choose>
+    				<td class="text-center coursename" style="white-space: nowrap;">
+    					<c:choose>
 		                    <c:when test="${vo.coursename eq '렌터카 페이지로 이동하기'}">
-		                        <a href="#">
-		                            ${vo.coursename}
+		                        <a href="../rentcar/rentcar_main.do">
+		                            ${vo.coursename }
 		                        </a>
 		                    </c:when>
 		                    <c:otherwise>
-		                        <a href="#" onclick="showLocationOnMap('${vo.coursename}')">
+		                        <a href="#" onclick="showLocationOnMap('${vo.coursename}');detail('${vo.coursename }')">
 		                            ${vo.coursename}
 		                        </a>
 		                    </c:otherwise>
 		                </c:choose>
+    					
+    				</td>
+    				
+    			</c:if>
+            </c:forEach>
+        </tr>   
+        <tr>
+   			<td class="coursename"><h3>Day2</h3></td>
+   		</tr> 
+    	<tr>
+		    <c:forEach var="vo" items="${list}">
+		        <c:if test="${vo.daytype==2 }">
+		            <td class="text-center coursename">
+		            	<a href="#" onclick="showLocationOnMap('${vo.coursename}');detail('${vo.coursename }')">
+    						${vo.coursename}
+    					</a>
 		            </td>
 		        </c:if>
 		    </c:forEach>
 		</tr>
         <c:if test="${aa[2]!=0 }">
         <tr>
-   			<td><h3>Day3</h3></td>
+   			<td class="coursename"><h3>Day3</h3></td>
    		</tr>   
     	<tr>
     		<c:forEach var="vo" items="${list}">
     			<c:if test="${vo.daytype==3 }">
-    				<td class="text-center">
-    					<a href="#" onclick="showLocationOnMap('${vo.coursename}')">
+    				<td class="text-center  coursename">
+    					<a href="#" onclick="showLocationOnMap('${vo.coursename}');detail('${vo.coursename }')">
     						${vo.coursename}
     					</a>
     				</td>
@@ -172,13 +211,13 @@
         
         <c:if test="${aa[3]!=0 }">
         <tr>
-   			<td><h3>Day4</h3></td>
+   			<td class="coursename"><h3>Day4</h3></td>
    		</tr>    
     	<tr>
     		<c:forEach var="vo" items="${list}">
     			<c:if test="${vo.daytype==4 }">
-    				<td class="text-center">
-    					<a href="#" onclick="showLocationOnMap('${vo.coursename}')">
+    				<td class="text-center  coursename">
+    					<a href="#" onclick="showLocationOnMap('${vo.coursename}');detail('${vo.coursename}')">
     						${vo.coursename}
     					</a>
     				</td>

@@ -35,7 +35,7 @@ public class CourseModel {
 		request.setAttribute("aa", aa);
 		request.setAttribute("list", list);
 		request.setAttribute("main_jsp", "../travel/course_detail.jsp");
-		
+		request.setAttribute("size", list.size());
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		if(id!=null)
@@ -51,5 +51,18 @@ public class CourseModel {
 		
 		return "../main/main.jsp";
 	}
-	
+	@RequestMapping("travel/coursename_related.do")
+	public String coursename_related(HttpServletRequest request, HttpServletResponse response)
+	{
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex) {}
+		String coursename = request.getParameter("coursename");
+		
+		TravelDAO dao = TravelDAO.newInstance();
+		List<TravelVO> list = dao.coursenameRelated(coursename);
+		request.setAttribute("list", list);
+		return "../travel/coursname_related.jsp";
+	}
 }
