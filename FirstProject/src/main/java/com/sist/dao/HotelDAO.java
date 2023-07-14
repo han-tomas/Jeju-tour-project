@@ -100,6 +100,7 @@ public class HotelDAO {
 			vo.setHdno(rs.getInt(1));
 			vo.setHuno(rs.getInt(2));
 			vo.setName(rs.getString(3));
+			vo.setAddress(rs.getString(4));
 			vo.setAddr1(rs.getString(4).substring(0, rs.getString(4).indexOf("/")));
 			vo.setAddr2(rs.getString(4).substring(rs.getString(4).lastIndexOf("/")+1));
 			vo.setContent(rs.getString(5));

@@ -88,7 +88,6 @@ a {
 	padding: 20px;
 	margin-bottom: 20px;
 }
-
 /* 달력css */
 .input-group-append {
   cursor: pointer;
@@ -107,14 +106,15 @@ a {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
 }
-.form-floating > .bi-calendar-date + .datepicker_input + label {
-  padding-left: 3.5rem;
-  z-index: 3;
+.fa-2x {
+	font-size:1.6em;
 }
 </style>
 <script type="text/javascript">
 $(function() {
 	let huno = $('#getHuno').val()
+	let inwon = $('#inwon').val()
+	let date = $('#date').val()
 	const selectTab = element => {
 	  const active = document.querySelector('.actived');
 	  const visible = document.querySelector('.content-visible');
@@ -135,22 +135,26 @@ $(function() {
 	  }
 	}, false);
 	
-	/* $('#datepicker').datepicker({
-	    uiLibrary: 'bootstrap5',
-	    multidate : true, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
-	    multidateSeparator :","
-	}); */
-	$('#datepicker').daterangepicker();
-	
+	$('.datepicker').daterangepicker();
 	
 	$.ajax({
 		type:'GET',
 		url:'../hotel/room_list.do',
-		data:{"huno":huno},
+		data:{"huno":huno,"inwon":inwon,"date":date},
 		success:function(result){
 			$('#roomResult').html(result);
 		}
 	})
+	function roomSet(){
+		$.ajax({
+			type:'GET',
+			url:'../hotel/room_list.do',
+			data:{"huno":huno,"inwon":inwon,"date":date},
+			success:function(result){
+				$('#roomResult').html(result);
+			}
+		})
+	}
 })
 </script>
 </head>
@@ -166,6 +170,7 @@ $(function() {
 	</div>
 	<div class="container container1">
 		<div class="row">
+		<form method="post" action="../hotel/hotel_reserve.do" id="reserveFrm">
 			<div class="col-sm-12" style="text-align: center;">
 				<div class="col-sm-12" style="padding:0px; margin:0px; border:none;">
 				<div id="carouselExampleControls" class="carousel slide"
@@ -197,41 +202,46 @@ $(function() {
 				<h4>${ vo.addr1 }</h4>
 				<h1>${ vo.name }</h1>
 			</div>
-			<div class="col-sm-12">
+			<div class="col-sm-12" style="border:none; padding:0px 20px 0px 0px;">
 			  <div class="row" style="justify-content: right;">
-				<div class="col-sm-6">
-					<div class="input-group" style="width: 250px;">
+					<!-- <div class="input-group" style="width: 250px;">
 						<input type="text" class="form-control">
 						<span class="input-group-append">
 							<span class="input-search bg-light d-block">
 								<i class="fa fa-search"></i>
 							</span>
 						</span>
+					</div> -->
+					<div class="row" style="justify-content: right;">
+						<div class="input-group" style="width: 360px;">
+							<span style="padding:6px 10px 0px 0px;"><i class="fa fa-person fa-2x"></i></span> 
+							<select class="form-control" style="margin-right:30px;" id="inwon" onchange="roomSet();">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+							</select>
+							<i class="fa fa-calendar fa-2x" style="padding:4px 10px 0px 0px"></i>
+							<input type="text" class="form-control datepicker" value="" id="date" style="width:200px;" /> 
+						</div>
 					</div>
 				</div>
-				<div class="col-sm-6">
-					<form class="row" style="justify-content: right;">
-						<!-- <input id="datepicker" width="276" /> -->
-						<div class="input-group date" id="datepicker" style="width: 280px;">
-							<input type="text" class="form-control" id="date" /> 
-							<span class="input-group-append">
-								<span class="input-group-text bg-light d-block">
-									<i class="fa fa-calendar"></i>
-								</span>
-							</span>
-						</div>
-					</form>
-				</div>
-			  </div>
 			</div>
 			<div class="col-sm-12">
 				<div class="row">
-					<input type="hidden" value="${ vo.huno }" id="getHuno">
+					<input type="hidden" value="${ vo.huno }" id="huno">
 					<div class="col-md-12" id="roomResult">
 					
 					</div>
 				</div>
 			</div>
+			</form>
 			<div class="col-sm-12">
 				<ul class="tabs">
 					<li class="tab-item"><a href="#item1" class="actived">숙소소개</a></li>
@@ -385,7 +395,7 @@ $(function() {
 						<p style="margin-top:-12px">
 						    <em class="link">
 						        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-						            혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+						            ${ vo.addr2 }
 						        </a>
 						    </em>
 						</p>

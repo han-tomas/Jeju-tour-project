@@ -104,6 +104,8 @@ public class HotelModel {
 	public String room_list(HttpServletRequest request, HttpServletResponse response) {
 
 		String huno = request.getParameter("huno");
+		String inwon = request.getParameter("inwon");
+		String date = request.getParameter("date");
 		
 		// DAO 연동
 		HotelDAO dao = HotelDAO.newInstance();
@@ -114,6 +116,7 @@ public class HotelModel {
 				posters[i] = hotelURL+posters[i];
 			}
 			vo.setRposters(posters);
+			
 		}
 		
 		request.setAttribute("rList", rList);

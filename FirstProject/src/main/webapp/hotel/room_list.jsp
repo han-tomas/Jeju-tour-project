@@ -10,7 +10,9 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(function(){
-	
+	$('#reserveBtn').click(function(){
+		
+	})
 });
 </script>
 </head>
@@ -54,7 +56,8 @@ $(function(){
 					<h4> <fmt:formatNumber value="${ rvo.price }" pattern="#,###"/>원</h4>
 				</div>
 				<div class="col-md-12" style="text-align:right; margin-top:10px;">
-					<input type="button" class="btn btn-outline-dark" id="reserveBtn" value="예약하기"/>
+					<input type="hidden" value="${ rvo.huno }" id="getHuno"/>
+					<input type="button" class="btn btn-danger" id="reserveBtn" value="예약하기"/>
 				</div>
 			</div>
 		</div>
