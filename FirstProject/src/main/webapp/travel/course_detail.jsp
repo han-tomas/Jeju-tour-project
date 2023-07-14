@@ -86,7 +86,7 @@ function detail(coursename){
     	<table class="table">
     	<tr>
     		<td id="coursename_related">
-    			<img src="${cvo.poster }" alt="Lights" style="width:100%;height: 380px;">
+    			<img src="${cvo.poster }" alt="Lights" style="width:100%;height: 370px;">
     		</td>
     	</tr>
     	</table>

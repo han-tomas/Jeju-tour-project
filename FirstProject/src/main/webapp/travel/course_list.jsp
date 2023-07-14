@@ -28,7 +28,7 @@
       <div class="row">
       <c:forEach var="vo" items="${list }">
       <div class="col-md-4">
-	     <div class="img-thumbnail" style="width: 450px; margin-bottom:30px; background-color: orange;border-radius:10px">
+	     <div class="img-thumbnail" style="width: 450px; margin-bottom:30px; background-color: #FFCD28;border-radius:10px">
 	      <a href="course_detail.do?cno=${vo.cno }">
 	        <img src="${vo.poster }" alt="Lights" style="width:100%; height: 250px;border-radius:10px">
 	        <div class="caption">
