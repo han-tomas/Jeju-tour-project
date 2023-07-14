@@ -153,14 +153,11 @@
 			</div>
 			<!-- /.col -->
 			<div class="col-md-9">
+			
 				<div class="row">
-					<div>
-						<h4>
-							<b>총 ${totalCategory}개</b>
-						</h4>
-					</div>
 					<div class="row" id="result"></div>
 				</div>
+				
 				<div class="pagination">
 					<c:if test="${startPage>1 }">
 						<a
