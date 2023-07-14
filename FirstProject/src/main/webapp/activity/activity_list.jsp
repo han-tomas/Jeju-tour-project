@@ -10,17 +10,11 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Insert title here</title>
-<!-- Bootstrap core CSS -->
- <!-- <link href="../assets/css/bootstrap.css" rel="stylesheet">  -->
  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<!-- Fontawesome core CSS -->
 <link href="../assets/css/font-awesome.min.css" rel="stylesheet" />
-<!--GOOGLE FONT -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css'>
-<!--Slide Show Css -->
 <link href="../assets/css/main-style.css" rel="stylesheet" />
-<!-- custom CSS here -->
 <link href="../assets/css/style.css" rel="stylesheet" />
 <style type="text/css">
 .pagination {
@@ -35,7 +29,7 @@
 	text-decoration: none;
 }
 
-.aLogo {
+.aLogo{
 	width: 30px;
 	height: 27px;
 	transition: background-color 0.6s ease;
@@ -44,10 +38,10 @@
 .aLogo:hover {
 	background-color: rgb(245, 246, 247);
 }
-/* 
-.aLogo li {
+
+/* .aLogo {
 	transition: background-color 0.6s ease;
-} */
+}  */
 
 .img-fluid {
 	border-radius: 12px;
@@ -76,39 +70,57 @@
 	margin-top: -5px;
 }
 .container1{
-	width:1000px;
+	width:1100px;
 }
 </style>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		let accno=1;		
-		$.ajax({
-			type : 'GET',
-			url : '../activity/activity_list_result.do',
-			data : {
-				"accno" : 1
-			},
-			success : function(result) {
-				$('#result').html(result);
-			}
-		})
-		$('.list-group-item').css("cursor", "pointer")
-		$('.list-group-item').click(function() {
-			let accno = $(this).attr("data-no")
-			$.ajax({
-				type : 'GET',
-				url : '../activity/activity_list_result.do',
-				data : {
-					"accno" : accno
-				},
-				success : function(result) {
-					$('#result').html(result);
-				}
-			})
-		})
-	})
+$(function() {
+    let accno = 1; // 초기 카테고리 번호
+    
+    // 최초 페이지 로드 시 카테고리 1의 데이터 요청
+    loadActivityList(accno);
+    $('.list-group-item').css("cursor", "pointer")
+    // 카테고리 클릭 이벤트
+    $('.list-group-item').click(function() {
+        accno = $(this).attr("data-no");
+        
+        // 선택한 카테고리의 데이터 요청
+        loadActivityList(accno);
+    });
+   /*  $('.pagination a').click(function(event){
+    	event.preventDefault();
+        let page = $(this).attr("data-page");
+        
+        // 선택한 페이지의 데이터 요청
+        loadActivityList(accno, page);
+    }) */
+    // 페이지네이션 클릭 이벤트
+    $(document).on('click', '.pagination a', function(event) {
+        event.preventDefault();
+        let page = $(this).attr("data-page");
+        
+        // 선택한 페이지의 데이터 요청
+        loadActivityList(accno, page);
+    });
+    // 데이터 요청 함수
+    function loadActivityList(accno, page = 1) {
+        $.ajax({
+            type: 'GET',
+            url: '../activity/activity_list_result.do',
+            data: {
+                "accno": accno,
+                "page": page
+            },
+            success: function(result) {
+                $('#result').html(result);
+            }
+        });
+    }
+});
 </script>
+
 </head>
 <body>
 	<div class="page-heading">
@@ -124,15 +136,11 @@
 		<div class="row">
 			<div class="col-md-3">
 				<div>
-					<a class="list-group-item active" data-no="1">Activity </a>
+					<a class="list-group-item active" data-no="1">Activity</a>
 					<ul class="list-group">
-						<li class="list-group-item" data-no="1"><img
-							src="image/activity.png" class="aLogo"> 액티비티</li>
-
-						<li class="list-group-item" data-no="2"><img
-							src="image/activity_logo.png" class="aLogo"> 클래스</li>
-						<li class="list-group-item" data-no="3"><img
-							src="image/ticket_logo.png" class="aLogo"> 입장권 </li>
+						<li class="list-group-item" data-no="1"><img src="image/activity.png" class="aLogo"> 액티비티</li>
+						<li class="list-group-item" data-no="2"><img src="image/activity_logo.png" class="aLogo"> 클래스</li>
+						<li class="list-group-item" data-no="3"><img src="image/ticket_logo.png" class="aLogo"> 입장권</li>
 						<li class="list-group-item" data-no="4"><img
 							src="image/snap_logo.png" class="aLogo"> 스냅촬영 </li>
 						<li class="list-group-item" data-no="5"><img
@@ -151,36 +159,12 @@
 					</ul>
 				</div>
 			</div>
-			<!-- /.col -->
 			<div class="col-md-9">
-			
 				<div class="row">
 					<div class="row" id="result"></div>
-					<div class="row" id="result2"></div>
 				</div>
-				
-				<%-- <div class="pagination">
-					<c:if test="${startPage>1 }">
-						<a
-							href="../activity/activity_list.do?page=${startPage-1 }&accno=${accno}">
-							&laquo;</a>
-					</c:if>
-					<c:forEach var="i" begin="${startPage }" end="${endPage }">
-
-						<a href="../activity/activity_list.do?page=${i}&accno=${accno}">${i}</a>
-					</c:forEach>
-
-					<c:if test="${endPage<totalpage }">
-						<a
-							href="../activity/activity_list.do?page=${endPage+1 }&accno=${accno }">
-							&raquo;</a>
-					</c:if>
-				</div> --%>
 			</div>
 		</div>
 	</div>
-
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="../assets/js/bootstrap.js"></script>
 </body>
 </html>
