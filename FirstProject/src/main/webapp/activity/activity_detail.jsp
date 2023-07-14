@@ -68,6 +68,13 @@ h4 {
 	margin: 0 auto; /* 수평 가운데 정렬을 위해 왼쪽과 오른쪽 마진을 자동으로 설정 */
 }
 
+.wishTd a {
+	display: flex; /* 버튼을 flex 컨테이너로 설정 */
+	justify-content: center; /* 가로 방향 가운데 정렬 */
+	align-items: center; /* 세로 방향 가운데 정렬 */
+	margin: 0 auto; /* 수평 가운데 정렬을 위해 왼쪽과 오른쪽 마진을 자동으로 설정 */
+}
+
 .buyTd a {
 	display: flex; /* 버튼을 flex 컨테이너로 설정 */
 	justify-content: center; /* 가로 방향 가운데 정렬 */
@@ -204,97 +211,98 @@ table td {
 					<strong>옵션 선택</strong>
 				</h4>
 
-			<img alt="" src="${images[0] }">
-			<div id="moreImages" style="display: none;">
-				<c:forEach var="i" begin="1" end="${imagesLength}">
-					<img alt="" src="${images[i]}">
-				</c:forEach>
-			</div>
-			<div class="d-grid">
-				<button type="button" id="showMoreImagesBtn"
-					class="btn btn-primary btn-block" onclick="toggleMoreImages()">
-					더 보기</button>
-			</div>
-			<%-- <c:forTokens items="${vo.poster }" delims="^" var="img">
+				<img alt="" src="${images[0] }">
+				<div id="moreImages" style="display: none;">
+					<c:forEach var="i" begin="1" end="${imagesLength}">
+						<img alt="" src="${images[i]}">
+					</c:forEach>
+				</div>
+				<div class="d-grid">
+					<button type="button" id="showMoreImagesBtn"
+						class="btn btn-primary btn-block" onclick="toggleMoreImages()">
+						더 보기</button>
+				</div>
+				<%-- <c:forTokens items="${vo.poster }" delims="^" var="img">
 						<div>
 							<img src="${img }" style="width:100%">
 						</div>
 				</c:forTokens> --%>
 
-			<hr>
-			<table class="table">
-				<tr>
-					<td width="10%"><h1>${vo.score }</h1> <sup>★★★★★</sup><br>
-						<sup>후기 ${vo.review_count }</sup></td>
-					<td width="90%">
-						<div style="height: 20px"></div> ★★★★★&nbsp;<b>${vo.reviewer }</b><br>
-						<br> ${vo.review_content }
-					</td>
-				</tr>
-			</table>
-			<hr>
-			<h3 class="text-left">
-				<strong>이용 안내</strong>
-			</h3>
-			<div style="height: 20px;"></div>
-			<h5 class="text-left">이용 시간</h5>
-			<div style="height: 10px;"></div>
-			<pre class="text-left" style="background-color: white;">${vo.hours_use }</pre>
-			<div style="height: 20px;"></div>
-			<h5 class="text-left">위치 안내</h5>
-			<div style="height: 10px;"></div>
-			<p class="text-left">${vo.location_name }</p>
-			<div style="height: 10px;"></div>
-			<div id="map" style="width: 100%; height: 350px;"></div>
-			<script>
-				//지도 출력
-				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-				mapOption = {
-					center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-					level : 3
-				// 지도의 확대 레벨
-				};
+				<hr>
+				<table class="table">
+					<tr>
+						<td width="10%"><h1>${vo.score }</h1> <sup>★★★★★</sup><br>
+							<sup>후기 ${vo.review_count }</sup></td>
+						<td width="90%">
+							<div style="height: 20px"></div> ★★★★★&nbsp;<b>${vo.reviewer }</b><br>
+							<br> ${vo.review_content }
+						</td>
+					</tr>
+				</table>
+				<hr>
+				<h3 class="text-left">
+					<strong>이용 안내</strong>
+				</h3>
+				<div style="height: 20px;"></div>
+				<h5 class="text-left">이용 시간</h5>
+				<div style="height: 10px;"></div>
+				<pre class="text-left" style="background-color: white;">${vo.hours_use }</pre>
+				<div style="height: 20px;"></div>
+				<h5 class="text-left">위치 안내</h5>
+				<div style="height: 10px;"></div>
+				<p class="text-left">${vo.location_name }</p>
+				<div style="height: 10px;"></div>
+				<div id="map" style="width: 100%; height: 350px;"></div>
+				<script>
+					//지도 출력
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+					mapOption = {
+						center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+						level : 3
+					// 지도의 확대 레벨
+					};
 
-				// 지도를 생성합니다    
-				var map = new kakao.maps.Map(mapContainer, mapOption);
+					// 지도를 생성합니다    
+					var map = new kakao.maps.Map(mapContainer, mapOption);
 
-				// 주소-좌표 변환 객체를 생성합니다
-				var geocoder = new kakao.maps.services.Geocoder();
+					// 주소-좌표 변환 객체를 생성합니다
+					var geocoder = new kakao.maps.services.Geocoder();
 
-				// 주소로 좌표를 검색합니다
-				geocoder
-						.addressSearch(
-								'${addr1 }',
-								function(result, status) {
+					// 주소로 좌표를 검색합니다
+					geocoder
+							.addressSearch(
+									'${addr1 }',
+									function(result, status) {
 
-									// 정상적으로 검색이 완료됐으면 
-									if (status === kakao.maps.services.Status.OK) {
+										// 정상적으로 검색이 완료됐으면 
+										if (status === kakao.maps.services.Status.OK) {
 
-										var coords = new kakao.maps.LatLng(
-												result[0].y, result[0].x);
+											var coords = new kakao.maps.LatLng(
+													result[0].y, result[0].x);
 
-										// 결과값으로 받은 위치를 마커로 표시합니다
-										var marker = new kakao.maps.Marker({
-											map : map,
-											position : coords
-										});
+											// 결과값으로 받은 위치를 마커로 표시합니다
+											var marker = new kakao.maps.Marker(
+													{
+														map : map,
+														position : coords
+													});
 
-										// 인포윈도우로 장소에 대한 설명을 표시합니다
-										var infowindow = new kakao.maps.InfoWindow(
-												{
-													content : '<div style="width:150px;text-align:center;padding:6px 0;">${vo.title}</div>'
-												});
-										infowindow.open(map, marker);
+											// 인포윈도우로 장소에 대한 설명을 표시합니다
+											var infowindow = new kakao.maps.InfoWindow(
+													{
+														content : '<div style="width:150px;text-align:center;padding:6px 0;">${vo.title}</div>'
+													});
+											infowindow.open(map, marker);
 
-										// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-										map.setCenter(coords);
-									}
-								});
-			</script>
-			<div style="height: 20px;"></div>
-			<h5 class="text-left">사용 방법</h5>
-			<div style="height: 10px;"></div>
-			<pre style="background-color: white;">${vo.how_use }</pre>
+											// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+											map.setCenter(coords);
+										}
+									});
+				</script>
+				<div style="height: 20px;"></div>
+				<h5 class="text-left">사용 방법</h5>
+				<div style="height: 10px;"></div>
+				<pre style="background-color: white;">${vo.how_use }</pre>
 			</div>
 			<div class="col-sm-4" id="yourDiv">
 				<div class="buyBox">
@@ -326,9 +334,18 @@ table td {
 							<tr>
 								<td class="center wishTd">
 									<div class="d-grid">
-										<button class="btn btn-block btn-light btn-wish">
-											<h5>🤍 위시리스트에 담기</h5>
-										</button>
+										<c:if test="${sessionScope.id!=null }">
+											<c:if test="${wish_count==0 }">
+												<a href="../activity/activityWish_insert.do?acino=${vo.acino }" class="btn btn-block btn-light btn-wish">
+													<h5><i class="fa fa-light fa-heart"></i> WishList 담기</h5>
+												</a>
+											</c:if>
+											<c:if test="${wish_count==1 }">
+												<a href="../activity/activityWish_cancle.do?acino=${vo.acino }" class="btn btn-block btn-light btn-wish">
+													<h5><i class="fa fa-solid fa-check"></i> WishList 취소</h5>
+												</a>
+											</c:if>
+										</c:if>
 									</div>
 								</td>
 							</tr>

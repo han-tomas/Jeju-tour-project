@@ -4,6 +4,7 @@ import java.util.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
@@ -107,7 +108,17 @@ public class ActivityModel {
 		request.setAttribute("images", images);
 		request.setAttribute("vo", vo);
 		// 데이터 => goods_detail
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		if(id!=null) {
+			ActivityWishDAO wdao=ActivityWishDAO.newInstance();
+			int wish_count=wdao.activityWishCount(id, Integer.parseInt(acino));
+			request.setAttribute("wish_count", wish_count);
+		}
+		
 		request.setAttribute("main_jsp", "../activity/activity_detail.jsp");
+		
 		return "../main/main.jsp";
 	}
 	

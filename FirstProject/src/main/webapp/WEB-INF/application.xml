@@ -13,4 +13,5 @@
 	<bean id="QnA" class="com.sist.model.QnAModel"/>
 	<bean id="JJimRecommend" class="com.sist.model.CourseJJimRecommendModel"/>
 	<bean id="foodlike" class="com.sist.model.FoodLikeModel"/>
+	<bean id="activityWish" class="com.sist.model.ActivityWishModel"/>
 </beans>
