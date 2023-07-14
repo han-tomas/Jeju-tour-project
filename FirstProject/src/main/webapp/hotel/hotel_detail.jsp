@@ -107,6 +107,10 @@ a {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
 }
+.form-floating > .bi-calendar-date + .datepicker_input + label {
+  padding-left: 3.5rem;
+  z-index: 3;
+}
 </style>
 <script type="text/javascript">
 $(function() {
@@ -130,10 +134,14 @@ $(function() {
 	    selectTab(event.target);
 	  }
 	}, false);
-
-	$(function(){
-		  $('#datepicker').datepicker();
-	});
+	
+	/* $('#datepicker').datepicker({
+	    uiLibrary: 'bootstrap5',
+	    multidate : true, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
+	    multidateSeparator :","
+	}); */
+	$('#datepicker').daterangepicker();
+	
 	
 	$.ajax({
 		type:'GET',
@@ -143,7 +151,6 @@ $(function() {
 			$('#roomResult').html(result);
 		}
 	})
-
 })
 </script>
 </head>
@@ -192,7 +199,7 @@ $(function() {
 			</div>
 			<div class="col-sm-12">
 			  <div class="row" style="justify-content: right;">
-				<div class="col-sm-4" style="margin-right:10px;">
+				<div class="col-sm-6">
 					<div class="input-group" style="width: 250px;">
 						<input type="text" class="form-control">
 						<span class="input-group-append">
@@ -202,22 +209,16 @@ $(function() {
 						</span>
 					</div>
 				</div>
-				<div class="col-sm-3">
-					<form class="row">
-						<div class="input-group date" id="datepicker" style="width: 180px;">
+				<div class="col-sm-6">
+					<form class="row" style="justify-content: right;">
+						<!-- <input id="datepicker" width="276" /> -->
+						<div class="input-group date" id="datepicker" style="width: 280px;">
 							<input type="text" class="form-control" id="date" /> 
 							<span class="input-group-append">
 								<span class="input-group-text bg-light d-block">
 									<i class="fa fa-calendar"></i>
 								</span>
 							</span>
-						</div>
-					</form>
-				</div>
-				<div class="col-sm-2">
-					<form class="row">
-						<div class="input-group date" >
-							<input type="text" class="form-control" id="day" /> 
 						</div>
 					</form>
 				</div>

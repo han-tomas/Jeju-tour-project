@@ -198,15 +198,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function () {
-	$('#category_1').click(function(){
-		location.replace('../activity/activity_list.do')
-	})
-	$('#category_2').click(function(){
-		location.replace('../hotel/hotel_list.do')
-	})
-	$('#category_3').click(function(){
-		location.replace('../hotel/rentcar_list.do')
-	})
 	$.ajax({
 			type:'GET',
 			url:'../hotel/hotel_list_result.do',
@@ -217,15 +208,30 @@ $(function () {
 		})
 	$('.list_tab').css("cursor", "pointer")
  	$('.list_tab').click(function(){
- 		let type= $(this).attr("data-no")
+ 		let l_type= $(this).attr("data-type")
 		$.ajax({
 			type:'GET',
 			url:'../hotel/hotel_list_result.do',
-			data:{"type":type-1},
+			data:{"type":l_type, "page":1},
 			success:function(result){
 				$('.list_tab').removeClass('curtab') 
-				$('#nav_'+type).addClass('curtab')
-				$('#result').html(result);
+				$('#nav_'+l_type).addClass('curtab')
+				$('#result').html(result)
+			}
+		})
+	})
+	/* <li class="page-item"><span class="page-link" id="prev" href="../hotel/hotel_list_result.do?page=${ startPage-1 }">&laquo;</span></li> */
+	$('.page-link').click(function(){
+		let p_type = $(this).attr("data-type")
+		let p_page = $(this).attr("data-page")
+		$.ajax({
+			type:'GET',
+			url:'../hotel/hotel_list_result.do',
+			data:{"type":p_type,"page":p_page},
+			success:function(result){
+				$('.page-item').removeClass('active')
+				$('.page_'+p_page).addClass('active')
+				$('#result').html(result)
 			}
 		})
 	})
@@ -254,19 +260,19 @@ $(function () {
 								<div class="col-lg-12">
 									<div class="row">
 									<div class="col-md-9" style="text-align:left;">
-										<div class="list_tab curtab" data-no="1" id="nav_1">
+										<div class="list_tab curtab" data-type="0" id="nav_0">
 											<div class="list_tab_2">전체</div>
 										</div>
-										<div class="list_tab" data-no="2" id="nav_2">
+										<div class="list_tab" data-type="1" id="nav_1">
 											<div class="list_tab_2">펜션</div>
 										</div>
-										<div class="list_tab" data-no="3" id="nav_3">
+										<div class="list_tab" data-type="2" id="nav_2">
 											<div class="list_tab_2">리조트</div>
 										</div>
-										<div class="list_tab" data-no="4" id="nav_4">
+										<div class="list_tab" data-type="3" id="nav_3">
 											<div class="list_tab_2">호텔</div>
 										</div>
-										<div class="list_tab" data-no="5" id="nav_5">
+										<div class="list_tab" data-type="4" id="nav_4">
 											<div class="list_tab_2">기타</div>
 										</div>
 									</div>
@@ -275,11 +281,15 @@ $(function () {
 										<div class="panel-body">
 											<div class="pull-right">
 												<ul class="pagination">
-												  <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-												  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-												  <li class="page-item"><a class="page-link" href="#">2</a></li>
-												  <li class="page-item"><a class="page-link" href="#">3</a></li>
-												  <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+													<c:if test="${ startPage>1 }">
+														<li class="page-item"><a href="../hotel/hotel_list.do?type=${ type }&page=${ startPage-1 }" class="page-link">&laquo;</a></li>
+													</c:if>
+													<c:forEach var="i" begin="${ startPage }" end="${ endPage }">
+														<li class="page-item page_${ i } ${ curpage==i?"active":"" }"><span class="page-link" data-type="${ type }" data-page="${ i }">${ i }</span></li>
+													</c:forEach>
+													<c:if test="${ endPage<totalpage }">
+														<li class="page-item"><a href="../hotel/hotel_list.do?type=${ type }&page=${ endPage+1 }" class="page-link">&raquo;</a></li>
+													</c:if>
 												</ul>
 											</div>
 										</div>

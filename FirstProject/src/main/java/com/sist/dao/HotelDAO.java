@@ -66,7 +66,7 @@ public class HotelDAO {
 	}
 	
 	// 총페이지
-	public int goodsTotalPage(int type) {
+	public int hotelTotalPage(int type) {
 		int total=0;
 		try {
 			conn = db.getConnection();

@@ -14,6 +14,33 @@ public class HotelModel {
 	private String hotelURL = "http://www.jejutori.com/";
 	@RequestMapping("hotel/hotel_list.do")
 	public String hotel_list(HttpServletRequest request, HttpServletResponse response) {
+		String page = request.getParameter("page");
+		if (page==null)
+			page="1";
+		String type = request.getParameter("type");
+		if (type == null)
+			type="0";
+		int curpage = Integer.parseInt(page);
+		
+		// DB연동
+		HotelDAO dao = HotelDAO.newInstance();
+		
+		// 총페이지
+		int totalpage = dao.hotelTotalPage(Integer.parseInt(type));
+
+		final int BLOCK = 5;
+		int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		
+		if (endPage > totalpage)
+			endPage = totalpage;
+		
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("type", type);
+		
 		request.setAttribute("main_jsp", "../hotel/hotel_list.jsp");
 		return "../main/main.jsp";
 	}
@@ -32,16 +59,13 @@ public class HotelModel {
 		HotelDAO dao = HotelDAO.newInstance();
 		List<HotelVO> list = dao.hotelListData(curpage, Integer.parseInt(type));
 		
-		// 총페이지
-		int totalpage = dao.goodsTotalPage(Integer.parseInt(type));
-		
 		request.setAttribute("list", list);
 		request.setAttribute("curpage", curpage);
-		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("type", type);
 		
 		return "../hotel/hotel_list_result.jsp";
 	}
+	
 	@RequestMapping("hotel/hotel_detail_before.do")
 	public String hotel_detail_before(HttpServletRequest request, HttpServletResponse response) {
 		
