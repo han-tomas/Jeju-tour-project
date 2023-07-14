@@ -231,10 +231,22 @@ table td {
 				<hr>
 				<table class="table">
 					<tr>
-						<td width="10%"><h1>${vo.score }</h1> <sup>★★★★★</sup><br>
+						<td width="15%"><h1>${vo.score }</h1> 
+						<c:forEach var="i" begin="1" end="5">
+						<sup style="color:gold">
+							<c:if test="${vo.score+1>i }">★</c:if>
+						</sup>
+						</c:forEach>
+							<br>
 							<sup>후기 ${vo.review_count }</sup></td>
-						<td width="90%">
-							<div style="height: 20px"></div> ★★★★★&nbsp;<b>${vo.reviewer }</b><br>
+						<td width="85%">
+							<div style="height: 20px"></div> 
+							<c:forEach var="i" begin="1" end="5">
+						<span style="color:gold">
+							<c:if test="${vo.score+1>i }">★</c:if>
+						</span>
+						</c:forEach>
+							<!-- <span style="color:gold">★★★★★</span> -->&nbsp;&nbsp;&nbsp;<b>${vo.reviewer }</b><br>
 							<br> ${vo.review_content }
 						</td>
 					</tr>
@@ -334,6 +346,11 @@ table td {
 							<tr>
 								<td class="center wishTd">
 									<div class="d-grid">
+										<c:if test="${sessionScope.id==null }">
+											<button class="btn btn-block btn-light btn-wish" id="noIdWish">
+													<h5><i class="fa fa-light fa-heart"></i> WishList 담기</h5>
+											</button>>
+										</c:if>
 										<c:if test="${sessionScope.id!=null }">
 											<c:if test="${wish_count==0 }">
 												<a href="../activity/activityWish_insert.do?acino=${vo.acino }" class="btn btn-block btn-light btn-wish">

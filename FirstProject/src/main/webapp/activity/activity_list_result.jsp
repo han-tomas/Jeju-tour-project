@@ -89,5 +89,22 @@ li {
 			</section>
 		</div>
 	</c:forEach>
+	<div class="pagination">
+					<c:if test="${startPage>1 }">
+						<a
+							href="../activity/activity_list.do?page=${startPage-1 }&accno=${accno}">
+							&laquo;</a>
+					</c:if>
+					<c:forEach var="i" begin="${startPage }" end="${endPage }">
+
+						<a href="../activity/activity_list.do?page=${i}&accno=${accno}">${i}</a>
+					</c:forEach>
+
+					<c:if test="${endPage<totalpage }">
+						<a
+							href="../activity/activity_list.do?page=${endPage+1 }&accno=${accno }">
+							&raquo;</a>
+					</c:if>
+				</div>
 </body>
 </html>

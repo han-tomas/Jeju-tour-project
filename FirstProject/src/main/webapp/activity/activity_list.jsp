@@ -156,9 +156,10 @@
 			
 				<div class="row">
 					<div class="row" id="result"></div>
+					<div class="row" id="result2"></div>
 				</div>
 				
-				<div class="pagination">
+				<%-- <div class="pagination">
 					<c:if test="${startPage>1 }">
 						<a
 							href="../activity/activity_list.do?page=${startPage-1 }&accno=${accno}">
@@ -174,7 +175,7 @@
 							href="../activity/activity_list.do?page=${endPage+1 }&accno=${accno }">
 							&raquo;</a>
 					</c:if>
-				</div>
+				</div> --%>
 			</div>
 		</div>
 	</div>
