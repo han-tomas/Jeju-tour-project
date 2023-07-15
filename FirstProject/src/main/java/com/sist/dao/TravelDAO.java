@@ -228,7 +228,14 @@ public class TravelDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT no,title,tag,introduction,loc,addr,road,tel,"
+			String sql="UPDATE travel_detail SET "
+					+ "hit=hit+1 "
+					+ "WHERE no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ps.executeUpdate();
+			
+			sql="SELECT no,title,tag,introduction,loc,addr,road,tel,"
 					+ "poster,info,lno "
 					+ "FROM travel_detail "
 					+ "WHERE no=?";
@@ -257,6 +264,38 @@ public class TravelDAO {
 			db.disConnection(conn, ps);
 		}
 		return vo;
+	}
+	// 검색어 top10
+	public List<TravelVO> findTop10()
+	{
+		List<TravelVO> list = new ArrayList<TravelVO>();
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT no,title,hit,rownum "
+					+ "FROM (SELECT fno,name,hit "
+					+ "FROM food_house ORDER BY hit DESC) "
+					+ "WHERE rownum<=10";
+			ps=conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				TravelVO vo = new TravelVO();
+				vo.setNo(rs.getInt(1));
+				vo.setTitle(rs.getString(2));
+				vo.setHit(rs.getInt(3));
+				list.add(vo);
+			}
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return list;
 	}
 	// 해당 검색어
 	public List<TravelVO> coursenameRelated(String coursename)

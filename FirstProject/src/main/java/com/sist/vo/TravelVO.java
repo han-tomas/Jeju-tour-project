@@ -14,9 +14,15 @@ package com.sist.vo;
  TCNO              NOT NULL NUMBER
  */
 public class TravelVO {
-	private int no,lno;
+	private int no,lno,hit;
 	private String title,tag,introduction,loc,addr,road,tel,poster,info,label;
 	
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 	public String getLabel() {
 		return label;
 	}

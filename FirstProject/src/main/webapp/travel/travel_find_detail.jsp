@@ -85,7 +85,7 @@
 	    <div class="row row2">
 	    	<div style="height: 10px"></div>
 	    	<div style="text-align:right;">
-    			<a href ="javascript:history.back()" class="btn btn-xs btn-outline-secondary" style="margin-right: 10px" ><i class="fa fa-list fa-sm" style="color: white; font-style: bold;">&nbsp;목록</i></a>
+    			<a href ="javascript:history.back()" class="btn btn-xs btn-secondary" style="margin-right: 10px" ><i class="fa fa-list fa-sm" style="color: white; font-style: bold;">&nbsp;목록</i></a>
 			</div>
 	    	<div style="height: 10px"></div>
 	    </div>
