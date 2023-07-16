@@ -29,6 +29,18 @@ $(function(){
 	
 })
 </script>
+<style type="text/css">
+  .log {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .log button {
+    width: 100%;
+  }
+
+</style>
 </head>
 <body>
 <!-- ***** Header Area Start ***** -->
@@ -65,20 +77,32 @@ $(function(){
 			</li> 
 			<li class="nav-item dropdown">
 			  <a class="nav-link dropdown-toggle" href="../contact.html" role="button" data-bs-toggle="dropdown" style="color:black;">Community</a>
-			  <ul class="dropdown-menu">
-			    <li><a class="dropdown-item" href="../notice/notice_list.do">Notice</a></li>
-			    <li><a class="dropdown-item" href="../qna/qna_list.do">QnA</a></li>
-			    <li><a class="dropdown-item" href="#">Review</a></li>
-			    <li> </li>
-			  </ul>
+				 <ul class="dropdown-menu">
+				    <li><a class="dropdown-item" href="../notice/notice_list.do">Notice</a></li>
+				    <li><a class="dropdown-item" href="../qna/qna_list.do">QnA</a></li>
+				    <li><a class="dropdown-item" href="#">Review</a></li>
+				    <li> </li>
+				 </ul>
 			</li> 
+
 			<c:if test="${sessionScope.id==null }">
-				<li><input type="button" class="btn btn-outline-dark" id="loginBtn" value="Login"/></li>
+				<li><input type="button" class="btn btn-outline-dark" id="loginBtn" value="Login"></li>
 			</c:if>
 			<c:if test="${sessionScope.id!=null }">
-				<li><input type="button" class="btn btn-outline-dark" id="myPage" value="${sessionScope.admin=='y'?"AdminPage":"MyPage" }"/></li>
-				<li style="padding:0px 12px 0px 12px"><input type="button" class="btn btn-outline-dark" id="logoutBtn" value="Logout"/></li>
+				<c:if test="${sessionScope.admin!='y' }">
+					<li class="log" >
+						<a href="../mypage/mypage_main.do" class="btn btn-outline-dark btn-block">mypage</a>
+						<input type="button" class="btn btn-outline-dark btn-block" id="logoutBtn" value="Logout">
+					</li>
+				</c:if>
+				<c:if test="${sessionScope.admin=='y' }">
+					<li class="log" >
+						<a href="#" class="btn btn-outline-dark btn-block">admin	page</a>
+						<input type="button" class="btn btn-outline-dark btn-block" id="logoutBtn" value="Logout">
+					</li>
+				</c:if>
 			</c:if>
+
           </ul>
           <a class='menu-trigger'>
               <span>Menu</span>
