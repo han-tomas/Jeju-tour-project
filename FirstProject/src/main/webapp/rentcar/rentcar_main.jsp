@@ -10,7 +10,6 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 
-
 </script>
 </head>
 <body>
