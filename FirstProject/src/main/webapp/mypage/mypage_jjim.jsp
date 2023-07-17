@@ -30,8 +30,7 @@ $(function(){
 	<h4>여행코스</h4>
 	<table class="table">
 		<tr>
-			<th class="text-center">no.</th>
-			<th class="text-center"></th>
+			<th class="text-center">no.</th>	
 			<th class="text-center">코스명</th>
 			<th class="text-center">찜한수</th>
 			<th class="text-center">추천수</th>
@@ -40,9 +39,6 @@ $(function(){
 		<c:forEach var="vo" items="${list }" varStatus="s">
 			<tr>
 				<th class="text-center">${s.index+1}</th>
-				<td class="text-center">
-					<img src="${vo.poster }" style="width: 100px;height: 100px">
-				</td>
 				<td class="text-center">${vo.title }</td>
 				<td class="text-center">${vo.jjim }</td>
 				<td class="text-center">${vo.recommend }</td>
