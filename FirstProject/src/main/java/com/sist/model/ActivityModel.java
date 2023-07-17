@@ -10,6 +10,10 @@ import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.*;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 public class ActivityModel {
 	@RequestMapping("activity/activity_list.do")
     public String activity_list(HttpServletRequest request, HttpServletResponse response) {
@@ -124,15 +128,50 @@ public class ActivityModel {
 	
 	@RequestMapping("activity/activity_reserve.do")
 	public String activity_reserve(HttpServletRequest request, HttpServletResponse response) {
-
-		String acino=request.getParameter("acino");
 		
+		String acino=request.getParameter("acino");
+		String date=request.getParameter("date");
+		String formattedDate="";
+		if (date==null)
+			date="";
+		if(!date.equals("")) {
+			DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 (E)", Locale.KOREAN);
+	        LocalDate dateStr = LocalDate.parse(date, inputFormatter);
+	        formattedDate = dateStr.format(outputFormatter);
+		}
+		String inwon=request.getParameter("inwon");
+		int people=Integer.parseInt(inwon);
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		String name=(String)session.getAttribute("name");	
 		ActivityDAO dao=ActivityDAO.newInstance();
 		ActivityVO vo=dao.activityDetailData(Integer.parseInt(acino));
 		if(vo.getPoster()==null)
 			vo.setPoster(vo.getMain_poster());
+		MemberDAO mdao=MemberDAO.newInstance();
+		MemberVO mvo=mdao.memberSearch(id);
+		request.setAttribute("mvo", mvo);
+		request.setAttribute("id", id);
+		request.setAttribute("name", name);
+		request.setAttribute("date", formattedDate);
+		request.setAttribute("people", people);
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../activity/activity_reserve.jsp");
 		return "../main/main.jsp";
 	}
+	
+	@RequestMapping("activity/agreeBtn1.do")
+	public String agreeBtn1(HttpServletRequest request, HttpServletResponse response) {
+		return "../activity/agreeBtn1.jsp";
+	}
+	@RequestMapping("activity/agreeBtn2.do")
+	public String agreeBtn2(HttpServletRequest request, HttpServletResponse response) {
+		return "../activity/agreeBtn2.jsp";
+	}
+	@RequestMapping("activity/agreeBtn3.do")
+	public String agreeBtn3(HttpServletRequest request, HttpServletResponse response) {
+		return "../activity/agreeBtn3.jsp";
+	}
+	
 }

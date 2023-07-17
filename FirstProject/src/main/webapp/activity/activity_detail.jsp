@@ -7,8 +7,77 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script>
+	$(function() {
+		$(window).scroll(
+				function() {
+					$("#yourDiv").css("margin-top",
+							Math.max(0, 0 - $(this).scrollTop()));
+				});
+		$("#datepicker").datepicker({
+			format : "yyyy-mm-dd", //데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+			autoclose : true, //사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+			startDate : '-1d',
+			calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
+			clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
+			disableTouchKeyboard : false, //모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
+			immediateUpdates : false, //사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
+			multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
+			title : "Calendar",
+			showWeekDays : true, // 위에 요일 보여주는 옵션 기본값 : true
+			todayHighlight : true, //오늘 날짜에 하이라이팅 기능 기본값 :false 
+			toggleActive : true, //이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
+			weekStart : 0, //달력 시작 요일 선택하는 것 기본값은 0인 일요일 
+			defaultDate: new Date()
+		});
+		
+	});
+
+	function toggleMoreImages() {
+		var moreImagesDiv = document.getElementById("moreImages");
+		var showMoreImagesBtn = document.getElementById("showMoreImagesBtn");
+
+		if (moreImagesDiv.style.display === "none") {
+			moreImagesDiv.style.display = "block";
+			showMoreImagesBtn.textContent = "닫기";
+		} else {
+			moreImagesDiv.style.display = "none";
+			showMoreImagesBtn.textContent = "더 보기";
+		}
+	}
+
+	function noIdWish() {
+		alert('로그인이 필요합니다.');
+	}
+
+	function noIdBuy() {
+		alert('로그인이 필요합니다.');
+		return;
+	}
+	
+</script>
+<script type="text/javascript">
+	$(function() {
+		
+		$('.realbuy').click(
+				function() {
+					var inwon = $('#inwon').val();
+					var date = $('#datepicker').val();
+					var acino = $('#acino').val(); // 선택한 방 ID 가져오기 (버튼에 data-속성으로 저장하는 방법도 있음)
+
+					if (date === '') {
+					      alert('날짜를 선택해주세요.'); // 입력 요청 알림
+					      return; // 화면을 유지하기 위해 return 문 사용
+					}
+					
+					// 예약 페이지로 이동하면서 선택한 값을 전달
+					location.href = '../activity/activity_reserve.do?acino='
+							+ acino + '&inwon=' + inwon + '&date=' + date;
+				});
+	});
+</script>
 <style type="text/css">
 .row {
 	margin: 0px auto;
@@ -58,6 +127,11 @@ h4 {
 	margin: 10px;
 }
 
+.buyTd button {
+	display: block; /* 버튼을 블록 레벨 요소로 설정하여 가운데 정렬을 적용할 수 있도록 함 */
+	margin: 0 auto;
+}
+
 .wishTd {
 	stext-align: center;
 	margin: 10px;
@@ -100,77 +174,7 @@ table td {
 	vertical-align: middle;
 	margin-top: -5px;
 }
-
-.calendar {
-	display: none; /* 처음에는 달력을 숨깁니다. */
-	position: absolute; /* 다른 요소 위로 올라갈 수 있도록 설정합니다. */
-	background-color: #f9f9f9;
-	border: 1px solid #ccc;
-	padding: 10px;
-	z-index: 1; /* 다른 요소보다 위에 표시될 수 있도록 설정합니다. */
-}
 </style>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-<script type="text/javascript">
-	function toggleMoreImages() {
-		var moreImagesDiv = document.getElementById("moreImages");
-		var showMoreImagesBtn = document.getElementById("showMoreImagesBtn");
-
-		if (moreImagesDiv.style.display === "none") {
-			moreImagesDiv.style.display = "block";
-			showMoreImagesBtn.textContent = "닫기";
-		} else {
-			moreImagesDiv.style.display = "none";
-			showMoreImagesBtn.textContent = "더 보기";
-		}
-	}
-	$(function() {
-		$(window).scroll(
-				function() {
-					$("#yourDiv").css("margin-top",
-							Math.max(0, 0 - $(this).scrollTop()));
-				});
-
-		$('#datepicker').datepicker();
-
-	})
-</script>
-<script>
-	function toggleCalendar() {
-		var calendar = document.getElementById("calendar");
-		if (calendar.style.display === "none") {
-			calendar.style.display = "block"; // 달력을 표시합니다.
-		} else {
-			calendar.style.display = "none"; // 달력을 숨깁니다.
-		}
-	}
-
-	// FullCalendar 초기화
-	document.addEventListener("DOMContentLoaded", function() {
-		var calendarEl = document.getElementById("calendar");
-
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			plugins : [ "dayGrid" ],
-			defaultView : "dayGridMonth",
-			events : [
-			// 이벤트를 여기에 추가합니다.
-			{
-				title : "이벤트 1",
-				start : "2023-07-01",
-				end : "2023-07-03"
-			}, {
-				title : "이벤트 2",
-				start : "2023-07-10",
-				end : "2023-07-12"
-			} ]
-		});
-
-		calendar.render();
-	});
-</script>
 </head>
 <body>
 	<div class="page-heading">
@@ -211,6 +215,30 @@ table td {
 					<strong>옵션 선택</strong>
 				</h4>
 
+
+				<div class="input-group" style="width: 360px;">
+					<span style="padding: 0px 10px 0px 0px;"><i
+						class="fa fa-person fa-2x"></i></span> <select class="form-control text-center"
+						style="margin-right: 30px;" id="inwon" name="inwon">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+						<option>9</option>
+						<option>10</option>
+					</select> <i class="fa fa-calendar fa-2x" style="padding: 0px 10px 0px 2px"></i>
+					<div>
+						<input type="text" id="datepicker" class="form-control text-center" value=""
+							name="date">
+					</div>
+				</div>
+				<div style="height: 20px"></div>
+
+
 				<img alt="" src="${images[0] }">
 				<div id="moreImages" style="display: none;">
 					<c:forEach var="i" begin="1" end="${imagesLength}">
@@ -231,22 +259,17 @@ table td {
 				<hr>
 				<table class="table">
 					<tr>
-						<td width="15%"><h1>${vo.score }</h1> 
-						<c:forEach var="i" begin="1" end="5">
-						<sup style="color:gold">
-							<c:if test="${vo.score+1>i }">★</c:if>
-						</sup>
-						</c:forEach>
-							<br>
-							<sup>후기 ${vo.review_count }</sup></td>
+						<td width="15%"><h1>${vo.score }</h1> <c:forEach var="i"
+								begin="1" end="5">
+								<sup style="color: gold"> <c:if test="${vo.score+1>i }">★</c:if>
+								</sup>
+							</c:forEach> <br> <sup>후기 ${vo.review_count }</sup></td>
 						<td width="85%">
-							<div style="height: 20px"></div> 
-							<c:forEach var="i" begin="1" end="5">
-						<span style="color:gold">
-							<c:if test="${vo.score+1>i }">★</c:if>
-						</span>
-						</c:forEach>
-							<!-- <span style="color:gold">★★★★★</span> -->&nbsp;&nbsp;&nbsp;<b>${vo.reviewer }</b><br>
+							<div style="height: 20px"></div> <c:forEach var="i" begin="1"
+								end="5">
+								<span style="color: gold"> <c:if test="${vo.score+1>i }">★</c:if>
+								</span>
+							</c:forEach> <!-- <span style="color:gold">★★★★★</span> -->&nbsp;&nbsp;&nbsp;<b>${vo.reviewer }</b><br>
 							<br> ${vo.review_content }
 						</td>
 					</tr>
@@ -332,10 +355,30 @@ table td {
 							<tr>
 								<td class="center buyTd">
 									<div class="d-grid">
-										<a href="../activity/activity_reserve.do?acino=${vo.acino }"
-											class="btn btn-block btn-info btn-buy"> <img
-											src="image/thunder.png" id="thunderImg">
-											<h5 style="color: white;">️티켓 선택</h5></a>
+										<c:if test="${sessionScope.id==null }">
+											<button class="btn btn-block btn-info btn-buy"
+												onclick="noIdBuy()"
+												style="display: flex; align-items: center;">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="image/thunder.png"
+													id="thunderImg" class="inline">
+												<h5 style="color: white;">️티켓 선택</h5>
+											</button>
+										</c:if>
+										<c:if test="${sessionScope.id!=null }">
+											<button class="btn btn-block btn-info btn-buy realbuy"
+												style="display: flex; align-items: center;">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="image/thunder.png"
+													id="thunderImg" class="inline"> <input type="hidden"
+													name="acino" value="${param.acino }" id="acino">
+												<h5 style="color: white;">️티켓 선택</h5>
+											</button>
+											<!-- <a href="../activity/activity_reserve.do"
+												class="btn btn-block btn-info btn-buy realbuy"> <img
+												src="image/thunder.png" id="thunderImg">
+												<h5 style="color: white;">️티켓 선택</h5></a> -->
+										</c:if>
 									</div>
 								</td>
 							</tr>
@@ -347,19 +390,30 @@ table td {
 								<td class="center wishTd">
 									<div class="d-grid">
 										<c:if test="${sessionScope.id==null }">
-											<button class="btn btn-block btn-light btn-wish" id="noIdWish">
-													<h5><i class="fa fa-light fa-heart"></i> WishList 담기</h5>
+											<button class="btn btn-block btn-light btn-wish"
+												onclick="noIdWish()">
+												<h5>
+													<i class="fa fa-light fa-heart"></i> WishList 담기
+												</h5>
 											</button>>
 										</c:if>
 										<c:if test="${sessionScope.id!=null }">
 											<c:if test="${wish_count==0 }">
-												<a href="../activity/activityWish_insert.do?acino=${vo.acino }" class="btn btn-block btn-light btn-wish">
-													<h5><i class="fa fa-light fa-heart"></i> WishList 담기</h5>
+												<a
+													href="../activity/activityWish_insert.do?acino=${vo.acino }"
+													class="btn btn-block btn-light btn-wish">
+													<h5>
+														<i class="fa fa-light fa-heart"></i> WishList 담기
+													</h5>
 												</a>
 											</c:if>
 											<c:if test="${wish_count==1 }">
-												<a href="../activity/activityWish_cancle.do?acino=${vo.acino }" class="btn btn-block btn-light btn-wish">
-													<h5><i class="fa fa-solid fa-check"></i> WishList 취소</h5>
+												<a
+													href="../activity/activityWish_cancle.do?acino=${vo.acino }"
+													class="btn btn-block btn-light btn-wish">
+													<h5>
+														<i class="fa fa-solid fa-check"></i> WishList 취소
+													</h5>
 												</a>
 											</c:if>
 										</c:if>
@@ -370,6 +424,10 @@ table td {
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<hr>
+			최근 본 목록 리스트 출력.
 		</div>
 	</div>
 </body>
