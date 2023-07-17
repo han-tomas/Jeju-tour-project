@@ -15,10 +15,7 @@ public class FoodModel {
 	@RequestMapping("food/food_list.do")
 	public String food_list(HttpServletRequest request,HttpServletResponse response) {
 		String mcno=request.getParameter("mcno");
-		
-		if(mcno==null)
-			mcno="1";
-		
+		if(mcno==null) mcno="1";
 		int curpage=(Integer.parseInt(mcno));
 		
 		FoodDAO dao=FoodDAO.newInstance();
@@ -44,38 +41,7 @@ public class FoodModel {
 		return "../main/main.jsp";
 	}
 	
-	@RequestMapping("food/food_list2.do")
-	public String food_list2(HttpServletRequest request,HttpServletResponse response) {
-		String mcno=request.getParameter("mcno");
-		
-		if(mcno==null)
-			mcno="1";
-		
-		int curpage=(Integer.parseInt(mcno));
-		
-		FoodDAO dao=FoodDAO.newInstance();
-		List<FoodCategoryVO> clist=dao.foodCategoryListData();
-		List<FoodVO> flist=dao.foodListData(Integer.parseInt(mcno));
-		int totalpage=dao.foodTotalPage();
-		final int BLOCK=10;
-		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
-		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-		if(endPage>totalpage)
-			endPage=totalpage;
-//		for(foodVO vo:flist) {
-//			System.out.println(vo.getName());
-//		}
-		request.setAttribute("clist", clist);
-		request.setAttribute("flist", flist);
-		request.setAttribute("curpage", curpage);
-		request.setAttribute("totalpage", totalpage);
-		request.setAttribute("startPage", startPage);
-		request.setAttribute("endPage", endPage);
-//		request.setAttribute("mcno", Integer.parseInt(mcno));
-		request.setAttribute("main_jsp", "../food/food_list.jsp");
-		return "../main/main.jsp";
-	}
-	
+
 	@RequestMapping("food/food_detail_before.do")
 	public String food_detail_before(HttpServletRequest request,HttpServletResponse response) {
 		// 쿠키생성
@@ -111,12 +77,8 @@ public class FoodModel {
 		if(id!=null) {
 			FoodLikeDAO fdao=FoodLikeDAO.newInstance();
 			int like_ok=fdao.foodLikeOk(Integer.parseInt(fino), id);
-			//int like_total=fdao.foodLikeTotalCount(Integer.parseInt(fino));
-			
 			request.setAttribute("like_ok", like_ok);
-			//request.setAttribute("like_total", like_total);
 		}
-		
 		
 		// 저장
 		request.setAttribute("vo", vo);
@@ -128,4 +90,5 @@ public class FoodModel {
 		request.setAttribute("main_jsp", "../food/food_detail.jsp");
 		return "../main/main.jsp";
 	}
+	
 }
