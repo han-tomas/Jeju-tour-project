@@ -50,16 +50,9 @@ public class FoodDAO {
 				    + "FROM (SELECT /*+INDEX_ASC(food_info fi_fino_pk)*/fino, mcno, poster, name, score, address, hit, like_count  "
 				    + "FROM food_info "
 				    + "WHERE mcno = ?)) ";
-//			// '=' 연산자를 사용하여 mcno와 일치하는 데이터 선택
-//				    + "WHERE num BETWEEN ? AND ?";
 
 	        ps = conn.prepareStatement(sql);
-//	        int rowSize=20;
-//	        int start=(rowSize*mcno)-(rowSize-1);
-//	        int end=rowSize*mcno;
 	        ps.setInt(1, mcno);
-//	        ps.setInt(2, start);
-//	        ps.setInt(3, end);
 	        ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				FoodVO vo=new FoodVO();
@@ -153,5 +146,4 @@ public class FoodDAO {
 		return vo;
 	}
 	
-
 }

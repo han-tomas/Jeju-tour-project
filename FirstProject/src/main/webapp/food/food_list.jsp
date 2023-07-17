@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 <style type="text/css">
 .page{
 	margin: 30px 0px 30px 0px;
@@ -37,14 +36,11 @@
 	padding-left: 13px;
 	width: 200px;
 }
+.container1{
+	width: 1000px;
+	margin: 0px auto;
+}
 </style>
-<!-- <script type="text/javascript">
-$(function(){
-	$(window).scroll(function(){
-	    $(".sticky").css("height",Math.max(0,0-$(this).scrollTop()));
-	});
-})
-</script> -->
 </head>
 <body>
 <div class="page-heading">
@@ -57,7 +53,8 @@ $(function(){
     </div>
   </div>
 </div> 
-  <div class="container" style="width: 1150px;">
+  <div class="container1">
+
     <div class="row">
       <div class="col-sm-3">
         <div class="sticky">

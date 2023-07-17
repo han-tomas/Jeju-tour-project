@@ -103,7 +103,7 @@ public class NoticeModel{
 		// db연동
 		NoticeDAO dao=NoticeDAO.newInstance();
 		NoticeVO vo=dao.noticeUpdateData(Integer.parseInt(no));
-		
+
 		// request를 통해 값을 보낸다
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../notice/notice_update.jsp");

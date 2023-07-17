@@ -15,7 +15,7 @@ body{
 	width: 1000px;
 }
 </style>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
 <script type="text/javascript">
 $(function(){
 	$('#del').click(function(){
@@ -27,7 +27,7 @@ $(function(){
 			url : '../notice/notice_delete.do',
 			data : {"no":no},
 			success: function(result){
-				location.href="../notice/notice_list.do"
+				location.href="../notice/notice_list.do";
 			}
 		})
 	})
@@ -58,7 +58,7 @@ $(function(){
       </c:if>
     </div>
     <table class="table">
-      <tr style="border-top : 1px solid;background-color: #dedede;">
+      <tr style="border-top : 1px solid;background-color: #dedede;"><!-- #dedede -->
         <th width=5% class="text-center">제목 | </th>
         <td width=50% class="text-left">[${vo.type}] ${vo.subject }</td>
         <th width=5% class="text-center">작성일</th>

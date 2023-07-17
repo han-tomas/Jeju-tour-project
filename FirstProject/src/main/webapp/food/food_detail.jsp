@@ -136,7 +136,7 @@ function goBackList(){
           </tr>
         </table>
         <div class="d-flex justify-content-end" style="margin: 10px;">
-          <button class="btn btn-sm btn-success" onclick="goBackList()">목록</button>
+          <button class="btn btn-xs" style="border-color: gray;" onclick="goBackList()">목록</button>
         </div>
         </div>
         <div class="col-sm-5">
