@@ -4,7 +4,14 @@ public class RoomVO {
 	private int rno, huno, account, price;
 	private String rname, person, rstructure, special, rposter;
 	private String[] rposters;
+	private String msg;
 	
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 	public String getRposter() {
 		return rposter;
 	}

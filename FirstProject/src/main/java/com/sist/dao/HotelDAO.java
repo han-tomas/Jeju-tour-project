@@ -151,4 +151,58 @@ public class HotelDAO {
 		}
 		return rList;
 	}
+	
+	// 방정보
+	public RoomVO roomSelectData(int rno) {
+		RoomVO vo = new RoomVO();
+		try {
+			conn = db.getConnection();
+			String sql = "SELECT rno, huno, rname, account, price, person, rstructure, special, rposter "
+						+"FROM room WHERE rno=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rno);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			vo.setRno(rs.getInt(1));
+			vo.setHuno(rs.getInt(2));
+			vo.setRname(rs.getString(3));
+			vo.setAccount(rs.getInt(4));
+			vo.setPrice(rs.getInt(5));
+			vo.setPerson(rs.getString(6));
+			vo.setRstructure(rs.getString(7));
+			vo.setSpecial(rs.getString(8));
+			vo.setRposter(rs.getString(9));
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		return vo;
+	}
+	
+	// 숙소명 취득
+	public String hotelNameData(int huno) {
+		String name = "";
+		
+		try {
+			conn = db.getConnection();
+			String sql = "SELECT name FROM hotel_detail "
+						+"WHERE huno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, huno);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			name = rs.getString(1);
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		
+		return name;
+	}
+	
+	// 
 }

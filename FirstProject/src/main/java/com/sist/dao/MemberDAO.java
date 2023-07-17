@@ -228,4 +228,36 @@ public class MemberDAO {
 		}
 		return vo;
 	}
+	
+	// 사용자 조회
+	public MemberVO memberSearch(String id) {
+		MemberVO vo = new MemberVO();
+		
+		try {
+			conn = db.getConnection();
+			String sql = "SELECT birth, email, post, addr1, addr2, phone, content "
+						+"FROM jeju_member "
+						+"WHERE id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			vo.setBirth(rs.getString(1));
+			vo.setEmail(rs.getString(2));
+			vo.setPost(rs.getString(3));
+			vo.setAddr1(rs.getString(4));
+			vo.setAddr2(rs.getString(5));
+			String phone1 = rs.getString(6).substring(0, 8);
+			String phone2 = rs.getString(6).substring(8);
+			vo.setPhone(phone1 + "-" + phone2);
+			vo.setContent(rs.getString(7));
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		
+		return vo;
+	}
 }

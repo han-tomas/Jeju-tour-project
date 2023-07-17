@@ -1,15 +1,20 @@
 package com.sist.model;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.*;
-
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 public class HotelModel {
 	private String hotelURL = "http://www.jejutori.com/";
 	@RequestMapping("hotel/hotel_list.do")
@@ -105,6 +110,7 @@ public class HotelModel {
 
 		String huno = request.getParameter("huno");
 		String inwon = request.getParameter("inwon");
+		int person = Integer.parseInt(inwon);
 		String date = request.getParameter("date");
 		
 		// DAO 연동
@@ -117,9 +123,130 @@ public class HotelModel {
 			}
 			vo.setRposters(posters);
 			
+			// 인원에 따른 가격 계산
+	        String pattern = "(\\d+)명"; // 숫자로 된 'n명' 패턴
+
+	        // 패턴과 일치하는 숫자를 추출
+	        Pattern regex = Pattern.compile(pattern);
+	        Matcher matcher = regex.matcher(vo.getPerson());
+
+	        // 추출된 숫자를 int 변수에 저장
+	        int min = 0;
+	        int max = 0;
+
+	        // 최소인원 (최소인원에 못미치더라도 예약 가능, 최소인원보다 많을 경우 추가인원 1명당 20%씩 가격상승)
+	        if (matcher.find()) {
+	            min = Integer.parseInt(matcher.group(1));
+	        }
+	        
+	        // 최대인원
+	        if (matcher.find()) {
+	            max = Integer.parseInt(matcher.group(1));
+	        }
+			
+	        if(person > 1 && person > min) {
+	        	if (person <= max) {
+	        		double plusPrice = 1+((person - min)*0.2);
+	        		vo.setPrice((int)(vo.getPrice()*plusPrice));
+	        	}
+	        }
 		}
-		
+		request.setAttribute("inwon", inwon);
+		request.setAttribute("date", date);
 		request.setAttribute("rList", rList);
 		return "../hotel/room_list.jsp";
+	}
+	
+	@RequestMapping("hotel/hotel_reserve.do")
+	public String hotel_reserve(HttpServletRequest request, HttpServletResponse response) {
+		try {
+		String inwon = request.getParameter("inwon");
+		int person = Integer.parseInt(inwon);
+		String date = request.getParameter("date");
+		if (date==null)
+			date="";
+		String rno = request.getParameter("rno");
+		String[] dateParts = date.split(" - ");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		String name=(String)session.getAttribute("name");
+		
+		// DAO연동
+		HotelDAO dao = HotelDAO.newInstance();
+		RoomVO vo = dao.roomSelectData(Integer.parseInt(rno));
+		String hname = dao.hotelNameData(vo.getHuno());
+		MemberDAO mdao = MemberDAO.newInstance();
+		MemberVO mvo = mdao.memberSearch(id);
+		mvo.setName(name);
+		
+		if (!date.equals("")) {
+			// 날짜 형식 지정
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+	        // 문자열을 LocalDate 객체로 변환
+	        LocalDate startDate = LocalDate.parse(dateParts[0], formatter);
+	        LocalDate endDate = LocalDate.parse(dateParts[1], formatter);
+
+	        // 날짜 간의 차이 계산
+	        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+	        
+	        // 요일 계산
+	        String[] koreanDays = {"일", "월", "화", "수", "목", "금", "토"};
+	        DayOfWeek startDateOfWeek = startDate.getDayOfWeek();
+	        DayOfWeek endDateOfWeek = endDate.getDayOfWeek();
+	        int startDateOfWeekValue = startDateOfWeek.getValue();
+	        int endDateOfWeekValue = endDateOfWeek.getValue(); 
+	        
+	        String start = koreanDays[startDateOfWeekValue];
+	        String end = koreanDays[endDateOfWeekValue];
+	        
+	        request.setAttribute("date", startDate + "(" + start + ") ~ "
+	        						+ endDate + "(" + end + ")");
+	        request.setAttribute("days", daysBetween);
+		}
+		// 메인포스터 저장
+		String poster = vo.getRposter();
+		poster = poster.substring(0, poster.indexOf("^"));
+		vo.setRposter(hotelURL+poster);
+		// 인원에 따른 가격 계산
+        String pattern = "(\\d+)명"; // 숫자로 된 'n명' 패턴
+
+        // 패턴과 일치하는 숫자를 추출
+        Pattern regex = Pattern.compile(pattern);
+        Matcher matcher = regex.matcher(vo.getPerson());
+
+        // 추출된 숫자를 int 변수에 저장
+        int min = 0;
+        int max = 0;
+
+        // 최소인원 (최소인원에 못미치더라도 예약 가능, 최소인원보다 많을 경우 추가인원 1명당 20%씩 가격상승)
+        if (matcher.find()) {
+            min = Integer.parseInt(matcher.group(1));
+        }
+        
+        // 최대인원
+        if (matcher.find()) {
+            max = Integer.parseInt(matcher.group(1));
+        }
+		
+        if(person > 1 && person > min) {
+        	if (person <= max) {
+        		double plusPrice = 1+((person - min)*0.2);
+        		vo.setPrice((int)(vo.getPrice()*plusPrice));
+        	}
+        }
+		
+		request.setAttribute("inwon", inwon);
+		request.setAttribute("hname", hname);
+		request.setAttribute("vo", vo);
+		request.setAttribute("mvo", mvo);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("main_jsp", "../hotel/hotel_reserve.jsp");
+		return "../main/main.jsp";
 	}
 }

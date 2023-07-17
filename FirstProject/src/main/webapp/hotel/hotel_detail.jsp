@@ -47,7 +47,7 @@ a {
 .tab-content {
   position: absolute;
   padding: 1.75em 0;
-  visibility: hidden;
+  display: none;
   height: 0;
 }
 
@@ -58,7 +58,7 @@ a {
 
 .content-visible {
   position: static;
-  visibility: visible;
+  display: block;
   height: auto;
 }
 
@@ -112,7 +112,7 @@ a {
 </style>
 <script type="text/javascript">
 $(function() {
-	let huno = $('#getHuno').val()
+	let huno = $('#huno').val()
 	let inwon = $('#inwon').val()
 	let date = $('#date').val()
 	const selectTab = element => {
@@ -145,7 +145,34 @@ $(function() {
 			$('#roomResult').html(result);
 		}
 	})
-	function roomSet(){
+	
+	$('#inwon').change(function() {
+	  var inwon = $(this).val();
+	  localStorage.setItem('inwon', inwon);
+	  updateRoomList();
+	});
+	
+	// 날짜 선택 (datepicker를 사용하는 경우)
+	$('#date').change(function() {
+	  var date = $(this).val();
+	  localStorage.setItem('date', date);
+	  updateRoomList();
+	});
+	
+	// 초기화시 로컬 스토리지에 저장된 값이 있는 경우 방 리스트 업데이트
+	if (localStorage.getItem('inwon')) {
+	  $('#inwon').val(localStorage.getItem('inwon'));
+	}
+	if (localStorage.getItem('date')) {
+	  $('#date').val(localStorage.getItem('date'));
+	}
+	
+	// 방 리스트 업데이트 함수
+	function updateRoomList() {
+		var inwon = $('#inwon').val();
+		var date = $('#date').val();
+		// AJAX 요청으로 방 리스트 업데이트
+		$("#roomResult").empty() 
 		$.ajax({
 			type:'GET',
 			url:'../hotel/room_list.do',
@@ -154,7 +181,11 @@ $(function() {
 				$('#roomResult').html(result);
 			}
 		})
+	
+	  // 방 리스트를 화면에 표시
+	  // ...
 	}
+	
 })
 </script>
 </head>
@@ -170,7 +201,6 @@ $(function() {
 	</div>
 	<div class="container container1">
 		<div class="row">
-		<form method="post" action="../hotel/hotel_reserve.do" id="reserveFrm">
 			<div class="col-sm-12" style="text-align: center;">
 				<div class="col-sm-12" style="padding:0px; margin:0px; border:none;">
 				<div id="carouselExampleControls" class="carousel slide"
@@ -215,7 +245,7 @@ $(function() {
 					<div class="row" style="justify-content: right;">
 						<div class="input-group" style="width: 360px;">
 							<span style="padding:6px 10px 0px 0px;"><i class="fa fa-person fa-2x"></i></span> 
-							<select class="form-control" style="margin-right:30px;" id="inwon" onchange="roomSet();">
+							<select class="form-control" style="margin-right:30px;" id="inwon">
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -241,7 +271,6 @@ $(function() {
 					</div>
 				</div>
 			</div>
-			</form>
 			<div class="col-sm-12">
 				<ul class="tabs">
 					<li class="tab-item"><a href="#item1" class="actived">숙소소개</a></li>
