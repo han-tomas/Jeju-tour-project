@@ -151,7 +151,6 @@ public class MemberModel {
 			// Ajax에 값을 전송 => NO, s***
 			PrintWriter out = response.getWriter();
 			out.println(res);
-			out.print(res1);
 		}catch(Exception ex) {}
 	}
 	@RequestMapping("member/idfind_ok2.do")
