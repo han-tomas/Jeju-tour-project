@@ -3,8 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- jQuery 라이브러리 로드 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- jQuery UI 라이브러리 로드 -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
   <style>
     /* CSS 스타일을 추가합니다. */
 
@@ -78,31 +87,114 @@
     
   </style>
 <script type="text/javascript">
-$(function(){
-	
-	$('.rdays').click(function(){
-		let year=$(this).attr("data-year");
-		let month=$(this).attr("data-month");
-		let day=$(this).text();
-		let rday=year+"년도 "+month+"월 "+day+"일";
-		$('#fd').show();
-		$('#food_day').text(rday)
-		
-		$.ajax({
-			type:'post',
-			url:'rentcar_reserve.do',
-			data:{"day":day},
-			success:function(result)
-			{
-				$('#food_time').html(result)
-			}
-		})
-	})
-})
+$(function() {
+    // datepicker 초기화
+    $(".datepicker").daterangepicker();
+
+    // "apply.daterangepicker" 이벤트 핸들러 등록
+    /* $(".datepicker").on("apply.daterangepicker", function (ev, picker) {
+      // 선택된 날짜 범위 값 읽기
+      const date = $("#date").val();
+      console.log("선택된 날짜 범위:", date);
+
+      // 선택된 날짜를 서버로 전송
+      $.ajax({
+        url: "rentcar_reserve.do",
+        type: "POST",
+        data: {"date": date},
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function(response) {
+          // 요청 성공 시 처리할 로직
+          console.log("서버 응답:", response);
+          // 예약이 성공적으로 완료되었을 때의 동작을 수행하거나 서버 응답을 화면에 표시하는 등의 작업을 할 수 있습니다.
+        },
+        error: function(error) {
+          // 요청 실패 시 처리할 로직
+          console.error("에러 발생:", error);
+        }
+      });
+    }); */
+  });
+    // "apply.daterangepicker" 이벤트 핸들러 등록
+    /* $(".datepicker").on("apply.daterangepicker", function (ev, picker) {
+      // 선택된 날짜 범위 값 읽기
+      const rent_day = $("#date").val();
+      console.log("선택된 날짜 범위:", rent_day);
+      
+      const dates = rent_day.split(" - ");
+      const startDate = moment(dates[0], "MM/DD/YYYY");
+      const endDate = moment(dates[1], "MM/DD/YYYY");
+      const useTime = endDate.diff(startDate, "days");
+	  
+      const end_Date = endDate.format("YYYY/MM/DD");
+      const start_Date = startDate.format("YYYY/MM/DD");
+      
+      console.log("일수 차이:", useTime);
+      //console.log("날짜 쪼개기:", dates.format("YYYY/MM/DD"));
+      //console.log("반납 일자:", endDate.format("YYYY/MM/DD"));
+      //console.log("대여 일자:", startDate.format("YYYY/MM/DD")); 
+      //console.log("대여 일자:", startDate)
+      //console.log("반납 일자:", endDate)
+      console.log("반납 일자:", end_Date);
+      console.log("대여 일자:", start_Date);
+      
+       $.ajax({
+        url: "rentcar_reserve.do",
+        type: "POST",
+        data: {"start_Date":start_Date,"end_Date":end_Date,"useTime":useTime},
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function(response) {
+          // 요청 성공 시 처리할 로직
+          console.log("서버 응답:", response);
+          // 예약이 성공적으로 완료되었을 때의 동작을 수행하거나 서버 응답을 화면에 표시하는 등의 작업을 할 수 있습니다.
+        },
+        error: function(error) {
+          // 요청 실패 시 처리할 로직
+          console.error("에러 발생:", error);
+        }
+      }); 
+    }); */
+ 
+
+//var insOpt; // 라디오 버튼에서 선택된 값을 저장할 변수
+
+/* function saveInsOpt() {
+	//var selectedOption = document.querySelector('input[name="insOpt"]:checked');
+    if (selectedOption) {
+      insOpt = selectedOption.value; // 선택된 값을 insOpt 변수에 저장합니다.
+      console.log("Selected value: " + insOpt);
+      
+      // AJAX 요청을 수행합니다.
+      $.ajax({
+        type: 'post',
+        url: '../rentcar/rentcar_reserve_ok.do',
+        data: {"insOpt": insOpt},
+        
+
+        success: function(insOpt) {
+          // AJAX 요청이 성공하면 이 함수가 실행됩니다.
+          // 서버로부터 받은 응답은 response 변수에 담겨있습니다.
+          console.log("AJAX 요청 성공! 응답 데이터:", insOpt)
+         // location.href="../rentcar/rentcar_reserve.do";
+          // 여기서 필요한 추가 동작을 처리하면 됩니다.
+        },
+/*         error: function(error) {
+          // AJAX 요청이 실패하면 이 함수가 실행됩니다.
+          console.error("AJAX 요청 실패!", error);
+          // 에러 처리 등 필요한 동작을 처리하면 됩니다.
+        } 
+      });
+    } else {
+      console.log("라디오 버튼을 선택해주세요."); */
+/*     } */
+    
+
+
 </script>
 </head>
 <body>
 
+<!-- <form action="../rentcar/rentcar_reserve.do"> -->
   <div class="page-heading">
     <div class="container">
       <div class="row">
@@ -112,16 +204,13 @@ $(function(){
       </div>
     </div>
   </div>
-  
+  <form method="post" action="../rentcar/rentcar_reserve.do" id="rFrm">
   <div class="popular-categories">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
           <div class="thumbnail">
-            
               <img src="https://rentinjeju.com${vo.img}" style= "alt:Lights; border-radius:20px; ">
-	       
-              
           </div>
         </div>
         <div class="col-md-8">
@@ -133,87 +222,27 @@ $(function(){
                 <hr>
                 <span>${vo.car_size}ㆍ${vo.seater}ㆍ${vo.fuel_type}ㆍ${vo.gear_type}ㆍ${vo.brand}</span>
                <hr>
-		        
-                
-                
-                
-     <table class="table">
-     <tr>
-     	<th>대여 기간 선택</th>
-                
-     </tr>
-      <tr>
-        <td>
-         <select name="year" id="year" class="input-sm">
-           <c:forEach var="i" begin="2023" end="2030">
-             <option ${i==year?"selected":"" }>${i }</option>
-           </c:forEach>
-         </select>년도&nbsp;
-         <select name="month" id="month" class="input-sm">
-           <c:forEach var="i" begin="1" end="12">
-             <option ${i==month?"selected":"" }>${i }</option>
-           </c:forEach>
-         </select>월
-         <select name="day" id="day" class="input-sm">
+ 			<!--<h3>대여기간 선택</h3>
+ 			<table class="table">
            
-           <c:forEach var="i" begin="1" end="31">	
-             <option ${i==day?"selected":"" }>${i }</option>
-           </c:forEach>
-         </select>일 부터
-         </td>
-      </tr>
-      <tr>
-      	<td colspan="3">
-         <select name="time" id="time" class="input-sm">
-         
-           <c:forEach var="i" begin="1" end="7">	
-             <option ${i==time?"selected":"" }>${i }</option>
-           </c:forEach>
-         </select>일 대여
-        <td>
-      </tr>
-       <tr class="success">
-        <c:forEach var="s" items="${strWeek }" varStatus="ss">
-          <c:choose>
-            <c:when test="${ss.index==0 }">
-             <c:set var="color" value="red"/>
-            </c:when>
-            <c:when test="${ss.index==6 }">
-             <c:set var="color" value="blue"/>
-            </c:when>
-            <c:otherwise>
-             <c:set var="color" value="black"/>
-            </c:otherwise>
-          </c:choose>
-          <th class="text-center" height="40" style="color:${color}">${s }</th>
-        </c:forEach>
-       </tr>
-       <c:set var="week" value="${week}"/>
-       <c:forEach var="i" begin="1" end="${lastday }">
-         <c:if test="${i==1 }">
            <tr>
-           <c:forEach var="j" begin="1" end="${week }">
-             <td height="40">&nbsp;</td>
-           </c:forEach>
-         </c:if>
-         <c:if test="${rday[i]==0 }">
-           <td class="text-center" height="40">${i }</td>
-         </c:if>
-         <c:if test="${rday[i]==1 }">
-           <td class="text-center rdays" style="background-color:black;color:white;" height="40"
-             data-year=${year } data-month=${month }
-           ><b>${i }</b></td>
-         </c:if>
-         <c:set var="week" value="${week+1 }"/>
-         <c:if test="${week>6 }">
-           <c:set var="week" value="0"/>
+             <td id="diary"></td>
            </tr>
-           <tr>
-         </c:if>
-       </c:forEach>
-       </tr>
-     </table>
-                 
+          </table>-->
+          
+    <div class="row" style="justify-content: right;">
+    
+    <input type=hidden name="cid" value="${vo.cid}">
+						<div class="input-group" style="width: 360px;">
+							
+							
+							<i class="fa fa-calendar fa-2x" style="padding:4px 10px 0px 0px"></i>
+							<input type="text" class="form-control datepicker" value="" name="date" id="date" style="width:200px;" />
+						</div>
+						
+					</div>
+               		
+               
               </div>
             
           </div>
@@ -222,17 +251,20 @@ $(function(){
     </div>
   </div>
   
+  
+   
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+        
            <h3 style="text-align: center;">자차 면책 선택</h3>
            <br>
 			<div class="row">
-          		
+          		 
           
 			    <div class="col-md-4">
-			    <label><input type="radio" name="ins" value="insOpt1" text-align= "center" checked> 가입 안함 </label><br><br>
-			    <font color="red">${vo.price }원</font>
+			    <input type="radio" name="insOpt" value="ins1"> 가입 안함 <br><br>
+			    <font color="red" >&nbsp;</font>
 			    <hr>
 <pre style="background-color: white;">
 - 자차 미가입.
@@ -241,8 +273,8 @@ $(function(){
    </pre>
 			    </div>
 			    <div class="col-md-4">
-			    <label><input type="radio" name="ins" value="insOpt2" text-align= "center"> 일반 자차</label><br><br>
-			    <font color="red" id="opt2Price">${vo.price+5000 }원</font>
+			    <input type="radio" name="insOpt" value="ins2"> 일반 자차<br><br>
+			    <font color="red" >+5000원</font>
    				<hr>
     			<pre style="background-color: white;">
 - 보상한도:300만원
@@ -253,13 +285,13 @@ $(function(){
 <br>
 - 보험내용:보상한도초과금 고객부담 / 단독사고 
 및 임차인100% 과실사고건 자차처리 불가
-<br>
+<br> 
 ※ 만26세 이상, 운전면허 취득 후 1년이상 경과.
    				</pre>
 			    </div>
 			    <div class="col-md-4">
-			    <label><input type="radio" name="ins" value="insOpt3" text-align= "center"> 고급 자차 </label><br><br>
-			    <font color="red" id="opt3Price">${vo.price+10000 }원</font>
+			    <input type="radio" name="insOpt" value="ins3" > 고급 자차 <br><br>
+			    <font color="red" >+10000원</font>
 			    <hr>
 <pre style="background-color: white;">
 - 보상한도:250~400만원
@@ -281,12 +313,12 @@ $(function(){
     <div class="container">
     	<div class="row">
     		<div class="col-md-12 text-center">
-    		<a href="../rentcar/rentcar_reserve.do?cid=${vo.cid }">
-    			<input type=button class="btn btn-lg btn-danger btn-reservation" value="예약하기" style="width: 150px" id="reserveBtn" >
-    		</a>
+    			<input type=submit class="btn btn-lg btn-danger btn-reservation" value="예약하기" style="width: 150px" id="reserveBtn" >
     		</div>
     	</div>
     </div>
+    </form>
+   <!--  </form> -->
     <br>
     
     <div class="container">

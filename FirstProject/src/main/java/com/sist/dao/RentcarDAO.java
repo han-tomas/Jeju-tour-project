@@ -160,4 +160,57 @@ public class RentcarDAO {
 		}
 		return vo;
 	}
+	
+	public List<RentcarVO> RentcarCategorySort(int page)
+	  {
+		  List<RentcarVO> list=new ArrayList<RentcarVO>();
+		  try
+		  {
+			  conn=db.getConnection();
+			  String sql="SELECT cid,img,car_name,car_size,seater,fuel_type,gear_type,brand,price,rcno,hit,like2,num "
+						+ "FROM (SELECT cid,img,car_name,car_size,seater,fuel_type,gear_type,brand,price,rcno,hit,like2,rownum as num "
+						+ "FROM (SELECT cid,img,car_name,car_size,seater,fuel_type,gear_type,brand,price,rcno,hit,like2 "
+						+ "FROM rent_info ORDER BY cid asc)) "
+						+ "WHERE num BETWEEN ? AND ? AND WHERE car_size LIKE '%?%' and car_size LIKE '%?%' and ";
+			  ps=conn.prepareStatement(sql);
+			  int rowSize=12;
+			  int start=(rowSize*page)-(rowSize-1);
+			  int end=rowSize*page;
+			  
+			  ps.setInt(1, start);
+			  ps.setInt(2, end);
+			  
+			  ResultSet rs=ps.executeQuery();
+			  while(rs.next())
+			  {
+				  RentcarVO vo=new RentcarVO();
+				  vo.setCid(rs.getInt(1));
+				  vo.setImg(rs.getString(2));
+				  vo.setCar_name(rs.getString(3));
+				  vo.setCar_size(rs.getString(4));
+				  vo.setSeater(rs.getString(5));
+				  vo.setFuel_type(rs.getString(6));
+				  vo.setGear_type(rs.getString(7));
+				  vo.setBrand(rs.getString(8));
+				  vo.setPrice(rs.getInt(9));
+				  vo.setRcno(rs.getInt(10));
+				  vo.setHit(rs.getInt(11));
+				  vo.setLike2(rs.getString(12));
+				  
+				  
+				  list.add(vo);
+			  }
+			  rs.close();
+			  
+		  }catch(Exception ex)
+		  {
+			  ex.printStackTrace();
+		  }
+		  finally
+		  {
+			  db.disConnection(conn, ps);
+		  }
+		  return list;
+	  }
+	
 }
