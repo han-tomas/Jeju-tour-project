@@ -131,5 +131,41 @@ public class MemberModel {
 		// 이동
 		return "redirect:../main/main.do";
 	}
-
+	@RequestMapping("member/idfind.do")
+	public String memberIdFind(HttpServletRequest request,HttpServletResponse response)
+	{
+		request.setAttribute("main_jsp", "../member/idfind.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("member/idfind_ok.do")
+	public void memberIdFindOk(HttpServletRequest request,HttpServletResponse response)
+	{
+		String email=request.getParameter("email");
+		String phone=request.getParameter("tel");
+		//DAO 연동
+		MemberDAO dao = MemberDAO.newInstance();
+		String res = dao.memeberId_EmailFind(email);
+		String res1 = dao.memeberId_PhoneFind(phone);
+		try
+		{
+			// Ajax에 값을 전송 => NO, s***
+			PrintWriter out = response.getWriter();
+			out.println(res);
+			out.print(res1);
+		}catch(Exception ex) {}
+	}
+	@RequestMapping("member/idfind_ok2.do")
+	public void memberIdFindOk2(HttpServletRequest request,HttpServletResponse response)
+	{
+		String phone=request.getParameter("tel");
+		//DAO 연동
+		MemberDAO dao = MemberDAO.newInstance();
+		String res = dao.memeberId_PhoneFind(phone);
+		try
+		{
+			// Ajax에 값을 전송 => NO, s***
+			PrintWriter out = response.getWriter();
+			out.println(res);
+		}catch(Exception ex) {}
+	}
 }

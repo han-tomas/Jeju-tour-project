@@ -15,9 +15,28 @@
 .btn-sm {
 	font-size: 0.5rem;
 }
+.main-banner1 {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-image: url(../assets/images/jeju-join.jpg);
+  padding: 200px 0px 100px 0px;
+  position: relative;
+  overflow: hidden;
+}
+.main-banner1 .top-text h2 {
+  color: #fff;
+  font-size: 45px;
+  font-weight: 800;
+  text-transform: capitalize;
+  margin-top: 15px;
+  margin-bottom: 45px;
+  margin: 0px auto;
+}
 </style>
-<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
 <script type="text/javascript">
 Shadowbox.init({
    players:['iframe']
@@ -70,19 +89,19 @@ $(function(){
 </script>
 </head>
 <body>
-<div class="page-heading">
-	    <div class="container">
-	      <div class="row">
-	        <div class="col-lg-8">
-	          <div class="top-text header-text">
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
+<div class="main-banner1">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="top-text header-text">
+            <h2 class="text-center">회원가입</h2>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>         
 <div class="popular-categories">
     <div class="container">
-    <h2 class="sectiontitle text-center">회원가입</h2>
     <div style="height:20px"></div>
     <div class="row row1">
      <form method="post" action="../member/join_ok.do" name="joinFrm" id="joinFrm">

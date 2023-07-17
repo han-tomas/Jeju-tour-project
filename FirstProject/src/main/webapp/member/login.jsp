@@ -25,7 +25,7 @@
 	margin-top:5px;
 }
 .row {
-	width: 580px;
+	width: 480px;
 	margin:5px;
 }
 .row1 {
@@ -33,6 +33,16 @@
 	align-items: center;
 	justify-content: center;
 }
+.logtable th,.logtable td {
+	border: none;
+}
+.loglogo{
+	width: 400px;
+	height: 200px;
+	margin: 0px auto;
+	margin-top: 100px;
+}
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -77,69 +87,46 @@ $(function(){
 	  // Shadowbox 닫기
 	  Shadowbox.close();
 	});
-	
+	$('#loglogo').click(function(){
+		parent.location.href = "../main/main.do";
+		// Shadowbox 닫기
+		Shadowbox.close();
+	});
+	$('#idfind').click(function(){
+		parent.location.href="../member/idfind.do";
+		Shadowbox.close();
+	})
 })
 </script>
 </head>
 <body>
-<!--   <div class="contact-page">
-      <div class="row">
-          <div class="inner-content" style="padding:0px">
-              <div class="col-sm-12 align-self-center" id="contact">
-                  <div class="row row1">
-                    <div class="col-sm-12" style="margin-top:10px">
-                      <fieldset>
-                        아이디<input type=text name="id" id="id" placeholder="id" autocomplete="on" required>
-                      </fieldset>
-                    </div>
-                    <div class="col-sm-12">
-                      <fieldset>
-                        비밀번호<input type="password" name="pwd" id="pwd" placeholder="pwd" autocomplete="on" required>
-                      </fieldset>
-                    </div>
-                    <div class="col-sm-12 d-flex justify-content-center">
-                      <fieldset>
-                        <button type="submit" id="logBtn" class="main-button">로그인</button>
-                        <button type="submit" id="joinBtn" class="main-button">회원가입</button>
-                        <button type="submit" id="#" class="main-button">아이디 찾기</button>
-                        <button type="submit" id="#" class="main-button">비밀번호 찾기</button>
-                        <a href="#" class="btn btn-xs btn-primary">아이디 찾기</a>
-					<a href="#" class="btn btn-xs btn-primary">비밀번호 찾기</a>
-                        
-                      </fieldset>
-                    </div>
-                  </div>
-            </div>
-        </div>
-    </div>
-  </div> -->
   <div class="contact-page">
       <div class="row">
-      	<a href="../main/main.do">
-      	<img src="jeju_logo.png">
-          </a>
-      	<table class="table">
+	      	<a href="#" class="loglogo" id="loglogo">
+	      		<img src="jeju_logo.png">
+	         </a>  	
+      	<table class="table logtable">
       		
       		<tr class="inline">
-      			<td width="30%">아이디</td>
+      			<td width="30%" style="text-align: right">아이디</td>
       			<td width="40%">
       				<input type=text name="id" id="id">
       			</td>
       			<td rowspan="2" width="30%">
-      				<button type="submit" id="logBtn" class="btn btn-sm btn-primary" style="width: 100px;height: 100px;">로그인</button>
+      				<button type="submit" id="logBtn" class="btn btn-outline-warning" style="width: 100px;height: 100px;">로그인</button>
       			</td>
       		</tr>
       		<tr>
-      			<td width="30%">비밀번호</td>
+      			<td width="30%" style="text-align: right">비밀번호</td>
       			<td width="40%">
       				<input type="password" name="pwd" id="pwd">
       			</td>
       		</tr>
       		<tr>
       			<td colspan="3" class="text-center">
-      				<button type="submit" id="joinBtn" class="btn btn-sm btn-primary">회원가입</button>
-                    <button type="submit" id="#" class="btn btn-sm btn-primary">아이디 찾기</button>
-                    <button type="submit" id="#" class="btn btn-sm btn-primary">비밀번호 찾기</button>
+      				<button type="submit" id="joinBtn" class="btn btn-outline-success">회원가입</button>
+                    <a href="#" class="btn btn-outline-danger" id="idfind">아이디 찾기</a>
+                    <button type="submit" id="#" class="btn btn-outline-info">비밀번호 찾기</button>
       			</td>
       		</tr>
       	</table>

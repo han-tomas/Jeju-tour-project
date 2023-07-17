@@ -173,7 +173,90 @@ public class MemberDAO {
 	// 회원 탈퇴
 	
 	// 아이디 찾기
-	
+	 public String memeberId_EmailFind(String email)
+	   {
+		   String result="";
+		   try
+		   {
+			   conn=db.getConnection();
+			   String sql="SELECT COUNT(*) FROM jeju_member "
+			   		+ "WHERE email=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setString(1, email);
+			   ResultSet rs = ps.executeQuery();
+			   rs.next();
+			   int count=rs.getInt(1);
+			   rs.close();
+			   if(count==0) // email이 없는 상태
+			   {
+				   result="NO";
+			   }
+			   else // email이 존재
+			   {
+				   sql="SELECT RPAD(SUBSTR(id,1,1),LENGTH(id),'*') "
+				   		+ "FROM jeju_member "
+				   		+ "WHERE email=?";
+				   //s***
+				   ps=conn.prepareStatement(sql);
+				   ps.setString(1, email);
+				   rs = ps.executeQuery();
+				   rs.next();
+				   result=rs.getString(1);
+				   rs.close();
+				   
+			   }
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   db.disConnection(conn, ps);
+		   }
+		   return result;
+	   }
+	 public String memeberId_PhoneFind(String phone)
+	 {
+		 String result="";
+		 try
+		 {
+			 conn=db.getConnection();
+			 String sql="SELECT COUNT(*) FROM jeju_member "
+					 + "WHERE phone=?";
+			 ps=conn.prepareStatement(sql);
+			 ps.setString(1, phone);
+			 ResultSet rs = ps.executeQuery();
+			 rs.next();
+			 int count=rs.getInt(1);
+			 rs.close();
+			 if(count==0) // email이 없는 상태
+			 {
+				 result="NO";
+			 }
+			 else // email이 존재
+			 {
+				 sql="SELECT RPAD(SUBSTR(id,1,1),LENGTH(id),'*') "
+						 + "FROM jeju_member "
+						 + "WHERE phone=?";
+				 //s***
+				 ps=conn.prepareStatement(sql);
+				 ps.setString(1, phone);
+				 rs = ps.executeQuery();
+				 rs.next();
+				 result=rs.getString(1);
+				 rs.close();
+				 
+			 }
+		 }catch(Exception ex)
+		 {
+			 ex.printStackTrace();
+		 }
+		 finally
+		 {
+			 db.disConnection(conn, ps);
+		 }
+		 return result;
+	 }
 	// 비밀번호 찾기
 	
 	// 비밀번호 변경
