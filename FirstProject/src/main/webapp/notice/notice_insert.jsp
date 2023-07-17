@@ -10,6 +10,13 @@
 	margin: 0px auto;
 	width: 800px
 }
+body{
+	font-family: Arial;
+}
+.container1{
+	margin: 0px auto;
+	width: 1000px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -54,31 +61,31 @@ $(function(){
   <form method=post action="../notice/notice_insert_ok.do" id="frm">
   <table class="table">
     <tr>
-      <th width=15%>구분</th>
+      <th width=15% class="text-center">구분</th>
       <td width=85%>
         <select name="type">
           <option>일반공지</option>
-          <option>긴급공지</option>
-          <option>이벤트 공지</option>
+          <option>중요공지</option>
+          <option>이벤트</option>
         </select>
       </td>
     </tr>
     <tr>
-      <th width=15%>제목</th>
+      <th width=15% class="text-center">제목</th>
       <td width=85%>
         <input type=text name=subject id="subject" size=50 class="input-sm">
       </td>
     </tr>
     <tr>
-      <th width=15%>내용</th>
+      <th width=15% class="text-center">내용</th>
       <td width=85%>
         <textarea rows="10" cols="50" id="content" name=content></textarea>
       </td> 
     </tr>
     <tr>
       <td colspan=2 class="text-center">
-        <input type=button value="글쓰기" class="btn btn-sm btn-success" id="notiBtn">
-        <input type=button value="취소" class="btn btn-sm btn-info" onclick="javascript:history.back()">
+        <input type=button value="글쓰기" class="btn btn-xs" style="border-color: gray;" id="notiBtn">
+        <input type=button value="취소" class="btn btn-xs" style="border-color: gray;" onclick="javascript:history.back()">
       </td>
     </tr>
   </table>

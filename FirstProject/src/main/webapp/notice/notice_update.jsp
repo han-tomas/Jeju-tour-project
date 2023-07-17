@@ -12,7 +12,7 @@
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
+<script>
 $(function(){
 	$('#update').click(function(){
 		alert('수정하시겠습니까?')
