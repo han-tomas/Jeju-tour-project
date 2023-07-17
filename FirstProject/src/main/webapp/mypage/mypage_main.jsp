@@ -5,11 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel="stylesheet" href="../assets/css/mypage_style.css">
-  <script src='https://unpkg.co/gsap@3/dist/gsap.min.js'></script>
-<script src='https://assets.codepen.io/16327/MorphSVGPlugin3.min.js'></script>
-<script  src="../assets/js/mypage_script.js"></script>
 </head>
 <body>
 <div class="page-heading">

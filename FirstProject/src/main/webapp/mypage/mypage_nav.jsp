@@ -5,66 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#menutitle{
+	transition: none;
+	transform: none;
+  	opacity: 1;
+  	width: auto;
+  	height: auto;
+  	color: rgb(255, 255, 255);
+  	font-size: 20pt
+}
+#menutitle:hover{
+  border-radius: 0 0 0 0;
+  border-color: rgb(255, 128, 0);
+  transform: none;
+  background: rgb(255, 128, 0);
+}
+</style>
 </head>
 <body>
-<aside>
-    <svg class="logo" viewBox="0 0 28 28">
-
-    </svg>
-    <nav>
-        <button class="home active">
-            <div>
-                <div class="icon">
-                   
-                </div>
-                Home
+<div class="container-fluid">
+        <div class="row">    
+            <div id="admin-sidebar">
+                <ul class="sidenav admin-sidenav">
+                	<li id=menutitle >마이페이지</li>
+                    <li><a href="#">홈</a></li>
+                    <li><a href="#">내정보관리</a></li>
+                    <li><a href="#">회원탈퇴</a></li>
+                    <li><a href="#">abcdefg</a></li>
+                    <li><a href="../mypage/mypage_reserve_list.do">예약리스트</a></li>
+                    <li><a href="../mypage/mypage_jjim_list.do">찜 목록</a></li>                  
+                </ul>
             </div>
-        </button>
-        <button class="explore">
-            <div>
-                <div class="icon">
-                    
-                </div>
-                내정보 수정
-            </div>
-        </button>
-        <button class="notifications">
-            <div>
-                <div class="icon">
-                    
-                </div>
-                회원탈퇴
-            </div>
-        </button>
-        <button class="messages">
-            <div>
-                <div class="icon">
-                    
-                </div>
-                QnA 목록
-            </div>
-        </button>
-        <a href="../mypage/mypage_reserve_list.do">
-        <button class="lists">
-            <div>
-                <div class="icon">
-                    
-                </div>
-               	예약목록
-            </div>
-        </button>
-        </a>
-        <a href="../mypage/mypage_jjim_list.do">
-        <button class="profile">
-            <div>
-                <div class="icon">
-                    
-                </div>
-                찜목록
-            </div>
-        </button>
-        </a>
-    </nav>
-</aside>
+        </div>
+</div>            
 </body>
 </html>
