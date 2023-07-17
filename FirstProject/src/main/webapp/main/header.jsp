@@ -97,7 +97,7 @@ $(function(){
 				</c:if>
 				<c:if test="${sessionScope.admin=='y' }">
 					<li class="log" >
-						<a href="#" class="btn btn-outline-dark btn-block">adminpage</a>
+						<a href="../adminpage/adminpage_main.do" class="btn btn-outline-dark btn-block">adminpage</a>
 						<input type="button" class="btn btn-outline-dark btn-block" id="logoutBtn" value="Logout">
 					</li>
 				</c:if>

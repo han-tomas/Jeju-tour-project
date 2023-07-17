@@ -15,4 +15,5 @@
 	<bean id="foodlike" class="com.sist.model.FoodLikeModel"/>
 	<bean id="activityWish" class="com.sist.model.ActivityWishModel"/>
 	<bean id="mypage" class="com.sist.model.MyPageModel"/>
+	<bean id="adminpage" class="com.sist.model.AdminPageModel"/>
 </beans>
