@@ -72,7 +72,7 @@ public class CourseJJimRecommendDAO {
 		{
 			conn = db.getConnection();
 			String sql ="SELECT no,cno,courseGetPoster(cno),"
-					+ "courseGetTitle(cno) "
+					+ "courseGetTitle(cno),courseGetJJim(cno),courseGetRecommend(cno) "
 					+ "FROM course_jjim "
 					+ "WHERE id=? "
 					+ "ORDER BY no DESC";
@@ -86,6 +86,8 @@ public class CourseJJimRecommendDAO {
 				vo.setCno(rs.getInt(2));
 				vo.setPoster(rs.getString(3));
 				vo.setTitle(rs.getString(4));
+				vo.setJjim(rs.getInt(5));
+				vo.setRecommend(rs.getInt(6));
 				list.add(vo);  // 찜목록에는 포스터,제목만 출력
 			}
 			rs.close();

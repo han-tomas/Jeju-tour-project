@@ -65,4 +65,24 @@ public class CourseModel {
 		request.setAttribute("list", list);
 		return "../travel/coursname_related.jsp";
 	}
+	@RequestMapping("travel/course_info.do")
+	public String jjim_info(HttpServletRequest request, HttpServletResponse response)
+	{
+		String cno=request.getParameter("cno");
+		CourseDAO dao=CourseDAO.newInstance();
+		List<CourseDetailVO> list = dao.courseDetailData(Integer.parseInt(cno));
+		List<Integer> dlist = dao.daytype(Integer.parseInt(cno));
+		CourseCategoryVO cvo =dao.courseImage(Integer.parseInt(cno));
+		int[] aa= new int[4];
+		for(int i=0; i<dlist.size();i++)
+		{
+			aa[i]=dlist.get(i);	
+		}
+		request.setAttribute("cvo", cvo);
+		request.setAttribute("aa", aa);
+		request.setAttribute("list", list);
+		request.setAttribute("size", list.size());
+		
+		return "../travel/course_info.jsp";
+	}
 }

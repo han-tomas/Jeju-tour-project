@@ -2,8 +2,12 @@ package com.sist.model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
+import com.sist.vo.*;
+import com.sist.dao.*;
+import java.util.*;
 
 public class MyPageModel {
 	@RequestMapping("mypage/mypage_main.do")
@@ -16,6 +20,11 @@ public class MyPageModel {
 	@RequestMapping("mypage/mypage_jjim_list.do")
 	public String jjim_list(HttpServletRequest request, HttpServletResponse response)
 	{
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		CourseJJimRecommendDAO dao = CourseJJimRecommendDAO.newInstance();
+		List<CourseJJimVO> list  = dao.courseJJimListData(id);
+		request.setAttribute("list", list);
 		request.setAttribute("mypage_jsp", "../mypage/mypage_jjim.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";

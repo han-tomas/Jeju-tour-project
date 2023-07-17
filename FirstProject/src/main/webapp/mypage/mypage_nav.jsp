@@ -21,6 +21,12 @@
   transform: none;
   background: rgb(255, 128, 0);
 }
+a{
+	color: rgb(255, 255, 0);
+}
+a:hover{
+	color: rgb(255, 255, 0);
+}
 </style>
 </head>
 <body>
@@ -29,12 +35,12 @@
             <div id="admin-sidebar">
                 <ul class="sidenav admin-sidenav">
                 	<li id=menutitle >마이페이지</li>
-                    <li><a href="#">홈</a></li>
-                    <li><a href="#">내정보관리</a></li>
-                    <li><a href="#">회원탈퇴</a></li>
-                    <li><a href="#">abcdefg</a></li>
-                    <li><a href="../mypage/mypage_reserve_list.do">예약리스트</a></li>
-                    <li><a href="../mypage/mypage_jjim_list.do">찜 목록</a></li>                  
+                    <a href="#"><li>홈</li></a>
+                    <a href="#"><li>내정보관리</li></a>
+                    <a href="#"><li>회원탈퇴</li></a>
+                    <a href="#"><li>abcdefg</li></a>
+                    <a href="../mypage/mypage_reserve_list.do"><li>예약리스트</li></a>
+                    <a href="../mypage/mypage_jjim_list.do" style="color: yellow"><li>찜 목록</li></a>                  
                 </ul>
             </div>
         </div>

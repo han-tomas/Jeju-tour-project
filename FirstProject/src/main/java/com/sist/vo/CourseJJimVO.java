@@ -4,6 +4,22 @@ public class CourseJJimVO {
 	private int no,cno;
 	private String id;
 	private String title, poster;
+	private int jjim,recommend;
+	
+	
+	
+	public int getJjim() {
+		return jjim;
+	}
+	public void setJjim(int jjim) {
+		this.jjim = jjim;
+	}
+	public int getRecommend() {
+		return recommend;
+	}
+	public void setRecommend(int recommend) {
+		this.recommend = recommend;
+	}
 	public int getNo() {
 		return no;
 	}
