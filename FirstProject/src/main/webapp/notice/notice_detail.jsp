@@ -7,10 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.main{
-	margin: 0px auto
-	margin-top: 100px
-	width: 800px
+body{
+	font-family: Arial;
+}
+.container1{
+	margin: 0px auto;
+	width: 1000px;
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -45,36 +47,33 @@ $(function(){
 </div> 
   <div class="container1">
   <main class="container clear">
-    <h2 class="sectiontitle">글보기</h2>
+    
+    <div style="margin-bottom: 20px;">
+      <h2 style="display: inline">공지사항</h2>
+      <c:if test="${sessionScope.admin=='y' }">
+        <span style="margin-left: 765px;">
+        <a href="../notice/notice_update.do?no=${vo.no }" class="btn btn-sm" style="border-color: gray;">수정</a>&nbsp;
+        <span class="btn btn-sm" id="del" data-no="${vo.no }" style="border-color: gray;">삭제</span>
+        </span>
+      </c:if>
+    </div>
     <table class="table">
-      <tr>
-        <th width=20% class="text-center">번호</th>
-        <td width=30% class="text-center">${vo.no }</td>
-        <th width=20% class="text-center">작성일</th>
-        <td width=30% class="text-center">${vo.dbday }</td>
+      <tr style="border-top : 1px solid;background-color: #dedede;">
+        <th width=5% class="text-center">제목 | </th>
+        <td width=50% class="text-left">[${vo.type}] ${vo.subject }</td>
+        <th width=5% class="text-center">작성일</th>
+        <td width=10% class="text-center">${vo.dbday }</td>
+        <th width=5% class="text-center">조회수</th>
+        <td width=5% class="text-center">${vo.hit }</td>
       </tr>
       <tr>
-        <th width=20% class="text-center">이름</th>
-        <td width=30% class="text-center">${vo.name }</td>
-        <th width=20% class="text-center">조회수</th>
-        <td width=30% class="text-center">${vo.hit }</td>
-      </tr>
-      <tr>
-        <th width=20% class="text-center">제목</th>
-        <td colspan=3>${vo.subject }</td>
-      </tr>
-      <tr>
-        <td colspan=4 class="text-left" valign="top" height="200">
+        <td colspan=6 valign="top" height="200">
           <pre style="white-space: pre-wrap;border: none;background-color: white">${vo.content }</pre>
         </td>
       </tr>
       <tr>
-        <td colspan=4 class="text-right">
-          <c:if test="${sessionScope.admin=='y' }">
-          <a href="../notice/notice_update.do?no=${vo.no }" class="btn btn-xs btn-info">수정</a>
-          <span class="btn btn-xs btn-danger" id="del" data-no="${vo.no }">삭제</span>
-          </c:if>
-          <a href="../notice/notice_list.do" class="btn btn-xs btn-warning">목록</a>
+        <td colspan=6>
+          <a href="../notice/notice_list.do" class="btn btn-xs" style="border-color: gray">목록</a>
         </td>
       </tr>
     </table>

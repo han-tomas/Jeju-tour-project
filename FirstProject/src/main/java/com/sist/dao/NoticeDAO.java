@@ -125,8 +125,7 @@ public class NoticeDAO {
 		   ps.executeUpdate();
 		   
 		   // 실제 데이터 읽기 
-		   sql="SELECT no,subject,name,content,"
-			  +"TO_CHAR(regdate,'yyyy-MM-dd'),hit "
+		   sql="SELECT subject,type,content,TO_CHAR(regdate,'yyyy-MM-dd'),hit "
 			  +"FROM notice "
 			  +"WHERE no=?";
 		   
@@ -135,12 +134,11 @@ public class NoticeDAO {
 		   
 		   ResultSet rs=ps.executeQuery();
 		   rs.next();
-		   vo.setNo(rs.getInt(1));
-		   vo.setSubject(rs.getString(2));
-		   vo.setName(rs.getString(3));
-		   vo.setContent(rs.getString(4));
-		   vo.setDbday(rs.getString(5));
-		   vo.setHit(rs.getInt(6));
+		   vo.setSubject(rs.getString(1));
+		   vo.setType(rs.getString(2));
+		   vo.setContent(rs.getNString(3));
+		   vo.setDbday(rs.getString(4));
+		   vo.setHit(rs.getInt(5));
 		   rs.close();
 			  
 	   }catch(Exception ex)
