@@ -26,7 +26,6 @@
 }
 .row {
 	width: 580px;
-	height: 350px;
 	margin:5px;
 }
 .row1 {
@@ -78,11 +77,12 @@ $(function(){
 	  // Shadowbox 닫기
 	  Shadowbox.close();
 	});
+	
 })
 </script>
 </head>
 <body>
-  <div class="contact-page">
+<!--   <div class="contact-page">
       <div class="row">
           <div class="inner-content" style="padding:0px">
               <div class="col-sm-12 align-self-center" id="contact">
@@ -103,8 +103,8 @@ $(function(){
                         <button type="submit" id="joinBtn" class="main-button">회원가입</button>
                         <button type="submit" id="#" class="main-button">아이디 찾기</button>
                         <button type="submit" id="#" class="main-button">비밀번호 찾기</button>
-                        <!-- <a href="#" class="btn btn-xs btn-primary">아이디 찾기</a>
-					<a href="#" class="btn btn-xs btn-primary">비밀번호 찾기</a> -->
+                        <a href="#" class="btn btn-xs btn-primary">아이디 찾기</a>
+					<a href="#" class="btn btn-xs btn-primary">비밀번호 찾기</a>
                         
                       </fieldset>
                     </div>
@@ -112,7 +112,39 @@ $(function(){
             </div>
         </div>
     </div>
-  </div>
+  </div> -->
+  <div class="contact-page">
+      <div class="row">
+      	<a href="../main/main.do">
+      	<img src="jeju_logo.png">
+          </a>
+      	<table class="table">
+      		
+      		<tr class="inline">
+      			<td width="30%">아이디</td>
+      			<td width="40%">
+      				<input type=text name="id" id="id">
+      			</td>
+      			<td rowspan="2" width="30%">
+      				<button type="submit" id="logBtn" class="btn btn-sm btn-primary" style="width: 100px;height: 100px;">로그인</button>
+      			</td>
+      		</tr>
+      		<tr>
+      			<td width="30%">비밀번호</td>
+      			<td width="40%">
+      				<input type="password" name="pwd" id="pwd">
+      			</td>
+      		</tr>
+      		<tr>
+      			<td colspan="3" class="text-center">
+      				<button type="submit" id="joinBtn" class="btn btn-sm btn-primary">회원가입</button>
+                    <button type="submit" id="#" class="btn btn-sm btn-primary">아이디 찾기</button>
+                    <button type="submit" id="#" class="btn btn-sm btn-primary">비밀번호 찾기</button>
+      			</td>
+      		</tr>
+      	</table>
+      </div>
+  </div>    	
   <!-- Scripts -->
 	<script src="../vendor/jquery/jquery.min.js"></script>
 	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
