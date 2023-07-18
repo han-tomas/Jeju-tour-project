@@ -15,7 +15,7 @@
             <div class="logo">
               <img src="../assets/images/jeju_logo.png" alt="Plot Listing">
             </div>
-            <p>If you consider that <a rel="nofollow" href="https://templatemo.com/tm-564-plot-listing" target="_parent">Plot Listing template</a> is useful for your website, please <a rel="nofollow" href="https://www.paypal.me/templatemo" target="_blank">support us</a> a little via PayPal.</p>
+            <p>If you want to feel the beauty and joy of Jeju Island, let's go with us right now!</p>
           </div>
         </div>
         <div class="col-lg-4">
@@ -44,22 +44,21 @@
         <div class="col-lg-4">
           <div class="contact-us">
             <h4>Contact Us</h4>
-            <p>27th Street of New Town, Digital Villa</p>
+            <p>21, World Cup buk-ro, Mapo-gu, Seoul</p>
             <div class="row">
               <div class="col-lg-6">
-                <a href="#">010-020-0340</a>
+                <a href="#">010-3070-7427</a>
               </div>
               <div class="col-lg-6">
-                <a href="#">090-080-0760</a>
+                <a href="#">02-336-8546</a>
               </div>
             </div>
           </div>
         </div>
         <div class="col-lg-12">
           <div class="sub-footer">
-            <p>Copyright © 2021 Plot Listing Co., Ltd. All Rights Reserved.
+            <p>Copyright(C) 2023 SSangyong Institute of System Technology, All Right Reserved.
             <br>
-			Design: <a rel="nofollow" href="https://templatemo.com" title="CSS Templates">TemplateMo</a></p>
           </div>
         </div>
       </div>
