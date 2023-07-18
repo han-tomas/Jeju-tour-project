@@ -431,5 +431,38 @@ public class MemberDAO {
 		
 		return vo;
 	}
+	// 관리자 페이지에 들어갈 회원 리스트
+	public List<MemberVO> memberList() {
+		List<MemberVO> list=new ArrayList<MemberVO>();
+		try {
+			conn=db.getConnection();
+			String sql="SELECT id,pwd,name,sex,birth,email,post,addr1,addr2,phone,TO_CHAR(regdate,'YYYY-MM-DD'),admin "
+					+ "FROM jeju_member";
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				MemberVO vo=new MemberVO();
+				vo.setId(rs.getString(1));
+				vo.setPwd(rs.getString(2));
+				vo.setName(rs.getString(3));
+				vo.setSex(rs.getString(4));
+				vo.setBirth(rs.getString(5));
+				vo.setEmail(rs.getString(6));
+				vo.setPost(rs.getString(7));
+				vo.setAddr1(rs.getString(8));
+				vo.setAddr2(rs.getString(9));
+				vo.setPhone(rs.getString(10));
+				vo.setDb_date(rs.getString(11));
+				vo.setAdmin(rs.getString(12));
+				list.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		return list;
+	}
 	
 }
