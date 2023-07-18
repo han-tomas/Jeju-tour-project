@@ -82,11 +82,14 @@ $(function(){
 			  {
 				// 중복된 이메일이 없는 경우
 				  $('#emailmsg').html('<span style="color:green; font-size:8px">사용가능한 이메일 입니다.</span>')
+				  
 			  }
 			  else
 			  {	  
 				  // 중복된 이메일이 있는 경우
-				  $('#emailmsg').html('<span style="color:red; font-size:8px">존재하는 이메일 입니다.</span>')
+				  $('#emailmsg').html('<span style="color:red; font-size:8px">'+email+'은(는)존재하는 이메일 입니다.</span>')
+				  $('#email').val("")
+				  $('#email').focus()
 			  }
 		  }
 	  })
@@ -122,6 +125,10 @@ $(function(){
 	    		else
 	    		{
 					$('#phonemsg').html('<span style="color:red; font-size:8px">사용중인 전화번호 입니다.</span>')    			
+					$('#tel2').val("")
+					$('#tel3').val("")
+				  	$('#tel2').focus()
+				  	
 	    		}	
 	    	}
 	    })
@@ -143,8 +150,7 @@ $(function(){
 	   }
 	   
 	   if (!isValid) {
-	      $('#warning').html('<span style="color:blue; font-size:8px">입력사항들을 모두 입력해주세요</span>')// 중복된 이메일이 없는 경우
-				  $('#emailmsg').html('<span style="color:green; font-size:8px">사용가능한 이메일 입니다.</span>')
+	      $('#warning').html('<span style="color:blue; font-size:8px">입력사항들을 모두 입력해주세요</span>')
 	      return; // 입력값이 없을 경우 함수를 종료하고 이후 코드를 실행하지 않음
 	   }
 
