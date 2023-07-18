@@ -179,7 +179,7 @@ $(function(){
      <form method="post" action="../member/join_ok.do" name="joinFrm" id="joinFrm">
       <table class="table">
         <tr>
-         <th style="text-align:right;" width=30%><sup style="color:red">*</sup>ID</th>
+         <th style="text-align:right;" width=30%>ID</th>
          <td width=70% class="inline">
           <input type=text name=id id=id size=20 class="input-sm"
            readonly>
@@ -188,7 +188,7 @@ $(function(){
         </tr>
         
         <tr>
-         <th style="text-align:right;" width=30%><sup style="color:red">*</sup>비밀번호</th>
+         <th style="text-align:right;" width=30%>비밀번호</th>
          <td width=70% class="inline">
           <input type=password name=pwd id=pwd size=20 class="input-sm">
           &nbsp;재입력&nbsp;<input type=password name=pwd1 id=pwd1 size=20 class="input-sm">
@@ -196,14 +196,14 @@ $(function(){
         </tr>
         
         <tr>
-         <th style="text-align:right;" width=30%><sup style="color:red">*</sup>이름</th>
+         <th style="text-align:right;" width=30%>이름</th>
          <td width=70% class="inline">
           <input type=text name=name id=name size=20 class="input-sm">
          </td>
         </tr>
         
         <tr>
-         <th style="text-align:right;" width=30%><sup style="color:red">*</sup>성별</th>
+         <th style="text-align:right;" width=30%>성별</th>
          <td width=70% class="inline">
           <input type="radio" name=sex value="남자" checked>남자
           <input type="radio" name=sex value="여자">여자
@@ -211,7 +211,7 @@ $(function(){
         </tr>
         
         <tr>
-         <th style="text-align:right;" width=30%><sup style="color:red">*</sup>생년월일</th>
+         <th style="text-align:right;" width=30%>생년월일</th>
          <td width=70% class="inline">
           <input type="date" name=birthday id=birth size=20>
          </td>
@@ -230,7 +230,7 @@ $(function(){
         	<td width="70%" id="emailmsg"></td>
         </tr>
         <tr>
-         <th style="text-align:right;" width=30%><sup style="color:red">*</sup>우편번호</th>
+         <th style="text-align:right;" width=30%>우편번호</th>
          <td width=70% class="inline">
           <input type=text name=post id=post size=10 class="input-sm">
           <input type=button value="우편번호검색" class="btn btn-sm btn-info"
@@ -239,7 +239,7 @@ $(function(){
         </tr>
         
         <tr>
-         <th style="text-align:right;" width=30%><sup style="color:red">*</sup>주소</th>
+         <th style="text-align:right;" width=30%>주소</th>
          <td width=70% class="inline">
           <input type=text name=addr1 id=addr1 size=55 class="input-sm"
            readonly
@@ -248,7 +248,7 @@ $(function(){
         </tr>
         
         <tr>
-         <th style="text-align:right;" width=30%><sup style="color:red">*</sup>상세주소</th>
+         <th style="text-align:right;" width=30%>상세주소</th>
          <td width=70% class="inline">
           <input type=text name=addr2 id=addr2 size=55 class="input-sm">
          </td>
@@ -275,7 +275,7 @@ $(function(){
         </tr> 
        
         <tr>
-         <th style="text-align:right;" width=30%><sup style="color:red">*</sup>소개</th>
+         <th style="text-align:right;" width=30%>소개</th>
          <td width=70% class="inline">
           <textarea rows="10" cols="55" name=content></textarea>
          </td>
