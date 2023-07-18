@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="../food/style.css">
 <style type="text/css">
 .page{
 	margin: 30px 0px 30px 0px;
@@ -22,23 +25,18 @@
 	color: black;
 	margin: 4px;
 }
-.foodtype{
-	width: 30px;
-	height: 30px;
-}
-.sticky{
-  	position: fixed;
-  	height: 0px;
-}
-.sticky ul li{
-	line-height: 45px;
-	border: 0.5px solid;
-	padding-left: 13px;
-	width: 200px;
-}
 .container1{
 	width: 1000px;
 	margin: 0px auto;
+}
+#side-nav a:hover{
+	color: black;
+}
+.foodImage{
+	width: 30px;
+	height: 30px;
+	margin-top: 10px;
+	margin-left: 10px;
 }
 </style>
 </head>
@@ -53,53 +51,62 @@
     </div>
   </div>
 </div> 
-  <div class="container1">
+  <div class="container container1">
 
     <div class="row">
       <div class="col-sm-3">
-        <div class="sticky">
-          <ul>
-            <li style="background-color: orange;color: white">Category</li>
-            <li>
-              <a href="../food/food_list.do?mcno=1">
-                <img src="image/한식.png" class="foodtype"><span style="color: gray;font-size: 16px;">한식</span>
-              </a>
-            </li>
-            <li>
-              <a href="../food/food_list.do?mcno=11">
-                <img src="image/양식.png" class="foodtype"><span style="color: gray;font-size: 16px;">양식</span>
-              </a>
-            </li>
-            <li>
-              <a href="../food/food_list.do?mcno=21">
-                <img src="image/디저트.png" class="foodtype"><span style="color: gray;font-size: 16px;">디저트</span>
-              </a>
-            </li>
-            <li>
-              <a href="../food/food_list.do?mcno=31">
-                <img src="image/카페.png" class="foodtype"><span style="color: gray;font-size: 16px;">카페</span>
-              </a>
-            </li>
-            <li>
-              <a href="../food/food_list.do?mcno=41">
-                <img src="image/치킨1.png" class="foodtype"><span style="color: gray;font-size: 16px;">치킨</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+
+			<nav id="side-nav">
+		    <span id=logo>Category</span>
+		     <ul>
+		      <li class="selected">
+		        <img src="image/한식.png" class="foodImage">
+		        <a href="../food/food_list.do?mcno=1">
+		          <span>한식</span></a>
+		        </li>
+		      </ul>
+		      <ul>
+		      <li class="selected">
+		      <img src="image/양식.png" class="foodImage">
+		          <a href="../food/food_list.do?mcno=11">
+		          <span>양식</span></a>
+		       </li>
+		      </ul>
+		      <ul>
+		      <li class="selected">
+		        <img src="image/디저트.png" class="foodImage">
+		         <a href="../food/food_list.do?mcno=21">
+		          <span>디저트</span></a>
+		      </li>
+		      </ul>
+		      <ul>
+		      <li class="selected">
+		        <img src="image/카페.png" class="foodImage">
+		         <a href="../food/food_list.do?mcno=31">
+		          <span>카페</span></a>
+		      </li>
+		      </ul>
+		      <ul>
+		      <li class="selected">
+		        <img src="image/치킨.png" class="foodImage">
+		         <a href="../food/food_list.do?mcno=41">
+		          <span>치킨</span></a>
+		      </li>
+		      </ul>
+		  </nav>
+			
       </div>
       <div class="col-sm-9">
+        <div><h4>총 1000개</h4></div>
         <div class="row">
         <c:forEach var="fvo" items="${flist }">
           <div class="col-md-6" style="padding: 15px;">
 	        <a href="../food/food_detail_before.do?fino=${fvo.fino }">
 			  <img src="${fvo.poster }" style="height: 300px; border-radius: 12px;margin-bottom: 10px;border: 1px solid #cfd8e7">
 			</a>
-			<h5>
-			  <a href="../food/food_detail_before.do?fino=${fvo.fino }"><span style="color: black;">${fvo.name }</span></a>
-			  <span style="color: orange">${fvo.score }</span>
-			</h5>
-			<h6>${fvo.address }</h6>
+			  <a href="../food/food_detail_before.do?fino=${fvo.fino }"><span style="color: black;font-size: 16pt;">${fvo.name }</span></a>
+			  <span style="color: orange;font-size: 14pt">${fvo.score }</span>
+			<p style="font-size: 12pt;">${fvo.address }</p>
 			<i class="fa fa-eye" style="border: 2px;color:gray;"></i>
 			  &nbsp;<fmt:formatNumber value="${fvo.hit }" pattern="###,###"/>
 			<i class="fa fa-gratipay" style="color: #f07070"></i>&nbsp;${fvo.like_count} 
