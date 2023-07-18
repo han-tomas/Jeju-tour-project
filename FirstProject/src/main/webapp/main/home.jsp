@@ -75,7 +75,7 @@
 								Food </a></li>
 						<li><a href="../travel/course_list.do"><span class="icon"><img
 									src="../assets/images/search-icon-05.png" alt="Travel"></span>
-								Traveling </a></li>
+								Courses </a></li>
 						<li><a href="../activity/activity_list.do"><span
 								class="icon"><img
 									src="../assets/images/search-icon-06.png" alt="Activity"></span>
