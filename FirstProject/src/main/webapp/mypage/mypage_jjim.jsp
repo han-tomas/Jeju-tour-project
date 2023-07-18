@@ -25,9 +25,15 @@ $(function(){
 </script>
 <style type="text/css">
 
-.table th{
+.travelhead{
 	background-color: #FFB900;
-
+}
+.foodImage{
+	width: 70px;
+	height: 50px;
+}
+#foodhead{
+	background-color: #fbc6c6;
 }
 </style>
 </head>
@@ -36,7 +42,7 @@ $(function(){
 	<div style="height: 30px"></div>
 	<h4>여행코스</h4>
 	<table class="table">
-		<tr>
+		<tr class="travelhead">
 			<th class="text-center">no.</th>	
 			<th class="text-center">코스명</th>
 			<th class="text-center">찜한수</th>
@@ -61,11 +67,33 @@ $(function(){
 	
 	<table class="table">
 		<tr>
-			<td>
+			<td class="travelhead">
 				<div id="jjim_info"></div>
 			</td>
 		</tr>		
 	</table>
-
+	
+	<h4>맛집</h4>
+	<table class="table">
+		<tr style="background-color: #fbc6c6" id="foodhead">
+			<th class="text-center">No</th>	
+			<th class="text-center"></th>
+			<th class="text-center">업체</th>
+			<th class="text-center">전화번호</th>
+			<th class="text-center"></th>
+		</tr>
+		<c:forEach var="fvo" items="${flist }" varStatus="ss">
+			<tr>
+				<td class="text-center">${ss.index+1}</td>
+				<td><img src="${fvo.poster }" class="foodImage"></td>
+				<td class="text-center">${fvo.name }</td>
+				<td class="text-center">${fvo.phone }</td>
+				<td>
+			      <a href="../food/food_detail.do?fino=${fvo.fino }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+				</td>
+			</tr>
+		</c:forEach>
+	</table>
+	
 </body>
 </html>

@@ -78,6 +78,9 @@ public class FoodModel {
 			FoodLikeDAO fdao=FoodLikeDAO.newInstance();
 			int like_ok=fdao.foodLikeOk(Integer.parseInt(fino), id);
 			request.setAttribute("like_ok", like_ok);
+			FoodJjimDAO fjdao=FoodJjimDAO.newInstance();
+			int jjim_ok=fjdao.foodJjimOk(Integer.parseInt(fino), id);
+			request.setAttribute("jjim_ok", jjim_ok);
 		}
 		
 		// 저장

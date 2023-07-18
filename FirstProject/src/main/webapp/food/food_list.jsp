@@ -97,7 +97,8 @@
 			
       </div>
       <div class="col-sm-9">
-        <div><h4>총 1000개</h4></div>
+        <span style="font-size: 16pt;">총 1000개</span>
+        <!-- <div><h4>총 1000개</h4></div> -->
         <div class="row">
         <c:forEach var="fvo" items="${flist }">
           <div class="col-md-6" style="padding: 15px;">
