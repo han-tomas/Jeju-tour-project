@@ -19,7 +19,6 @@
 }
 
 .buyBox {
-	position: fixed;
 	width: 400px;
 }
 
@@ -311,7 +310,7 @@ $(function(){
 											style="height: 50px;" disabled="disabled" id="buyBtn">
 											<h5>
 												<strong> <fmt:formatNumber
-														value="${vo.price*people }" pattern="#,###" />원
+														value="${vo.price*people }" pattern="#,###" />원 결제하기
 												</strong>
 											</h5>
 										</button>
