@@ -29,6 +29,7 @@ public class TravelModel {
 		TravelDAO dao= TravelDAO.newInstance();
 		String lno = request.getParameter("lno");
 		List<TravelVO> list = new ArrayList<TravelVO>();
+		
 		if(lno!=null)
 		{
 			list = dao.travelCategoryFindData(fd, curpage, Integer.parseInt(lno));
