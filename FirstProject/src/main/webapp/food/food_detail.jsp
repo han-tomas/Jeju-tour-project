@@ -25,6 +25,9 @@
 .table1 th{
 	font-size: 16px;
 }
+.row1 a{
+	color: black;
+}
 </style>
 <script type="text/javascript">
 function goBackList(){
@@ -77,11 +80,19 @@ function goBackList(){
 	   <c:if test="${sessionScope.id!=null }">
 	   <c:if test="${like_ok==0 }">
 	     <a href="../foodLike/food_like_insert.do?fino=${ vo.fino }">
-	     <i class="fa fa-heart" style="color: gray"></i></a>&nbsp;${vo.like_count}
+	     <i class="fa fa-heart" style="color: gray"></i></a>&nbsp;${vo.like_count}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   </c:if>
 	   <c:if test="${like_ok!=0 }">
 	     <a href="../foodLike/food_like_cancle.do?fino=${ vo.fino }">
-	     <i class="fa fa-heart" style="color: #f07070"></i></a>&nbsp;${vo.like_count}
+	     <i class="fa fa-heart" style="color: #f07070"></i></a>&nbsp;${vo.like_count}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   </c:if>
+	   <c:if test="${jjim_ok==0 }">
+	      <i class="fa fa-shopping-cart fa-lg" style="color: gray;"></i>
+	     <a href="../foodjjim/food_jjim_insert.do?fino=${vo.fino }">&nbsp;찜하기</a>
+	   </c:if>
+	   <c:if test="${jjim_ok!=0 }">
+	     <i class="fa fa-shopping-cart fa-lg" style="color: #ffd35c;"></i>
+	     <a href="../foodjjim/food_jjim_cancle.do?fino=${vo.fino }">&nbsp;찜했어</a>
 	   </c:if>
 	   </c:if>
 	   

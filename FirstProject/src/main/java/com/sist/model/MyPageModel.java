@@ -17,6 +17,7 @@ public class MyPageModel {
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
 	}
+	
 	@RequestMapping("mypage/mypage_jjim_list.do")
 	public String jjim_list(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -24,11 +25,17 @@ public class MyPageModel {
 		String id = (String)session.getAttribute("id");
 		CourseJJimRecommendDAO dao = CourseJJimRecommendDAO.newInstance();
 		List<CourseJJimVO> list  = dao.courseJJimListData(id);
+		
+		FoodJjimDAO fdao=FoodJjimDAO.newInstance();
+		List<FoodJjimVO> flist=fdao.foodjjimListData(id);
+		
+		request.setAttribute("flist", flist);
 		request.setAttribute("list", list);
 		request.setAttribute("mypage_jsp", "../mypage/mypage_jjim.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
 	}
+	
 	@RequestMapping("mypage/mypage_reserve_list.do")
 	public String reserve_list(HttpServletRequest request, HttpServletResponse response)
 	{
