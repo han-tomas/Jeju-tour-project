@@ -17,7 +17,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  background-image: url(../assets/images/jeju-join.jpg);
+  background-image: url(../assets/images/idpwdfind.jpg);
   padding: 200px 0px 100px 0px;
   position: relative;
   overflow: hidden;
@@ -35,6 +35,9 @@
 	width: 200px; 
 	font-size: 15pt;
 	white-space: nowrap;
+}
+th{
+	text-align: right;
 }
 </style>
 <script type="text/javascript">
@@ -134,13 +137,13 @@ $( function() {
     <div id="home" class="container tab-pane active"><br>
       	<table class="table">
 				<tr class="inline">
-					<td width=30% style="text-align: right;font-size: 15pt">
+					<th width=30% style="text-align: right;font-size: 15pt">
 						이메일
-					</td>
+					</th>
 					<td width=70%>	
 						<input type=text id="email" class="input-sm" style="height: 40px">
 						<input type=button value="검색"
-							class="btn btn-outline-danger" id="emailBtn">
+							class="btn btn-outline-secondary" id="emailBtn">
 					</td>
 				</tr>
 				<tr>
@@ -154,13 +157,13 @@ $( function() {
     <div id="menu1" class="container tab-pane fade"><br>
 		<table class="table">
 				<tr class="inline">
-					<td width=30%  style="text-align: right;font-size: 15pt">
+					<th width=30%  style="text-align: right;font-size: 15pt">
 						전화번호
-					</td>
+					</th>
 					<td width=70%>	
 						<input type=text id="tel" class="input-sm" style="height: 40px" value="010-">
 						<input type=button value="검색"
-							class="btn btn-outline-danger" id="telBtn">
+							class="btn btn-outline-secondary" id="telBtn">
 					</td>
 				</tr>
 				<tr>

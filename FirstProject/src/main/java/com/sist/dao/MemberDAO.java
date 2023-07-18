@@ -258,7 +258,95 @@ public class MemberDAO {
 		 return result;
 	 }
 	// 비밀번호 찾기
-	
+	public String memberPasswordFind(String name,String email)
+   {
+	   String result="";
+	   try
+	   {
+		   conn=db.getConnection();
+		   String sql="SELECT COUNT(*) FROM jeju_member "
+		   		+ "WHERE name=? AND email=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, name);
+		   ps.setString(2, email);
+		   ResultSet rs = ps.executeQuery();
+		   rs.next();
+		   int count =rs.getInt(1);
+		   rs.close();
+		   if(count ==0)
+		   {
+			   result="NO";
+		   }
+		   else
+		   {
+			   sql="SELECT RPAD(SUBSTR(pwd,1,1),LENGTH(pwd),'*') "
+			   		+ "FROM jeju_member "
+			   		+ "WHERE name=? AND email=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setString(1, name);
+			   ps.setString(2, email);
+			   rs=ps.executeQuery();
+			   rs.next();
+			   result=rs.getString(1);
+			   rs.close();
+		   }
+			   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+		  
+	   }
+	   finally
+	   {
+		   db.disConnection(conn, ps);
+	   }
+	   return result;
+   }
+	public String memberPasswordPhoneFind(String name,String phone)
+	{
+		String result="";
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT COUNT(*) FROM jeju_member "
+					+ "WHERE name=? AND phone=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, phone);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int count =rs.getInt(1);
+			rs.close();
+			if(count ==0)
+			{
+				result="NO";
+			}
+			else
+			{
+				sql="SELECT RPAD(SUBSTR(pwd,1,1),LENGTH(pwd),'*') "
+						+ "FROM jeju_member "
+						+ "WHERE name=? AND phone=?";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1, name);
+				ps.setString(2, phone);
+				rs=ps.executeQuery();
+				rs.next();
+				result=rs.getString(1);
+				rs.close();
+			}
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+			
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return result;
+	}
+
 	// 비밀번호 변경
 	
 	// 로그인
@@ -343,4 +431,5 @@ public class MemberDAO {
 		
 		return vo;
 	}
+	
 }

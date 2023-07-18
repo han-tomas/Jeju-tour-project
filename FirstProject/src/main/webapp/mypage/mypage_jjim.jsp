@@ -23,6 +23,13 @@ $(function(){
 	})
 })
 </script>
+<style type="text/css">
+
+.table th{
+	background-color: #FFB900;
+
+}
+</style>
 </head>
 <body>
 	<h2>${sessionScope.name }님의 찜 목록</h2>
@@ -38,7 +45,7 @@ $(function(){
 		</tr>
 		<c:forEach var="vo" items="${list }" varStatus="s">
 			<tr>
-				<th class="text-center">${s.index+1}</th>
+				<td class="text-center">${s.index+1}</td>
 				<td class="text-center">${vo.title }</td>
 				<td class="text-center">${vo.jjim }</td>
 				<td class="text-center">${vo.recommend }</td>

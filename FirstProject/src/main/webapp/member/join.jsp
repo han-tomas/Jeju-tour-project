@@ -33,6 +33,9 @@
   margin-bottom: 45px;
   margin: 0px auto;
 }
+.table td,.table th{
+	border: none;
+}
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery.js"></script>
@@ -200,13 +203,14 @@ $(function(){
         <tr>
 	     <th width=20%></th>
          <td width=80% >
-         	<div style="text-align:right;">
+         	<div style="text-align:right;" class="warning">
          	<sub style="color:red;">*은 필수 입력 사항입니다.</sub>
          	</div>
          </td>
         </tr>
         <tr>
-          <td colspan="2" class="text-center">
+        	<th width=20%></th>
+          <td width=80% class="text-center">
            <input type="button" value="회원가입" 
              class="btn btn-success btn-sm" id="joinBtn">
            <input type=button value="취소"

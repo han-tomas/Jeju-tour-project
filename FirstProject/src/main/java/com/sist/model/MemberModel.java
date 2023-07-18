@@ -141,11 +141,9 @@ public class MemberModel {
 	public void memberIdFindOk(HttpServletRequest request,HttpServletResponse response)
 	{
 		String email=request.getParameter("email");
-		String phone=request.getParameter("tel");
 		//DAO 연동
 		MemberDAO dao = MemberDAO.newInstance();
 		String res = dao.memeberId_EmailFind(email);
-		String res1 = dao.memeberId_PhoneFind(phone);
 		try
 		{
 			// Ajax에 값을 전송 => NO, s***
@@ -163,6 +161,50 @@ public class MemberModel {
 		try
 		{
 			// Ajax에 값을 전송 => NO, s***
+			PrintWriter out = response.getWriter();
+			out.println(res);
+		}catch(Exception ex) {}
+	}
+	@RequestMapping("member/passwordfind.do")
+	public String memberPasswordFind(HttpServletRequest request,HttpServletResponse response)
+	{
+		request.setAttribute("main_jsp", "../member/passwordfind.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("member/passwordfindOk.do")
+	public void memeberPasswordOk(HttpServletRequest request,HttpServletResponse response)
+	{
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex) {}
+		String name= request.getParameter("name");
+		String email= request.getParameter("email");
+		//DAO 연동
+		MemberDAO dao=MemberDAO.newInstance();
+		String res = dao.memberPasswordFind(name, email);
+		try
+		{
+			//Spring => @RestController
+			PrintWriter out = response.getWriter();
+			out.println(res);
+		}catch(Exception ex) {}
+	}
+	@RequestMapping("member/passwordfindOk2.do")
+	public void memeberPasswordOk2(HttpServletRequest request,HttpServletResponse response)
+	{
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex) {}
+		String name= request.getParameter("name2");
+		String phone= request.getParameter("tel");
+		//DAO 연동
+		MemberDAO dao=MemberDAO.newInstance();
+		String res = dao.memberPasswordPhoneFind(name, phone);
+		try
+		{
+			//Spring => @RestController
 			PrintWriter out = response.getWriter();
 			out.println(res);
 		}catch(Exception ex) {}

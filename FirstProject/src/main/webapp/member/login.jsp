@@ -96,6 +96,10 @@ $(function(){
 		parent.location.href="../member/idfind.do";
 		Shadowbox.close();
 	})
+	$('#pwdfind').click(function(){
+		parent.location.href="../member/passwordfind.do";
+		Shadowbox.close();
+	})
 })
 </script>
 </head>
@@ -125,8 +129,8 @@ $(function(){
       		<tr>
       			<td colspan="3" class="text-center">
       				<button type="submit" id="joinBtn" class="btn btn-outline-success">회원가입</button>
-                    <a href="#" class="btn btn-outline-danger" id="idfind">아이디 찾기</a>
-                    <button type="submit" id="#" class="btn btn-outline-info">비밀번호 찾기</button>
+                    <span class="btn btn-outline-danger" id="idfind">아이디 찾기</span>
+                    <span class="btn btn-outline-primary" id="pwdfind">비밀번호 찾기</span>
       			</td>
       		</tr>
       	</table>
