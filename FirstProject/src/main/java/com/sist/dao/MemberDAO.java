@@ -55,6 +55,7 @@ public class MemberDAO {
 			rs.next();
 			count = rs.getInt(1);
 			rs.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

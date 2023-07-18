@@ -84,17 +84,25 @@ $(function(){
     		return;
     	}
     	
-    	let tel=$('#tel').val();
-    	if(tel.trim()==="")
+    	let tel1=$('#tel1').val()
+    	let tel2=$('#tel2').val()
+    	let tel3=$('#tel3').val()
+    	let phone=tel1.trim()+tel2.trim()+tel3.trim()
+    	if(tel2.trim()=="")
     	{
-    		$('#tel').focus();
+    		$('#tel2').focus();
     		return;
     	}
+    	else if(tel3.trim()=="")
+    	{
+    		$('#tel3').focus();
+    		return;
+    	}	
     	//axios.get(), axios.post() => vue,react => 서버 연결, 결과값 받기
     	$.ajax({
     		type:'post',
     		url:'../member/passwordfindOk2.do',
-    		data:{"name2":name, "tel":tel},
+    		data:{"name2":name, "tel":phone},
     		success:function(result)
     		{
     			let res=result.trim();
@@ -142,14 +150,14 @@ $(function(){
     <div id="home" class="container tab-pane active"><br>
       	<table class="table">
 				<tr>
-					<th width=20%>이름</th>
-					<td width=80%>
+					<th width=30%>이름</th>
+					<td width=70%>
 						<input type=text id="name" class="input-sm">
 					</td>
 				</tr>
 				<tr>
-					<th width=20%>이메일</th>
-					<td width=80%>
+					<th width=30%>이메일</th>
+					<td width=70%>
 						<input type=text id="email" class="input-sm">
 					</td>
 				</tr>
@@ -170,15 +178,22 @@ $(function(){
     <div id="menu1" class="container tab-pane fade"><br>
 		<table class="table">
 				<tr>
-					<th width=20%>이름</th>
-					<td width=80%>
+					<th width=30%>이름</th>
+					<td width=70%>
 						<input type=text id="name2" class="input-sm">
 					</td>
 				</tr>
 				<tr>
-					<th width=20%>전화번호</th>
-					<td width=80%>
-						<input type=text id="tel" class="input-sm" value="010-">
+					<th width=30%>전화번호</th>
+					<td width=70%>
+						<select name=phone1 class="input-sm" id="tel1">
+				           <option>010</option>
+				           <option>011</option>
+				           <option>016</option>
+				           <option>070</option>
+				        </select>
+				          -<input type=text size=4 class="input-sm" id="tel2">
+				          -<input type=text size=4 class="input-sm" id="tel3">
 					</td>						
 				</tr>
 				<tr>

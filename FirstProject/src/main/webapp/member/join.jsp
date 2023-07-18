@@ -37,9 +37,9 @@
 	border: none;
 }
 </style>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script> -->
 <script type="text/javascript">
 Shadowbox.init({
    players:['iframe']
@@ -64,6 +64,68 @@ $(function(){
     	  title:'우편번호 검색'
       })
    })
+   $('#emailBtn').click(function(){
+	  let email=$('#email').val();
+	  if(email.trim()=="")
+	  {
+		  $('#email').focus();
+		  return;
+	  }
+	  $.ajax({
+		  type:'post',
+		  url:'../member/emailfind.do',
+		  data:{"email":email},
+		  success:function(result)
+		  {
+			  let count =Number(result.trim());
+			  if(count==0)
+			  {
+				// 중복된 이메일이 없는 경우
+				  $('#emailmsg').html('<span style="color:green; font-size:8px">사용가능한 이메일 입니다.</span>')
+			  }
+			  else
+			  {	  
+				  // 중복된 이메일이 있는 경우
+				  $('#emailmsg').html('<span style="color:red; font-size:8px">존재하는 이메일 입니다.</span>')
+			  }
+		  }
+	  })
+	  
+   })
+   $('#phoneBtn').click(function(){
+	    let tel1=$('#tel1').val()
+	   	let tel2=$('#tel2').val()
+	   	let tel3=$('#tel3').val()
+	   	let phone=tel1.trim()+tel2.trim()+tel3.trim()
+    	if(tel2.trim()=="")
+    	{
+    		$('#tel2').focus();
+    		return;
+    	}
+    	else if(tel3.trim()=="")
+    	{
+    		$('#tel3').focus();
+    		return;
+    	}
+	    $.ajax({
+	    	type:'post',
+	    	url:'../member/phonefind.do',
+	    	data:{"phone":phone},
+	    	success:function(result)
+	    	{
+	    		let count =Number(result.trim());
+	    		if(count==0)
+	    		{
+	    			// 중복된 전화번호가 없는 경우
+					$('#phonemsg').html('<span style="color:green; font-size:8px">사용가능한 전화번호 입니다.</span>')
+	    		}
+	    		else
+	    		{
+					$('#phonemsg').html('<span style="color:red; font-size:8px">사용중인 전화번호 입니다.</span>')    			
+	    		}	
+	    	}
+	    })
+   })
    
      $('#joinBtn').click(function(){
 	   // 필수 입력 필드 배열
@@ -81,7 +143,8 @@ $(function(){
 	   }
 	   
 	   if (!isValid) {
-	      alert("필수 입력 내용을 모두 입력해주세요!");
+	      $('#warning').html('<span style="color:blue; font-size:8px">입력사항들을 모두 입력해주세요</span>')// 중복된 이메일이 없는 경우
+				  $('#emailmsg').html('<span style="color:green; font-size:8px">사용가능한 이메일 입니다.</span>')
 	      return; // 입력값이 없을 경우 함수를 종료하고 이후 코드를 실행하지 않음
 	   }
 
@@ -156,7 +219,10 @@ $(function(){
             class="btn btn-sm btn-danger" id="emailBtn">
          </td>
         </tr>
-        
+        <tr>
+        	<th width="30%"></th>
+        	<td width="70%" id="emailmsg"></td>
+        </tr>
         <tr>
          <th style="text-align:right;" width=30%><sup style="color:red">*</sup>우편번호</th>
          <td width=70% class="inline">
@@ -185,13 +251,21 @@ $(function(){
         <tr>
          <th style="text-align:right;" width=30%>전화</th>
          <td width=70% class="inline">
-          <select name=phone1 class="input-sm">
+          <select name=phone1 id="tel1" class="input-sm">
            <option>010</option>
+           <option>011</option>
+           <option>016</option>
+           <option>070</option>
           </select>
-          <input type=text name=phone id=phone size=12 class="input-sm">
+          -<input type=text name=phone2 id="tel2" size=4 class="input-sm">
+          -<input type=text name=phone3 id="tel3" size=4 class="input-sm">
           <input type=button value="전화체크" 
             class="btn btn-sm btn-warning" id="phoneBtn">
          </td>
+        </tr>
+        <tr>
+        	<th width="30%"></th>
+        	<td width="70%" id="phonemsg"></td>
         </tr> 
        
         <tr>
@@ -202,10 +276,8 @@ $(function(){
         </tr> 
         <tr>
 	     <th width=20%></th>
-         <td width=80% >
-         	<div style="text-align:right;" class="warning">
-         	<sub style="color:red;">*은 필수 입력 사항입니다.</sub>
-         	</div>
+         <td width=80% id="warning" style="text-align: right">
+         	
          </td>
         </tr>
         <tr>

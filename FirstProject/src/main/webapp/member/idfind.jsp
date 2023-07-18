@@ -76,12 +76,20 @@ $( function() {
     		
     })
     $('#telBtn').on('click',function(){
-    	let phone=$('#tel').val();
-    	if(phone.trim()=="")
+    	let tel1=$('#tel1').val()
+    	let tel2=$('#tel2').val()
+    	let tel3=$('#tel3').val()
+    	let phone=tel1.trim()+tel2.trim()+tel3.trim()
+    	if(tel2.trim()=="")
     	{
-    		$('#tel').focus();
+    		$('#tel2').focus();
     		return;
     	}
+    	else if(tel3.trim()=="")
+    	{
+    		$('#tel3').focus();
+    		return;
+    	}	
     	$.ajax({
     		type:'post',
     		url:'../member/idfind_ok2.do',
@@ -160,10 +168,17 @@ $( function() {
 					<th width=30%  style="text-align: right;font-size: 15pt">
 						전화번호
 					</th>
-					<td width=70%>	
-						<input type=text id="tel" class="input-sm" style="height: 40px" value="010-">
-						<input type=button value="검색"
-							class="btn btn-outline-secondary" id="telBtn">
+					<td width=70%>
+						<select name=phone1 class="input-sm" id="tel1">
+				           <option>010</option>
+				           <option>011</option>
+				           <option>016</option>
+				           <option>070</option>
+				        </select>
+				          -<input type=text size=4 class="input-sm" id="tel2">
+				          -<input type=text size=4 class="input-sm" id="tel3">
+				        <input type=button value="검색" 
+				            class="btn btn-sm btn-secondary" id="telBtn">
 					</td>
 				</tr>
 				<tr>

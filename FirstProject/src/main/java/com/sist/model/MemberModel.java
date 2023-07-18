@@ -92,6 +92,42 @@ public class MemberModel {
 		
 		return "../member/postfind_result.jsp";
 	}
+	@RequestMapping("member/emailfind.do")
+	public void memberEmailCheck(HttpServletRequest request, HttpServletResponse response)
+	{
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex) {}
+		String email= request.getParameter("email");
+		//DAO 연결
+		MemberDAO dao = MemberDAO.newInstance();
+		int count =dao.memberEmailCheck(email);
+		try
+		{
+			// Ajax에 값을 전송 => NO, s***
+			PrintWriter out = response.getWriter();
+			out.println(count);
+		}catch(Exception ex) {}
+	}
+	@RequestMapping("member/phonefind.do")
+	public void memberPhoneCheck(HttpServletRequest request, HttpServletResponse response)
+	{
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex) {}
+		String phone= request.getParameter("phone");
+		//DAO 연결
+		MemberDAO dao = MemberDAO.newInstance();
+		int count =dao.memberPhoneCheck(phone);
+		try
+		{
+			// Ajax에 값을 전송 => NO, s***
+			PrintWriter out = response.getWriter();
+			out.println(count);
+		}catch(Exception ex) {}
+	}
 	@RequestMapping("member/join_ok.do")
 	public String memberJoinOk(HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -109,7 +145,8 @@ public class MemberModel {
 		String addr1 = request.getParameter("addr1");
 		String addr2 = request.getParameter("addr2");
 		String phone1 = request.getParameter("phone1");
-		String phone = request.getParameter("phone");
+		String phone2 = request.getParameter("phone2");
+		String phone3 = request.getParameter("phone3");
 		String content = request.getParameter("content");
 		
 		MemberVO vo = new MemberVO();
@@ -122,7 +159,7 @@ public class MemberModel {
 		vo.setPost(post);
 		vo.setAddr1(addr1);
 		vo.setAddr2(addr2);
-		vo.setPhone(phone1+"-"+phone);
+		vo.setPhone(phone1+phone2+phone3);
 		vo.setContent(content);
 		
 		MemberDAO dao = MemberDAO.newInstance();
