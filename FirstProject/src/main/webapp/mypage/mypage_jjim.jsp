@@ -44,6 +44,9 @@ $(function(){
 				<td class="text-center">${vo.recommend }</td>
 				<td>
 					<span class="btn btn-sm btn-warning cdetail" data-cno="${vo.cno}">상세보기</span>
+					<a href="../jjim/jjim_cancel.do?cno=${vo.cno }" 
+					class="btn btn-sm btn-danger" data-cno="${vo.cno}">
+					삭제</a>
 				</td>
 			</tr>
 		</c:forEach>

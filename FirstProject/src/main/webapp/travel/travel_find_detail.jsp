@@ -62,6 +62,12 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
+.row2 table{
+	background-color: white;
+}
+.row2 td,.row2 th{
+	border:none;
+}
 .map_wrap{
 	height: 380px;
 }
@@ -324,7 +330,7 @@
 						}
 				</script>
 	    	</div>
-	    	<div class="row row1">
+	    	<div class="row row2">
 	    		<table class="table">
 			    	<tr>
 			    		<td class="text-center inline" style="color: white;background-color: #FFCD28;"><h2 style="width: 100%">${vo.title }</h2></td>

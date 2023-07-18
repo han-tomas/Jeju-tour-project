@@ -27,14 +27,6 @@ public class CourseJJimRecommendModel {
 		// return "redirect:"
 		return "redirect:../travel/course_detail.do?cno="+cno;
 	}
-	@RequestMapping("jjim/jjim_cancel.do")
-	public String jjim_cancel(HttpServletRequest request, HttpServletResponse response)
-	{
-		String no=request.getParameter("no");
-		CourseJJimRecommendDAO dao = CourseJJimRecommendDAO.newInstance();
-		dao.courseJJimCancel(Integer.parseInt(no));
-		return "redirect:../mypage/mypage_jjim_list.do"; // 마이페이지 만들예정
-	}
 	@RequestMapping("recommend/recommend_insert.do")
 	public String like_insert(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -46,6 +38,30 @@ public class CourseJJimRecommendModel {
 		vo.setId(id);
 		CourseJJimRecommendDAO dao = CourseJJimRecommendDAO.newInstance();
 		dao.courseRecommendInsert(vo);
+		return "redirect:../travel/course_detail.do?cno="+cno;
+	}
+	@RequestMapping("jjim/jjim_cancel.do")
+	public String jjim_cancel(HttpServletRequest request, HttpServletResponse response)
+	{
+		String cno=request.getParameter("cno");
+		CourseJJimRecommendDAO dao = CourseJJimRecommendDAO.newInstance();
+		dao.courseJJimCancel(Integer.parseInt(cno));
+		return "redirect:../mypage/mypage_jjim_list.do";
+	}
+	@RequestMapping("jjim/jjim_cancel2.do")
+	public String jjim_cancel2(HttpServletRequest request, HttpServletResponse response)
+	{
+		String cno=request.getParameter("cno");
+		CourseJJimRecommendDAO dao = CourseJJimRecommendDAO.newInstance();
+		dao.courseJJimCancel(Integer.parseInt(cno));
+		return "redirect:../travel/course_detail.do?cno="+cno;
+	}
+	@RequestMapping("recommend/recommend_cancel.do")
+	public String recommend_cancel(HttpServletRequest request, HttpServletResponse response)
+	{
+		String cno=request.getParameter("cno");
+		CourseJJimRecommendDAO dao = CourseJJimRecommendDAO.newInstance();
+		dao.courseRecommendCancel(Integer.parseInt(cno));
 		return "redirect:../travel/course_detail.do?cno="+cno;
 	}
 }

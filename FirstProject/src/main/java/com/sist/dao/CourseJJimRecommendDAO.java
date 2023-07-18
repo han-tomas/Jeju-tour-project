@@ -103,15 +103,15 @@ public class CourseJJimRecommendDAO {
 		return list;
 	}
 	// JJim 취소
-	public void courseJJimCancel(int no)
+	public void courseJJimCancel(int cno)
 	{
 		try
 		{
 			conn=db.getConnection();
 			String sql="DELETE FROM course_jjim "
-					+ "WHERE no=?";
+					+ "WHERE cno=?";
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, no);
+			ps.setInt(1, cno);
 			ps.executeUpdate();
 		}catch(Exception ex)
 		{
@@ -195,5 +195,25 @@ public class CourseJJimRecommendDAO {
 			db.disConnection(conn, ps);
 		}
 		return count;
+	}
+	// 추천 취소
+	public void courseRecommendCancel(int cno)
+	{
+		try
+		{
+			conn=db.getConnection();
+			String sql="DELETE FROM course_recommend "
+					+ "WHERE cno=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, cno);
+			ps.executeUpdate();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
 	}
 }

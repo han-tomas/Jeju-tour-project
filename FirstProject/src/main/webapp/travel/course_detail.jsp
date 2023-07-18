@@ -68,13 +68,13 @@ function detail(coursename){
 	    			<a href="../jjim/jjim_insert.do?cno=${cvo.cno }" class="btn btn-xs btn-outline-danger"><i class="fa fa-heart fa-sm">&nbsp;찜하기</i></a>			
     			</c:if>
     			<c:if test="${jjim_count!=0 }">
-	    			<span class="btn btn-xs btn-danger"><i class="fa fa-heart fa-sm" style="color: white; font-style: bold">&nbsp;찜하기</i></span>			
+	    			<a href="../jjim/jjim_cancel2.do?cno=${cvo.cno }" class="btn btn-xs btn-danger"><i class="fa fa-heart fa-sm" style="color: white; font-style: bold">&nbsp;찜하기</i></a>			
     			</c:if>
     			<c:if test="${recommend_count==0 }">
 	  				<a href="../recommend/recommend_insert.do?cno=${cvo.cno }" class="btn btn-xs btn-outline-primary"><i class="fa fa-thumbs-o-up fa-sm">&nbsp;추천</i></a>
 	  			</c:if>
 	  			<c:if test="${recommend_count!=0 }">
-	  				<span class="btn btn-xs btn-primary"><i class="fa fa-thumbs-o-up fa-sm" style="color: white; font-style: bold">&nbsp;추천</i></span>
+	  				<a href="../recommend/recommend_cancel.do?cno=${cvo.cno }" class="btn btn-xs btn-primary"><i class="fa fa-thumbs-o-up fa-sm" style="color: white; font-style: bold">&nbsp;추천</i></a>
 	  			</c:if>	
     		</c:if>
     		<a href ="../travel/course_list.do" class="btn btn-xs btn-outline-secondary" style="margin-right: 10px" ><i class="fa fa-list fa-sm" style="color: white; font-style: bold;">&nbsp;목록</i></a>
