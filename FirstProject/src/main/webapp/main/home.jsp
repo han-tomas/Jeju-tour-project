@@ -70,23 +70,23 @@
 				</div>
 				<div class="col-lg-10 offset-lg-1">
 					<ul class="categories">
-						<li><a href="../travel/travel_find.do"><span class="icon"><img
-									src="../assets/images/search-icon-05.png" alt="Travel"></span>
-								Traveling </a></li>
-						<li><a href="../hotel/hotel_list.do"><span class="icon"><img
-									src="../assets/images/search-icon-01.png" alt="Hotel"></span>
-								Hotel </a></li>
 						<li><a href="../food/food_list.do"><span class="icon"><img
 									src="../assets/images/search-icon-02.png" alt="Food"></span>
 								Food </a></li>
-						<li><a href="../rentcar/rentcar_main.do"><span
-								class="icon"><img
-									src="../assets/images/search-icon-03.png" alt="RentalCar"></span>
-								Cars </a></li>
+						<li><a href="../travel/course_list.do"><span class="icon"><img
+									src="../assets/images/search-icon-05.png" alt="Travel"></span>
+								Traveling </a></li>
 						<li><a href="../activity/activity_list.do"><span
 								class="icon"><img
 									src="../assets/images/search-icon-06.png" alt="Activity"></span>
 								Activity </a></li>
+						<li><a href="../hotel/hotel_list.do"><span class="icon"><img
+									src="../assets/images/search-icon-01.png" alt="Hotel"></span>
+								Hotel </a></li>
+						<li><a href="../rentcar/rentcar_main.do"><span
+								class="icon"><img
+									src="../assets/images/search-icon-03.png" alt="RentalCar"></span>
+								Cars </a></li>
 					</ul>
 				</div>
 			</div>
