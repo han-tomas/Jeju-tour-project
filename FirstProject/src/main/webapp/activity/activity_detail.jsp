@@ -9,58 +9,11 @@
 <title>Insert title here</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script>
-	$(function() {
-		$(window).scroll(
-				function() {
-					$("#yourDiv").css("margin-top",
-							Math.max(0, 0 - $(this).scrollTop()));
-				});
-		$("#datepicker").datepicker({
-			format : "yyyy-mm-dd", //데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
-			autoclose : true, //사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
-			startDate : '-1d',
-			calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
-			clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
-			disableTouchKeyboard : false, //모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
-			immediateUpdates : false, //사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
-			multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
-			title : "Calendar",
-			showWeekDays : true, // 위에 요일 보여주는 옵션 기본값 : true
-			todayHighlight : true, //오늘 날짜에 하이라이팅 기능 기본값 :false 
-			toggleActive : true, //이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
-			weekStart : 0, //달력 시작 요일 선택하는 것 기본값은 0인 일요일 
-			defaultDate: new Date()
-		});
-		
-	});
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-	function toggleMoreImages() {
-		var moreImagesDiv = document.getElementById("moreImages");
-		var showMoreImagesBtn = document.getElementById("showMoreImagesBtn");
-
-		if (moreImagesDiv.style.display === "none") {
-			moreImagesDiv.style.display = "block";
-			showMoreImagesBtn.textContent = "닫기";
-		} else {
-			moreImagesDiv.style.display = "none";
-			showMoreImagesBtn.textContent = "더 보기";
-		}
-	}
-
-	function noIdWish() {
-		alert('로그인이 필요합니다.');
-	}
-
-	function noIdBuy() {
-		alert('로그인이 필요합니다.');
-		return;
-	}
-	
-</script>
 <script type="text/javascript">
 	$(function() {
-		
+
 		$('.realbuy').click(
 				function() {
 					var inwon = $('#inwon').val();
@@ -68,10 +21,10 @@
 					var acino = $('#acino').val(); // 선택한 방 ID 가져오기 (버튼에 data-속성으로 저장하는 방법도 있음)
 
 					if (date === '') {
-					      alert('날짜를 선택해주세요.'); // 입력 요청 알림
-					      return; // 화면을 유지하기 위해 return 문 사용
+						alert('날짜를 선택해주세요.'); // 입력 요청 알림
+						return; // 화면을 유지하기 위해 return 문 사용
 					}
-					
+
 					// 예약 페이지로 이동하면서 선택한 값을 전달
 					location.href = '../activity/activity_reserve.do?acino='
 							+ acino + '&inwon=' + inwon + '&date=' + date;
@@ -108,7 +61,6 @@ h4 {
 }
 
 .buyBox {
-	position: fixed;
 	width: 400px;
 }
 
@@ -218,8 +170,9 @@ table td {
 
 				<div class="input-group" style="width: 360px;">
 					<span style="padding: 0px 10px 0px 0px;"><i
-						class="fa fa-person fa-2x"></i></span> <select class="form-control text-center"
-						style="margin-right: 30px;" id="inwon" name="inwon">
+						class="fa fa-person fa-2x"></i></span> <select
+						class="form-control text-center" style="margin-right: 30px;"
+						id="inwon" name="inwon">
 						<option>1</option>
 						<option>2</option>
 						<option>3</option>
@@ -232,8 +185,8 @@ table td {
 						<option>10</option>
 					</select> <i class="fa fa-calendar fa-2x" style="padding: 0px 10px 0px 2px"></i>
 					<div>
-						<input type="text" id="datepicker" class="form-control text-center" value=""
-							name="date">
+						<input type="text" id="datepicker"
+							class="form-control text-center" value="" name="date">
 					</div>
 				</div>
 				<div style="height: 20px"></div>
@@ -395,7 +348,7 @@ table td {
 												<h5>
 													<i class="fa fa-light fa-heart"></i> WishList 담기
 												</h5>
-											</button>>
+											</button>
 										</c:if>
 										<c:if test="${sessionScope.id!=null }">
 											<c:if test="${wish_count==0 }">
@@ -425,10 +378,113 @@ table td {
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<hr>
-			최근 본 목록 리스트 출력.
+		<div class="recent-listing">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="section-heading">
+							<h2>Recent Listing</h2>
+							<h6>Check Them Out</h6>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="owl-carousel owl-listing">
+							<c:forEach var="cvo" items="${cList}" varStatus="s">
+								<div class="item">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="listing-item">
+												<div class="left-image">
+													<a href="../activity/activity_detail.do?acino=${cvo.acino }"><img
+														src="${cvo.main_poster }"></a>
+												</div>
+												<div class="right-content align-self-center">
+													<a href="../activity/activity_detail.do?acino=${cvo.acino }"><h4>${cvo.title}</h4></a>
+													<span class="price"><div class="icon">
+															<img src="../assets/images/listing-icon-01.png" alt="">
+														</div> <fmt:formatNumber value="${cvo.price }" pattern="#,###" />원</span>
+													<span class="details"><em></em></span>
+													<h1>${cvo.score }</h1>
+													<span> <c:forEach var="i" begin="1" end="5">
+															<sup style="color: gold"> <c:if
+																	test="${cvo.score+1>i }">★</c:if>
+															</sup>
+														</c:forEach> <br> <sup>후기 ${vo.review_count }</sup></span>
+													<div class="main-white-button">
+														<a
+															href="../activity/activity_detail.do?acino=${cvo.acino }"><i
+															class="fa fa-eye"></i> Contact Now</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	<script>
+	$(function() {
+		/* $(window).scroll(
+				function() {
+					$("#yourDiv").css("margin-top",
+							Math.max(0, -200 - $(this).scrollTop()));
+				}); */
+
+		/* $(window).scroll(function() {
+			  var scrollHeight = $(document).height(); // 문서의 전체 높이
+			  var scrollPosition = $(window).height() + $(window).scrollTop(); // 스크롤된 위치
+			  var footerHeight = $("footer").outerHeight(); // footer의 높이
+
+			  // 스크롤이 footer까지 도달하기 전까지만 #yourDiv 이동
+			  if (scrollPosition < (scrollHeight - footerHeight)) {
+			    $("#yourDiv").css("margin-top", Math.max(0, 0 - $(this).scrollTop()));
+			  }
+			});		 */
+
+		$("#datepicker").datepicker({
+			format : "yyyy-mm-dd",
+			autoclose : true,
+			startDate : '-1d',
+			calendarWeeks : false,
+			clearBtn : false,
+			disableTouchKeyboard : false,
+			immediateUpdates : false,
+			title : "Calendar",
+			showWeekDays : true,
+			todayHighlight : true,
+			toggleActive : true,
+			weekStart : 0,
+			defaultDate : new Date()
+		});
+
+	});
+
+	function toggleMoreImages() {
+		var moreImagesDiv = document.getElementById("moreImages");
+		var showMoreImagesBtn = document.getElementById("showMoreImagesBtn");
+
+		if (moreImagesDiv.style.display === "none") {
+			moreImagesDiv.style.display = "block";
+			showMoreImagesBtn.textContent = "닫기";
+		} else {
+			moreImagesDiv.style.display = "none";
+			showMoreImagesBtn.textContent = "더 보기";
+		}
+	}
+
+	function noIdWish() {
+		alert('로그인이 필요합니다.');
+	}
+
+	function noIdBuy() {
+		alert('로그인이 필요합니다.');
+		return;
+	}
+</script>
 </body>
 </html>

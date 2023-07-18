@@ -12,7 +12,10 @@
   $(function(){
 	  $('#side-nav ul li.selected ul').hide();
 	  $('#side-nav ul li.selected span').click(function(){
-	    $(this).siblings('ul').toggle();
+		  if ($(this).parent().siblings().hasClass('selected')) {
+		      $(this).parent().siblings('.selected').children('ul').hide();
+		    }
+		  $(this).siblings('ul').toggle();
 	    // sbling은 선택한 요소의 형제요소 선택
 	    // toggle() : 선택한 요소의 가시성 전환 (On/Off)
 	    // => 선택한 요소가 보이는 상태에서 호출하면 숨겨지고, 이미 숨겨진 상태에서 호출하면 보인다
@@ -26,10 +29,7 @@
     <ul>
       <li class="selected">
           <i class="fa fa-users"></i>
-          <span>회원관리</span>
-        <ul>
-          <li><a href="#">회원목록</a></li>
-        </ul>
+          <span><a href="../adminpage/member_list.do">회원관리</a></span>
       </li>
       <li class="selected">
           <i class="fa fa-calendar"></i>

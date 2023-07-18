@@ -3,7 +3,14 @@ import java.util.*;
 public class MemberVO {
 	private String id, pwd, name, sex, birth, email, post, addr1, addr2, phone, content, admin, msg;
 	private Date regdate;
+	private String db_date;
 	
+	public String getDb_date() {
+		return db_date;
+	}
+	public void setDb_date(String db_date) {
+		this.db_date = db_date;
+	}
 	public String getMsg() {
 		return msg;
 	}

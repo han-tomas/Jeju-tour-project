@@ -13,7 +13,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
-import java.util.Locale;
 public class ActivityModel {
 	@RequestMapping("activity/activity_list.do")
     public String activity_list(HttpServletRequest request, HttpServletResponse response) {
@@ -120,6 +119,20 @@ public class ActivityModel {
 			int wish_count=wdao.activityWishCount(id, Integer.parseInt(acino));
 			request.setAttribute("wish_count", wish_count);
 		}
+		
+		// Cookie 전송
+		Cookie[] cookies=request.getCookies();
+		List<ActivityVO> cList=new ArrayList<ActivityVO>();
+		if(cookies!=null) {
+			for(int i=cookies.length-1;i>=0;i--) {
+				if(cookies[i].getName().startsWith("activity_")) {
+					String cacino=cookies[i].getValue();
+					ActivityVO cvo=dao.activityDetailData(Integer.parseInt(cacino));
+					cList.add(cvo);
+				}
+			}
+		}
+		request.setAttribute("cList", cList);
 		
 		request.setAttribute("main_jsp", "../activity/activity_detail.jsp");
 		

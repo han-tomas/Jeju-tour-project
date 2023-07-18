@@ -14,7 +14,7 @@
 <body>
 <div class="page-heading">
   <div class="container">
-    <div class="row">
+    <div class="row row1">
       <div class="col-lg-8">
         <div class="top-text header-text">
         </div>
@@ -24,10 +24,10 @@
 </div> 
 <div class="container container1">
 <div class="row">
-<div class="col-sm-3" style="height: 500px;"><!-- background-color: orange; -->
+<div class="col-sm-2" style="height: 500px;">
   <jsp:include page="../adminpage/adminpage_nav.jsp"></jsp:include>
 </div>
-<div class="col-sm-9" style="height: 500px;"><!-- background-color: yellow; -->
+<div class="col-sm-10" style="height: 500px;">
   <%--변경위치 --%>
   <jsp:include page="${adminpage_jsp }"></jsp:include>
 </div>
