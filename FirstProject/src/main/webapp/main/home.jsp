@@ -404,6 +404,53 @@
 								</div>
 							</div>
 						</c:forEach>
+						
+						<%-- food 출력 --%>
+						<c:forEach var="fvo" items="${fList}">
+							<div class="item">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="listing-item">
+											<div class="left-image">
+												<a href="../food/food_detail.do?fino=${fvo.fino }">
+												<img src="${fvo.poster }" class="recentImg" style="width: 480px;height: 400px;">
+												</a>
+											</div>
+											<div class="right-content align-self-center">
+												<a href="../food/food_detail.do?fino=${fvo.fino }">
+												  <h4>${fvo.name}</h4>		
+												</a>
+												<span class="details">
+												  <strong style="color: orange">평점&nbsp;&nbsp;${fvo.score }</strong>
+												</span><br>
+												<span>
+												  <i class="fa fa-map-marker"></i>&nbsp;&nbsp;${addr1 }
+												</span><br>
+												<span>
+												  <ul>
+									                <c:forTokens items="${fvo.menu }" delims="원" var="m">
+									                  <c:choose>
+									                    <c:when test="${m eq 'no' }">
+									                      <li style="display: block;">정보없음</li>
+									                    </c:when>
+									                    <c:otherwise>
+									                      <li style="display:block;">${m }원</li>
+									                    </c:otherwise>
+									                  </c:choose>
+									                </c:forTokens>
+									              </ul>
+												</span>
+												<div class="main-white-button">
+													<a href="../food/food_detail.do?fino=${fvo.fino }"> <i
+														class="fa fa-eye"></i> 상세보기
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
 
 					</div>
 				</div>

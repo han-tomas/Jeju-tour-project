@@ -15,10 +15,13 @@ public class MainModel {
 		ActivityDAO dao=ActivityDAO.newInstance();
 		TravelDAO tdao=TravelDAO.newInstance();
 		HotelDAO hdao=HotelDAO.newInstance();
+		FoodDAO fdao=FoodDAO.newInstance();
+		
 		Cookie[] cookies=request.getCookies();
 		List<ActivityVO> cList=new ArrayList<ActivityVO>();
 		List<TravelVO> tList=new ArrayList<>();
 		List<HotelVO> hList=new ArrayList<>();
+		List<FoodVO> fList=new ArrayList<FoodVO>();
 		
 		if(cookies!=null) {
 			for(int i=cookies.length-1;i>=0;i--) {
@@ -40,9 +43,17 @@ public class MainModel {
 					hvo.setPoster(aposter);
 					hList.add(hvo);
 				}
+				if(cookies[i].getName().startsWith("food_")) {
+					String fino=cookies[i].getValue();
+					FoodVO fvo=fdao.foodDetailData(Integer.parseInt(fino));
+					String addr=fvo.getAddress();
+					String addr1=addr.substring(0,addr.indexOf("지번"));
+					fList.add(fvo);
+					request.setAttribute("addr1", addr1);
+				}
 			}
 		}
-		
+		request.setAttribute("fList", fList);
 		request.setAttribute("hList", hList);
 		request.setAttribute("cList", cList);
 		request.setAttribute("tList", tList);
