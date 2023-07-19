@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -155,6 +156,7 @@ $(function(){
 			title : '개인정보 국외 이전 동의 (필수)'
 		})
 	})
+	
 })
 </script>
 </head>
@@ -181,26 +183,37 @@ $(function(){
 				<hr>
 				<table class="table">
 					<tr>
-						<td rowspan="2" width="20%"><img src="https://rentinjeju.com${vo.img }"
+						<td rowspan="3" width="20%"><img src="https://rentinjeju.com${vo.img }"
 							class="reserveImg"></td>
 						<td width="80%" style="font-size: 17px; font-weight: bold;">${vo.car_name }</td>
 					</tr>
 					<tr>
 						<td style="color: gray">${date }</td>
 					</tr>
-					<%-- <tr style="background-color: rgb(248, 249, 250)">
-						<td width="20%">인원별 가격</td>
+					<tr>
+						<td style="color: gray"></td>
+					</tr>
+					 <tr style="background-color: rgb(248, 249, 250)">
+						<td width="20%">1일 대여 가격</td>
 						<td width="80%" class="text-right"><fmt:formatNumber
 								value="${vo.price }" pattern="#,###" />원</td>
-					</tr> --%>
-					<%-- <tr style="background-color: rgb(248, 249, 250)">
-						<td width="20%">인원수</td>
-						<td width="80%" class="text-right">${people }명</td>
-					</tr> --%>
+					</tr> 
+					<tr style="background-color: rgb(248, 249, 250)">
+						<td width="20%">대여 일수</td>
+						<td width="80%" class="text-right">${days }일</td>
+					</tr>
+					<tr style="background-color: rgb(248, 249, 250)">
+						<td width="20%">보험 종류</td>
+						<td width="80%" class="text-right">${insOpt}</td>
+					</tr>
+					<tr style="background-color: rgb(248, 249, 250)">
+						<td width="20%">보험비</td>
+						<td width="80%" class="text-right">${insPrice }원</td>
+					</tr>
 					<tr>
 						<td width="20%">최종 금액</td>
 						<td width="80%" class="text-right"><fmt:formatNumber
-								value="${vo.price }" pattern="#,###" />원</td>
+								value="${vo.price*days+insPrice }" pattern="#,###" />원</td>
 					</tr>
 				</table>
 				<div style="height: 20px"></div>
@@ -242,8 +255,8 @@ $(function(){
 							</tr>
 							<tr height="60px;"
 								style="vertical-align: middle; font-size: 10pt;">
-								<td>주문 금액</td>
-								<td><fmt:formatNumber value="${vo.price }"
+								<td>##</td>
+								<td><fmt:formatNumber value=""
 										pattern="#,###" />원</td>
 							</tr>
 							<tr height="60px;"
@@ -251,7 +264,7 @@ $(function(){
 								<td style="color: rgb(80, 150, 230);"><strong>총 결제
 										금액</strong></td>
 								<td style="font-size: 20pt; color: rgb(80, 150, 230);"><b>
-										<fmt:formatNumber value="${vo.price }" pattern="#,###" />원
+										<fmt:formatNumber value="${vo.price*days+insPrice }" pattern="#,###" />원
 								</b></td>
 							</tr>
 							<tr>
@@ -307,15 +320,28 @@ $(function(){
 							<tr>
 								<td colspan="2" class="center wishTd">
 									<div class="d-grid">
+										<c:if test="${sessionScope.id!=null }">
 										<button class="btn btn-block btn-primary btn-wish"
 											style="height: 50px;" disabled="disabled" id="buyBtn">
 											<h5>
 												<strong> <fmt:formatNumber
-														value="${vo.price }" pattern="#,###" />원
+														value="${vo.price*days+insPrice }" pattern="#,###" />원 결제하기
 												</strong>
 											</h5>
 										</button>
-									</div>
+										</c:if>
+									 </div>
+									 <%-- <div class="d-grid">
+										<c:if test="${sessionScope.id==null }">
+										<button class="btn btn-block btn-primary btn-wish"
+											style="height: 50px;" disabled="disabled" id="NbuyBtn">
+											<h5>
+												<strong> 로그인 하세요
+												</strong>
+											</h5>
+										</button>
+										</c:if>
+									</div> --%>
 								</td>
 							</tr>
 						</table>

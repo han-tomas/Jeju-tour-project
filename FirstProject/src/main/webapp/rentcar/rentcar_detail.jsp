@@ -89,106 +89,15 @@
 <script type="text/javascript">
 $(function() {
     // datepicker 초기화
-    $(".datepicker").daterangepicker();
-
-    // "apply.daterangepicker" 이벤트 핸들러 등록
-    /* $(".datepicker").on("apply.daterangepicker", function (ev, picker) {
-      // 선택된 날짜 범위 값 읽기
-      const date = $("#date").val();
-      console.log("선택된 날짜 범위:", date);
-
-      // 선택된 날짜를 서버로 전송
-      $.ajax({
-        url: "rentcar_reserve.do",
-        type: "POST",
-        data: {"date": date},
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-        success: function(response) {
-          // 요청 성공 시 처리할 로직
-          console.log("서버 응답:", response);
-          // 예약이 성공적으로 완료되었을 때의 동작을 수행하거나 서버 응답을 화면에 표시하는 등의 작업을 할 수 있습니다.
-        },
-        error: function(error) {
-          // 요청 실패 시 처리할 로직
-          console.error("에러 발생:", error);
-        }
-      });
-    }); */
-  });
-    // "apply.daterangepicker" 이벤트 핸들러 등록
-    /* $(".datepicker").on("apply.daterangepicker", function (ev, picker) {
-      // 선택된 날짜 범위 값 읽기
-      const rent_day = $("#date").val();
-      console.log("선택된 날짜 범위:", rent_day);
-      
-      const dates = rent_day.split(" - ");
-      const startDate = moment(dates[0], "MM/DD/YYYY");
-      const endDate = moment(dates[1], "MM/DD/YYYY");
-      const useTime = endDate.diff(startDate, "days");
-	  
-      const end_Date = endDate.format("YYYY/MM/DD");
-      const start_Date = startDate.format("YYYY/MM/DD");
-      
-      console.log("일수 차이:", useTime);
-      //console.log("날짜 쪼개기:", dates.format("YYYY/MM/DD"));
-      //console.log("반납 일자:", endDate.format("YYYY/MM/DD"));
-      //console.log("대여 일자:", startDate.format("YYYY/MM/DD")); 
-      //console.log("대여 일자:", startDate)
-      //console.log("반납 일자:", endDate)
-      console.log("반납 일자:", end_Date);
-      console.log("대여 일자:", start_Date);
-      
-       $.ajax({
-        url: "rentcar_reserve.do",
-        type: "POST",
-        data: {"start_Date":start_Date,"end_Date":end_Date,"useTime":useTime},
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-        success: function(response) {
-          // 요청 성공 시 처리할 로직
-          console.log("서버 응답:", response);
-          // 예약이 성공적으로 완료되었을 때의 동작을 수행하거나 서버 응답을 화면에 표시하는 등의 작업을 할 수 있습니다.
-        },
-        error: function(error) {
-          // 요청 실패 시 처리할 로직
-          console.error("에러 발생:", error);
-        }
-      }); 
-    }); */
- 
-
-//var insOpt; // 라디오 버튼에서 선택된 값을 저장할 변수
-
-/* function saveInsOpt() {
-	//var selectedOption = document.querySelector('input[name="insOpt"]:checked');
-    if (selectedOption) {
-      insOpt = selectedOption.value; // 선택된 값을 insOpt 변수에 저장합니다.
-      console.log("Selected value: " + insOpt);
-      
-      // AJAX 요청을 수행합니다.
-      $.ajax({
-        type: 'post',
-        url: '../rentcar/rentcar_reserve_ok.do',
-        data: {"insOpt": insOpt},
-        
-
-        success: function(insOpt) {
-          // AJAX 요청이 성공하면 이 함수가 실행됩니다.
-          // 서버로부터 받은 응답은 response 변수에 담겨있습니다.
-          console.log("AJAX 요청 성공! 응답 데이터:", insOpt)
-         // location.href="../rentcar/rentcar_reserve.do";
-          // 여기서 필요한 추가 동작을 처리하면 됩니다.
-        },
-/*         error: function(error) {
-          // AJAX 요청이 실패하면 이 함수가 실행됩니다.
-          console.error("AJAX 요청 실패!", error);
-          // 에러 처리 등 필요한 동작을 처리하면 됩니다.
-        } 
-      });
-    } else {
-      console.log("라디오 버튼을 선택해주세요."); */
-/*     } */
+    //$(".datepicker").daterangepicker();
+    $(".datepicker").daterangepicker({
+		//format : "yyyy-mm-dd", //데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+		//mindate:0;
+		//todayHighlight : true, //오늘 날짜에 하이라이팅 기능 기본값 :false 
+		//toggleActive : true, //이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제		
     
-
+	});
+})
 
 </script>
 </head>
@@ -263,7 +172,7 @@ $(function() {
           		 
           
 			    <div class="col-md-4">
-			    <input type="radio" name="insOpt" value="ins1"> 가입 안함 <br><br>
+			    <input type="radio" name="insOpt" value="가입안함" checked> 가입 안함 <br><br>
 			    <font color="red" >&nbsp;</font>
 			    <hr>
 <pre style="background-color: white;">
@@ -273,7 +182,7 @@ $(function() {
    </pre>
 			    </div>
 			    <div class="col-md-4">
-			    <input type="radio" name="insOpt" value="ins2"> 일반 자차<br><br>
+			    <input type="radio" name="insOpt" value="일반자차"> 일반 자차<br><br>
 			    <font color="red" >+5000원</font>
    				<hr>
     			<pre style="background-color: white;">
@@ -290,7 +199,7 @@ $(function() {
    				</pre>
 			    </div>
 			    <div class="col-md-4">
-			    <input type="radio" name="insOpt" value="ins3" > 고급 자차 <br><br>
+			    <input type="radio" name="insOpt" value="고급자차" > 고급 자차 <br><br>
 			    <font color="red" >+10000원</font>
 			    <hr>
 <pre style="background-color: white;">
@@ -309,7 +218,7 @@ $(function() {
          </div>  	
         </div>
       </div>
-
+	<c:if test="${sessionScope.id!=null }">
     <div class="container">
     	<div class="row">
     		<div class="col-md-12 text-center">
@@ -317,7 +226,18 @@ $(function() {
     		</div>
     	</div>
     </div>
+    </c:if>
     </form>
+    <c:if test="${sessionScope.id==null }">
+    <div class="container">
+    	<div class="row">
+    		<div class="col-md-12 text-center">
+    			<input class="btn btn-lg btn-danger btn-reservation" value="로그인하세요" style="width: 200px">
+    		</div>
+    	</div>
+    </div>
+    </c:if>
+    
    <!--  </form> -->
     <br>
     
