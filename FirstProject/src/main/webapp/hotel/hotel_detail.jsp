@@ -112,9 +112,53 @@ a {
 </style>
 <script type="text/javascript">
 $(function() {
-	let huno = $('#huno').val()
-	let inwon = $('#inwon').val()
-	let date = $('#date').val()
+	var huno = $('#huno').val()
+	var inwon = $('#inwon').val()
+	var date = $('#date').val()
+	var today = moment();
+
+	$('.datepicker').daterangepicker({
+		startDate: today, // 오늘 날짜를 시작 기간으로 설정
+		endDate: today.clone().add(1, 'days') // 오늘 날짜를 1일 뒤로 설정하여 종료 기간으로 설정
+	});
+	
+	$.ajax({
+		type:'GET',
+		url:'../hotel/room_list.do',
+		data:{"huno":huno,"inwon":inwon,"date":date},
+		success:function(result){
+			alert(huno + "," + inwon + "," + date + '성공!');
+			$('#roomResult').html(result);
+		}
+	})
+	
+	$('#inwon').change(function() {
+	  var inwon = $(this).val();
+	  updateRoomList();
+	});
+	
+	// 날짜 선택 (datepicker를 사용하는 경우)
+	$('#date').change(function() {
+	  date = $(this).val();
+	  updateRoomList();
+	});
+	
+	// 방 리스트 업데이트 함수
+	function updateRoomList() {
+		var inwon = $('#inwon').val();
+		var date = $('#date').val();
+		
+		// AJAX 요청으로 방 리스트 업데이트
+		$("#roomResult").empty() 
+		$.ajax({
+			type:'GET',
+			url:'../hotel/room_list.do',
+			data:{"huno":huno,"inwon":inwon,"date":date},
+			success:function(result){
+				$('#roomResult').html(result);
+			}
+		})
+	}
 	const selectTab = element => {
 	  const active = document.querySelector('.actived');
 	  const visible = document.querySelector('.content-visible');
@@ -135,56 +179,6 @@ $(function() {
 	  }
 	}, false);
 	
-	$('.datepicker').daterangepicker();
-	
-	$.ajax({
-		type:'GET',
-		url:'../hotel/room_list.do',
-		data:{"huno":huno,"inwon":inwon,"date":date},
-		success:function(result){
-			$('#roomResult').html(result);
-		}
-	})
-	
-	$('#inwon').change(function() {
-	  var inwon = $(this).val();
-	  localStorage.setItem('inwon', inwon);
-	  updateRoomList();
-	});
-	
-	// 날짜 선택 (datepicker를 사용하는 경우)
-	$('#date').change(function() {
-	  var date = $(this).val();
-	  localStorage.setItem('date', date);
-	  updateRoomList();
-	});
-	
-	// 초기화시 로컬 스토리지에 저장된 값이 있는 경우 방 리스트 업데이트
-	if (localStorage.getItem('inwon')) {
-	  $('#inwon').val(localStorage.getItem('inwon'));
-	}
-	if (localStorage.getItem('date')) {
-	  $('#date').val(localStorage.getItem('date'));
-	}
-	
-	// 방 리스트 업데이트 함수
-	function updateRoomList() {
-		var inwon = $('#inwon').val();
-		var date = $('#date').val();
-		// AJAX 요청으로 방 리스트 업데이트
-		$("#roomResult").empty() 
-		$.ajax({
-			type:'GET',
-			url:'../hotel/room_list.do',
-			data:{"huno":huno,"inwon":inwon,"date":date},
-			success:function(result){
-				$('#roomResult').html(result);
-			}
-		})
-	
-	  // 방 리스트를 화면에 표시
-	  // ...
-	}
 	
 })
 </script>
@@ -234,19 +228,11 @@ $(function() {
 			</div>
 			<div class="col-sm-12" style="border:none; padding:0px 20px 0px 0px;">
 			  <div class="row" style="justify-content: right;">
-					<!-- <div class="input-group" style="width: 250px;">
-						<input type="text" class="form-control">
-						<span class="input-group-append">
-							<span class="input-search bg-light d-block">
-								<i class="fa fa-search"></i>
-							</span>
-						</span>
-					</div> -->
 					<div class="row" style="justify-content: right;">
 						<div class="input-group" style="width: 360px;">
 							<span style="padding:6px 10px 0px 0px;"><i class="fa fa-person fa-2x"></i></span> 
 							<select class="form-control" style="margin-right:30px;" id="inwon">
-								<option>1</option>
+								<option selected>1</option>
 								<option>2</option>
 								<option>3</option>
 								<option>4</option>

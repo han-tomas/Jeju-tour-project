@@ -419,9 +419,10 @@ public class MemberDAO {
 			vo.setPost(rs.getString(3));
 			vo.setAddr1(rs.getString(4));
 			vo.setAddr2(rs.getString(5));
-			String phone1 = rs.getString(6).substring(0, 8);
-			String phone2 = rs.getString(6).substring(8);
-			vo.setPhone(phone1 + "-" + phone2);
+			String phone1 = rs.getString(6).substring(0, 3);
+			String phone2 = rs.getString(6).substring(3, 7);
+			String phone3 = rs.getString(6).substring(7);
+			vo.setPhone(phone1 + "-" + phone2 + "-" + phone3);
 			vo.setContent(rs.getString(7));
 			rs.close();
 		} catch (Exception e) {

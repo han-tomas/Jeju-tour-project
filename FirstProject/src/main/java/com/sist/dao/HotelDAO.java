@@ -117,18 +117,27 @@ public class HotelDAO {
 	}
 	
 	// 방 리스트
-	public List<RoomVO> roomListData(int huno) {
+	public List<RoomVO> roomListData(int huno, String start, String end) {
 		List<RoomVO> rList = new ArrayList<RoomVO>();
 		try {
 			conn = db.getConnection();
 			String sql = "SELECT rno, huno, rname, account, price, person, rstructure, special, rposter, num "
 						+"FROM (SELECT rno, huno, rname, account, price, person, rstructure, special, rposter, rownum as num "
 						+"FROM (SELECT rno, huno, rname, account, price, person, rstructure, special, rposter "
-						+"FROM room)) "
-						+"WHERE huno = ?";
+						+"FROM room WHERE huno = ?)) room_data "
+						+"WHERE NOT EXISTS (SELECT 1 "
+						+"FROM hotel_reserve WHERE huno = ? "
+						+"AND rno = room_data.rno "
+						+"AND TO_DATE(checkin, 'YYYY-MM-DD') <= TO_DATE(?, 'YYYY-MM-DD') "
+						+"AND TO_DATE(checkout, 'YYYY-MM-DD') >= TO_DATE(?, 'YYYY-MM-DD') "
+						+"GROUP BY rno "
+						+"HAVING COUNT(*) >= account)";
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, huno);
+			ps.setInt(2, huno);
+			ps.setString(3, end);
+			ps.setString(4, start);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				RoomVO vo = new RoomVO();
@@ -204,5 +213,28 @@ public class HotelDAO {
 		return name;
 	}
 	
-	// 
+	// 예약하기
+	public void hotelReserveOk(HotelReserveVO vo) {
+		try {
+			conn = db.getConnection();
+			String sql = "INSERT INTO hotel_reserve VALUES("
+						+"hr_hrno_seq.nextval,?,?,?,?,?,?,?,?,?,?,'','n',sysdate)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, vo.getCheckin());
+			ps.setString(2, vo.getCheckout());
+			ps.setInt(3, vo.getRno());
+			ps.setString(4, vo.getId());
+			ps.setString(5, vo.getName());
+			ps.setString(6, vo.getEmail());
+			ps.setString(7, vo.getPhone());
+			ps.setInt(8, vo.getPrice());
+			ps.setInt(9, vo.getPrice());
+			ps.setInt(10, vo.getTprice());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+	}
 }

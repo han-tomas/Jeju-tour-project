@@ -5,7 +5,14 @@ public class RoomVO {
 	private String rname, person, rstructure, special, rposter;
 	private String[] rposters;
 	private String msg;
+	private int maxInwon;
 	
+	public int getMaxInwon() {
+		return maxInwon;
+	}
+	public void setMaxInwon(int maxInwon) {
+		this.maxInwon = maxInwon;
+	}
 	public String getMsg() {
 		return msg;
 	}

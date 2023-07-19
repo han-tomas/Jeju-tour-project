@@ -10,21 +10,29 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(function(){
-
+	
 	// 방 예약 버튼 클릭 시
 	$('.reserveBtn').click(function() {
-	  var inwon = $('#inwon').val();
-	  var date = $('#date').val();
-	  var roomId = $(this).attr("data-no"); // 선택한 방 ID 가져오기 (버튼에 data-속성으로 저장하는 방법도 있음)
-	
-	  // 예약 페이지로 이동하면서 선택한 값을 전달
-	  location.href = '../hotel/hotel_reserve.do?rno=' + roomId + '&inwon=' + inwon + '&date=' + date;
+	  let inwon = $('#inwon').val();
+	  let date = $('#date').val();
+	  let id = $(this).attr("data-id");
+	  let roomId = $(this).attr("data-no"); // 선택한 방 ID 가져오기 (버튼에 data-속성으로 저장하는 방법도 있음)
+	  let max = $(this).attr("data-max");
+	  if (id === null || id.trim() === '') {
+		  alert("로그인이 필요합니다!");
+	  } else if (parseInt(inwon) > parseInt(max)) {
+		  alert("인원이 초과되었습니다!");
+	  } else {
+		  // 예약 페이지로 이동하면서 선택한 값을 전달
+		  location.href = '../hotel/hotel_reserve.do?rno=' + roomId + '&inwon=' + inwon + '&date=' + date;
+	  }
+	  
 	});
 });
 </script>
 </head>
 <body>
-	<c:forEach var="rvo" items="${ rList }">
+	<c:forEach var="rvo" items="${rList}">
 		<div class="row">
 		
 		<div class="col-md-4" style="padding:15px; border:1px;">
@@ -66,7 +74,8 @@ $(function(){
 				</div>
 				<div class="col-md-12" style="text-align:right; margin-top:10px;">
 					<input type="hidden" value="${ rvo.huno }" id="huno"/>
-					<input type="button" data-no="${ rvo.rno }" class="btn btn-danger reserveBtn" value="예약하기"/>
+					<input type="button" class="btn btn-danger reserveBtn" value="예약하기" 
+								data-id="${ sessionScope.id }" data-max="${ rvo.maxInwon }" data-no="${ rvo.rno }" />
 				</div>
 			</div>
 		</div>

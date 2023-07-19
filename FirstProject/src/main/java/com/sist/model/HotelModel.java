@@ -112,14 +112,31 @@ public class HotelModel {
 		String inwon = request.getParameter("inwon");
 		int person = Integer.parseInt(inwon);
 		String date = request.getParameter("date");
+		String[] dateParts = date.split(" - ");
 		
-		// DAO 연동
-		HotelDAO dao = HotelDAO.newInstance();
-		List<RoomVO> rList = dao.roomListData(Integer.parseInt(huno));
-		for(RoomVO vo:rList) {
+		// 날짜 형식 지정
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        // 문자열을 LocalDate 객체로 변환
+        LocalDate startDate = LocalDate.parse(dateParts[0], formatter);
+        LocalDate endDate = LocalDate.parse(dateParts[1], formatter);
+        
+        // DAO 연동
+        HotelDAO dao = HotelDAO.newInstance();
+        List<RoomVO> rList = dao.roomListData(Integer.parseInt(huno), startDate.toString(), endDate.toString());
+
+		
+		// 불요데이터 제거
+		int halfSize = rList.size() / 2;
+		for (int i=rList.size()-1; i>=halfSize; i--) {
+			rList.remove(i);
+		}
+		
+		for (int i = 0; i < rList.size(); i++) {
+		    RoomVO vo = rList.get(i);
 			String[] posters = vo.getRposter().split("\\^");
-			for (int i=0; i<posters.length; i++) {
-				posters[i] = hotelURL+posters[i];
+			for (int j=0; j<posters.length; j++) {
+				posters[j] = hotelURL+posters[j];
 			}
 			vo.setRposters(posters);
 			
@@ -150,10 +167,12 @@ public class HotelModel {
 	        		vo.setPrice((int)(vo.getPrice()*plusPrice));
 	        	}
 	        }
+	        vo.setMaxInwon(max);
 		}
 		request.setAttribute("inwon", inwon);
 		request.setAttribute("date", date);
 		request.setAttribute("rList", rList);
+		
 		return "../hotel/room_list.jsp";
 	}
 	
@@ -176,6 +195,11 @@ public class HotelModel {
 		HotelDAO dao = HotelDAO.newInstance();
 		RoomVO vo = dao.roomSelectData(Integer.parseInt(rno));
 		String hname = dao.hotelNameData(vo.getHuno());
+		int hnameIdx = hname.indexOf("(");
+		if (hnameIdx != -1) {
+			hname = hname.substring(0, hnameIdx);
+		}
+		
 		MemberDAO mdao = MemberDAO.newInstance();
 		MemberVO mvo = mdao.memberSearch(id);
 		mvo.setName(name);
@@ -201,6 +225,8 @@ public class HotelModel {
 	        String start = koreanDays[startDateOfWeekValue];
 	        String end = koreanDays[endDateOfWeekValue];
 	        
+	        request.setAttribute("startDate", startDate);
+	        request.setAttribute("endDate", endDate);
 	        request.setAttribute("date", startDate + "(" + start + ") ~ "
 	        						+ endDate + "(" + end + ")");
 	        request.setAttribute("days", daysBetween);
@@ -248,5 +274,43 @@ public class HotelModel {
 		
 		request.setAttribute("main_jsp", "../hotel/hotel_reserve.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("hotel/hotel_reserve_ok.do")
+	public String hotel_reserve_ok(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String rno = request.getParameter("rno");
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+		String inwon = request.getParameter("inwon");
+		String price = request.getParameter("price");
+		String tprice = request.getParameter("tprice");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		HotelReserveVO vo = new HotelReserveVO();
+		vo.setId(id);
+		vo.setName(name);
+		vo.setEmail(email);
+		vo.setPhone(phone);
+		vo.setRno(Integer.parseInt(rno));
+		vo.setCheckin(startDate);
+		vo.setCheckout(endDate);
+		vo.setInwon(Integer.parseInt(inwon));
+		vo.setPrice(Integer.parseInt(price));
+		vo.setTprice(Integer.parseInt(tprice));
+		
+		// DAO연동
+		HotelDAO dao = HotelDAO.newInstance();
+		dao.hotelReserveOk(vo);
+		
+		return "redirect:../mypage/mypage_reserve_list.do";
 	}
 }
