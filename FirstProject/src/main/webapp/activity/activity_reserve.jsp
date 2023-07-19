@@ -208,7 +208,7 @@ function requestPay() {
 	        msg += '결제 금액 : ' + rsp.paid_amount;
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
 	    } else {
-	    	location.href="../mypage/mypage_buy.do";
+	    	location.href="../mypage/mypage_reserve.do";
 	    }
 	});
 }

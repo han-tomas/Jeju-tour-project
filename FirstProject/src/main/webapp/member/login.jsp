@@ -114,16 +114,16 @@ $(function(){
       		<tr class="inline">
       			<td width="30%" style="text-align: right">아이디</td>
       			<td width="40%">
-      				<input type=text name="id" id="id">
+      				<input type=text name="id" id="id" tabindex="1">
       			</td>
       			<td rowspan="2" width="30%">
-      				<button type="submit" id="logBtn" class="btn btn-outline-warning" style="width: 100px;height: 100px;">로그인</button>
+      				<button type="submit" id="logBtn" class="btn btn-outline-warning" style="width: 100px;height: 100px;" tabindex="3">로그인</button>
       			</td>
       		</tr>
       		<tr>
       			<td width="30%" style="text-align: right">비밀번호</td>
       			<td width="40%">
-      				<input type="password" name="pwd" id="pwd">
+      				<input type="password" name="pwd" id="pwd" tabindex="2">
       			</td>
       		</tr>
       		<tr>

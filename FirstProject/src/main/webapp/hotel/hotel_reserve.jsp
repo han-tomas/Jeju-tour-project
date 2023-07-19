@@ -203,14 +203,14 @@ $(function(){
 						<td width="20%"></td>
 						<td width="20%">인원별 가격</td>
 						<td width="60%" class="text-right" colspan="3">
-							<fmt:formatNumber value="${ vo.price * inwon}" pattern="#,###" />원
+							<fmt:formatNumber value="${ vo.price }" pattern="#,###" />원
 						</td>
 					</tr>
 					<tr style="background-color: rgb(248,249,250)">
 						<td width="20%"></td>					
 						<td width="20%">총 상품 금액</td>					
 						<td width="60%" class="text-right" colspan="3">
-							<fmt:formatNumber value="${ vo.price * inwon * days}" pattern="#,###" />원
+							<fmt:formatNumber value="${ vo.price * days}" pattern="#,###" />원
 						</td>					
 					</tr>
 				</table>
@@ -253,13 +253,13 @@ $(function(){
 							<tr height="60px;" style="vertical-align: middle;font-size: 10pt;">
 								<td>주문 금액</td>
 								<td>
-									<fmt:formatNumber value="${ vo.price * inwon * days}" pattern="#,###" />원
+									<fmt:formatNumber value="${ vo.price * days}" pattern="#,###" />원
 								</td>
 							</tr>
 							<tr height="60px;" style="vertical-align: middle;background-color: rgb(246,251,255);">
 								<td style="color: rgb(80,150,230);"><strong>총 결제 금액</strong></td>
 								<td style="font-size: 20pt;color: rgb(80,150,230);"><b>
-									<fmt:formatNumber value="${ vo.price * inwon * days }" pattern="#,###" />원
+									<fmt:formatNumber value="${ vo.price * days }" pattern="#,###" />원
 									</b>
 								</td>
 							</tr>
@@ -328,10 +328,13 @@ $(function(){
 										<input type="hidden" name="name" id="name"  value="${ mvo.name }"/>
 										<input type="hidden" name="email" id="email"  value="${ mvo.email }"/>
 										<input type="hidden" name="phone" id="phone"  value="${ mvo.phone }"/>
+										<input type="hidden" name="date" id="date"  value="${ date }"/>
+										<input type="hidden" name="poster" id="poster"  value="${ vo.rposter }"/>
+										<input type="hidden" name="title" id="title"  value="${ hname }^${ vo.rname }"/>
 									<button class="btn btn-block btn-primary btn-wish" style="height: 50px;" disabled="disabled" id="reserveBtn">
 										<h5>
 										<strong>
-										<fmt:formatNumber value="${ vo.price * inwon * days }" pattern="#,###" />원 결제하기
+										<fmt:formatNumber value="${ vo.price * days }" pattern="#,###" />원 결제하기
 										</strong>
 										</h5>
 									</button>

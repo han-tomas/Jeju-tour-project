@@ -44,19 +44,18 @@ public class MyPageModel {
 		return "../main/main.jsp";
 	}
 	
-	@RequestMapping("mypage/mypage_buy.do")
+	@RequestMapping("mypage/mypage_reserve.do")
 	public String mypage_buy(HttpServletRequest request, HttpServletResponse response) {
 		
 		
 		
-		request.setAttribute("mypage_jsp", "../mypage/mypage_buy.jsp");
+		request.setAttribute("mypage_jsp", "../mypage/mypage_reserve.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
 	}
 	
 	@RequestMapping("mypage/mypage_cart.do")
 	public String mypage_cart(HttpServletRequest request, HttpServletResponse response) {
-		
 		
 		
 		request.setAttribute("mypage_jsp", "../mypage/mypage_cart.jsp");

@@ -126,10 +126,10 @@ public class HotelDAO {
 						+"FROM (SELECT rno, huno, rname, account, price, person, rstructure, special, rposter "
 						+"FROM room WHERE huno = ?)) room_data "
 						+"WHERE NOT EXISTS (SELECT 1 "
-						+"FROM hotel_reserve WHERE huno = ? "
+						+"FROM jeju_reserve WHERE huno = ? "
 						+"AND rno = room_data.rno "
 						+"AND TO_DATE(checkin, 'YYYY-MM-DD') <= TO_DATE(?, 'YYYY-MM-DD') "
-						+"AND TO_DATE(checkout, 'YYYY-MM-DD') >= TO_DATE(?, 'YYYY-MM-DD') "
+						+"AND TO_DATE(checkout, 'YYYY-MM-DD') > TO_DATE(?, 'YYYY-MM-DD') "
 						+"GROUP BY rno "
 						+"HAVING COUNT(*) >= account)";
 			ps = conn.prepareStatement(sql);
@@ -214,22 +214,28 @@ public class HotelDAO {
 	}
 	
 	// 예약하기
-	public void hotelReserveOk(HotelReserveVO vo) {
+	public void hotelReserveOk(ReservationVO vo) {
 		try {
 			conn = db.getConnection();
-			String sql = "INSERT INTO hotel_reserve VALUES("
-						+"hr_hrno_seq.nextval,?,?,?,?,?,?,?,?,?,?,'','n',sysdate)";
+			String sql = "INSERT INTO jeju_reserve ("
+						+"jrno, checkin, checkout, dbday, rno, id, rname, remail, rphone, "
+						+"inwon, price, tprice, poster, title, rcno, rok, regdate) "
+						+"VALUES("
+						+"jr_jrno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,2,'n',sysdate)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, vo.getCheckin());
 			ps.setString(2, vo.getCheckout());
-			ps.setInt(3, vo.getRno());
-			ps.setString(4, vo.getId());
-			ps.setString(5, vo.getName());
-			ps.setString(6, vo.getEmail());
-			ps.setString(7, vo.getPhone());
-			ps.setInt(8, vo.getPrice());
-			ps.setInt(9, vo.getPrice());
-			ps.setInt(10, vo.getTprice());
+			ps.setString(3, vo.getDbday());
+			ps.setInt(4, vo.getRno());
+			ps.setString(5, vo.getId());
+			ps.setString(6, vo.getName());
+			ps.setString(7, vo.getEmail());
+			ps.setString(8, vo.getPhone());
+			ps.setInt(9, vo.getInwon());
+			ps.setInt(10, vo.getPrice());
+			ps.setInt(11, vo.getTprice());
+			ps.setString(12, vo.getPoster());
+			ps.setString(13, vo.getTitle());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
