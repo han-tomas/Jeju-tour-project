@@ -81,6 +81,7 @@ $(function(){
 				    <li><a class="dropdown-item" href="../notice/notice_list.do">Notice</a></li>
 				    <li><a class="dropdown-item" href="../qna/qna_list.do">QnA</a></li>
 				    <li><a class="dropdown-item" href="../freeboard/list.do">자유게시판</a></li>
+				    <li><a class="dropdown-item" href="../review/list.do">Review</a></li>
 				    <li> </li>
 				 </ul>
 			</li> 

@@ -170,4 +170,33 @@ public class ActivityDAO {
 		}
 		return totalCategory;
 	}
+	
+	public void activityReserveOk(ActivityReserveVO vo) {
+		try {
+			conn = db.getConnection();
+			String sql = "INSERT INTO jeju_reserve ("
+						+"jrno, dbday, acino, id, rname, remail, rphone, "
+						+"inwon, price, tprice, poster, title, rcno, rok, regdate) "
+						+"VALUES("
+						+"jr_jrno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,1,'n',sysdate)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, vo.getDbday());
+			ps.setInt(2, vo.getAcino());
+			ps.setString(3, vo.getId());
+			ps.setString(4, vo.getRname());
+			ps.setString(5, vo.getRemail());
+			ps.setString(6, vo.getRphone());
+			ps.setInt(7, vo.getInwon());
+			ps.setInt(8, vo.getPrice());
+			ps.setInt(9, vo.getTprice());
+			ps.setString(10, vo.getPoster());
+			ps.setString(11, vo.getTitle());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+	}
+	
 }
