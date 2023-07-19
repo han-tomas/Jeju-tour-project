@@ -3,6 +3,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
@@ -49,5 +50,58 @@ public class AdminPageModel {
 		request.setAttribute("adminpage_jsp", "../adminpage/reserve_rentcar.jsp");
 		request.setAttribute("main_jsp", "../adminpage/adminpage_main.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("adminpage/adminqna_list.do")
+	public String adminqna_list(HttpServletRequest request,HttpServletResponse response) {
+		String page=request.getParameter("page");
+		if(page==null) page="1";
+		
+		int curpage=Integer.parseInt(page);
+		
+		QnA_DAO dao=QnA_DAO.newInstance();
+		List<QnA_VO> list=dao.qnaAdminListData(curpage);
+		int totalpage=dao.qnaBoardAdminTotalPage();
+		
+		request.setAttribute("list", list);
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage",totalpage);
+		request.setAttribute("adminpage_jsp", "../adminpage/adminqna_list.jsp");
+		request.setAttribute("main_jsp", "../adminpage/adminpage_main.jsp");
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("adminpage/adminqna_insert.do")
+	public String adminqna_insert(HttpServletRequest request,HttpServletResponse response) {
+		String no=request.getParameter("no");
+		
+		request.setAttribute("no", no);
+		request.setAttribute("adminpage_jsp", "../adminpage/adminqna_insert.jsp");
+		request.setAttribute("main_jsp", "../adminpage/adminpage_main.jsp");
+		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("adminpage/adminqna_insert_ok.do")
+	public String adminqna_insert_ok(HttpServletRequest request,HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (Exception e) {}
+		
+		String type=request.getParameter("type");
+		String subject=request.getParameter("subject");
+		String content=request.getParameter("content");
+		String qno=request.getParameter("qno");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		QnA_VO vo=new QnA_VO();
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setId(id);
+		vo.setType(type);
+		
+		QnA_DAO dao=QnA_DAO.newInstance();
+		dao.qnaBoardAdminInsert(Integer.parseInt(qno), vo);
+		return "redirect:../adminpage/adminqna_list.do";
 	}
 }
