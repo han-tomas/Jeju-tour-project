@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <style>
 body{
 	font-family: "Open Sans", sans-serif;

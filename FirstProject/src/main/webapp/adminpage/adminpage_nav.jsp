@@ -35,9 +35,9 @@
           <i class="fa fa-calendar"></i>
           <span>예약관리</span>
         <ul>
-          <li><a href="#">activity</a></li>
-          <li><a href="#">숙박</a></li>
-          <li><a href="#">렌터카</a></li>
+          <li><a href="../adminpage/reserve_activity.do">activity</a></li>
+          <li><a href="../adminpage/reserve_hotel.do">숙박</a></li>
+          <li><a href="../adminpage/reserve_rentcar.do">렌터카</a></li>
         </ul>
       </li>
     </ul>
