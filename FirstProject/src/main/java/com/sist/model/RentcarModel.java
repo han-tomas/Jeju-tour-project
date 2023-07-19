@@ -117,7 +117,7 @@ public class RentcarModel {
 	}
 	
 	@RequestMapping("rentcar/rentcar_reserve.do")
-	public String car_reserver(HttpServletRequest request, HttpServletResponse response)
+	public String car_reserve(HttpServletRequest request, HttpServletResponse response)
 	{	
 		try
 		{

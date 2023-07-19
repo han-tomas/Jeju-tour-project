@@ -73,6 +73,47 @@ public class MyPageModel {
 		return "redirect:../mypage/mypage_reserve.do";
 	}
 	
+	@RequestMapping("mypage/mypage_rentcar_reserve.do")
+	public String mypage_rentcar_reserve(HttpServletRequest request, HttpServletResponse response) {
+		String cid=request.getParameter("cid");
+		String dbday=request.getParameter("dbday");
+		//String strPrice=request.getParameter("price");
+		String strTprice=request.getParameter("tprice");
+		//int price=Integer.parseInt(strPrice);
+		int tprice=Integer.parseInt(strTprice);
+		String startDate=request.getParameter("startDate");
+		String endDate=request.getParameter("endDate");
+		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		String name=(String)session.getAttribute("name");
+		
+		MemberDAO mdao=MemberDAO.newInstance();
+		MemberVO mvo=mdao.memberSearch(id);
+		
+		RentcarDAO rdao=RentcarDAO.newInstance();
+		RentcarVO rvo=rdao.RentcarDetailData(Integer.parseInt(cid));
+		
+		ReservationVO vo=new ReservationVO();
+		
+		vo.setDbday(dbday);
+		vo.setCid(rvo.getCid());
+		vo.setId(id);
+		vo.setRname(name);
+		vo.setRemail(mvo.getEmail());
+		vo.setRphone(mvo.getPhone());
+		//vo.setPrice(price);
+		vo.setTprice(tprice);
+		vo.setPoster(rvo.getImg());
+		vo.setTitle(rvo.getCar_name());
+		vo.setCheckin(startDate);
+		vo.setCheckout(endDate);
+		
+		rdao.RentcarReserveOk(vo);
+		
+		return "redirect:../mypage/mypage_reserve.do";
+	}
+	
 	@RequestMapping("mypage/mypage_reserve.do")
 	public String mypage_reserve(HttpServletRequest request, HttpServletResponse response) {
 		

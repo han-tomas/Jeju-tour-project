@@ -4,6 +4,7 @@ import com.sist.common.*;
 import java.sql.*;
 
 import com.sist.vo.RentcarVO;
+import com.sist.vo.ReservationVO;
 import com.sist.vo.RentcarVO;
 public class RentcarDAO {
 	private Connection conn;
@@ -236,5 +237,70 @@ public class RentcarDAO {
 		  }
 		  return sList;
 	  }
+	/*public void RentcarReserveOk(ReservationVO rrvo) 
+	{
+		try 
+		{
+			conn = db.getConnection();
+			String sql = "INSERT INTO jeju_reserve ("
+						+"jrno, checkin, checkout, dbday, rno, acino, cid, rcno, rname, remail, rphone, "
+						+"inwon, price, tprice, poster, title, payment, rok, regdate) "
+						+"VALUES("
+						+"jr_jrno_seq.nextval,?,?,?,?,?,?,3,?,?,?,?,?,?,?,?,?,'n',sysdate)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, rrvo.getCheckin());
+			ps.setString(2, rrvo.getCheckout());
+			ps.setString(3, rrvo.getDbday());
+			ps.setInt(4, rrvo.getRno());
+			ps.setInt(5, rrvo.getAcino());
+			ps.setInt(6, rrvo.getCid());
+			ps.setString(7, rrvo.getRname());
+			ps.setString(8, rrvo.getRemail());
+			ps.setString(9, rrvo.getRphone());
+			ps.setInt(10, rrvo.getInwon());
+			ps.setInt(11, rrvo.getPrice());
+			ps.setInt(12, rrvo.getTprice());
+			String rPoster="https://rentinjeju.com$"+rrvo.getPoster();
+			ps.setString(13, rPoster);
+			ps.setString(14, rrvo.getTitle());
+			ps.setString(15, rrvo.getPayment());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+	}*/
+	
+	public void RentcarReserveOk(ReservationVO vo) 
+	{
+		try 
+		{
+			conn = db.getConnection();
+			String sql = "INSERT INTO jeju_reserve ("
+						+"jrno, checkin, checkout, dbday, cid, rcno, id, rname, remail, rphone, "
+						+"tprice, poster, title, rok, regdate) "
+						+"VALUES(jr_jrno_seq.nextval,?,?,?,?,3,?,?,?,?,?,?,?,'n',sysdate)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, vo.getCheckin());
+			ps.setString(2, vo.getCheckout());
+			ps.setString(3, vo.getDbday());
+			ps.setInt(4, vo.getCid());
+			ps.setString(5, vo.getId());
+			ps.setString(6, vo.getRname());
+			ps.setString(7, vo.getRemail());
+			ps.setString(8, vo.getRphone());
+			ps.setInt(9, vo.getTprice());
+			String rPoster="https://rentinjeju.com"+vo.getPoster();
+			ps.setString(10, rPoster);
+			//System.out.println(rPoster);
+			ps.setString(11, vo.getTitle());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+	}
 		
 }
