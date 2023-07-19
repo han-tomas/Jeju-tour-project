@@ -88,6 +88,9 @@ public class HotelModel {
 	public String hotel_detail(HttpServletRequest request, HttpServletResponse response) {
 		
 		String huno=request.getParameter("huno");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
 		// DAO 연결
 		HotelDAO dao=HotelDAO.newInstance();
 		// 결과값을 request에 묶어서 => goods_detail.jsp로 전송 
@@ -96,6 +99,13 @@ public class HotelModel {
 		int imagesLength = images.length;
 		for (int i=0; i<imagesLength; i++) {
 			images[i] = hotelURL + images[i];
+		}
+		
+		// 찜여부 확인
+		if(id!=null) {
+			HotelWishDAO wdao=HotelWishDAO.newInstance();
+			int wish_count=wdao.hotelWishCount(id, vo.getHdno());
+			request.setAttribute("wish_count", wish_count);
 		}
 		request.setAttribute("imagesLength", imagesLength);
 		request.setAttribute("images", images);
@@ -301,9 +311,9 @@ public class HotelModel {
 		
 		ReservationVO vo = new ReservationVO();
 		vo.setId(id);
-		vo.setName(name);
-		vo.setEmail(email);
-		vo.setPhone(phone);
+		vo.setRname(name);
+		vo.setRemail(email);
+		vo.setRphone(phone);
 		vo.setRno(Integer.parseInt(rno));
 		vo.setCheckin(startDate);
 		vo.setCheckout(endDate);

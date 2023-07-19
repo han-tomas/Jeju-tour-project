@@ -109,6 +109,15 @@ a {
 .fa-2x {
 	font-size:1.6em;
 }
+.table1 {
+	margin:0px;
+}
+.table1 tr td {
+	border:none;
+	border-collapse: collapse;
+	padding:0px;
+	margin:0px;
+}
 </style>
 <script type="text/javascript">
 $(function() {
@@ -225,8 +234,28 @@ $(function() {
 				</div>
 			</div>
 			<div class="col-sm-12">
-				<h4>${ vo.addr1 }</h4>
-				<h1>${ vo.name }</h1>
+				<table class="table table1">
+				<tr>
+					<td><h4>${ vo.addr1 }</h4></td>
+					<td style="text-align:right; width:100px;"><i class="fa fa-eye fa-2x"></i><h6 style="padding:5px; display:block;">${ vo.hit }</h6></td>
+					<c:if test="${ sessionScope.id!=null }">
+						<c:if test="${ wish_count==0 }">
+							<td style="text-align:right; width:40px;">
+								<a href="../hotel/hotelWish_insert.do?hdno=${ vo.hdno }&huno=${ vo.huno }">
+									<i class="fa fa-heart-o fa-2x"></i></a></td>
+						</c:if>
+						<c:if test="${ wish_count==1 }">
+							<td style="text-align:right; width:40px;">
+								<a href="../hotel/hotelWish_cancle.do?hdno=${ vo.hdno }&huno=${ vo.huno }">
+									<i class="fa fa-heart fa-2x" style="color: #ff2600;"></i></a></td>
+						</c:if>
+					</c:if>
+					<c:if test="${ sessionScope.id==null }">
+						<td style="text-align:right;"><i class="fa fa-heart-o fa-2x"></i></td>
+					</c:if>
+				</tr>
+				<tr><td><h1>${ vo.name }</h1></td></tr>
+				</table>
 			</div>
 			<div class="col-sm-12" style="border:none; padding:0px 20px 0px 0px;">
 			  <div class="row" style="justify-content: right;">
@@ -261,14 +290,13 @@ $(function() {
 			</div>
 			<div class="col-sm-12">
 				<ul class="tabs">
-					<li class="tab-item"><a href="#item1">숙소소개</a></li>
+					<li class="tab-item"><a href="#item1" class="actived">숙소소개</a></li>
 					<li class="tab-item"><a href="#item2">이용안내</a></li>
 					<li class="tab-item"><a href="#item3">취소/환불규정</a></li>
 					<li class="tab-item"><a href="#item4">평점/리뷰</a></li>
-					<li class="tab-item"><a href="#item5" class="actived">지도</a></li>
 				</ul>
 				<div class="wrapper_tab-content">
-					<article id="item1" class="tab-content">
+					<article id="item1" class="tab-content content-visible">
 						<table class="table">
 							<tr>
 								<td style="width:25%"><strong>숙소소개</strong></td>
@@ -282,10 +310,6 @@ $(function() {
 												<p>${ item }</p>
 											</c:otherwise> 
 										</c:choose> 
-																				
-										<c:if test="">
-											
-										</c:if>
 									</c:forTokens>
 								</td>
 							</tr>
@@ -293,6 +317,52 @@ $(function() {
 								<td style="width:25%"><strong>부대시설</strong></td>
 								<td style="width:75%">
 									<p>${ vo.etc }</p>
+								</td>
+							</tr>
+							<tr>
+								<td style="width:25%"><strong>위치안내</strong></td>
+								<td style="width:75%">
+									<p>${ vo.addr2 }</p>
+									<div id="map" style="width:100%;height:350px;"></div>
+						
+						<script>
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						    mapOption = {
+						        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+						        level: 3 // 지도의 확대 레벨
+						    };  
+						
+						// 지도를 생성합니다    
+						var map = new kakao.maps.Map(mapContainer, mapOption); 
+						
+						// 주소-좌표 변환 객체를 생성합니다
+						var geocoder = new kakao.maps.services.Geocoder();
+						
+						// 주소로 좌표를 검색합니다
+						geocoder.addressSearch('${ vo.addr2 }', function(result, status) {
+						
+						    // 정상적으로 검색이 완료됐으면 
+						     if (status === kakao.maps.services.Status.OK) {
+						
+						        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+						
+						        // 결과값으로 받은 위치를 마커로 표시합니다
+						        var marker = new kakao.maps.Marker({
+						            map: map,
+						            position: coords
+						        });
+						
+						        // 인포윈도우로 장소에 대한 설명을 표시합니다
+						        var infowindow = new kakao.maps.InfoWindow({
+						            content: '<div style="width:150px;text-align:center;padding:6px 0;">${ vo.name }</div>'
+						        });
+						        infowindow.open(map, marker);
+						
+						        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+						        map.setCenter(coords);
+						    } 
+						});    
+						</script>
 								</td>
 							</tr>
 						</table>
@@ -406,49 +476,6 @@ $(function() {
 
 					<article id="item4" class="tab-content">
 						<h1>평점장소</h1>
-					</article>
-					
-					<article id="item5" class="tab-content content-visible">
-						<div id="map" style="width:100%;height:350px;"></div>
-						
-						<script>
-						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-						    mapOption = {
-						        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-						        level: 3 // 지도의 확대 레벨
-						    };  
-						
-						// 지도를 생성합니다    
-						var map = new kakao.maps.Map(mapContainer, mapOption); 
-						
-						// 주소-좌표 변환 객체를 생성합니다
-						var geocoder = new kakao.maps.services.Geocoder();
-						
-						// 주소로 좌표를 검색합니다
-						geocoder.addressSearch('${ vo.addr2 }', function(result, status) {
-						
-						    // 정상적으로 검색이 완료됐으면 
-						     if (status === kakao.maps.services.Status.OK) {
-						
-						        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-						
-						        // 결과값으로 받은 위치를 마커로 표시합니다
-						        var marker = new kakao.maps.Marker({
-						            map: map,
-						            position: coords
-						        });
-						
-						        // 인포윈도우로 장소에 대한 설명을 표시합니다
-						        var infowindow = new kakao.maps.InfoWindow({
-						            content: '<div style="width:150px;text-align:center;padding:6px 0;">${ vo.name }</div>'
-						        });
-						        infowindow.open(map, marker);
-						
-						        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-						        map.setCenter(coords);
-						    } 
-						});    
-						</script>
 					</article>
 				</div>
 			</div>

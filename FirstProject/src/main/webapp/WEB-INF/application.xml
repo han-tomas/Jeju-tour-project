@@ -19,5 +19,6 @@
 	<bean id="foodjjim" class="com.sist.model.FoodJjimModel"/>
 	<bean id="freeboard" class="com.sist.model.FreeBoardModel"/>
 	<bean id="fbreply" class="com.sist.model.FreeBoardReplyModel"/>
+	<bean id="hotelWish" class="com.sist.model.HotelWishModel"/>
 	
 </beans>

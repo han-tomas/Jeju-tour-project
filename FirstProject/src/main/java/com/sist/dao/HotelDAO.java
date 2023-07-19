@@ -90,12 +90,31 @@ public class HotelDAO {
 		
 		try {
 			conn = db.getConnection();
-			String sql = "SELECT hdno, huno, name, addr, content, etc, poster "
+			
+			// hdno 취득
+			String sql = "SELECT hdno from hotel_detail WHERE huno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, huno);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int hdno = rs.getInt(1);
+			rs.close();
+			
+			// hit 증가
+			sql="UPDATE hotel_detail SET "
+					+ "hit=hit+1 "
+					+ "WHERE hdno="+hdno;
+			
+			ps=conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			// 실제 데이터 읽기
+			sql = "SELECT hdno, huno, name, addr, content, etc, poster, hit "
 						+"FROM hotel_detail "
 						+"WHERE huno=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, huno);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			rs.next();
 			vo.setHdno(rs.getInt(1));
 			vo.setHuno(rs.getInt(2));
@@ -228,9 +247,9 @@ public class HotelDAO {
 			ps.setString(3, vo.getDbday());
 			ps.setInt(4, vo.getRno());
 			ps.setString(5, vo.getId());
-			ps.setString(6, vo.getName());
-			ps.setString(7, vo.getEmail());
-			ps.setString(8, vo.getPhone());
+			ps.setString(6, vo.getRname());
+			ps.setString(7, vo.getRemail());
+			ps.setString(8, vo.getRphone());
 			ps.setInt(9, vo.getInwon());
 			ps.setInt(10, vo.getPrice());
 			ps.setInt(11, vo.getTprice());
