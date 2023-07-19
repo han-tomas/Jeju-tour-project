@@ -62,7 +62,7 @@ public class FreeBoardDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT COUNT(*) FROM project_freeboard";
+			String sql="SELECT COUNT(*) FROM jeju_freeboard";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			rs.next();

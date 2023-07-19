@@ -25,6 +25,19 @@
   margin-bottom: 45px;
   margin: 0px auto;
 }
+.row1{
+	margin: 0px auto;
+	width: 960px;
+}
+.container1{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagination .page-item.active .page-link {
+    background-color: orange;
+    border-color: orange;
+  }
 </style>
 </head>
 <body>
@@ -33,7 +46,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="top-text header-text">
-            <h2 class="text-center">아이디 찾기</h2>
+            <h2 class="text-center">자유 게시판</h2>
           </div>
         </div>
       </div>
@@ -45,12 +58,23 @@
 	    <div class="row row1">
 	    	<table class="table">
 	    		<tr>
+		  	 		<td>
+		  	 			<a href="../freeboard/insert.do" class="btn btn-sm btn-warning" id="fbinsert">
+			  	 			<i class="fa fa-pencil-square-o"></i>
+			  	 			&nbsp;글쓰기
+		  	 			</a>
+		  	 		</td>
+		  	 	</tr>
+	    	</table>
+	    	<table class="table">
+	    		<tr>
 	    			<th width=10% class="text-center">번호</th>
 		  	 		<th width=45% class="text-center">제목</th>
 		  	 		<th width=15% class="text-center">이름</th>
 		  	 		<th width=20% class="text-center">작성일</th>
 		  	 		<th width=10% class="text-center">조회수</th>
 	    		</tr>
+	    	<c:forEach var="vo" items="${list }" >
 	    		<tr>
 	    			<td width=10% class="text-center">${vo.no }</td>
 	  	 			<td width=45%><a href="../board/detail.do?no=${vo.no}">${vo.subject }</a></td>
@@ -58,7 +82,32 @@
 	  	 			<td width=20% class="text-center">${vo.dbday }</td>
 	  	 			<td width=10% class="text-center">${vo.hit }</td>
 	    		</tr>
+	    	</c:forEach>	
 	    	</table>
+	    	<div class="container1">
+    			<ul class="pagination" style="align-items: center">
+				<c:if test="${startPage>1 }">
+				  <li class="page-item">
+					  <a class="page-link" href="../freeboard/list.do?page=${startPage-1}">
+					  	Previous
+					  </a>
+				  </li>
+				</c:if>
+					  <c:forEach var="i" begin="${startPage }" end="${endPage }">
+					  	<li class="page-item ${curpage==i?'active':'' }">
+					  		<a class="page-link" href="../freeboard/list.do?page=${i }">${i }</a>
+					  	</li>
+					  </c:forEach>
+				  <c:if test="${endPage<totalpage }">
+					  <li class="page-item">
+						  <a class="page-link" href="../freeboard/list.do?page=${endPage+1 }">
+						  	Next
+						  </a>
+					  </li>
+				 </c:if>
+				</ul>
+	    	</div>
+	    	
 	    </div>
     </div> 
 </div>      
