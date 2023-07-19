@@ -192,7 +192,7 @@ public class FreeBoardDAO {
 			if(db_pwd.equals(vo.getPwd()))
 			{
 				bCheck=true;
-				sql="UPDATE project_freeboard SET "
+				sql="UPDATE jeju_freeboard SET "
 						+ "name=?,subject=?,content=? "
 						+ "WHERE no=?";
 				ps=conn.prepareStatement(sql);

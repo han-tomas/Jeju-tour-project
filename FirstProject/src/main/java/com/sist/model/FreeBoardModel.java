@@ -1,4 +1,5 @@
 package com.sist.model;
+import java.io.PrintWriter;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,5 +62,64 @@ public class FreeBoardModel {
 		dao.freeboardInsert(vo);
 		
 		return "redirect:../freeboard/list.do";
+	}
+	@RequestMapping("freeboard/detail.do")
+	public String freeboard_detail(HttpServletRequest request, HttpServletResponse response)
+	{
+		String no = request.getParameter("no");
+		//DAO연결
+		FreeBoardDAO dao = FreeBoardDAO.newInstance();
+		FreeboardVO vo = dao.freeboardDetailData(Integer.parseInt(no));
+		request.setAttribute("vo", vo);
+		request.setAttribute("main_jsp", "../freeboard/detail.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("freeboard/update.do")
+	public String freeboard_update(HttpServletRequest request, HttpServletResponse response)
+	{
+		String no = request.getParameter("no");
+		//DAO연결
+		FreeBoardDAO dao = FreeBoardDAO.newInstance();
+		FreeboardVO vo = dao.freeboardUpdateData(Integer.parseInt(no));
+		request.setAttribute("vo", vo);
+		request.setAttribute("main_jsp", "../freeboard/update.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("freeboard/update_ok.do")
+	public void freeboard_update_ok(HttpServletRequest request, HttpServletResponse response)
+	{
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex) {}
+		FreeboardVO vo = new FreeboardVO();
+		vo.setName(request.getParameter("name"));
+		vo.setSubject(request.getParameter("subject"));
+		vo.setContent(request.getParameter("content"));
+		vo.setPwd(request.getParameter("pwd"));
+		vo.setNo(Integer.parseInt(request.getParameter("no")));
+		
+		FreeBoardDAO dao = FreeBoardDAO.newInstance();
+		boolean bCheck = dao.freeboardUpdate(vo);
+		try
+		{
+			PrintWriter out = response.getWriter();
+			out.println(bCheck); // => Ajax에서 읽어서 처리
+		}catch(Exception ex) {}
+	}
+	@RequestMapping("freeboard/delete.do")
+	public void freeboard_delete(HttpServletRequest request, HttpServletResponse response)
+	{
+		String no = request.getParameter("no");
+		String pwd= request.getParameter("pwd");
+		
+		FreeBoardDAO dao = FreeBoardDAO.newInstance();
+		String res = dao.freeboardDelete(Integer.parseInt(no), pwd);
+		
+		try
+		{
+			PrintWriter out = response.getWriter();
+			out.println(res); // => Ajax에서 읽어서 처리
+		}catch(Exception ex) {}
 	}
 }
