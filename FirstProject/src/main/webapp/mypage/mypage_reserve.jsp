@@ -54,6 +54,7 @@ tr, td {
 							</tr>
 						</table>
 					</div>
+					<div style="height: 15px;"></div>
 				</c:forEach>
 				<%-- <div
 						style="border: solid 1px; border-color: orange; border-radius: 20px; width: 750px; padding: 20px 20px 0px 20px;">

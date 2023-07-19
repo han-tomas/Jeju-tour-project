@@ -15,11 +15,12 @@ public class ActivityWishDAO {
 		return dao;
 	}
 	
-	public void activityWishInsert(ActivityWishVO vo) {
+	public void activityWishInsert(WishReserveVO vo) {
 		try {
 			conn=db.getConnection();
-			String sql="INSERT INTO activity_wish VALUES("
-					+ "aw_no_seq.nextval,?,?)";
+			String sql="INSERT INTO wish_reserve ("
+					+ "no, id, acino, rcno) VALUES ("
+					+ "wr_no_seq.nextval,?,?,1)";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, vo.getId());
 			ps.setInt(2, vo.getAcino());
@@ -36,7 +37,7 @@ public class ActivityWishDAO {
 		try {
 			conn=db.getConnection();
 			String sql="SELECT count(*) "
-					+ "FROM activity_wish "
+					+ "FROM wish_reserve "
 					+ "WHERE acino=? AND id=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, acino);
@@ -53,52 +54,10 @@ public class ActivityWishDAO {
 		return count;
 	}
 	
-	public List<ActivityWishVO> activityWishListData(String id){
-		List<ActivityWishVO> list=new ArrayList<ActivityWishVO>();
-		try {
-			conn=db.getConnection();
-//			String sql="SELECT no,fno,"
-//					+ "(SELECT poster FROM food_house WHERE fno=jjim.fno),"
-//					+ "(SELECT name FROM food_house WHERE fno=jjim.fno),"
-//					+ "(SELECT phone FROM food_house WHERE fno=jjim.fno) "
-//					+ "FROM jjim "
-//					+ "WHERE id=? "
-//					+ "ORDER BY no DESC";
-			String sql="SELECT no, acino, (SELECT title FROM activity_info WHERE acino=activity_info.acino),"
-					+ "(SELECT main_poster FROM activity_info WHERE acino=activity_info.acino),"
-					+ "(SELECT price FROM activity_info WHERE acino=activity_info.acino), "
-					+ "(SELECT score FROM activity_info WHERE acino=activity_info.acino) "
-					+ "FROM jjim "
-					+ "WHERE id=? "
-					+ "ORDER BY no DESC";
-			ps=conn.prepareStatement(sql);
-			ps.setString(1, id);
-			ResultSet rs=ps.executeQuery();
-			while(rs.next()){
-				ActivityWishVO vo=new ActivityWishVO();
-				vo.setNo(rs.getInt(1));
-				vo.setAcino(rs.getInt(2));
-				vo.setTitle(rs.getString(3));
-				String poster=rs.getString(4);
-				poster=poster.replace("#", "&");
-				vo.setMain_poster(poster);
-				vo.setPrice(rs.getInt(5));
-				vo.setScore(rs.getDouble(6));
-				list.add(vo);
-			}
-			rs.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			db.disConnection(conn, ps);
-		}
-		return list;
-	}
-	
 	public void activityWishCancle(int acino, String id) {
 		try {
 			conn=db.getConnection();
-			String sql="DELETE FROM activity_wish WHERE acino=? and id=?";
+			String sql="DELETE FROM wish_reserve WHERE acino=? and id=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, acino);
 			ps.setString(2, id);

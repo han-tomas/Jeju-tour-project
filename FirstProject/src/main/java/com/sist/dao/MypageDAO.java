@@ -26,7 +26,8 @@ public class MypageDAO {
 		List<ReservationVO> list=new ArrayList<ReservationVO>();
 		try {
 			conn=db.getConnection();
-			String sql="SELECT dbday,poster,title,regdate,tprice FROM jeju_reserve WHERE id=?";
+			String sql="SELECT dbday,poster,title,regdate,tprice FROM jeju_reserve WHERE id=? "
+					+ "ORDER BY jrno DESC";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ResultSet rs=ps.executeQuery();

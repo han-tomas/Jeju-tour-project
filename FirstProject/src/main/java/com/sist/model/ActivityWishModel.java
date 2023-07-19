@@ -14,7 +14,7 @@ public class ActivityWishModel {
 		String acino=request.getParameter("acino");
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		ActivityWishVO vo=new ActivityWishVO();
+		WishReserveVO vo=new WishReserveVO();
 		vo.setId(id);
 		vo.setAcino(Integer.parseInt(acino));
 		ActivityWishDAO dao=ActivityWishDAO.newInstance();
