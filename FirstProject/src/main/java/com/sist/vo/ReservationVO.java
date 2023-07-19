@@ -16,11 +16,29 @@ ROK	CHAR(1 BYTE)
 REGDATE	DATE
  */
 import java.util.*;
-public class HotelReserveVO {
-	private int hrno, rno, inwon, price, tprice;
+public class ReservationVO {
+	private int jrno, rno, acino, cid, rcno, inwon, price, tprice;
 	private String checkin, checkout, id, name, email, phone, payment, rok, dbday, poster, title;
 	private Date regdate;
 	
+	public int getAcino() {
+		return acino;
+	}
+	public void setAcino(int acino) {
+		this.acino = acino;
+	}
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	public int getRcno() {
+		return rcno;
+	}
+	public void setRcno(int rcno) {
+		this.rcno = rcno;
+	}
 	public String getDbday() {
 		return dbday;
 	}
@@ -39,11 +57,11 @@ public class HotelReserveVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getHrno() {
-		return hrno;
+	public int getJrno() {
+		return jrno;
 	}
-	public void setHrno(int hrno) {
-		this.hrno = hrno;
+	public void setJrno(int jrno) {
+		this.jrno = jrno;
 	}
 	public int getRno() {
 		return rno;

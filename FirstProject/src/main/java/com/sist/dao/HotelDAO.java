@@ -214,7 +214,7 @@ public class HotelDAO {
 	}
 	
 	// 예약하기
-	public void hotelReserveOk(HotelReserveVO vo) {
+	public void hotelReserveOk(ReservationVO vo) {
 		try {
 			conn = db.getConnection();
 			String sql = "INSERT INTO jeju_reserve ("

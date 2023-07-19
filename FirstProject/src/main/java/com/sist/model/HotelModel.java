@@ -299,7 +299,7 @@ public class HotelModel {
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		
-		HotelReserveVO vo = new HotelReserveVO();
+		ReservationVO vo = new ReservationVO();
 		vo.setId(id);
 		vo.setName(name);
 		vo.setEmail(email);
