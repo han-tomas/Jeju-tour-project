@@ -1,5 +1,6 @@
 package com.sist.model;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ public class FreeBoardModel {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
+		request.setAttribute("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		
 		request.setAttribute("main_jsp", "../freeboard/list.jsp");
 		return "../main/main.jsp";
@@ -72,6 +74,13 @@ public class FreeBoardModel {
 		FreeboardVO vo = dao.freeboardDetailData(Integer.parseInt(no));
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../freeboard/detail.jsp");
+		
+		
+		// 댓글 읽기
+		FreeBoardReplyDAO fdao=FreeBoardReplyDAO.newInstance();
+		List<FreeBoardReplyVO> list = fdao.replyListData(Integer.parseInt(no));
+		request.setAttribute("list", list);
+		
 		return "../main/main.jsp";
 	}
 	@RequestMapping("freeboard/update.do")

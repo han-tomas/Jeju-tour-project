@@ -81,7 +81,7 @@ public class FreeBoardReplyDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="INSERT INTO project_freeboard_reply(no,bno,id,name,content,group_id) "
+			String sql="INSERT INTO jeju_freeboard_reply(no,bno,id,name,content,group_id) "
 					+ "VALUES(jfr_no_seq.nextval,?,?,?,?,"
 					+ "(SELECT NVL(MAX(group_id)+1,1) FROM jeju_freeboard_reply))";
 			ps=conn.prepareStatement(sql);
@@ -115,6 +115,21 @@ public class FreeBoardReplyDAO {
 			    =>CCCCCCC			1		4(3+1)	2
 	 
 	 */
+ 	 /*
+	        NO         NOT NULL NUMBER       
+			BNO                 NUMBER       
+			ID                  VARCHAR2(20) 
+			NAME       NOT NULL VARCHAR2(51) 
+			MSG        NOT NULL CLOB         
+			REGDATE             DATE         
+			GROUP_ID            NUMBER    ==> 답변끼리 모아주는 역할     
+			GROUP_STEP          NUMBER    ==> 답변출력 순서 
+			GROUP_TAB           NUMBER    ==> 어느 댓글에 대한 표시
+			--------------------------------------------------- 댓글  
+			ROOT                NUMBER    ==> 상위 댓글번호  
+			DEPTH               NUMBER    ==> 댓글 갯수 
+	    */
+	 
 	public void replyReplyInsert(int pno,FreeBoardReplyVO vo)
 	{
 		try
@@ -144,7 +159,7 @@ public class FreeBoardReplyDAO {
 			ps.setInt(2, gs);
 			ps.executeUpdate(); // (commit()=>X)
 			//insert => insert
-			sql="INSERT INTO project_freeboard_reply VALUES("
+			sql="INSERT INTO jeju_freeboard_reply VALUES("
 					+ "pfr_no_seq.nextval,?,?,?,?,SYSDATE,?,?,?,?,0)";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, vo.getBno());
@@ -164,6 +179,72 @@ public class FreeBoardReplyDAO {
 			ps.setInt(1, pno);
 			ps.executeUpdate();
 			
+			conn.commit();
+		}catch(Exception ex)
+		{
+			try
+			{
+				conn.rollback();
+			}catch(Exception e) {}
+			ex.printStackTrace();
+		}
+		finally
+		{
+			// conn의 원래 기능으로 설정
+			try
+			{
+				conn.setAutoCommit(true);
+			}catch(Exception ex){}
+			db.disConnection(conn, ps);
+		}
+	}
+	// 댓글 삭제
+	// 댓글 삭제
+	public void replyDelete(int no)
+	{
+		try
+		{
+			conn=db.getConnection();
+			conn.setAutoCommit(false);
+			// SQL문장이 여러개 수행
+			String sql="SELECT root,depth "
+					+ "FROM jeju_freeboard_reply "
+					+ "WHERE no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int root=rs.getInt(1);
+			int depth=rs.getInt(2);
+			rs.close();
+			
+			if(depth==0)
+			{
+				sql="DELETE FROM jeju_freeboard_reply "
+						+ "WHERE no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, no);
+				ps.executeUpdate();
+			}
+			else
+			{
+				String msg="관리자가 삭제한 댓글입니다.";
+				sql="UPDATE jeju_freeboard_reply SET "
+						+ "msg=? "
+						+ "WHERE no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1, msg);
+				ps.setInt(2, no);
+				ps.executeUpdate();
+			}
+			
+			//depth 감소
+			sql="UPDATE jeju_freeboard_reply SET "
+					+ "depth=depth-1 "
+					+ "WHERE no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, root);
+			ps.executeUpdate();
 			conn.commit();
 		}catch(Exception ex)
 		{

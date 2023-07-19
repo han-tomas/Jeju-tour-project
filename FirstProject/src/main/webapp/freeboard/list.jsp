@@ -38,6 +38,13 @@
     background-color: orange;
     border-color: orange;
   }
+.table{
+	border-radius: 7px;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.table th{
+	background-color: #FFE0B2;
+}  
 </style>
 </head>
 <body>
@@ -56,7 +63,7 @@
     <div class="container">
 	    <div style="height:20px"></div>
 	    <div class="row row1">
-	    	<table class="table">
+	    	<table class="table1">
 	    		<tr>
 		  	 		<td>
 		  	 			<a href="../freeboard/insert.do" class="btn btn-sm btn-warning" id="fbinsert">
@@ -66,6 +73,7 @@
 		  	 		</td>
 		  	 	</tr>
 	    	</table>
+	    	<div style="height: 10px"></div>
 	    	<table class="table">
 	    		<tr>
 	    			<th width=10% class="text-center">번호</th>
@@ -75,9 +83,13 @@
 		  	 		<th width=10% class="text-center">조회수</th>
 	    		</tr>
 	    	<c:forEach var="vo" items="${list }" >
-	    		<tr>
+	    		<tr style="font-size: 13pt">
 	    			<td width=10% class="text-center">${vo.no }</td>
-	  	 			<td width=45%><a href="../freeboard/detail.do?no=${vo.no}">${vo.subject }</a></td>
+	  	 			<td width=45%><a href="../freeboard/detail.do?no=${vo.no}">${vo.subject }</a>
+	  	 			<c:if test="${today==vo.dbday }">
+	  	 				<sup><img src="image/new.gif" style="width: 60px;height: 30px;"></sup>
+	  	 			</c:if>
+	  	 			</td>
 	  	 			<td width=15% class="text-center">${vo.name }</td>
 	  	 			<td width=20% class="text-center">${vo.dbday }</td>
 	  	 			<td width=10% class="text-center">${vo.hit }</td>

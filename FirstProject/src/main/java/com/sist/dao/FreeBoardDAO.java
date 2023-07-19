@@ -22,7 +22,7 @@ public class FreeBoardDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD hh24:mi:ss'),hit,num "
+			String sql="SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD'),hit,num "
 					+ "FROM (SELECT no,subject,name,regdate,hit,rownum AS num "
 					+ "FROM (SELECT /*+INDEX_DESC(jeju_freeboard jf_no_pk)*/no,subject,name,regdate,hit "
 					+ "FROM jeju_freeboard)) "
@@ -110,7 +110,7 @@ public class FreeBoardDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="UPDATE project_freeboard SET "
+			String sql="UPDATE jeju_freeboard SET "
 					+ "hit=hit+1 "
 					+ "WHERE no=?";
 			// 조회수 증가
@@ -119,7 +119,7 @@ public class FreeBoardDAO {
 			ps.executeUpdate();
 			
 			// 실제 데이터 읽기
-			sql="SELECT no,subject,name,content,TO_CHAR(regdate,'YYYY-MM-DD hh24:mi:ss'),hit "
+			sql="SELECT no,subject,name,content,TO_CHAR(regdate,'YYYY-MM-DD'),hit "
 					+ "FROM jeju_freeboard "
 					+ "WHERE no=?";
 			ps=conn.prepareStatement(sql);
