@@ -18,9 +18,17 @@ REGDATE	DATE
 import java.util.*;
 public class ReservationVO {
 	private int jrno, rno, acino, cid, rcno, inwon, price, tprice;
-	private String checkin, checkout, id, name, email, phone, payment, rok, dbday, poster, title;
+	private String checkin, checkout, id, rname, remail, rphone, payment, rok, dbday, poster, title;
 	private Date regdate;
+	private String realDate;
 	
+	
+	public String getRealDate() {
+		return realDate;
+	}
+	public void setRealDate(String realDate) {
+		this.realDate = realDate;
+	}
 	public int getAcino() {
 		return acino;
 	}
@@ -105,23 +113,23 @@ public class ReservationVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getRname() {
+		return rname;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setRname(String rname) {
+		this.rname = rname;
 	}
-	public String getEmail() {
-		return email;
+	public String getRemail() {
+		return remail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setRemail(String remail) {
+		this.remail = remail;
 	}
-	public String getPhone() {
-		return phone;
+	public String getRphone() {
+		return rphone;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setRphone(String rphone) {
+		this.rphone = rphone;
 	}
 	public String getPayment() {
 		return payment;

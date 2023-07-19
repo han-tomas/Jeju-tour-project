@@ -38,7 +38,7 @@ a:hover{
                     <a href="#"><li>홈</li></a>
                     <a href="#"><li>내정보관리</li></a>
                     <a href="#"><li>회원탈퇴</li></a>
-                    <a href="../mypage/mypage_reserve_list.do"><li>예약리스트</li></a>
+                    <a href="../mypage/mypage_reserve.do"><li>예약리스트</li></a>
                     <a href="../mypage/mypage_jjim_list.do" style="color: yellow"><li>찜 목록</li></a>                  
                 </ul>
             </div>

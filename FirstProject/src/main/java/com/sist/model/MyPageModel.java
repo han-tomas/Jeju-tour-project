@@ -36,19 +36,52 @@ public class MyPageModel {
 		return "../main/main.jsp";
 	}
 	
-	@RequestMapping("mypage/mypage_reserve_list.do")
-	public String reserve_list(HttpServletRequest request, HttpServletResponse response)
-	{
-		request.setAttribute("mypage_jsp", "../mypage/mypage_reserve.jsp");
-		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
-		return "../main/main.jsp";
+	
+	@RequestMapping("mypage/mypage_activity_reserve.do")
+	public String mypage_activity_reserve(HttpServletRequest request, HttpServletResponse response) {
+		String acino=request.getParameter("acino");
+		String strInwon=request.getParameter("inwon");
+		String strPrice=request.getParameter("price");
+		String strTprice=request.getParameter("tprice");
+		String dbday=request.getParameter("dbday");
+		int inwon=Integer.parseInt(strInwon);
+		int price=Integer.parseInt(strPrice);
+		int tprice=Integer.parseInt(strTprice);
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		String name=(String)session.getAttribute("name");
+		MemberDAO mdao=MemberDAO.newInstance();
+		MemberVO mvo=mdao.memberSearch(id);
+		ActivityDAO adao=ActivityDAO.newInstance();
+		ActivityVO avo=adao.activityDetailData(Integer.parseInt(acino));
+		ReservationVO arvo=new ReservationVO();
+		
+		arvo.setDbday(dbday);
+		arvo.setAcino(avo.getAcino());
+		arvo.setId(id);
+		arvo.setRname(name);
+		arvo.setRemail(mvo.getEmail());
+		arvo.setRphone(mvo.getPhone());
+		arvo.setInwon(inwon);
+		arvo.setPrice(price);
+		arvo.setTprice(tprice);
+		arvo.setPoster(avo.getMain_poster());
+		arvo.setTitle(avo.getTitle());
+		
+		adao.activityReserveOk(arvo);
+		
+		return "redirect:../mypage/mypage_reserve.do";
 	}
 	
 	@RequestMapping("mypage/mypage_reserve.do")
-	public String mypage_buy(HttpServletRequest request, HttpServletResponse response) {
+	public String mypage_reserve(HttpServletRequest request, HttpServletResponse response) {
 		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
 		
-		
+		MypageDAO mydao=MypageDAO.newInstance();
+		List<ReservationVO> list=mydao.reservationListData(id);
+		request.setAttribute("list", list);
 		request.setAttribute("mypage_jsp", "../mypage/mypage_reserve.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";

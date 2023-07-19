@@ -171,7 +171,7 @@ public class ActivityDAO {
 		return totalCategory;
 	}
 	
-	public void activityReserveOk(ActivityReserveVO vo) {
+	public void activityReserveOk(ReservationVO vo) {
 		try {
 			conn = db.getConnection();
 			String sql = "INSERT INTO jeju_reserve ("

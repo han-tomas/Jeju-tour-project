@@ -34,31 +34,28 @@ tr, td {
 						<table class="table table-reserve">
 							<tr>
 								<td style="font-size: 15pt; font-weight: bold;">결제완료</td>
-								<td>${vo.regdate }</td>
-								<td><button class="btn btn-success" disabled>예약대기</button></td>
+								<td>${vo.realDate }</td>
+								<td><button class="btn btn-outline-success" disabled>예약대기</button></td>
 							</tr>
 							<tr>
-								<td rowspan="2" width="20%"><img
+								<td rowspan="2" width="15%"><img
 									src="${vo.poster }"
 									class="reserveImg"></td>
-								<td width="60%" style="font-size: 17px; font-weight: bold;"
+								<td width="65%" style="font-size: 17px; font-weight: bold;"
 									id="title">${vo.title }</td>
-								<td width="20%"><a href="#"
-									class="btn btn-outline-secondary">예약취소</a></td>
+								<td width="15%"><a href="#" class="btn btn-outline-danger">예약취소</a></td>
 							</tr>
 							<tr>
-								<td width="60%" style="color: gray;">${vo.dbday }<span
-									style="margin-left: 280px;">
-								<fmt:formatNumber value="${vo.price }" pattern="#,###" />원
-								</span></td>
-								<td width="20%"><a href="#"
+								<td width="65%" style="color: gray;"><p>${vo.dbday }</p>
+								<p style="text-align:right;margin-right: 30px;font-weight: bold;font-size: 18pt">${vo.price }</p>
+								</td>
+								<td width="20%"><a href="../review/insert.do"
 									class="btn btn-outline-secondary">리뷰작성</a></td>
 							</tr>
 						</table>
 					</div>
 				</c:forEach>
-				<!-- 예시 -->
-				<div
+				<%-- <div
 						style="border: solid 1px; border-color: orange; border-radius: 20px; width: 750px; padding: 20px 20px 0px 20px;">
 						<table class="table table-reserve">
 							<tr>
@@ -109,7 +106,7 @@ tr, td {
 									class="btn btn-outline-secondary">리뷰작성</a></td>
 							</tr>
 						</table>
-					</div>
+					</div> --%>
 			</td>
 		</tr>
 	</table>

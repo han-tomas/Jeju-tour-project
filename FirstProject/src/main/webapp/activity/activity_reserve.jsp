@@ -167,14 +167,39 @@ $(function(){
 			title : '개인정보 국외 이전 동의 (필수)'
 		})
 	})
+	
+	let acino=$('#buyBtn').attr("data-no");
+	let inwon=$('#inwon').val();
+	let price=$('#price').val();
+	let tprice=$('#total_price').attr('data-total');
+	let dbday=$('#dbday').val();
+$('#buyBtn').click(function(){
+		$.ajax({
+			type:'post',
+			url:'../mypage/mypage_activity_reserve.do',
+			data:{"acino":acino,"inwon":inwon,"price":price,"tprice":tprice,"dbday":dbday},
+			success:function(result){
+				requestPay()
+			}
+		})
+})
+	
+	
 })
 
 
-$(function(){
+/* $(function(){
 	$('#buyBtn').click(function(){
 		requestPay()
 	})
-})
+}) 
+
+
+
+*/
+
+
+
 
 var IMP = window.IMP; // 생략 가능
 IMP.init("imp36806187"); // 예: imp00000000
@@ -366,8 +391,11 @@ function requestPay() {
 										<input type="hidden" id="total_price" data-total="${vo.price*people }">
 										<input type="hidden" id="post" value="${mvo.post }">
 										<input type="hidden" id="addr1" value="${mvo.addr1 }">
+										<input type="hidden" id="inwon" value="${people }">
+										<input type="hidden" id="price" value="${vo.price }">
+										<input type="hidden" id="dbday" value="${date }">
 										<button class="btn btn-block btn-primary btn-wish"
-											style="height: 50px;" disabled="disabled" id="buyBtn">
+											style="height: 50px;" disabled="disabled" id="buyBtn" data-no="${vo.acino }">
 											<h5>
 												<strong> <fmt:formatNumber
 														value="${vo.price*people }" pattern="#,###" />원 결제하기
