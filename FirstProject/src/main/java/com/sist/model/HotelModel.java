@@ -267,6 +267,7 @@ public class HotelModel {
 		request.setAttribute("hname", hname);
 		request.setAttribute("vo", vo);
 		request.setAttribute("mvo", mvo);
+		request.setAttribute("date", date);
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -292,6 +293,9 @@ public class HotelModel {
 		String inwon = request.getParameter("inwon");
 		String price = request.getParameter("price");
 		String tprice = request.getParameter("tprice");
+		String dbday = request.getParameter("date");
+		String poster = request.getParameter("poster");
+		String title = request.getParameter("title");
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		
@@ -306,6 +310,9 @@ public class HotelModel {
 		vo.setInwon(Integer.parseInt(inwon));
 		vo.setPrice(Integer.parseInt(price));
 		vo.setTprice(Integer.parseInt(tprice));
+		vo.setDbday(dbday);
+		vo.setPoster(poster);
+		vo.setTitle(title);
 		
 		// DAO연동
 		HotelDAO dao = HotelDAO.newInstance();

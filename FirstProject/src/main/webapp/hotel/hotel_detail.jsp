@@ -115,19 +115,21 @@ $(function() {
 	var huno = $('#huno').val()
 	var inwon = $('#inwon').val()
 	var date = $('#date').val()
-	var today = moment();
+	var today = moment()
+	var tomorrow = moment().add(1, 'day');
+	var formattedToday = today.format("MM/DD/YYYY");
+    var formattedTomorrow = tomorrow.format("MM/DD/YYYY");
 
 	$('.datepicker').daterangepicker({
 		startDate: today, // 오늘 날짜를 시작 기간으로 설정
-		endDate: today.clone().add(1, 'days') // 오늘 날짜를 1일 뒤로 설정하여 종료 기간으로 설정
+		endDate: tomorrow // 오늘 날짜를 1일 뒤로 설정하여 종료 기간으로 설정
 	});
 	
 	$.ajax({
 		type:'GET',
 		url:'../hotel/room_list.do',
-		data:{"huno":huno,"inwon":inwon,"date":date},
+		data:{"huno":huno,"inwon":inwon,"date":formattedToday + " - " + formattedTomorrow},
 		success:function(result){
-			alert(huno + "," + inwon + "," + date + '성공!');
 			$('#roomResult').html(result);
 		}
 	})
@@ -259,14 +261,14 @@ $(function() {
 			</div>
 			<div class="col-sm-12">
 				<ul class="tabs">
-					<li class="tab-item"><a href="#item1" class="actived">숙소소개</a></li>
+					<li class="tab-item"><a href="#item1">숙소소개</a></li>
 					<li class="tab-item"><a href="#item2">이용안내</a></li>
 					<li class="tab-item"><a href="#item3">취소/환불규정</a></li>
 					<li class="tab-item"><a href="#item4">평점/리뷰</a></li>
-					<li class="tab-item"><a href="#item5">지도</a></li>
+					<li class="tab-item"><a href="#item5" class="actived">지도</a></li>
 				</ul>
 				<div class="wrapper_tab-content">
-					<article id="item1" class="tab-content content-visible">
+					<article id="item1" class="tab-content">
 						<table class="table">
 							<tr>
 								<td style="width:25%"><strong>숙소소개</strong></td>
@@ -406,14 +408,7 @@ $(function() {
 						<h1>평점장소</h1>
 					</article>
 					
-					<article id="item5" class="tab-content">
-						<p style="margin-top:-12px">
-						    <em class="link">
-						        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-						            ${ vo.addr2 }
-						        </a>
-						    </em>
-						</p>
+					<article id="item5" class="tab-content content-visible">
 						<div id="map" style="width:100%;height:350px;"></div>
 						
 						<script>

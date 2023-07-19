@@ -18,9 +18,27 @@ REGDATE	DATE
 import java.util.*;
 public class HotelReserveVO {
 	private int hrno, rno, inwon, price, tprice;
-	private String checkin, checkout, id, name, email, phone, payment, rok;
+	private String checkin, checkout, id, name, email, phone, payment, rok, dbday, poster, title;
 	private Date regdate;
 	
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getHrno() {
 		return hrno;
 	}
