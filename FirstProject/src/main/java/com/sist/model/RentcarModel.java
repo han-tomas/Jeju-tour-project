@@ -2,6 +2,7 @@ package com.sist.model;
 
 import java.time.DayOfWeek;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -10,10 +11,12 @@ import java.util.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
+import com.sist.dao.MemberDAO;
 import com.sist.dao.RentcarDAO;
-
+import com.sist.vo.MemberVO;
 //import com.sist.dao.ReserveDAO;
 import com.sist.vo.RentcarVO;
 
@@ -30,17 +33,13 @@ public class RentcarModel {
 		else if (type==null)
 			type="";
 		int curpage=Integer.parseInt(page);
-		//String sort="";
-		//if(sort==null)
-		//	sort="전체";  // 1: 전체 2:국산 3:수입 4:경차 5: 준중형 6: 중형 7: 소형차 8: 오픈카 9: 스포츠카 10: 전기차
-
+		
 		RentcarDAO dao=RentcarDAO.newInstance();
 		
-		//List<RentcarVO> list=dao.RentcarListData(curpage);
-		//int totalpage=dao.RentcarTotalPage();
-		int totalpage=dao.RentcarSortTotalPage(type);
-		//List<RentcarVO> sList=dao.RentcarSort(curpage, type);
-
+		
+		//int totalpage=dao.RentcarSortTotalPage(Integer.parseInt(type));
+		int totalpage=dao.RentcarTotalPage();
+		
 		final int BLOCK = 5;
 		int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
 		int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -55,6 +54,7 @@ public class RentcarModel {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("type", type);
+		
 		request.setAttribute("main_jsp", "../rentcar/rentcar_main.jsp");
 		
 		return "../main/main.jsp";
@@ -80,53 +80,7 @@ public class RentcarModel {
 		
 		return "../rentcar/rentcar_main_result.jsp";
 	}
-	@RequestMapping("rentcar/rentcar_sort.do")
-	public String rentcar_sort(HttpServletRequest request, HttpServletResponse response)
-	{
-		String[] chk = new String[10]; 
-		//String[] chk = request.getParameterValues("sort");
-		chk[0]="";
-		chk[1]=request.getParameter("chk1");
-		if (chk[1]==null) {
-			chk[1] = "";
-		}
-		chk[2]=request.getParameter("chk2");
-		if (chk[2]==null) {
-			chk[2] = "";
-		}
-		chk[3]=request.getParameter("chk3");
-		if (chk[3]==null) {
-			chk[3] = "";
-		}
-		chk[4]=request.getParameter("chk4");
-		if (chk[4]==null) {
-			chk[4] = "";
-		}
-		chk[5]=request.getParameter("chk5");
-		if (chk[5]==null) {
-			chk[5] = "";
-		}
-		chk[6]=request.getParameter("chk6");
-		if (chk[6]==null) {
-			chk[6] = "";
-		}
-		chk[7]=request.getParameter("chk7");
-		if (chk[7]==null) {
-			chk[7] = "";
-		}
-		chk[8]=request.getParameter("chk8");
-		if (chk[8]==null) {
-			chk[8] = "";
-		}
-		chk[9]=request.getParameter("chk9");
-		if (chk[9]==null) {
-			chk[9] = "";
-		}
-		for (int i = 0; i < chk.length; i++) {
-		    System.out.println("chk[" + i + "]: " + chk[i]);
-		}
-		return "../main/main.jsp";
-	}
+	
 	@RequestMapping("rentcar/rentcar_detail.before.do")
 	  public String rentcar_detail_before(HttpServletRequest request,
 			  HttpServletResponse response)
@@ -196,19 +150,12 @@ public class RentcarModel {
 	        // 문자열을 LocalDate 객체로 변환
 	        LocalDate startDate = LocalDate.parse(dateParts[0], formatter);
 	        LocalDate endDate = LocalDate.parse(dateParts[1], formatter);
-	        LocalDate currentDate = LocalDate.now();
+	        //LocalDate currentDate = LocalDate.now();
 	        
-	        //System.out.println(currentDate);
-	        //System.out.println(startDate);
-	        // 날짜 간의 차이 계산
+	        
 	        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
 			
-			 //long rdaysBetween = ChronoUnit.DAYS.between(currentDate, endDate); 
-			 //long rdaysBetween2 = ChronoUnit.DAYS.between(currentDate, startDate);
-			 //System.out.println(rdaysBetween); 
-			 //System.out.println(rdaysBetween2);
-			 //request.setAttribute("rdaysBetween", rdaysBetween);
-			 //request.setAttribute("rdaysBetween2", rdaysBetween2);
+			 
 	        
 	        // 요일 계산
 	        String[] koreanDays = {"일", "월", "화", "수", "목", "금", "토"};
@@ -224,13 +171,17 @@ public class RentcarModel {
 	        
 	        request.setAttribute("date", startDate + "(" + start + ") ~ "
 	        						+ endDate + "(" + end + ")");
-	        request.setAttribute("days", daysBetween);
-	        
-	        
-	        	
+	        request.setAttribute("days", daysBetween);	
 		}
 		
-
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		String name=(String)session.getAttribute("name");
+		MemberDAO mdao=MemberDAO.newInstance();
+		MemberVO mvo=mdao.memberSearch(id);
+		request.setAttribute("mvo", mvo);
+		request.setAttribute("id", id);
+		request.setAttribute("name", name);
 		
 		//request.setAttribute("rent_day", rent_day);
 		RentcarDAO dao=RentcarDAO.newInstance();
@@ -259,6 +210,7 @@ public class RentcarModel {
 		
 		//return "../rentcar/rentcar_reserve.do?cid="+cid;
 		return "redirect:../rentcar/rentcar_reserve.do";
+	
 		
 	}
 	@RequestMapping("rentcar/agreeBtn1.do")
