@@ -17,4 +17,7 @@
 	<bean id="mypage" class="com.sist.model.MyPageModel"/>
 	<bean id="adminpage" class="com.sist.model.AdminPageModel"/>
 	<bean id="foodjjim" class="com.sist.model.FoodJjimModel"/>
+	<bean id="freeboard" class="com.sist.model.FreeBoardModel"/>
+	<bean id="fbreply" class="com.sist.model.FreeBoardReplyModel"/>
+	
 </beans>
