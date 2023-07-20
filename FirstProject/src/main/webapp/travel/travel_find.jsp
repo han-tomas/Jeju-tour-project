@@ -131,7 +131,7 @@ td{
 										</td>
 		  							</tr>
 									<tr>
-										<td width=65%  style="font-style: italic;font-size: 15px;" >
+										<td width=65%  style="font-style: italic;font-size: 15px; color: #03A9F4" >
 											${vo.tag }
 										</td>
 									</tr>

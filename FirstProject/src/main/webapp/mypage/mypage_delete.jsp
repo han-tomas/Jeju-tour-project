@@ -37,6 +37,15 @@ $(function(){
 	})
 })
 </script>
+<style type="text/css">
+th,td{
+	border:none;
+}
+.table{
+	box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 10px;
+}
+</style>
 </head>
 <body>
 <h2>회원 탈퇴</h2>
@@ -45,7 +54,7 @@ $(function(){
 	<table class="table">
 		<tr>
 			<th colspan="2">
-				<span style="font-size: 15pt">비밀번호 확인</span>
+				<span style="font-size: 15pt">&nbsp;&nbsp;비밀번호 확인</span>
 			</th>
 		</tr>
 		<tr>

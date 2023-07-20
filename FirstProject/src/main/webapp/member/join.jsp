@@ -44,7 +44,21 @@
 Shadowbox.init({
    players:['iframe']
 })
+
 $(function(){
+	$('#pwd1').keyup(function(){
+		   let pwd=$('#pwd').val()
+		   let pwd1=$('#pwd1').val()
+		   if(pwd.trim()===pwd1.trim())
+		   {
+			   $('#pwdmsg').html('<span style="color:green;font-size:8px">비밀번호가 일치합니다</span>')
+		   }
+		   else
+		   {
+			   $('#pwdmsg').html('<span style="color:red;font-size:8px">비밀번호가 일치하지 않습니다.</span>')
+			  
+		   }  
+	   })
    $('#idCheckBtn').click(function(){
       Shadowbox.open({
     	  content:'../member/idcheck.do',
@@ -136,13 +150,14 @@ $(function(){
    
      $('#joinBtn').click(function(){
 	   // 필수 입력 필드 배열
-	   var requiredFields = ['id', 'name', 'post', 'pwd', 'birth', 'sex', 'addr1', 'addr2', 'content'];
-	   var isValid = true;
-	   
+	   let requiredFields = ['id', 'name', 'post', 'pwd', 'birth', 'sex', 'addr1', 'addr2', 'content'];
+	   let isValid = true;
+	   let pwd=$('#pwd').val()
+	   let pwd1=$('#pwd1').val()
 	   // 필수 입력 필드를 순회하며 값이 비어있는지 확인
-	   for (var i = 0; i < requiredFields.length; i++) {
-	      var field = requiredFields[i];
-	      var value = $('#' + field).val();
+	   for (let i = 0; i < requiredFields.length; i++) {
+	      let field = requiredFields[i];
+	      let value = $('#' + field).val();
 	      if (value === '') {
 	         isValid = false;
 	         break;
@@ -150,12 +165,20 @@ $(function(){
 	   }
 	   
 	   if (!isValid) {
-	      $('#warning').html('<span style="color:blue; font-size:8px">입력사항들을 모두 입력해주세요</span>')
+	      $('#warning').html('<span style="color:red; font-size:11px">입력사항들을 모두 입력해주세요</span>')
 	      return; // 입력값이 없을 경우 함수를 종료하고 이후 코드를 실행하지 않음
 	   }
-
-	   alert("회원가입 완료!");
-	   $('#joinFrm').submit();
+	   if(pwd.trim()!==pwd1.trim())
+	   {
+		   $('#pwd1').val("")
+		   $('#pwd1').focus()
+		   
+	   }
+	   else
+	   {
+		   alert("회원가입 완료!");
+		   $('#joinFrm').submit();		   
+	   }
 	})
 })
 </script>
@@ -189,10 +212,20 @@ $(function(){
         
         <tr>
          <th style="text-align:right;" width=30%>비밀번호</th>
-         <td width=70% class="inline">
-          <input type=password name=pwd id=pwd size=20 class="input-sm">
-          &nbsp;재입력&nbsp;<input type=password name=pwd1 id=pwd1 size=20 class="input-sm">
+	         <td width=70% class="inline">
+	          <input type=password name=pwd id=pwd size=20 class="input-sm" value="${vo.pwd }">
+	         </td>
+        </tr>
+        <tr>
+         <th style="text-align:right;" width=30%>재입력</th>
+         <td>
+         	<input type=password name=pwd1 id=pwd1 size=20 class="input-sm" value="${vo.pwd }">
          </td>
+        </tr>
+        <tr>
+        	<th width=30%></th>
+        	<td width=70% id="pwdmsg">
+        	</td>
         </tr>
         
         <tr>

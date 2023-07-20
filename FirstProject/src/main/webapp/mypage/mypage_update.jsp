@@ -238,10 +238,10 @@ $(function(){
          <th style="text-align:right;" width=30%>전화</th>
          <td width=70% class="inline">
           <select name=phone1 id="tel1" class="input-sm">
-           <option>010</option ${phone1=='010'?"selected":"" }>
-           <option>011</option ${phone1=='011'?"selected":"" }>
-           <option>016</option ${phone1=='016'?"selected":"" }>
-           <option>070</option ${phone1=='070'?"selected":"" }>
+           <option ${phone1=='010'?"selected":"" }>010</option >
+           <option ${phone1=='011'?"selected":"" }>011</option>
+           <option ${phone1=='016'?"selected":"" }>016</option >
+           <option ${phone1=='070'?"selected":"" }>070</option>
           </select>
           -<input type=text name=phone2 id="tel2" size=4 class="input-sm" value="${phone2 }">
           -<input type=text name=phone3 id="tel3" size=4 class="input-sm" value="${phone3 }">
