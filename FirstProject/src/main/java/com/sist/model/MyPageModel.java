@@ -34,9 +34,17 @@ public class MyPageModel {
 		ActivityWishDAO adao = ActivityWishDAO.newInstance();
 		List<WishReserveVO> alist = adao.activityWishListData(id);
 		
+		HotelWishDAO hdao = HotelWishDAO.newInstance();
+		List<WishReserveVO> hlist = hdao.hotelWishListData(id);
+		
+		RentcarWishDAO rdao = RentcarWishDAO.newInstance();
+		List<WishReserveVO> rlist = rdao.rentcarWishListData(id);		
+		
 		request.setAttribute("list", list);
 		request.setAttribute("flist", flist);
 		request.setAttribute("alist", alist);
+		request.setAttribute("hlist", hlist);
+		request.setAttribute("rlist", rlist);
 		request.setAttribute("mypage_jsp", "../mypage/mypage_jjim.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";

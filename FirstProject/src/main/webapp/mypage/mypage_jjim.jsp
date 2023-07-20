@@ -102,12 +102,9 @@ $(function(){
 .travelhead{
 	background-color: #FFB900;
 }
-.foodImage{
+.listImage{
 	width: 70px;
 	height: 50px;
-}
-#foodhead{
-	background-color: #fbc6c6;
 }
 </style>
 </head>
@@ -149,7 +146,7 @@ $(function(){
 	
 	<h4>맛집</h4>
 	<table class="table">
-		<tr style="background-color: #fbc6c6" id="foodhead">
+		<tr style="background-color: #fbc6c6">
 			<th class="text-center">No</th>	
 			<th class="text-center"></th>
 			<th class="text-center">업체</th>
@@ -159,7 +156,7 @@ $(function(){
 		<c:forEach var="fvo" items="${flist }" varStatus="ss">
 			<tr>
 				<td class="text-center">${ss.index+1}</td>
-				<td><img src="${fvo.poster }" class="foodImage"></td>
+				<td><img src="${fvo.poster }" class="listImage"></td>
 				<td class="text-center">${fvo.name }</td>
 				<td class="text-center">${fvo.phone }</td>
 				<td>
@@ -180,19 +177,19 @@ $(function(){
 		<div class="wrapper_tab-content">
 			<article id="item1" class="tab-content content-visible">
 				<table class="table">
-					<tr style="background-color: #fbc6c6" id="foodhead">
-						<th class="text-center">no</th>	
-						<th class="text-center"></th>
-						<th class="text-center">상품명</th>
-						<th class="text-center"></th>
+					<tr style="background-color: #fbc6c6">
+						<th class="text-center" width="10%">No</th>	
+						<th class="text-center" width="15%"></th>
+						<th class="text-center" width="60%">상품명</th>
+						<th class="text-center" width="15%"></th>
 					</tr>
 					<c:forEach var="avo" items="${ alist }" varStatus="ss">
 						<tr>
 							<td class="text-center">${ss.index+1}</td>
-							<td><img src="${ avo.main_poster }" class="foodImage"></td>
-							<td class="text-center">${ avo.title }</td>
+							<td><img src="${ avo.main_poster }" class="listImage"></td>
+							<td class="text-left">${ avo.title }</td>
 							<td>
-						      <a href="../food/food_detail.do?fino=${fvo.fino }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+						      <a href="../activity/activity_detail.do?acino=${ avo.acino }"><span class="btn btn-sm btn-warning">상세보기</span></a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -201,21 +198,19 @@ $(function(){
 			
 			<article id="item2" class="tab-content">
 				<table class="table">
-					<tr style="background-color: #fbc6c6" id="foodhead">
-						<th class="text-center">2222222</th>	
-						<th class="text-center"></th>
-						<th class="text-center">업체</th>
-						<th class="text-center">전화번호</th>
-						<th class="text-center"></th>
+					<tr style="background-color: #fbc6c6">
+						<th class="text-center" width="10%">No</th>	
+						<th class="text-center" width="15%"></th>
+						<th class="text-center" width="60%">상품명</th>
+						<th class="text-center" width="15%"></th>
 					</tr>
-					<c:forEach var="fvo" items="${flist }" varStatus="ss">
+					<c:forEach var="hvo" items="${ hlist }" varStatus="ss">
 						<tr>
 							<td class="text-center">${ss.index+1}</td>
-							<td><img src="${fvo.poster }" class="foodImage"></td>
-							<td class="text-center">${fvo.name }</td>
-							<td class="text-center">${fvo.phone }</td>
+							<td><img src="${ hvo.main_poster }" class="listImage"></td>
+							<td class="text-left">${ hvo.title }</td>
 							<td>
-						      <a href="../food/food_detail.do?fino=${fvo.fino }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+						      <a href="../hotel/hotel_detail.do?huno=${hvo.huno }"><span class="btn btn-sm btn-warning">상세보기</span></a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -224,21 +219,19 @@ $(function(){
 
 			<article id="item3" class="tab-content">
 				<table class="table">
-					<tr style="background-color: #fbc6c6" id="foodhead">
-						<th class="text-center">33333</th>	
-						<th class="text-center"></th>
-						<th class="text-center">업체</th>
-						<th class="text-center">전화번호</th>
-						<th class="text-center"></th>
+					<tr style="background-color: #fbc6c6">
+						<th class="text-center" width="10%">No</th>	
+						<th class="text-center" width="15%"></th>
+						<th class="text-center" width="60%">상품명</th>
+						<th class="text-center" width="15%"></th>
 					</tr>
-					<c:forEach var="fvo" items="${flist }" varStatus="ss">
+					<c:forEach var="rvo" items="${rlist }" varStatus="ss">
 						<tr>
 							<td class="text-center">${ss.index+1}</td>
-							<td><img src="${fvo.poster }" class="foodImage"></td>
-							<td class="text-center">${fvo.name }</td>
-							<td class="text-center">${fvo.phone }</td>
+							<td><img src="${ rvo.main_poster }" class="listImage"></td>
+							<td class="text-left">${ rvo.title }</td>
 							<td>
-						      <a href="../food/food_detail.do?fino=${fvo.fino }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+						      <a href="../rentcar/rentcar_detail.do?cid=${ rvo.cid }"><span class="btn btn-sm btn-warning">상세보기</span></a>
 							</td>
 						</tr>
 					</c:forEach>
