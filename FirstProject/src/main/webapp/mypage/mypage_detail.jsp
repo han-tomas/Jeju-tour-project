@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2 class="sectiontitle">내정보 수정</h2>
+<h2 class="sectiontitle">내정보</h2>
 	<div style="height: 30px"></div>
     <div class="row">
       <table class="table">

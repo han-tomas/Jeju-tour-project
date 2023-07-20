@@ -54,7 +54,7 @@ $(function(){
 			</td>	
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: right" id="msg">
+			<td colspan="2" class="text-center" id="msg">
 			</td> 
 		</tr>
 		<tr>

@@ -8,18 +8,34 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com//jquery.js"></script>
 <script type="text/javascript">
+let i=0;
 $(function(){
 	$('.cdetail').click(function(){
-		let cno=$(this).attr("data-cno");
-		$.ajax({
-			type:'post',
-			url:'../travel/course_info.do',
-			data:{"cno":cno},
-			success:function(result)
-			{
-				$('#jjim_info').html(result)
-			}
-		})
+		if(i==0)
+		{
+			$(this).text("상세보기")
+			$(this).removeClass('btn-warning').addClass('btn-secondary');
+			$('#detailtable').show()
+			let cno=$(this).attr("data-cno");
+			$.ajax({
+				type:'post',
+				url:'../travel/course_info.do',
+				data:{"cno":cno},
+				success:function(result)
+				{
+					$('#jjim_info').html(result)
+				}
+			})
+			i=1;	
+		}
+		else
+		{
+			$(this).text("상세보기")
+			$(this).removeClass('btn-secondary').addClass('btn-warning');
+			$('#detailtable').hide()
+			i=0;
+		}
+		
 	})
 	const selectTab = element => {
 		  const active = document.querySelector('.actived');
@@ -136,7 +152,7 @@ $(function(){
 		</c:forEach>
 	</table>
 	
-	<table class="table">
+	<table class="table" id="detailtable" style="display:none">
 		<tr>
 			<td class="travelhead">
 				<div id="jjim_info"></div>
