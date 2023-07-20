@@ -272,9 +272,9 @@ public class TravelDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT no,title,hit,rownum "
-					+ "FROM (SELECT fno,name,hit "
-					+ "FROM food_house ORDER BY hit DESC) "
+			String sql="SELECT no,title,hit,poster,rownum "
+					+ "FROM (SELECT no,title,hit,poster "
+					+ "FROM travel_detail ORDER BY hit DESC) "
 					+ "WHERE rownum<=10";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -282,8 +282,14 @@ public class TravelDAO {
 			{
 				TravelVO vo = new TravelVO();
 				vo.setNo(rs.getInt(1));
-				vo.setTitle(rs.getString(2));
+				String title=rs.getString(2);
+				if(title.length()>18)
+				{
+					title=title.substring(0,18)+"...";
+				}
+				vo.setTitle(title);
 				vo.setHit(rs.getInt(3));
+				vo.setPoster(rs.getString(4));
 				list.add(vo);
 			}
 			rs.close();

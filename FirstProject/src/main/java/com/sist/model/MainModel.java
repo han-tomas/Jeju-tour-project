@@ -65,6 +65,11 @@ public class MainModel {
 				}
 			}
 		}
+		// 인기 검색어 Top 10
+		TravelDAO ttopdao = TravelDAO.newInstance();
+		List<TravelVO> ttoplist = ttopdao.findTop10();
+		request.setAttribute("ttoplist", ttoplist);
+		
 		request.setAttribute("fList", fList);
 		request.setAttribute("hList", hList);
 		request.setAttribute("cList", cList);

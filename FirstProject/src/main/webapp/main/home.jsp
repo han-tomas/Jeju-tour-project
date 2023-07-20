@@ -24,6 +24,15 @@
 	        select.setAttribute("name", "lno"); // 다른 옵션 선택 시 name 속성 추가
 	    }
 	}
+$(function(){
+	$('.top10title').css("cursor","pointer")
+	$('.top10title').click(function(){
+		let img=$(this).attr("data-poster")
+		$('#poster').attr("src",img)
+		
+	})
+})
+	
 </script>
 </head>
 <body>
@@ -255,21 +264,20 @@
 													<div class="row">
 														<div class="col-lg-5 align-self-center">
 															<div class="left-text">
-																<h4>Information and Safety Tips for Traveling</h4>
-																<p>You are allowed to use this template for your
-																	commercial websites. You are NOT allowed to
-																	redistribute this template ZIP file on any Free CSS
-																	collection websites.</p>
-																<div class="main-white-button">
-																	<a rel="nofollow" href="https://templatemo.com/contact"><i
-																		class="fa fa-eye"></i> Read More</a>
-																</div>
+																<h3 style="color: white">여행 인기 검색어 TOP 10</h3>
+																<p>
+																<br>
+																<c:forEach var="ttop" items="${ttoplist }" varStatus="s">
+																	<span class="top10title" style="font-size: 15pt;color: white; line-height: 2" data-poster="${ttop.poster }">${s.index+1 }. &nbsp;${ttop.title }</span><br>
+																</c:forEach>
+																</p>
+																
 															</div>
 														</div>
 														<div class="col-lg-7 align-self-center">
 															<div class="right-image">
-																<img src="../assets/images/tabs-image-05.jpg"
-																	alt="Traveling Beach">
+																<img src="dol.png"
+																	alt="" id="poster" style="width: 455px;height: 540px">
 															</div>
 														</div>
 													</div>
@@ -355,12 +363,18 @@
 											<div class="right-content align-self-center">
 												<a href="../travel/travel_find_detail.do?no=${tvo.no }">
 													<h4>${tvo.title}</h4>
-												</a> <span class="price">
-													<div class="icon">
-														<img src="../assets/images/listing-icon-01.png" alt="">
-													</div>
-												</span> <span class="details"> <em></em>
-												</span> <span> <br>
+												</a> 
+												<span class="price">
+													${tvo.tag }
+												</span> 
+												<span class="details">
+													${tvo.introduction } 
+												</span> 
+												<span>
+												 	${tvo.label }
+												</span>
+												<span>
+												 	${tvo.addr }
 												</span>
 												<div class="main-white-button">
 													<a href="../travel/travel_find_detail.do?no=${tvo.no }">
