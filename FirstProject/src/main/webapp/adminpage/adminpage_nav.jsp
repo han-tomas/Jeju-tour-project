@@ -41,7 +41,7 @@
         </ul>
       </li>
       <li class="selected">
-          <i class="fa fa-users"></i>
+          <i class="fa fa-comments-o"></i>
           <span><a href="../adminpage/adminqna_list.do">QnA관리</a></span>
       </li>
     </ul>

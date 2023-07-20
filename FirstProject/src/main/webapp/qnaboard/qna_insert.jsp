@@ -57,7 +57,7 @@ $(function(){
 </div> 
   <div class="container1">
   <div class="row1">
-  <h2 class="sectiontitle">QnA</h2>
+  <h2 class="sectiontitle" style="border-bottom: 1px solid gray;">질문하기</h2>
   <form method=post action="../qnaboard/qna_insert_ok.do" id="frm">
   <table class="table">
     <tr>

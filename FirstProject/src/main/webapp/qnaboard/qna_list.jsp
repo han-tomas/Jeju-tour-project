@@ -41,9 +41,10 @@ p{
   </div>
 </div>
 <div class="container1">
-  <h2>QnA</h2>
-  <p>총 ${count }건
-      <a href="../qnaboard/qna_insert.do" class="btn btn-sm" style="border-color:gray;float:right">글작성</a>
+  <h2>${sessionScope.name }님의 문의사항</h2>
+  <p>
+    <a href="../qnaboard/qna_insert.do" class="btn btn-sm" 
+    style="border-color:gray;float:right;margin-bottom: 10px;">글작성</a>
   </p>
   <table class="table table-striped">
     <thead style="border-top: 1px solid;">
@@ -52,10 +53,14 @@ p{
  		<th width=45%>제목</th>
  		<th width=15% class="text-center">작성자</th>
  		<th width=20% class="text-center">작성일</th>
+ 		<th width=20% class="text-center"></th>
       </tr>
     </thead>
     <tbody>
+    
       <c:forEach var="vo" items="${list }" varStatus="s">
+        <c:if test="${id!='hong' }">
+          <c:if test="${id==vo.id }">
           <tr>
             <td width=10% class="text-center">${s.index+1 }</td>
             <td width=45%>
@@ -67,13 +72,17 @@ p{
                 <sub style="color: red">new</sub>
               </c:if>
             </td>
-            <td width=15% class="text-center">
-              <c:if test="${vo.id=='hong' }">관리자</c:if>
-              <c:if test="${vo.id!='hong' }">${vo.id }</c:if>
-            </td>
+            <td width=15% class="text-center">${vo.id }</td>
             <td width=20% class="text-center">${vo.dbday }</td>
+            <c:if test="${vo.isreply==0 }">
+              <td width=20% class="text-center">답변대기</td>
+            </c:if>
+            <c:if test="${vo.isreply==1 }">
+              <td width=20% class="text-center">답변완료</td>
+            </c:if>
           </tr>
-         <c:set var="no" value="${no-1 }"/>
+          </c:if>
+        </c:if>
       </c:forEach>
     </tbody>
   </table>

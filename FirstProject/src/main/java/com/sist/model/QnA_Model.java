@@ -18,7 +18,10 @@ public class QnA_Model {
 		List<QnA_VO> list=dao.qnaBoardListData(curpage);
 		int totalpage=dao.qnaBoardTotalPage();
 		int count=dao.qnaBoardCount();
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
 		
+		request.setAttribute("id", id);
 		request.setAttribute("list", list);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
@@ -75,5 +78,16 @@ public class QnA_Model {
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../qnaboard/qna_detail.jsp");
 		return "../main/main.jsp";
+	}
+	
+	@RequestMapping("qnaboard/qna_reply.do")
+	public String qna_reply(HttpServletRequest request,HttpServletResponse response) {
+		String group_id=request.getParameter("group_id");
+		
+		QnA_DAO dao=QnA_DAO.newInstance();
+		QnA_VO vo=dao.qnaBoardDetailReplyData(Integer.parseInt(group_id));
+		
+		request.setAttribute("vo", vo);
+		return "../qnaboard/qna_reply.jsp";
 	}
 }

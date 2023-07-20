@@ -79,8 +79,10 @@ $(function(){
 			  <a class="nav-link dropdown-toggle" href="../contact.html" role="button" data-bs-toggle="dropdown" style="color:black;">Community</a>
 				 <ul class="dropdown-menu">
 				    <li><a class="dropdown-item" href="../notice/notice_list.do">Notice</a></li>
-				    <li><a class="dropdown-item" href="../qnaboard/qna_list.do">QnA</a></li>
 				    <li><a class="dropdown-item" href="../freeboard/list.do">자유게시판</a></li>
+				    <c:if test="${sessionScope.id!=null }">
+				      <li><a class="dropdown-item" href="../qnaboard/qna_list.do">나의 QnA</a></li>
+				    </c:if>
 				    <li></li>
 				 </ul>
 			</li> 
