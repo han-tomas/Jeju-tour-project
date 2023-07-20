@@ -15,6 +15,18 @@ public class MyPageModel {
 	@RequestMapping("mypage/mypage_main.do")
 	public String mypage_main(HttpServletRequest request, HttpServletResponse response)
 	{
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		//DAO
+		MypageDAO dao = MypageDAO.newInstance();
+		MemberVO vo = dao.mypageUpdateData(id);
+		String phone1= vo.getPhone().substring(0,3);
+		String phone2= vo.getPhone().substring(3,7);
+		String phone3= vo.getPhone().substring(7,11);
+		request.setAttribute("vo", vo);
+		request.setAttribute("phone1", phone1);
+		request.setAttribute("phone2", phone2);
+		request.setAttribute("phone3", phone3);
 		request.setAttribute("mypage_jsp", "../mypage/mypage_detail.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";

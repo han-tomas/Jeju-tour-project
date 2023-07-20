@@ -14,7 +14,6 @@ $(function(){
 		if(i==0)
 		{
 			$(this).text("상세보기")
-			$(this).removeClass('btn-warning').addClass('btn-secondary');
 			$('#detailtable').show()
 			let cno=$(this).attr("data-cno");
 			$.ajax({
@@ -31,7 +30,6 @@ $(function(){
 		else
 		{
 			$(this).text("상세보기")
-			$(this).removeClass('btn-secondary').addClass('btn-warning');
 			$('#detailtable').hide()
 			i=0;
 		}
