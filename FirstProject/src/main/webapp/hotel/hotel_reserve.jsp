@@ -90,6 +90,7 @@ vertical-align: middle;
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('#checkall').click(function(){ 
@@ -115,15 +116,10 @@ $(function(){
 			$('#agreeMsg').show();
 		}
 	})
-	$('#reserveBtn').click(function(){
-		$('#frm').submit();
-	})
 })
-</script>
-<script type="text/javascript">
-	Shadowbox.init({
+Shadowbox.init({
 		players : [ 'iframe' ]
-	})
+})
 $(function(){
 	$('#agreeBtn1').click(function() {
 		Shadowbox.open({
@@ -154,7 +150,69 @@ $(function(){
 			title : '개인정보 국외 이전 동의 (필수)'
 		})
 	})
+	
+	let name=$('#name').val();
+	let email=$('#email').val();
+	let phone=$('#phone').val();
+	let rno=$('#rno').val();
+	let startDate=$('#startDate').val();
+	let endDate=$('#endDate').val();
+	let inwon=$('#inwon').val();
+	let price=$('#price').val();
+	let tprice=$('#tprice').val();
+	let date=$('#date').val();
+	let poster=$('#poster').val();
+	let title=$('#title').val();
+	$('#reserveBtn').click(function(){
+		$.ajax({
+			type:'post',
+			url:'../hotel/hotel_reserve_ok.do',
+			data:{"name":name,"email":email,"phone":phone,"rno":rno,"startDate":startDate,
+				"endDate":endDate,"inwon":inwon,"price":price,"tprice":tprice,"date":date,
+				"poster":poster,"title":title},
+			success:function(result){
+				requestPay()
+			}
+		})
+	})
 })
+		
+var IMP = window.IMP; // 생략 가능
+IMP.init("imp36806187"); // 예: imp00000000
+function requestPay() {
+	console.log('clicked');
+IMP.request_pay({
+    pg : 'html5_inicis', // version 1.1.0부터 지원.
+        /*
+            'kakao':카카오페이,
+            'inicis':이니시스, 'html5_inicis':이니시스(웹표준결제),
+            'nice':나이스,
+            'jtnet':jtnet,
+            'uplus':LG유플러스
+        */
+    pay_method : 'card', // 'card' : 신용카드 | 'trans' : 실시간계좌이체 | 'vbank' : 가상계좌 | 'phone' : 휴대폰소액결제
+    merchant_uid : 'merchant_' + new Date().getTime(),
+    name : $('#title').val(),
+    amount : $('#tprice').attr('data-price'),
+    buyer_email : $('#email').val(),
+    buyer_name : $('#name').val(),
+    buyer_tel : $('#phone').val(),
+    buyer_addr : $('#addr1').val(),
+    buyer_postcode : $('#post').val(),
+    app_scheme : 'iamporttest' //in app browser결제에서만 사용 
+}, function(rsp) {
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	    } else {
+	    	location.href="../mypage/mypage_reserve.do";
+	    }
+	});
+}
+	
 </script>
 </head>
 <body>
@@ -168,7 +226,6 @@ $(function(){
 		</div>
 	</div>
 	<div class="container">
-		<form method="post" action="../hotel/hotel_reserve_ok.do" id="frm">
 		<div class="row">
 			<div class="col-sm-8">
 				<h3><strong>예약하기</strong></h3>
@@ -324,13 +381,15 @@ $(function(){
 										<input type="hidden" name="endDate" id="endDate"  value="${ endDate }"/>
 										<input type="hidden" name="inwon" id="inwon"  value="${ inwon }"/>
 										<input type="hidden" name="price" id="price"  value="${ vo.price }"/>
-										<input type="hidden" name="tprice" id="tprice"  value="${ vo.price * inwon * days }"/>
+										<input type="hidden" name="tprice" id="tprice" data-price="${ vo.price * days }"  value="${ vo.price * days }"/>
 										<input type="hidden" name="name" id="name"  value="${ mvo.name }"/>
 										<input type="hidden" name="email" id="email"  value="${ mvo.email }"/>
 										<input type="hidden" name="phone" id="phone"  value="${ mvo.phone }"/>
 										<input type="hidden" name="date" id="date"  value="${ date }"/>
 										<input type="hidden" name="poster" id="poster"  value="${ vo.rposter }"/>
-										<input type="hidden" name="title" id="title"  value="${ hname }^${ vo.rname }"/>
+										<input type="hidden" name="title" id="title"  value="${ hname }"/>
+										<input type="hidden" name="addr1" id="addr1"  value="${ mvo.addr1 }"/>
+										<input type="hidden" name="post" id="post"  value="${ mvo.post }"/>
 									<button class="btn btn-block btn-primary btn-wish" style="height: 50px;" disabled="disabled" id="reserveBtn">
 										<h5>
 										<strong>
@@ -346,7 +405,6 @@ $(function(){
 				</div>
 			</div>
 		</div>
-		</form>
 	</div>
 </body>
 </html>

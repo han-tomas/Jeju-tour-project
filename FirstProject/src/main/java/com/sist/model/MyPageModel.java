@@ -31,8 +31,12 @@ public class MyPageModel {
 		FoodJjimDAO fdao=FoodJjimDAO.newInstance();
 		List<FoodJjimVO> flist=fdao.foodjjimListData(id);
 		
-		request.setAttribute("flist", flist);
+		ActivityWishDAO adao = ActivityWishDAO.newInstance();
+		List<WishReserveVO> alist = adao.activityWishListData(id);
+		
 		request.setAttribute("list", list);
+		request.setAttribute("flist", flist);
+		request.setAttribute("alist", alist);
 		request.setAttribute("mypage_jsp", "../mypage/mypage_jjim.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";

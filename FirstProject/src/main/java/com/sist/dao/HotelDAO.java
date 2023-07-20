@@ -125,6 +125,7 @@ public class HotelDAO {
 			vo.setContent(rs.getString(5));
 			vo.setEtc(rs.getString(6));
 			vo.setPoster(rs.getString(7));
+			vo.setHit(rs.getInt(8));
 			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();

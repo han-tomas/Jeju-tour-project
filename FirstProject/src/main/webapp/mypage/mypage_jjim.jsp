@@ -21,9 +21,83 @@ $(function(){
 			}
 		})
 	})
+	const selectTab = element => {
+		  const active = document.querySelector('.actived');
+		  const visible = document.querySelector('.content-visible');
+		  const tabContent = document.getElementById(element.href.split('#')[1]);
+		  if (active) {
+		    active.classList.remove('actived');
+		  }
+		  element.classList.add('actived');
+		  if (visible) {
+		    visible.classList.remove('content-visible');
+		  }
+		  tabContent.classList.add('content-visible');
+		  event.preventDefault();
+		}
+		document.addEventListener('click', event => {
+		  if (event.target.matches('.tab-item a')) {
+		    selectTab(event.target);
+		  }
+		}, false);
 })
 </script>
 <style type="text/css">
+.a1 {
+	text-decoration: none;
+	color: inherit;
+}
+.tabs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 30px;
+  color: #000;
+}
+
+.container2 {
+  max-width: 1000px;
+  width: 100%;
+  padding: 15px 0px 15px 0px;
+} 
+.tab-item {
+	color: #000;
+	padding: 0px 15px 0px 15px;
+}
+
+.tab-item a:hover {
+  color: inherit;
+  padding-bottom: 4px;
+  border-bottom: 3px solid #FF7F31;
+}
+
+.wrapper_tab-content {
+  position: relative;
+}
+
+.tab-content {
+  position: absolute;
+  padding: 1.75em 0;
+  display: none;
+  height: 0;
+}
+
+.tab-content h1 {
+  font-size: 1.12em;
+  margin-bottom: .5em;
+}
+
+.content-visible {
+  position: static;
+  display: block;
+  height: auto;
+}
+
+.actived {
+  padding-bottom: 4px;
+  border-bottom: 3px solid #FFA63C;
+}
 
 .travelhead{
 	background-color: #FFB900;
@@ -94,6 +168,85 @@ $(function(){
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<h4>예약</h4>
+	<div class="container container2">
+	<div class="row">
+		<ul class="tabs">
+			<li class="tab-item"><a href="#item1" class="a1 actived">Activity</a></li>
+			<li class="tab-item"><a href="#item2" class="a1">Hotel</a></li>
+			<li class="tab-item"><a href="#item3" class="a1">Rentcar</a></li>
+		</ul>
+		<div class="wrapper_tab-content">
+			<article id="item1" class="tab-content content-visible">
+				<table class="table">
+					<tr style="background-color: #fbc6c6" id="foodhead">
+						<th class="text-center">no</th>	
+						<th class="text-center"></th>
+						<th class="text-center">상품명</th>
+						<th class="text-center"></th>
+					</tr>
+					<c:forEach var="avo" items="${ alist }" varStatus="ss">
+						<tr>
+							<td class="text-center">${ss.index+1}</td>
+							<td><img src="${ avo.main_poster }" class="foodImage"></td>
+							<td class="text-center">${ avo.title }</td>
+							<td>
+						      <a href="../food/food_detail.do?fino=${fvo.fino }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</article>
+			
+			<article id="item2" class="tab-content">
+				<table class="table">
+					<tr style="background-color: #fbc6c6" id="foodhead">
+						<th class="text-center">2222222</th>	
+						<th class="text-center"></th>
+						<th class="text-center">업체</th>
+						<th class="text-center">전화번호</th>
+						<th class="text-center"></th>
+					</tr>
+					<c:forEach var="fvo" items="${flist }" varStatus="ss">
+						<tr>
+							<td class="text-center">${ss.index+1}</td>
+							<td><img src="${fvo.poster }" class="foodImage"></td>
+							<td class="text-center">${fvo.name }</td>
+							<td class="text-center">${fvo.phone }</td>
+							<td>
+						      <a href="../food/food_detail.do?fino=${fvo.fino }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</article>
+
+			<article id="item3" class="tab-content">
+				<table class="table">
+					<tr style="background-color: #fbc6c6" id="foodhead">
+						<th class="text-center">33333</th>	
+						<th class="text-center"></th>
+						<th class="text-center">업체</th>
+						<th class="text-center">전화번호</th>
+						<th class="text-center"></th>
+					</tr>
+					<c:forEach var="fvo" items="${flist }" varStatus="ss">
+						<tr>
+							<td class="text-center">${ss.index+1}</td>
+							<td><img src="${fvo.poster }" class="foodImage"></td>
+							<td class="text-center">${fvo.name }</td>
+							<td class="text-center">${fvo.phone }</td>
+							<td>
+						      <a href="../food/food_detail.do?fino=${fvo.fino }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</article>
+		</div>
+	</div>
+	</div>
 	
 </body>
 </html>

@@ -67,4 +67,35 @@ public class ActivityWishDAO {
 			db.disConnection(conn, ps);
 		}
 	}
+	
+	// mypage 찜목록출력
+	public List<WishReserveVO> activityWishListData(String id){
+		List<WishReserveVO> list = new ArrayList<WishReserveVO>();
+		try {
+			conn = db.getConnection();
+			String sql = "SELECT no, acino, jejuActivityPoster(acino), "
+						+"jejuActivityTitle(acino) "
+						+"FROM wish_reserve "
+						+"WHERE id=? "
+						+ "AND rcno=1"
+						+"ORDER BY no DESC";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				WishReserveVO vo = new WishReserveVO();
+				vo.setNo(rs.getInt(1));
+				vo.setAcino(rs.getInt(2));
+				vo.setMain_poster(rs.getString(3));
+				vo.setTitle(rs.getString(4));
+				list.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		return list;
+	}
 }
