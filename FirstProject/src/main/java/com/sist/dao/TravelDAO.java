@@ -29,7 +29,7 @@ public class TravelDAO {
 					+ "FROM (SELECT /*+ INDEX_ASC(travel_detail td_no_pk)*/no,poster,title,tag,loc,lno "
 					+ "FROM travel_detail WHERE title LIKE '%'||?||'%')) "
 					+ "WHERE num BETWEEN ? AND ?";
-			int rowSize=20;
+			int rowSize=10;
 			int start=(rowSize*page)-(rowSize-1);
 			int end=rowSize*page;
 			
@@ -96,7 +96,7 @@ public class TravelDAO {
 					+ "FROM travel_detail WHERE title LIKE '%'||?||'%' AND lno=?)) "
 					+ "WHERE num BETWEEN ? AND ? ";
 					
-			int rowSize=12;
+			int rowSize=10;
 			int start=(rowSize*page)-(rowSize-1);
 			int end=rowSize*page;
 			
@@ -159,7 +159,7 @@ public class TravelDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT CEIL(COUNT(*)/12.0) "
+			String sql="SELECT CEIL(COUNT(*)/10.0) "
 					+ "FROM travel_detail "
 					+ "WHERE title LIKE '%'||?||'%'";
 			ps=conn.prepareStatement(sql);
@@ -185,7 +185,7 @@ public class TravelDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT CEIL(COUNT(*)/12.0) "
+			String sql="SELECT CEIL(COUNT(*)/10.0) "
 					+ "FROM travel_detail "
 					+ "WHERE title LIKE '%'||?||'%' "
 					+ "AND lno=?";

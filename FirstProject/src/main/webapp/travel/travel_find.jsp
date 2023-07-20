@@ -48,11 +48,12 @@
 a{
 	width: 100%;
 }
-
-.table1{
-	border: 2px solid orange;
-	background-color: white;
+.table{
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius : 10px;
+    width: 800px;
 }
+
 td{
 	border: none;
 }
@@ -62,6 +63,7 @@ td{
 	transition: background-color 0.6s ease;
 	margin-right: 10px;
 }
+
 </style>
 </head>
 <body>
@@ -106,40 +108,50 @@ td{
 		  				</td>
 		  			</tr>
 		  			</thead>
-		  			<tbody style="background-color:#FFCD28 ">
+		  			<tbody>
 		  			<tr>
 		  				<td>
 		  					<c:forEach var="vo" items="${list }">
 		  						<table class="table table1">
+		  							<tr>
+											<td>
+												<div style="height: 5px;"></div>
+											</td>
+									</tr>
 		  							<tr>
 		  								<td width=35% class="text-center" rowspan="4">
 		  									<a href="../travel/travel_find_detail_before.do?no=${vo.no }">
 		  									<img src="${vo.poster }" style="width:300px;height: 200px" class="img-thumbnail">
 		  									</a>
 		  								</td>
-										<td width=65%>
-											<a href="../travel/travel_find_detail_before.do?no=${vo.no }">
-											<h3>${vo.title }</h3>
+										<td width=65% style="font-size: 25px;">
+											<a href="../travel/travel_find_detail_before.do?no=${vo.no }" style="color: orange">
+											${vo.title }
 											</a>
 										</td>
 		  							</tr>
 									<tr>
-										<td width=65%>
-											<h6>${vo.tag }</h6>
+										<td width=65%  style="font-style: italic;font-size: 15px;" >
+											${vo.tag }
 										</td>
 									</tr>
 									<tr>
 										<td width=65%>
-											<h6>${vo.label }</h6>
+											${vo.label }
 										</td>
 									</tr>
 									<tr>
 									
 										<td width=65%>
-											<h6>${vo.loc }</h6>
+											${vo.loc }
 										</td>
 									</tr>
-		  						</table>
+										<tr>
+											<td>
+												<div style="height: 5px;"></div>
+											</td>
+										</tr>
+									</table>
 		  					</c:forEach>
 		  				</td>
 		  			</tr>
