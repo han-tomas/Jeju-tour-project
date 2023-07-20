@@ -390,13 +390,14 @@ table td {
 					<div class="col-lg-12">
 						<div class="owl-carousel owl-listing">
 							<c:forEach var="cvo" items="${cList}" varStatus="s">
+							<c:if test="${s.index>=0 && s.index<10 }">
 								<div class="item">
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="listing-item">
 												<div class="left-image">
 													<a href="../activity/activity_detail.do?acino=${cvo.acino }"><img
-														src="${cvo.main_poster }"></a>
+														src="${cvo.main_poster }" style="width: 480px;height: 360px;"></a>
 												</div>
 												<div class="right-content align-self-center">
 													<a href="../activity/activity_detail.do?acino=${cvo.acino }"><h4>${cvo.title}</h4></a>
@@ -420,6 +421,7 @@ table td {
 										</div>
 									</div>
 								</div>
+								</c:if>
 							</c:forEach>
 						</div>
 					</div>

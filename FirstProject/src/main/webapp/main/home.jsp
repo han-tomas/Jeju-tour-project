@@ -299,7 +299,8 @@
 				<div class="col-lg-12">
 					<div class="owl-carousel owl-listing">
 						<%-- Activity 출력 --%>
-						<c:forEach var="cvo" items="${cList}">
+						<c:forEach var="cvo" items="${cList}" varStatus="s1">
+						<c:if test="${s1.index>=0 && s1.index<2 }">
 							<div class="item">
 								<div class="row">
 									<div class="col-lg-12">
@@ -336,10 +337,12 @@
 									</div>
 								</div>
 							</div>
+							</c:if>
 						</c:forEach>
 
 						<%-- Course 출력 --%>
-						<c:forEach var="tvo" items="${tList}">
+						<c:forEach var="tvo" items="${tList}" varStatus="s2">
+						 <c:if test="${s2.index>=0 && s2.index<2 }"> 
 							<div class="item">
 								<div class="row">
 									<div class="col-lg-12">
@@ -369,10 +372,12 @@
 									</div>
 								</div>
 							</div>
+							</c:if>
 						</c:forEach>
 
 						<%-- Hotel 출력 --%>
-						<c:forEach var="hvo" items="${hList}">
+						<c:forEach var="hvo" items="${hList}" varStatus="s3">
+						 <c:if test="${s3.index>=0 && s3.index<2 }">
 							<div class="item">
 								<div class="row">
 									<div class="col-lg-12">
@@ -403,10 +408,12 @@
 									</div>
 								</div>
 							</div>
+							</c:if>
 						</c:forEach>
 						
 						<%-- food 출력 --%>
-						<c:forEach var="fvo" items="${fList}">
+						<c:forEach var="fvo" items="${fList}" varStatus="s4">
+						 <c:if test="${s4.index>=0 && s4.index<2 }"> 
 							<div class="item">
 								<div class="row">
 									<div class="col-lg-12">
@@ -450,6 +457,7 @@
 									</div>
 								</div>
 							</div>
+							</c:if>
 						</c:forEach>
 
 					</div>
