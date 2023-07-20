@@ -70,6 +70,10 @@ public class MainModel {
 		List<TravelVO> ttoplist = ttopdao.findTop10();
 		request.setAttribute("ttoplist", ttoplist);
 		
+		// 인기 맛집 list 10
+		List<FoodVO> ffList=fdao.foodTopListData();
+		request.setAttribute("ffList", ffList);
+		
 		request.setAttribute("fList", fList);
 		request.setAttribute("hList", hList);
 		request.setAttribute("cList", cList);
