@@ -310,8 +310,8 @@ table td {
 							</tr>
 							<tr height="60px;"
 								style="vertical-align: middle; font-size: 10pt;">
-								<td>##</td>
-								<td><fmt:formatNumber value="" pattern="#,###" />원</td>
+								<td>주문 금액</td>
+								<td><fmt:formatNumber value="${vo.price*days+insPrice }" pattern="#,###" />원</td>
 							</tr>
 							<tr height="60px;"
 								style="vertical-align: middle; background-color: rgb(246, 251, 255);">

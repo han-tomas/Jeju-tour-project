@@ -14,7 +14,7 @@
 			<div class="pro-img-box">
 				<c:choose>
 					<c:when test="${vo.price != 0}">
-						<a href="../rentcar/rentcar_detail.do?cid=${vo.cid}" class="pro-title">
+						<a href="../rentcar/rentcar_detail.before.do?cid=${vo.cid}" class="pro-title">
 							<img src="https://rentinjeju.com${vo.img}" class="img-fluid" style="width:100%; height:300px;  border-radius:30px; " />
 						</a>
 					</c:when>
@@ -28,7 +28,7 @@
 			<div class="panel-body text-left">
 				<c:if test="${vo.price != 0}">
 					<h1>
-						<a href="../rentcar/rentcar_detail.do?cid=${vo.cid}" class="pro-title"> ${vo.car_name} </a>
+						<a href="../rentcar/rentcar_detail.before.do?cid=${vo.cid}" class="pro-title"> ${vo.car_name} </a>
 					</h1>
 					<hr>
 					<span>${vo.car_size}ㆍ${vo.seater}ㆍ${vo.fuel_type}ㆍ${vo.gear_type}ㆍ${vo.brand}</span><br>

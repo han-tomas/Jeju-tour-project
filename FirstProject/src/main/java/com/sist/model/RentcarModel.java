@@ -12,13 +12,17 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.sist.controller.RequestMapping;
+import com.sist.dao.ActivityWishDAO;
 import com.sist.dao.MemberDAO;
 import com.sist.dao.RentcarDAO;
+import com.sist.dao.RentcarWishDAO;
 import com.sist.vo.MemberVO;
 //import com.sist.dao.ReserveDAO;
 import com.sist.vo.RentcarVO;
+import com.sist.vo.WishReserveVO;
 
 public class RentcarModel {
 	@RequestMapping("rentcar/rentcar_main.do") 
@@ -28,17 +32,16 @@ public class RentcarModel {
 		if(page==null)
 			page="1";	
 		String type=request.getParameter("type");
-		if (type=="1")
-			type="";
-		else if (type==null)
-			type="";
+		if (type==null)
+			type="0";
 		int curpage=Integer.parseInt(page);
 		
 		RentcarDAO dao=RentcarDAO.newInstance();
 		
 		
-		//int totalpage=dao.RentcarSortTotalPage(Integer.parseInt(type));
-		int totalpage=dao.RentcarTotalPage();
+		
+		int totalpage=dao.RentcarSortTotalPage(Integer.parseInt(type));
+		//int totalpage=dao.RentcarTotalPage();
 		
 		final int BLOCK = 5;
 		int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
@@ -111,7 +114,14 @@ public class RentcarModel {
 		RentcarDAO dao=RentcarDAO.newInstance();
 		RentcarVO vo=dao.RentcarDetailData(Integer.parseInt(cid));
 		request.setAttribute("vo", vo);
-
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		if(id!=null) {
+			RentcarWishDAO wdao=RentcarWishDAO.newInstance();
+			int wish_count=wdao.rentcarWishCount(id, Integer.parseInt(cid));
+			request.setAttribute("wish_count", wish_count);
+		}
 		request.setAttribute("main_jsp", "../rentcar/rentcar_detail.jsp");
 		return "../main/main.jsp";
 	}
@@ -158,7 +168,7 @@ public class RentcarModel {
 			 
 	        
 	        // 요일 계산
-	        String[] koreanDays = {"일", "월", "화", "수", "목", "금", "토"};
+	        String[] koreanDays = {"", "월", "화", "수", "목", "금", "토", "일"};
 	        DayOfWeek startDateOfWeek = startDate.getDayOfWeek();
 	        DayOfWeek endDateOfWeek = endDate.getDayOfWeek();
 	        int startDateOfWeekValue = startDateOfWeek.getValue();
@@ -209,10 +219,10 @@ public class RentcarModel {
 		  }catch(Exception ex) {}
 		
 		//return "../rentcar/rentcar_reserve.do?cid="+cid;
-		return "redirect:../rentcar/rentcar_reserve.do";
-	
-		
+		return "redirect:../rentcar/rentcar_reserve.do";	
 	}
+	
+	
 	@RequestMapping("rentcar/agreeBtn1.do")
 	public String agreeBtn1(HttpServletRequest request, HttpServletResponse response) {
 		return "../rentcar/agreeBtn1.jsp";

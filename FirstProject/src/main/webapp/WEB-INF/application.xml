@@ -21,4 +21,5 @@
 	<bean id="fbreply" class="com.sist.model.FreeBoardReplyModel"/>
 	<bean id="hotelWish" class="com.sist.model.HotelWishModel"/>
 	<bean id="qnaboard" class="com.sist.model.QnA_Model"/>
+	<bean id="rentcarWish" class="com.sist.model.RentcarWishModel"/>
 </beans>

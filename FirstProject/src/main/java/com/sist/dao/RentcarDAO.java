@@ -12,7 +12,7 @@ public class RentcarDAO {
 	private final String URL = "jdbc:oracle:thin:@211.238.142.122:1521:xe";
 	private CreateDataBase db=new CreateDataBase();
 	private static RentcarDAO dao;
-	private String[] sizetab = {"'%'","'%SUV%' OR car_size LIKE '%승합%'","'%수입%'","'%소형%'","'%중형%'","'%오픈%'"};
+	private String[] sizetab = {"'%'","'%SUV%'","'%수입%'","'%소형%'","'%중형%'","'%오픈%'"};
 	public RentcarDAO()
 	{
 		try
@@ -94,7 +94,7 @@ public class RentcarDAO {
 		  return list;
 	  }
 	
-	public int RentcarTotalPage()
+	/*public int RentcarTotalPage()
 	  {
 		  int total=0;
 		  try
@@ -115,11 +115,11 @@ public class RentcarDAO {
 			  db.disConnection(conn, ps);
 		  }
 		  return total;
-	  }
+	  }*/
 	
 	public int RentcarSortTotalPage(int type)
 	  {
-		  int sTotal=0;
+		  int total=0;
 		  try
 		  {
 			  conn=db.getConnection();
@@ -127,7 +127,7 @@ public class RentcarDAO {
 			  ps=conn.prepareStatement(sql);
 			  ResultSet rs=ps.executeQuery();
 			  rs.next();
-			  sTotal=rs.getInt(1);
+			  total=rs.getInt(1);
 			  rs.close();
 		  }catch(Exception ex)
 		  {
@@ -137,7 +137,7 @@ public class RentcarDAO {
 		  {
 			  db.disConnection(conn, ps);
 		  }
-		  return sTotal;
+		  return total;
 	  }
 	
 	public RentcarVO RentcarDetailData(int cid)

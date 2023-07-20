@@ -113,7 +113,7 @@ $(function() {
       </div>
     </div>
   </div>
-  <form method="post" action="../rentcar/rentcar_reserve.do" id="rFrm">
+  <form method="GET" action="../rentcar/rentcar_reserve.do" id="rFrm">
   <div class="popular-categories">
     <div class="container">
       <div class="row">
@@ -138,10 +138,12 @@ $(function() {
              <td id="diary"></td>
            </tr>
           </table>-->
-          
+          <h5>예약일 설정</h5>
+          <br>
     <div class="row" style="justify-content: right;">
-    
+    		
     <input type=hidden name="cid" value="${vo.cid}">
+    
 						<div class="input-group" style="width: 360px;">
 							
 							
@@ -218,15 +220,38 @@ $(function() {
          </div>  	
         </div>
       </div>
-	<c:if test="${sessionScope.id!=null }">
-    <div class="container">
-    	<div class="row">
-    		<div class="col-md-12 text-center">
-    			<input type=submit class="btn btn-lg btn-danger btn-reservation" value="예약하기" style="width: 150px" id="reserveBtn" >
-    		</div>
-    	</div>
-    </div>
-    </c:if>
+		<c:if test="${sessionScope.id!=null }">
+		  
+	        <div class="container">
+	    	 <div class="row">
+	    		<div class="col-md-2 text-center">
+	    			
+	    		</div>
+	    		<div class="col-md-2 text-center">
+	    			
+	    		</div>
+	    		<div class="col-md-2 text-center">
+	    			<input type=submit class="btn btn-lg btn-danger btn-reservation" value="예약하기" style="width: 150px" >
+	    		</div>
+	    		<c:if test="${wish_count==0 }">
+		    		<div class="col-md-2 text-center">
+		    			<a href="../rentcar/rentcarWish_insert.do?cid=${vo.cid }" class="btn btn-lg btn-info btn-reservation" value="" style="width: 150px; ">찜하기</a>
+		    		</div>
+	    		 </c:if>
+	    		 <c:if test="${wish_count==1 }">
+		    		 <div class="col-md-2 text-center">
+		    			<a href="../rentcar/rentcarWish_cancel.do?cid=${vo.cid }" class="btn btn-lg btn-info btn-reservation" value="" style="width: 150px">찜취소</a>
+		    		</div>
+	    		</c:if>
+	    		<div class="col-md-2 text-center">
+	    			
+	    		</div>
+	    		<div class="col-md-2 text-center">
+	    			
+	    		</div>
+	    	</div>
+	       </div>
+	   </c:if>
     </form>
     <c:if test="${sessionScope.id==null }">
     <div class="container">

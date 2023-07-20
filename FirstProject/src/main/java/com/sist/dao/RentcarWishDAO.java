@@ -30,7 +30,7 @@ public class RentcarWishDAO {
 					+ "wr_no_seq.nextval,?,?,3)";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, vo.getId());
-			ps.setInt(2, vo.getHdno());
+			ps.setInt(2, vo.getCid());
 			ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -39,9 +39,7 @@ public class RentcarWishDAO {
 		}
 	}
 	
-	
-	
-	public int rentcarWishCount(String id, int hdno) {
+	public int rentcarWishCount(String id, int cid) {
 		int count=0;
 		try {
 			conn=db.getConnection();
@@ -49,7 +47,7 @@ public class RentcarWishDAO {
 					+ "FROM wish_reserve "
 					+ "WHERE cid=? AND id=?";
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, hdno);
+			ps.setInt(1, cid);
 			ps.setString(2, id);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
@@ -63,12 +61,12 @@ public class RentcarWishDAO {
 		return count;
 	}
 	
-	public void rentcarWishCancle(WishReserveVO vo) {
+	public void rentcarWishCancel(WishReserveVO vo) {
 		try {
 			conn=db.getConnection();
 			String sql="DELETE FROM wish_reserve WHERE cid=? and id=?";
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, vo.getHdno());
+			ps.setInt(1, vo.getCid());
 			ps.setString(2, vo.getId());
 			ps.executeUpdate();
 		} catch (Exception e) {
