@@ -179,50 +179,7 @@ public class QnA_DAO {
 		}
 		return vo;
 	}
-//	// update (data)
-//	public QnA_VO qnaBoardUpdateData(int no) {
-//		QnA_VO vo=new QnA_VO();
-//		try {
-//			conn=db.getConnection();
-//			String sql="SELECT no,id,subject,content,TO_CHAR(regdate,'yyyy-MM-dd') "
-//					+ "FROM qnaboard "
-//					+ "WHERE no=?";
-//			ps=conn.prepareStatement(sql);
-//			ps.setInt(1, no);
-//			ResultSet rs=ps.executeQuery();
-//			rs.next();
-//			vo.setNo(rs.getInt(1));
-//			vo.setId(rs.getString(2));
-//			vo.setSubject(rs.getString(3));
-//			vo.setContent(rs.getString(4));
-//			vo.setDbday(rs.getString(5));
-//			rs.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			db.disConnection(conn, ps);
-//		}
-//		return vo;
-//	}
-//	// update
-//	public void qnaBoardUpdate(QnA_VO vo) {
-//		try {
-//			conn=db.getConnection();
-//			String sql="UPDATE qnaboard SET "
-//					+ "subject=?,content=? "
-//					+ "WHERE no=?";
-//			ps=conn.prepareStatement(sql);
-//			ps.setString(1, vo.getSubject());
-//			ps.setString(2, vo.getContent());
-//			ps.setInt(3, vo.getNo());
-//			ps.executeUpdate();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			db.disConnection(conn, ps);
-//		}
-//	}
-	
+
 	// admin
 	// list
 	public List<QnA_VO> qnaAdminListData(int page){
@@ -233,7 +190,8 @@ public class QnA_DAO {
 					+ "FROM (SELECT no,id,subject,regdate,isreply,group_step,rownum as num "
 					+ "FROM (SELECT no,id,subject,regdate,isreply,group_step "
 					+ "FROM qnaboard ORDER BY group_id DESC)) "
-					+ "WHERE num BETWEEN ? AND ?";
+					+ "WHERE num BETWEEN ? AND ? "
+					+ "AND group_step=0";
 			ps=conn.prepareStatement(sql);
 			int rowSize=10;
 			int start=(rowSize*page)-(rowSize-1);
@@ -321,5 +279,32 @@ public class QnA_DAO {
 			} catch (Exception e2) {}
 			db.disConnection(conn, ps);
 		}
+	}
+	
+	//detail
+	public QnA_VO qnaBoardAdminDetailData(int no) {
+		QnA_VO vo=new QnA_VO();
+		try {
+			conn=db.getConnection();
+			String sql="SELECT no,id,subject,content,TO_CHAR(regdate,'yyyy-MM-dd'),type "
+					+ "FROM qnaboard "
+					+ "WHERE no=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setNo(rs.getInt(1));
+			vo.setId(rs.getString(2));
+			vo.setSubject(rs.getString(3));
+			vo.setContent(rs.getString(4));
+			vo.setDbday(rs.getString(5));
+			vo.setType(rs.getString(6));
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		return vo;
 	}
 }

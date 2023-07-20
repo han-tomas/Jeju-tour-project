@@ -21,7 +21,57 @@ body{
 .container2{
 	margin: 0px auto;
 }
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+  }
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	  $('#qnaDetailBtn').click(function(){
+	    let no = $(this).attr('data-no'); // 수정된 코드
+	    let button = $(this);
+	    let originalText = button.text();
+	    button.text("취소");
+	    $.ajax({
+	      type: 'post',
+	      url: '../adminpage/adminqna_detail.do',
+	      data:{"no":no},
+	      success:function(result){
+	        $('#qnaContent').html(result);
+	        // 이전 이벤트 제거
+	        button.off('click').click(function(){
+	          $('#qnaContent').empty();
+	          button.text(originalText);
+	          
+	          // 다시 이벤트 추가
+	          button.off('click').click(function(){
+	            let no=$(this).data('no');
+	            let button=$(this);
+	            let originalText=button.text();
+	            button.text("취소");
+	            $.ajax({
+	              type: 'post',
+	              url: '../adminpage/adminqna_detail.do',
+	              data:{"no":no},
+	              success:function(result){
+	                $('#qnaContent').html(result);
+	                // 이전 이벤트 제거
+	                button.off('click').click(function(){
+	                  $('#qnaContent').empty();
+	                  button.text(originalText);
+	                });
+	              }
+	            });
+	          });
+	        });
+	      }
+	    });
+	  });
+	});
+</script>
 </head>
 <body>
 <div class="container container2">
@@ -47,9 +97,9 @@ body{
             <a href="../adminpage/adminqna_insert.do?no=${vo.no }" class="btn btn-sm" style="border-color: blue">답변대기</a>
           </c:if>
           <c:if test="${vo.isreply==1 }">
-            <span class="btn btn-sm" style="border-color: gray">답변완료</span>
+            <span class="btn btn-sm" style="border-color: gray;">답변완료</span>
           </c:if>
-          <span class="btn btn-sm" style="border-color: orange">내용보기</span>
+          <span class="btn btn-sm" id="qnaDetailBtn" style="border-color: orange" data-no="${vo.no}">내용보기</span>
 		</td>
       </tr>
       </c:forEach>
@@ -57,7 +107,13 @@ body{
   </table>
 </div>
 <div>
-
+  <table class="table">
+    <tr>
+      <td>
+        <span id="qnaContent"></span>
+      </td>
+    </tr>
+  </table>
 </div>
 <div>
   <table class="table table-borderless">

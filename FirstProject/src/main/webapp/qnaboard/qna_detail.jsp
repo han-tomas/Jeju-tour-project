@@ -15,7 +15,6 @@ body{
 	width: 1000px;
 }
 </style>
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
 <script type="text/javascript">
 $(function(){
 	$('#del').click(function(){
@@ -54,7 +53,7 @@ $(function(){
     <table class="table">
       <tr style="border-top : 1px solid;background-color: #dedede;"><!-- #dedede -->
         <th width=5% class="text-center">제목 | </th>
-        <td width=50% class="text-left">[${vo.type}] ${vo.subject }</td>
+        <td width=50% class="text-left">[${vo.type}]&nbsp;&nbsp;${vo.subject }</td>
         <th width=5% class="text-center">작성일</th>
         <td width=10% class="text-center">${vo.dbday }</td>
       </tr>
@@ -66,8 +65,9 @@ $(function(){
       <tr>
         <td colspan=6>
           <a href="../qnaboard/qna_list.do" class="btn btn-sm" style="border-color: gray">목록</a>
-          <c:if test="${sessionScope.id=vo.id }"></c:if>
-          <span class="btn btn-sm" id="del" data-no="${vo.no }" style="border-color: gray;">삭제</span>
+          <c:if test="${sessionScope.id==vo.id }">
+            <span class="btn btn-sm" id="del" data-no="${vo.no }" style="border-color: gray;">삭제</span>
+          </c:if>
         </td>
       </tr>
     </table>

@@ -55,10 +55,9 @@ p{
       </tr>
     </thead>
     <tbody>
-      <c:forEach var="vo" items="${list }">
-        <c:set var="no" value="${count }"/>
+      <c:forEach var="vo" items="${list }" varStatus="s">
           <tr>
-            <td width=10% class="text-center">${no}</td>
+            <td width=10% class="text-center">${s.index+1 }</td>
             <td width=45%>
               <c:if test="${vo.group_tab==1 }">
               &nbsp;&nbsp;&nbsp;
@@ -69,10 +68,8 @@ p{
               </c:if>
             </td>
             <td width=15% class="text-center">
-              <c:if test="${vo.id=='hong' }">
-              관리자
-              </c:if>
-              ${vo.id }
+              <c:if test="${vo.id=='hong' }">관리자</c:if>
+              <c:if test="${vo.id!='hong' }">${vo.id }</c:if>
             </td>
             <td width=20% class="text-center">${vo.dbday }</td>
           </tr>

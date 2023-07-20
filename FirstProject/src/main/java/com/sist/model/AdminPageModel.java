@@ -104,4 +104,15 @@ public class AdminPageModel {
 		dao.qnaBoardAdminInsert(Integer.parseInt(qno), vo);
 		return "redirect:../adminpage/adminqna_list.do";
 	}
+	
+	@RequestMapping("adminpage/adminqna_detail.do")
+	public String adminqna_detail(HttpServletRequest request,HttpServletResponse response) {
+		String no=request.getParameter("no");
+		
+		QnA_DAO dao=QnA_DAO.newInstance();
+		QnA_VO vo=dao.qnaBoardAdminDetailData(Integer.parseInt(no));
+		
+		request.setAttribute("vo", vo);
+		return "../adminpage/adminqna_detail.jsp";
+	}
 }
