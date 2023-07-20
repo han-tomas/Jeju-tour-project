@@ -24,9 +24,9 @@ public class MypageDAO {
 		List<ReservationVO> list=new ArrayList<ReservationVO>();
 		try {
 			conn=db.getConnection();
-			String sql="SELECT dbday,poster,title,regdate,tprice,num "
-					+ "FROM (SELECT dbday,poster,title,regdate,tprice,rownum as num "
-					+ "FROM (SELECT /*+ INDEX_DESC(jeju_reserve jr_jrno_pk)*/dbday, poster, title, regdate, tprice "
+			String sql="SELECT dbday,poster,title,regdate,tprice,jrno,num "
+					+ "FROM (SELECT dbday,poster,title,regdate,tprice,jrno,rownum as num "
+					+ "FROM (SELECT /*+ INDEX_DESC(jeju_reserve jr_jrno_pk)*/dbday, poster, title, regdate, tprice,jrno "
 					+ "FROM jeju_reserve WHERE id=?)) "
 					+ "WHERE num BETWEEN ? AND ?";
 			ps=conn.prepareStatement(sql);
@@ -47,6 +47,7 @@ public class MypageDAO {
 				String realday = sdf.format(date);
 				vo.setRealDate(realday);
 				vo.setTprice(rs.getInt(5));
+				vo.setJrno(rs.getInt(6));
 				list.add(vo);
 			}
 			rs.close();
@@ -58,12 +59,13 @@ public class MypageDAO {
 		return list;
 	}
 	
-	public int reservationRowCount() {
+	public int reservationRowCount(String id) {
 		int count=0;
 		try {
 			conn=db.getConnection();
-			String sql="SELECT COUNT(*) FROM jeju_reserve";
+			String sql="SELECT COUNT(*) FROM jeju_reserve WHERE id=?";
 			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
 			count=rs.getInt(1);
@@ -272,4 +274,19 @@ public class MypageDAO {
 		}
 		return result;
 	}
+	
+	public void reserveDelete(int jrno) {
+		try {
+			conn=db.getConnection();
+			String sql="DELETE FROM jeju_reserve WHERE jrno=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, jrno);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.disConnection(conn, ps);
+		}
+	}
+	
 }

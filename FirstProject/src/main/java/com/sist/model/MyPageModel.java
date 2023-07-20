@@ -150,7 +150,7 @@ public class MyPageModel {
 			page="1";
 		MypageDAO mydao=MypageDAO.newInstance();
 		int curpage=Integer.parseInt(page);
-		int count=mydao.reservationRowCount();
+		int count=mydao.reservationRowCount(id);
 		int totalpage=(int)(Math.ceil(count/5.0));
 		
 		final int BLOCK=5;
@@ -306,7 +306,17 @@ public class MyPageModel {
 			PrintWriter out = response.getWriter();
 			out.println(result);
 		}catch(Exception ex) {}
-		
-		
 	}
+	
+	@RequestMapping("mypage/mypage_reserve_delete.do")
+	public String mypage_reserve_delete(HttpServletRequest request,HttpServletResponse response) {
+		
+		String jrno=request.getParameter("jrno");
+		MypageDAO dao=MypageDAO.newInstance();
+		dao.reserveDelete(Integer.parseInt(jrno));
+		
+		return "redirect:../mypage/mypage_reserve.do";
+	}
+	
+	
 }

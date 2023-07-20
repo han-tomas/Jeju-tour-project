@@ -41,7 +41,7 @@ tr, td {
 									class="reserveImg"></td>
 								<td width="65%" style="font-size: 17px; font-weight: bold;"
 									id="title">${vo.title }</td>
-								<td width="15%"><a href="#" class="btn btn-outline-danger">예약취소</a></td>
+								<td width="15%"><a href="../mypage/mypage_reserve_delete.do?jrno=${vo.jrno }" class="btn btn-outline-danger">예약취소</a></td>
 							</tr>
 							<tr>
 								<td width="65%" style="color: gray;"><p>${vo.dbday }</p>
