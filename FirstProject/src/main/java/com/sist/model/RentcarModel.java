@@ -19,6 +19,7 @@ import com.sist.dao.ActivityWishDAO;
 import com.sist.dao.MemberDAO;
 import com.sist.dao.RentcarDAO;
 import com.sist.dao.RentcarWishDAO;
+import com.sist.vo.ActivityVO;
 import com.sist.vo.MemberVO;
 //import com.sist.dao.ReserveDAO;
 import com.sist.vo.RentcarVO;
@@ -122,6 +123,7 @@ public class RentcarModel {
 			int wish_count=wdao.rentcarWishCount(id, Integer.parseInt(cid));
 			request.setAttribute("wish_count", wish_count);
 		}
+					
 		request.setAttribute("main_jsp", "../rentcar/rentcar_detail.jsp");
 		return "../main/main.jsp";
 	}

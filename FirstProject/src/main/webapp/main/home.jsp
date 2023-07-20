@@ -459,7 +459,42 @@
 							</div>
 							</c:if>
 						</c:forEach>
-
+						<c:forEach var="rvo" items="${rList}" varStatus="s5">
+						<c:if test="${s5.index>=0 && s5.index<2 }"> 
+							<div class="item">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="listing-item">
+											<div class="left-image">
+												<a href="../rentcar/rentcar_detail.do?cid=${rvo.cid }"> <img
+													src="${rvo.img }"
+													class="recentImg" style="width: 480px;height: 400px;">
+												</a>
+											</div>
+											<div class="right-content align-self-center">
+												<a href="../rentcar/rentcar_detail.do?cid=${rvo.cid }">
+													<h4>${rvo.car_name}</h4>
+												</a> <span class="price">
+													<div class="icon">
+														<img src="../assets/images/listing-icon-01.png" alt="">
+													</div>	
+														<fmt:formatNumber value="${rvo.price }" pattern="#,###" />원
+													
+												</span> <span class="details"> <em></em>
+												</span> <span> <br>
+												</span>
+												<div class="main-white-button">
+													<a href="../rentcar/rentcar_detail.do?cid=${rvo.cid }"> <i
+														class="fa fa-eye"></i> 상세보기
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							</c:if>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
