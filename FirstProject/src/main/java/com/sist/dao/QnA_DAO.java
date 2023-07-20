@@ -205,8 +205,8 @@ public class QnA_DAO {
 				vo.setId(rs.getString(2));
 				vo.setSubject(rs.getString(3));
 				vo.setDbday(rs.getString(4));
-				vo.setGroup_step(rs.getInt(5));
-				vo.setIsreply(rs.getInt(6));
+				vo.setIsreply(rs.getInt(5));
+				vo.setGroup_step(rs.getInt(6));
 				list.add(vo);
 			}
 			rs.close();

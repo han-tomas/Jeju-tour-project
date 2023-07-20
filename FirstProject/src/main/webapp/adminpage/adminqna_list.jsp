@@ -30,7 +30,7 @@ body{
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	  $('#qnaDetailBtn').click(function(){
+	  $('.qnaDetailBtn').click(function(){
 	    let no = $(this).attr('data-no'); // 수정된 코드
 	    let button = $(this);
 	    let originalText = button.text();
@@ -97,9 +97,9 @@ $(function(){
             <a href="../adminpage/adminqna_insert.do?no=${vo.no }" class="btn btn-sm" style="border-color: blue">답변대기</a>
           </c:if>
           <c:if test="${vo.isreply==1 }">
-            <span class="btn btn-sm" style="border-color: gray;">답변완료</span>
+            <span class="btn btn-sm disabled" style="border-color: gray;">답변완료</span>
           </c:if>
-          <span class="btn btn-sm" id="qnaDetailBtn" style="border-color: orange" data-no="${vo.no}">내용보기</span>
+          <span class="btn btn-sm qnaDetailBtn" style="border-color: orange" data-no="${vo.no}">내용보기</span>
 		</td>
       </tr>
       </c:forEach>
