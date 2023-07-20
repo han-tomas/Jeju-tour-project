@@ -36,10 +36,9 @@ public class MypageDAO {
 				vo.setDbday(rs.getString(1));
 				vo.setPoster(rs.getString(2));
 				vo.setTitle(rs.getString(3));
-//				Date date = rs.getDate(4);
-//				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//				String realday = sdf.format(date);
-				String realday="2023년 07월 19일";
+				Date date = rs.getDate(4);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String realday = sdf.format(date);
 				vo.setRealDate(realday);
 				vo.setTprice(rs.getInt(5));
 				list.add(vo);
