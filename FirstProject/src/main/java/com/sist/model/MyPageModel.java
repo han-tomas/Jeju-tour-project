@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import com.sist.controller.RequestMapping;
 import com.sist.vo.*;
 import com.sist.dao.*;
+
+import java.io.PrintWriter;
 import java.util.*;
 
 public class MyPageModel {
@@ -129,12 +131,111 @@ public class MyPageModel {
 	}
 	
 	@RequestMapping("mypage/mypage_cart.do")
-	public String mypage_cart(HttpServletRequest request, HttpServletResponse response) {
-		
-		
+	public String mypage_cart(HttpServletRequest request, HttpServletResponse response) 
+	{
 		request.setAttribute("mypage_jsp", "../mypage/mypage_cart.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
 	}
-	
+	@RequestMapping("mypage/mypage_pwdcheck.do")
+	public String mypage_pwdcheck(HttpServletRequest request, HttpServletResponse response)
+	{
+		request.setAttribute("mypage_jsp", "../mypage/mypage_pwdcheck.jsp");
+		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("mypage/mypage_pwdcheck_ok.do")
+	public void mypage_pwdcheck_ok(HttpServletRequest request,HttpServletResponse response)
+	{
+		String pwd=request.getParameter("pwd");
+		HttpSession session=request.getSession();
+		String id =(String)session.getAttribute("id");
+		
+		MypageDAO dao = MypageDAO.newInstance();
+		String res = dao.mypagePwdOK(id, pwd);
+		
+		try
+		{
+			PrintWriter out = response.getWriter();
+			out.println(res);
+		}catch(Exception ex) {}
+	}
+	@RequestMapping("mypage/mypage_update.do")
+	public String mypage_update(HttpServletRequest request,HttpServletResponse response)
+	{
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		//DAO
+		MypageDAO dao = MypageDAO.newInstance();
+		MemberVO vo = dao.mypageUpdateData(id);
+		String phone1= vo.getPhone().substring(0,3);
+		String phone2= vo.getPhone().substring(3,7);
+		String phone3= vo.getPhone().substring(7,11);
+		request.setAttribute("vo", vo);
+		request.setAttribute("phone1", phone1);
+		request.setAttribute("phone2", phone2);
+		request.setAttribute("phone3", phone3);
+		request.setAttribute("mypage_jsp", "../mypage/mypage_update.jsp");
+		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("mypage/mypage_update_ok.do")
+	public String mypage_update_ok(HttpServletRequest request,HttpServletResponse response)
+	{
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String name = request.getParameter("name");
+		String sex = request.getParameter("sex");
+		String birth = request.getParameter("birthday");
+		String email = request.getParameter("email");
+		String post = request.getParameter("post");
+		String addr1 = request.getParameter("addr1");
+		String addr2 = request.getParameter("addr2");
+		String phone1 = request.getParameter("phone1");
+		String phone2 = request.getParameter("phone2");
+		String phone3 = request.getParameter("phone3");
+		String content = request.getParameter("content");
+		
+		MemberVO vo = new MemberVO();
+		vo.setId(id);
+		vo.setPwd(pwd);
+		vo.setName(name);
+		vo.setSex(sex);
+		vo.setBirth(birth);
+		vo.setEmail(email);
+		vo.setPost(post);
+		vo.setAddr1(addr1);
+		vo.setAddr2(addr2);
+		vo.setPhone(phone1+phone2+phone3);
+		vo.setContent(content);
+		
+		MypageDAO dao = MypageDAO.newInstance();
+		dao.mypageUpdate(vo);
+		
+		return "redirect: ../mypage/mypage_detail.do";
+	}
+	@RequestMapping("mypage/mypage_detail.do")
+	public String mypage_detail(HttpServletRequest request,HttpServletResponse response)
+	{
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		//DAO
+		MypageDAO dao = MypageDAO.newInstance();
+		MemberVO vo = dao.mypageUpdateData(id);
+		String phone1= vo.getPhone().substring(0,3);
+		String phone2= vo.getPhone().substring(3,7);
+		String phone3= vo.getPhone().substring(7,11);
+		request.setAttribute("vo", vo);
+		request.setAttribute("phone1", phone1);
+		request.setAttribute("phone2", phone2);
+		request.setAttribute("phone3", phone3);
+		request.setAttribute("mypage_jsp", "../mypage/mypage_detail.jsp");
+		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
+		return "../main/main.jsp";
+	}
 }
