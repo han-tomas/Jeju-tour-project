@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,21 +40,28 @@
       <th></th>
       </tr>
     </thead>
-    <%-- <c:forEach var="vo" items="${list }"> --%>
+    <c:forEach var="vo" items="${list }">
       <tr>
-        <td >1</td>
+        <td >${vo.jrno }</td>
         <td >
-          <img src="../adminpage/temp/rentcar.jpg" class="rentcarImage">
+          <img src="${vo.poster }" class="rentcarImage">
         </td>
-        <td>그랜드스타렉스 12인승</td>
-        <td>2023-07-19(수) ~ 2023-07-19(수)</td>
-        <td>15,900원</td>
-        <td>심청이</td>
-        <td>
-          <input type=button class="btn btn-outline-danger" value="승인">
+        <td >${vo.title }</td>
+        <td >
+		<fmt:formatNumber value="${vo.tprice }" pattern="#,###" />원
+		</td>
+        <td >${vo.dbday }</td>
+        <td >${vo.rname }</td>
+        <td >
+          	<c:if test="${vo.rok=='n' }">
+	        <a href="../adminpage/admin_reserve_ok.do?jrno=${vo.jrno }" class="btn btn-outline-danger">승인대기</a>
+	      </c:if>
+	      <c:if test="${vo.rok=='y' }">
+	        <button class="btn btn-outline-secondary" disabled>승인완료</button>
+	      </c:if>
         </td>
       </tr>
-    <%-- </c:forEach> --%>
+    </c:forEach>
   </table>
 </div>
 </body>

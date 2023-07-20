@@ -6,8 +6,8 @@ import com.sist.common.*;
 public class ActivityWishDAO {
 	private Connection conn;
 	private PreparedStatement ps;
-	private static ActivityWishDAO dao;
 	private CreateDataBase db = new CreateDataBase();
+	private static ActivityWishDAO dao;
 	
 	public static ActivityWishDAO newInstance() {
 		if(dao==null)
