@@ -35,8 +35,8 @@ a:hover{
             <div id="admin-sidebar">
                 <ul class="sidenav admin-sidenav">
                 	<li id=menutitle >마이페이지</li>
-                    <a href="#"><li>홈</li></a>
-                    <a href="#"><li>내정보관리</li></a>
+                    <a href="../mypage/mypage_detail.do"><li>내정보</li></a>
+                    <a href="../mypage/mypage_pwdcheck.do"><li>내정보관리</li></a>
                     <a href="#"><li>회원탈퇴</li></a>
                     <a href="../mypage/mypage_reserve.do"><li>예약리스트</li></a>
                     <a href="../mypage/mypage_jjim_list.do" style="color: yellow"><li>찜 목록</li></a>                  
