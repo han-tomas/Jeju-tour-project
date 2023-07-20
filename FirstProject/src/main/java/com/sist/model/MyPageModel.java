@@ -121,9 +121,28 @@ public class MyPageModel {
 		
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		
+		String page=request.getParameter("page");
+		if(page==null)
+			page="1";
 		MypageDAO mydao=MypageDAO.newInstance();
-		List<ReservationVO> list=mydao.reservationListData(id);
+		int curpage=Integer.parseInt(page);
+		int count=mydao.reservationRowCount();
+		int totalpage=(int)(Math.ceil(count/5.0));
+		
+		final int BLOCK=5;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		if(endPage>totalpage)
+			endPage=totalpage;
+		
+		
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("count", count);
+		
+		List<ReservationVO> list=mydao.reservationListData(id,curpage);
 		request.setAttribute("list", list);
 		request.setAttribute("mypage_jsp", "../mypage/mypage_reserve.jsp");
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");

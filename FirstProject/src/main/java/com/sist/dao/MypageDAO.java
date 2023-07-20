@@ -1,7 +1,5 @@
 package com.sist.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
@@ -22,14 +20,22 @@ public class MypageDAO {
 		return dao;
 	}
 	
-	public List<ReservationVO> reservationListData(String id){
+	public List<ReservationVO> reservationListData(String id, int page){
 		List<ReservationVO> list=new ArrayList<ReservationVO>();
 		try {
 			conn=db.getConnection();
-			String sql="SELECT dbday,poster,title,regdate,tprice FROM jeju_reserve WHERE id=? "
-					+ "ORDER BY jrno DESC";
+			String sql="SELECT dbday,poster,title,regdate,tprice,num "
+					+ "FROM (SELECT dbday,poster,title,regdate,tprice,rownum as num "
+					+ "FROM (SELECT /*+ INDEX_DESC(jeju_reserve jr_jrno_pk)*/dbday, poster, title, regdate, tprice "
+					+ "FROM jeju_reserve WHERE id=?)) "
+					+ "WHERE num BETWEEN ? AND ?";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, id);
+			int rowSize=5;
+			int start=(rowSize*page)-(rowSize-1);
+			int end=rowSize*page;
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				ReservationVO vo=new ReservationVO();
@@ -50,6 +56,24 @@ public class MypageDAO {
 			db.disConnection(conn, ps);
 		}
 		return list;
+	}
+	
+	public int reservationRowCount() {
+		int count=0;
+		try {
+			conn=db.getConnection();
+			String sql="SELECT COUNT(*) FROM jeju_reserve";
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			count=rs.getInt(1);
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.disConnection(conn, ps);
+		}
+		return count;
 	}
 	//비밀번호 확인
 	public String mypagePwdOK(String id,String pwd)
