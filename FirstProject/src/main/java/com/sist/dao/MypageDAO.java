@@ -170,5 +170,106 @@ public class MypageDAO {
 			db.disConnection(conn, ps);
 		}
 	}
-	
+	// 회원 탈퇴
+	public String mypageDeleteOk(String id,String pwd)
+	{
+		String result="NO";
+		try
+		{
+			conn=db.getConnection();
+			   String sql="SELECT pwd FROM jeju_member "
+			   		+ "WHERE id=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setString(1, id);
+			   ResultSet rs = ps.executeQuery();
+			   rs.next();
+			   String db_pwd = rs.getString(1);
+			   rs.close();
+			   if(db_pwd.equals(pwd))
+			   {
+				   try
+				   {
+					   conn.setAutoCommit(false);
+					   
+					   sql="DELETE FROM hotel_wish WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM activity_wish WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM course_recommend WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM course_jjim WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM jeju_food_jjim WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM jeju_food_like WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM wish_reserve WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM jeju_reserve WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM jeju_freeboard_reply WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM qnaboard WHERE id=?";
+					   ps=conn.prepareStatement(sql);
+					   ps.setString(1, id);
+					   ps.executeUpdate();
+					   
+					   sql="DELETE FROM jeju_member "
+						   		+ "WHERE id=?";
+						   ps=conn.prepareStatement(sql);
+						   ps.setString(1, id);
+						   ps.executeUpdate();
+					   result="YES";
+				   }catch(Exception ex)
+				   {
+					   try
+					   {
+						   conn.rollback();
+					   }catch(Exception e) {}
+				   }
+				   finally
+				   {
+					   try
+					   {
+						   conn.setAutoCommit(true);
+					   }catch(Exception ex) {}
+				   }
+			   }
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return result;
+	}
 }

@@ -281,4 +281,32 @@ public class MyPageModel {
 		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
 		return "../main/main.jsp";
 	}
+	@RequestMapping("mypage/mypage_delete.do")
+	public String mypage_delete(HttpServletRequest request,HttpServletResponse response)
+	{
+		request.setAttribute("mypage_jsp", "../mypage/mypage_delete.jsp");
+		request.setAttribute("main_jsp", "../mypage/mypage_main.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("mypage/mypage_delete_ok.do")
+	public void memberDeleteOk(HttpServletRequest request,HttpServletResponse response)
+	{
+		String pwd=request.getParameter("pwd");
+		HttpSession session= request.getSession();
+		String id = (String)session.getAttribute("id");
+		// DAO 연동
+		MypageDAO dao = MypageDAO.newInstance();
+		String result=dao.mypageDeleteOk(id, pwd);
+		if(result.equals("YES"))
+		{
+			session.invalidate(); // 세션을 해제해야 다시 로그인으로 넘어감
+		}
+		try
+		{
+			PrintWriter out = response.getWriter();
+			out.println(result);
+		}catch(Exception ex) {}
+		
+		
+	}
 }
