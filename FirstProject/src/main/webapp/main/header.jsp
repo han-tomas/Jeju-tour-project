@@ -81,7 +81,7 @@ $(function(){
 				    <li><a class="dropdown-item" href="../notice/notice_list.do">Notice</a></li>
 				    <li><a class="dropdown-item" href="../freeboard/list.do">자유게시판</a></li>
 				    <c:if test="${sessionScope.id!=null }">
-				      <li><a class="dropdown-item" href="../qnaboard/qna_list.do">나의 QnA</a></li>
+				      <li><a class="dropdown-item" href="../qnaboard/qna_list.do">My QnA</a></li>
 				    </c:if>
 				    <li></li>
 				 </ul>
@@ -99,7 +99,7 @@ $(function(){
 				</c:if>
 				<c:if test="${sessionScope.admin=='y' }">
 					<li class="log" >
-						<a href="../adminpage/adminpage_main.do" class="btn btn-outline-dark btn-block">adminpage</a>
+						<a href="../adminpage/member_list.do" class="btn btn-outline-dark btn-block">adminpage</a>
 						<input type="button" class="btn btn-outline-dark btn-block" id="logoutBtn" value="Logout">
 					</li>
 				</c:if>
