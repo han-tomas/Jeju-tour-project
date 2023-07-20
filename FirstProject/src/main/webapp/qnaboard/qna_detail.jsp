@@ -30,6 +30,18 @@ $(function(){
 			}
 		})
 	})
+	$('#adminreplyBtn').click(function(){
+		let group_id=$(this).attr("data-no")
+		$.ajax({
+			type:'post',
+			url:'../qnaboard/qna_reply.do',
+			data:{"group_id":group_id},
+			success:function(result){
+				$('#adminreply').html(result)
+			}
+		})
+		
+	})
 })
 </script>
 </head>
@@ -48,7 +60,7 @@ $(function(){
   <main class="container clear">
     
     <div style="margin-bottom: 20px;">
-      <h2 style="display: inline">QnA</h2>
+      <h2 style="display: inline">${sessionScope.name }님의 문의사항</h2>
     </div>
     <table class="table">
       <tr style="border-top : 1px solid;background-color: #dedede;"><!-- #dedede -->
@@ -68,9 +80,19 @@ $(function(){
           <c:if test="${sessionScope.id==vo.id }">
             <span class="btn btn-sm" id="del" data-no="${vo.no }" style="border-color: gray;">삭제</span>
           </c:if>
+          <c:if test="${vo.isreply==1 }">
+            <span class="btn btn-sm" id="adminreplyBtn" style="border-color: gray" data-no="${vo.group_id }">답변</span>
+          </c:if>
         </td>
       </tr>
     </table>
+    <!-- ajax -->
+    <table class="table">
+      <tr>
+        <td id="adminreply" style="background-color: #f3f3f3; padding:0px;"></td>
+      </tr>
+    </table>
+    
   </main>
 </div>
 </body>

@@ -45,19 +45,9 @@ $(function(){
 </script>
 </head>
 <body>
-<div class="page-heading">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="top-text header-text">
-        </div>
-      </div>
-    </div>
-  </div>
-</div> 
   <div class="container1">
   <div class="row1">
-  <h2 class="sectiontitle">공지사항</h2>
+  <h2 class="sectiontitle" style="border-bottom: 1px solid gray;">답변하기</h2>
   <form method=post action="../adminpage/adminqna_insert_ok.do" id="frm">
   <table class="table">
     <tr>
@@ -83,8 +73,8 @@ $(function(){
     </tr>
     <tr>
       <td colspan=2 class="text-center">
-        <input type=button value="답변" class="btn btn-xs" style="border-color: gray;" id="replyBtn">
-        <input type=button value="취소" class="btn btn-xs" style="border-color: gray;" onclick="javascript:history.back()">
+        <input type=button value="답변" class="btn btn-sm" style="border-color: gray;" id="replyBtn">
+        <input type=button value="취소" class="btn btn-sm" style="border-color: gray;" onclick="javascript:history.back()">
       </td>
     </tr>
   </table>

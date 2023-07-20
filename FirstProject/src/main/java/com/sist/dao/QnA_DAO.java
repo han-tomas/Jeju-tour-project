@@ -1,6 +1,5 @@
 package com.sist.dao;
 import java.util.*;
-import java.util.Date;
 import java.sql.*;
 import com.sist.vo.*;
 import com.sist.common.*;
@@ -25,9 +24,9 @@ public class QnA_DAO {
 	private Date regdate;
 			 */
 			conn=db.getConnection();
-			String sql="SELECT no,id,subject,TO_CHAR(regdate,'yyyy-MM-dd'),group_tab,type,num "
-					+ "FROM (SELECT no,id,subject,regdate,group_tab,type,rownum as num "
-					+ "FROM (SELECT no,id,subject,regdate,group_tab,type "
+			String sql="SELECT no,id,subject,TO_CHAR(regdate,'yyyy-MM-dd'),group_tab,type,isreply,group_id,num "
+					+ "FROM (SELECT no,id,subject,regdate,group_tab,type,isreply,group_id,rownum as num "
+					+ "FROM (SELECT no,id,subject,regdate,group_tab,type,isreply,group_id "
 					+ "FROM qnaboard ORDER BY group_id DESC,group_step ASC)) "
 					+ "WHERE num BETWEEN ? AND ?";
 			ps=conn.prepareStatement(sql);
@@ -45,6 +44,8 @@ public class QnA_DAO {
 				vo.setDbday(rs.getString(4));
 				vo.setGroup_tab(rs.getInt(5));
 				vo.setType(rs.getString(6));
+				vo.setIsreply(rs.getInt(7));
+				vo.setGroup_id(rs.getInt(8));
 				list.add(vo);
 			}
 			rs.close();
@@ -152,13 +153,8 @@ public class QnA_DAO {
 	public QnA_VO qnaBoardDetailData(int no) {
 		QnA_VO vo=new QnA_VO();
 		try {
-			/*
-			private int no,group_step,group_tab,group_id,isreply;
-			private String id,name,subject,content,dbday,type;
-			private Date regdate;
-			 */
 			conn=db.getConnection();
-			String sql="SELECT no,id,subject,content,TO_CHAR(regdate,'yyyy-MM-dd'),type "
+			String sql="SELECT no,id,subject,content,TO_CHAR(regdate,'yyyy-MM-dd'),type,isreply,group_id "
 					+ "FROM qnaboard "
 					+ "WHERE no=?";
 			ps=conn.prepareStatement(sql);
@@ -171,6 +167,8 @@ public class QnA_DAO {
 			vo.setContent(rs.getString(4));
 			vo.setDbday(rs.getString(5));
 			vo.setType(rs.getString(6));
+			vo.setIsreply(rs.getInt(7));
+			vo.setGroup_id(rs.getInt(8));
 			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -179,7 +177,31 @@ public class QnA_DAO {
 		}
 		return vo;
 	}
-
+	// qna reply
+	public QnA_VO qnaBoardDetailReplyData(int group_id) {
+		QnA_VO vo=new QnA_VO();
+		try {
+			conn=db.getConnection();
+			String sql="SELECT subject,content,TO_CHAR(regdate,'yyyy-MM-dd'),type "
+					+ "FROM qnaboard "
+					+ "WHERE group_id=? AND isreply=0";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, group_id);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setSubject(rs.getString(1));
+			vo.setContent(rs.getString(2));
+			vo.setDbday(rs.getString(3));
+			vo.setType(rs.getString(4));
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		return vo;
+	}
+	
 	// admin
 	// list
 	public List<QnA_VO> qnaAdminListData(int page){
