@@ -24,10 +24,10 @@
 </div> 
 <div class="container container1">
 <div class="row">
-<div class="col-sm-2" style="height: 500px;">
+<div class="col-sm-2">
   <jsp:include page="../adminpage/adminpage_nav.jsp"></jsp:include>
 </div>
-<div class="col-sm-10" style="height: 500px;">
+<div class="col-sm-10">
   <%--변경위치 --%>
   <jsp:include page="${adminpage_jsp }"></jsp:include>
 </div>
