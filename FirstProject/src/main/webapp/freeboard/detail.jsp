@@ -129,6 +129,15 @@ $(function(){
 			k=0;
 		}
 	})
+	$('#reBtn').click(function(){
+		let cont=$('#recont').val()
+		if(cont.trim()=="")
+		{
+			$('#recont').focus()
+			return;
+		}
+		$('#reForm').submit()
+	})
 })
 </script>
 </head>
@@ -205,8 +214,8 @@ $(function(){
 		  	 						<img src="image/reply.png" style="width: 15px; height: 15px;">&nbsp;${rvo.name }&nbsp;(${rvo.dbday })
 		  	 					</td>
 		  	 					<td class="text-right">
-		  	 						<c:if test="${sessionScope.id!=null }">
-		  	 							<c:if test="${sessionScope.id==rvo.id }">
+		  	 						<c:if test="${sessionScope.id!=null  }">
+		  	 							<c:if test="${sessionScope.id==rvo.id || sessionScope.admin=='y'}">
 				  	 						<span class="btn btn-sm btn-success ups" data-no="${rvo.no }">수정</span>
 				  	 						<a href="../freeboard/reply_delete.do?no=${rvo.no }&bno=${vo.no}" class="btn btn-sm btn-danger">삭제</a>
 		  	 							</c:if>
@@ -245,18 +254,20 @@ $(function(){
 		  	 	</td>
 		  	 </tr>
 		  	 </table>
+		  	<c:if test="${sessionScope.id!=null }">
 	    	<table class="table">
 		  	 <%-- 새댓글 입력 --%>
 		  	 	<tr>
 		  	 		<td>
-		  	 			<form method="post" action="../freeboard/reply_insert.do" class="inline">
+		  	 			<form method="post" action="../freeboard/reply_insert.do" class="inline" id="reForm">
 		  	 				<input type="hidden" name="bno" value="${vo.no}">
-		  	 				<textarea rows="4" cols="60" name="content" style="float: left"></textarea>
-		  						&nbsp;<input type=submit value="댓글쓰기" style="width: 126px;height: 102px;background-color: #FF9800;color: white; border-color: #FF9800; border-radius: 10px;">
+		  	 				<textarea rows="4" cols="60" name="content" style="float: left" id="recont"></textarea>
+		  						&nbsp;<input type=button value="댓글쓰기" style="width: 126px;height: 102px;background-color: #FF9800;color: white; border-color: #FF9800; border-radius: 10px;" id="reBtn">
 		  	 			</form>
 		  	 		</td>
 		  	 	</tr>
 		  	 </table>
+		  	</c:if>
 	    </div>	
 	</div>
 </div>	    

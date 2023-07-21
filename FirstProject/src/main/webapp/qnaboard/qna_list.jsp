@@ -58,7 +58,7 @@ p{
     </thead>
     <tbody>
       <c:forEach var="vo" items="${list }" varStatus="s">
-        <c:if test="${id!='hong' && id==vo.id}">
+        <c:if test="${sessionScope.admin=='y' && id==vo.id}">
           <tr>
             <td width=10% class="text-center">${ vo.num }</td>
             <td width=45%>
