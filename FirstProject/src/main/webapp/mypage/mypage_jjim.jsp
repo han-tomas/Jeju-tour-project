@@ -179,8 +179,8 @@ $(function(){
 			</tr>
 		</c:forEach>
 	</table>
-	
-	<h4>예약</h4>
+	<div style="height: 50px"></div>
+	<h2>${sessionScope.name }님의 예약 목록</h2>
 	<div class="container container2">
 	<div class="row">
 		<ul class="tabs">
