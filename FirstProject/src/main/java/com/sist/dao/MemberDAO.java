@@ -259,16 +259,16 @@ public class MemberDAO {
 		 return result;
 	 }
 	// 비밀번호 찾기
-	public String memberPasswordFind(String name,String email)
+	public String memberPasswordFind(String id,String email)
    {
 	   String result="";
 	   try
 	   {
 		   conn=db.getConnection();
 		   String sql="SELECT COUNT(*) FROM jeju_member "
-		   		+ "WHERE name=? AND email=?";
+		   		+ "WHERE id=? AND email=?";
 		   ps=conn.prepareStatement(sql);
-		   ps.setString(1, name);
+		   ps.setString(1, id);
 		   ps.setString(2, email);
 		   ResultSet rs = ps.executeQuery();
 		   rs.next();
@@ -282,9 +282,9 @@ public class MemberDAO {
 		   {
 			   sql="SELECT RPAD(SUBSTR(pwd,1,1),LENGTH(pwd),'*') "
 			   		+ "FROM jeju_member "
-			   		+ "WHERE name=? AND email=?";
+			   		+ "WHERE id=? AND email=?";
 			   ps=conn.prepareStatement(sql);
-			   ps.setString(1, name);
+			   ps.setString(1, id);
 			   ps.setString(2, email);
 			   rs=ps.executeQuery();
 			   rs.next();
@@ -303,16 +303,16 @@ public class MemberDAO {
 	   }
 	   return result;
    }
-	public String memberPasswordPhoneFind(String name,String phone)
+	public String memberPasswordPhoneFind(String id,String phone)
 	{
 		String result="";
 		try
 		{
 			conn=db.getConnection();
 			String sql="SELECT COUNT(*) FROM jeju_member "
-					+ "WHERE name=? AND phone=?";
+					+ "WHERE id=? AND phone=?";
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, name);
+			ps.setString(1, id);
 			ps.setString(2, phone);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
@@ -326,9 +326,9 @@ public class MemberDAO {
 			{
 				sql="SELECT RPAD(SUBSTR(pwd,1,1),LENGTH(pwd),'*') "
 						+ "FROM jeju_member "
-						+ "WHERE name=? AND phone=?";
+						+ "WHERE id=? AND phone=?";
 				ps=conn.prepareStatement(sql);
-				ps.setString(1, name);
+				ps.setString(1, id);
 				ps.setString(2, phone);
 				rs=ps.executeQuery();
 				rs.next();
