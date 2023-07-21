@@ -63,7 +63,11 @@ table, th, td {
 table td {
   padding: 10px;
 }
-
+.payImg{
+	width: 48px;
+	height: 30px;
+	align-items: center;
+}
 #score_icon {
 	width: 10px;
 	height: 10px;
@@ -293,6 +297,45 @@ IMP.request_pay({
 				<div style="height: 20px"></div>
 				<h4><strong>결제 방법</strong></h4>
 				<hr>
+				<div class="form-check">
+									  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+									  	<label class="form-check-label" for="flexRadioDefault1">
+									    신용/체크카드
+									  	</label>
+									</div>
+									<div style="height: 7px;"></div>
+									<div class="form-check">
+									  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+									  	<label class="form-check-label" for="flexRadioDefault2">
+									    카카오페이
+									 	</label>
+									 	<img src="../assets/images/kakao.png" class="payImg">
+									</div>
+									<div style="height: 7px;"></div>
+									<div class="form-check">
+									  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+									  	<label class="form-check-label" for="flexRadioDefault2">
+									    토스페이
+									 	</label>
+									 	<img src="../assets/images/toss.png" class="payImg">
+									</div>
+									<div style="height: 7px;"></div>
+									<div class="form-check">
+									  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+									  	<label class="form-check-label" for="flexRadioDefault2">
+									    네이버페이
+									 	</label>
+									 	<img src="../assets/images/naver.png" class="payImg">
+									</div>
+									<div style="height: 7px;"></div>
+									<div class="form-check">
+									  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+									  	<label class="form-check-label" for="flexRadioDefault2">
+									    페이코
+									 	</label>
+									 	<img src="../assets/images/payco.png" class="payImg">
+									</div>
+									<div style="height: 100px"></div>
 			</div>
 			<div class="col-sm-4" style="color:black" id="yourDiv">
 				<div class="buyBox">
