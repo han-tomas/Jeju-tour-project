@@ -15,7 +15,7 @@ public class QnA_DAO {
 		return dao;
 	}
 	// list
-	public List<QnA_VO> qnaBoardListData(int page){
+	public List<QnA_VO> qnaBoardListData(int page, String id){
 		List<QnA_VO> list=new ArrayList<QnA_VO>();
 		try {
 			/*
@@ -27,14 +27,15 @@ public class QnA_DAO {
 			String sql="SELECT no,id,subject,TO_CHAR(regdate,'yyyy-MM-dd'),group_tab,type,isreply,group_id,num "
 					+ "FROM (SELECT no,id,subject,regdate,group_tab,type,isreply,group_id,rownum as num "
 					+ "FROM (SELECT no,id,subject,regdate,group_tab,type,isreply,group_id "
-					+ "FROM qnaboard ORDER BY group_id DESC,group_step ASC)) "
+					+ "FROM qnaboard WHERE id=? ORDER BY group_id DESC,group_step ASC)) "
 					+ "WHERE num BETWEEN ? AND ?";
 			ps=conn.prepareStatement(sql);
 			int rowSize=10;
 			int start=(rowSize*page)-(rowSize-1);
 			int end=rowSize*page;
-			ps.setInt(1, start);
-			ps.setInt(2, end);
+			ps.setString(1, id);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {
 				QnA_VO vo=new QnA_VO();
@@ -46,6 +47,7 @@ public class QnA_DAO {
 				vo.setType(rs.getString(6));
 				vo.setIsreply(rs.getInt(7));
 				vo.setGroup_id(rs.getInt(8));
+				vo.setNum(rs.getInt(9));
 				list.add(vo);
 			}
 			rs.close();
@@ -74,25 +76,6 @@ public class QnA_DAO {
 			db.disConnection(conn, ps);
 		}
 		return total;
-	}
-	
-	// count number
-	public int qnaBoardCount() {
-		int count=0;
-		try {
-			conn=db.getConnection();
-			String sql="SELECT COUNT(*) FROM qnaboard";
-			ps=conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			rs.next();
-			count=rs.getInt(1);
-			rs.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			db.disConnection(conn, ps);
-		}
-		return count;
 	}
 	
 	// insert

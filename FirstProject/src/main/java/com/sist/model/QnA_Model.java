@@ -12,20 +12,18 @@ public class QnA_Model {
 	@RequestMapping("qnaboard/qna_list.do")
 	public String qna_list(HttpServletRequest request,HttpServletResponse response) {
 		String page=request.getParameter("page");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
 		if(page==null) page="1";
 		int curpage=Integer.parseInt(page);
 		QnA_DAO dao=QnA_DAO.newInstance();
-		List<QnA_VO> list=dao.qnaBoardListData(curpage);
+		List<QnA_VO> list=dao.qnaBoardListData(curpage, id);
 		int totalpage=dao.qnaBoardTotalPage();
-		int count=dao.qnaBoardCount();
-		HttpSession session=request.getSession();
-		String id=(String)session.getAttribute("id");
 		
 		request.setAttribute("id", id);
 		request.setAttribute("list", list);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
-		request.setAttribute("count", count);
 		request.setAttribute("main_jsp", "../qnaboard/qna_list.jsp");
 		return "../main/main.jsp";
 	}

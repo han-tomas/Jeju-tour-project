@@ -53,20 +53,15 @@ p{
  		<th width=45%>제목</th>
  		<th width=15% class="text-center">작성자</th>
  		<th width=20% class="text-center">작성일</th>
- 		<th width=20% class="text-center"></th>
+ 		<th width=20% class="text-center">상태</th>
       </tr>
     </thead>
     <tbody>
-    
       <c:forEach var="vo" items="${list }" varStatus="s">
-        <c:if test="${id!='hong' }">
-          <c:if test="${id==vo.id }">
+        <c:if test="${id!='hong' && id==vo.id}">
           <tr>
-            <td width=10% class="text-center">${s.index+1 }</td>
+            <td width=10% class="text-center">${ vo.num }</td>
             <td width=45%>
-              <c:if test="${vo.group_tab==1 }">
-              &nbsp;&nbsp;&nbsp;
-              </c:if>
               <a href="../qnaboard/qna_detail.do?no=${vo.no}" style="color: black">[${vo.type}]&nbsp;&nbsp;${vo.subject }</a>
               <c:if test="${today.equals(vo.dbday) }">
                 <sub style="color: red">new</sub>
@@ -82,7 +77,6 @@ p{
             </c:if>
           </tr>
           </c:if>
-        </c:if>
       </c:forEach>
     </tbody>
   </table>

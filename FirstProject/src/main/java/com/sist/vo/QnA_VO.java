@@ -20,10 +20,16 @@ CREATE TABLE qnaboard(
 import java.util.Date;
 
 public class QnA_VO {
-	private int no,group_step,group_tab,group_id,isreply;
+	private int no,group_step,group_tab,group_id,isreply, num;
 	private String id,name,subject,content,dbday,type;
 	private Date regdate;
 	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getType() {
 		return type;
 	}
