@@ -37,11 +37,18 @@ $(function(){
 		let fimg=$(this).attr("data-poster")
 		$('#fposter').attr("src",fimg)
 	})
+<<<<<<< HEAD
 	
 	$('.acTop10').css("cursor","pointer")
 	$('.acTop10').click(function(){
 		let aimg=$(this).attr("data-aposter")
 		$('#aposter').attr("src",aimg)
+=======
+	$('.hotelTop10').css("cursor","pointer")
+	$('.hotelTop10').click(function(){
+		let himg=$(this).attr("data-poster")
+		$('#hposter').attr("src",himg)
+>>>>>>> branch 'master' of https://github.com/http-kjs/FirstProject.git
 	})
 })
 	
@@ -174,20 +181,23 @@ $(function(){
 													<div class="row">
 														<div class="col-lg-5 align-self-center">
 															<div class="left-text">
-																<h4>One Of The Most Trending Stuffs Right Now!</h4>
-																<p>Plot Listing is a responsive Bootstrap 5 website
-																	template that included 4 different HTML pages. This
-																	template is provided by TemplateMo website. You can
-																	apply this layout for your static or dynamic CMS
-																	websites.</p>
+																<h3 style="color: white">추천 호텔 10선</h3><br>
+																
+																
+																<c:forEach var="vo" items="${hhList }" varStatus="f">
+																	<span class="hotelTop10" style="font-size: 15pt;color: white; line-height: 2" data-poster="${vo.poster }">
+																	  <strong>${f.index+1 }. &nbsp;${vo.name }</strong>
+																	</span><br>
+																</c:forEach>
+																
 																<div class="main-white-button">
-																	<a href="#"><i class="fa fa-eye"></i> Discover More</a>
+																	<a href="../hotel/hotel_list.do"><i class="fa fa-eye"></i>제주 호텔 더보기</a>
 																</div>
 															</div>
 														</div>
 														<div class="col-lg-7 align-self-center">
 															<div class="right-image">
-																<img src="../assets/images/tabs-image-01.jpg" alt="">
+																<img src="../assets/images/tabs-image-01.jpg" id="hposter" style="width: 455px;height: 510px">
 															</div>
 														</div>
 													</div>

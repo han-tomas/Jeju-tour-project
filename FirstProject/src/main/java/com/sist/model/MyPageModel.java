@@ -62,6 +62,50 @@ public class MyPageModel {
 		return "../main/main.jsp";
 	}
 	
+
+	@RequestMapping("mypage/mypage_hotel_reserve.do")
+	public String hotel_reserve_ok(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String rno = request.getParameter("rno");
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+		String inwon = request.getParameter("inwon");
+		String price = request.getParameter("price");
+		String tprice = request.getParameter("tprice");
+		String dbday = request.getParameter("date");
+		String poster = request.getParameter("poster");
+		String title = request.getParameter("title");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		ReservationVO vo = new ReservationVO();
+		vo.setId(id);
+		vo.setRname(name);
+		vo.setRemail(email);
+		vo.setRphone(phone);
+		vo.setRno(Integer.parseInt(rno));
+		vo.setCheckin(startDate);
+		vo.setCheckout(endDate);
+		vo.setInwon(Integer.parseInt(inwon));
+		vo.setPrice(Integer.parseInt(price));
+		vo.setTprice(Integer.parseInt(tprice));
+		vo.setDbday(dbday);
+		vo.setPoster(poster);
+		vo.setTitle(title);
+		
+		// DAO연동
+		HotelDAO dao = HotelDAO.newInstance();
+		dao.hotelReserveOk(vo);
+		
+		return "redirect:../mypage/mypage_reserve.do";
+	}
 	
 	@RequestMapping("mypage/mypage_activity_reserve.do")
 	public String mypage_activity_reserve(HttpServletRequest request, HttpServletResponse response) {
@@ -314,6 +358,49 @@ public class MyPageModel {
 		String jrno=request.getParameter("jrno");
 		MypageDAO dao=MypageDAO.newInstance();
 		dao.reserveDelete(Integer.parseInt(jrno));
+		
+		return "redirect:../mypage/mypage_reserve.do";
+	}
+	
+
+	@RequestMapping("mypage/mypage_review.do")
+	public String mypage_review(HttpServletRequest request,HttpServletResponse response) {
+		String jrno = request.getParameter("jrno");
+		request.setAttribute("jrno", jrno);
+		
+		return "../mypage/mypage_review.jsp";
+	}
+	
+	@RequestMapping("mypage/mypage_review_ok.do")
+	public String mypage_review_ok(HttpServletRequest request,HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String jrno = request.getParameter("jrno");
+		String content = request.getParameter("content");
+		String score = request.getParameter("score");
+
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		String name = (String)session.getAttribute("name");
+		
+		// DAO연동
+		MypageDAO mdao = MypageDAO.newInstance();
+		ReservationVO rvo = mdao.reserveSearch(Integer.parseInt(jrno));
+		ReviewVO rvvo = new ReviewVO();
+		rvvo.setJrno(Integer.parseInt(jrno));
+		rvvo.setContent(content);
+		rvvo.setScore(score);
+		rvvo.setId(id);
+		rvvo.setName(name);
+		rvvo.setAcino(rvo.getAcino());
+		rvvo.setHdno(rvo.getHdno());
+		rvvo.setCid(rvo.getCid());
+		rvvo.setRcno(rvo.getRcno());
+		mdao.reviewInsert(rvvo);
+		
 		
 		return "redirect:../mypage/mypage_reserve.do";
 	}

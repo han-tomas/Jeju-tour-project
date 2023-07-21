@@ -215,11 +215,11 @@ public class MemberModel {
 		{
 			request.setCharacterEncoding("UTF-8");
 		}catch(Exception ex) {}
-		String name= request.getParameter("name");
+		String id= request.getParameter("id");
 		String email= request.getParameter("email");
 		//DAO 연동
 		MemberDAO dao=MemberDAO.newInstance();
-		String res = dao.memberPasswordFind(name, email);
+		String res = dao.memberPasswordFind(id, email);
 		try
 		{
 			//Spring => @RestController
@@ -234,11 +234,11 @@ public class MemberModel {
 		{
 			request.setCharacterEncoding("UTF-8");
 		}catch(Exception ex) {}
-		String name= request.getParameter("name2");
+		String id= request.getParameter("id2");
 		String phone= request.getParameter("tel");
 		//DAO 연동
 		MemberDAO dao=MemberDAO.newInstance();
-		String res = dao.memberPasswordPhoneFind(name, phone);
+		String res = dao.memberPasswordPhoneFind(id, phone);
 		try
 		{
 			//Spring => @RestController

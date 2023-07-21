@@ -43,10 +43,10 @@ th{
 <script type="text/javascript">
 $(function(){
 	$('#emailBtn').click(function(){
-    	let name=$('#name').val();
-    	if(name.trim()==="")
+    	let id=$('#id').val();
+    	if(id.trim()==="")
     	{
-    		$('#name').focus();
+    		$('#id').focus();
     		return;
     	}
     	
@@ -60,13 +60,13 @@ $(function(){
     	$.ajax({
     		type:'post',
     		url:'../member/passwordfindOk.do',
-    		data:{"name":name, "email":email},
+    		data:{"id":id, "email":email},
     		success:function(result)
     		{
     			let res=result.trim();
     			if(res==='NO')
     			{
-    				$('#pwd_email').html('<span style="color:red">이름이나 이메일이 존재하지 않습니다</span>')
+    				$('#pwd_email').html('<span style="color:red">아이디나 이메일이 존재하지 않습니다</span>')
     			}
     			else
     			{
@@ -77,10 +77,10 @@ $(function(){
     	})
     })
 	$('#telBtn').click(function(){
-    	let name=$('#name2').val();
-    	if(name.trim()==="")
+    	let id=$('#id2').val();
+    	if(id.trim()==="")
     	{
-    		$('#name2').focus();
+    		$('#id2').focus();
     		return;
     	}
     	
@@ -102,7 +102,7 @@ $(function(){
     	$.ajax({
     		type:'post',
     		url:'../member/passwordfindOk2.do',
-    		data:{"name2":name, "tel":phone},
+    		data:{"id2":id, "tel":phone},
     		success:function(result)
     		{
     			let res=result.trim();
@@ -150,9 +150,9 @@ $(function(){
     <div id="home" class="container tab-pane active"><br>
       	<table class="table">
 				<tr>
-					<th width=30%>이름</th>
+					<th width=30%>아이디</th>
 					<td width=70%>
-						<input type=text id="name" class="input-sm">
+						<input type=text id="id" class="input-sm">
 					</td>
 				</tr>
 				<tr>
@@ -178,9 +178,9 @@ $(function(){
     <div id="menu1" class="container tab-pane fade"><br>
 		<table class="table">
 				<tr>
-					<th width=30%>이름</th>
+					<th width=30%>아이디</th>
 					<td width=70%>
-						<input type=text id="name2" class="input-sm">
+						<input type=text id="id2" class="input-sm">
 					</td>
 				</tr>
 				<tr>

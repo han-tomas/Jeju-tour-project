@@ -233,6 +233,29 @@ public class HotelDAO {
 		return name;
 	}
 	
+	// 숙소번호 취득
+	public int hotelHdnoData(int huno) {
+		int hdno = 0;
+		
+		try {
+			conn = db.getConnection();
+			String sql = "SELECT hdno FROM hotel_detail "
+					+"WHERE huno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, huno);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			hdno = rs.getInt(1);
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		
+		return hdno;
+	}
+	
 	// 예약하기
 	public void hotelReserveOk(ReservationVO vo) {
 		try {
@@ -262,5 +285,74 @@ public class HotelDAO {
 		} finally {
 			db.disConnection(conn, ps);
 		}
+	}
+	
+	// 댓글
+	public List<ReviewVO> hotelReview(int hdno) {
+		List<ReviewVO> list = new ArrayList<ReviewVO>();
+		try {
+			conn = db.getConnection();
+			String sql = "SELECT content, score, name, num "
+						+"FROM (SELECT content, score, name, hdno, rownum AS num "
+						+"FROM (SELECT content, score, name, hdno "
+						+"FROM reserve_review WHERE hdno=? ORDER BY rownum desc)) "
+						+"WHERE num <= 5";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, hdno);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				ReviewVO vo = new ReviewVO();
+				vo.setContent(rs.getString(1));
+				vo.setScore(rs.getString(2));
+				vo.setName(rs.getString(3));
+				list.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		
+		return list;
+	}
+	
+	// 검색어 top10
+	public List<HotelVO> hotelTop10() {
+		List<HotelVO> list = new ArrayList<HotelVO>();
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT hdno,name,hit,poster,rownum "
+					+ "FROM (SELECT hdno,name,hit,poster "
+					+ "FROM hotel_detail ORDER BY hit DESC) "
+					+ "WHERE rownum<=10";
+			ps=conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				HotelVO vo = new HotelVO();
+				vo.setHdno(rs.getInt(1));
+				String name=rs.getString(2);
+				if(name.length()>18)
+				{
+					name=name.substring(0,18)+"...";
+				}
+				vo.setName(name);
+				vo.setHit(rs.getInt(3));
+				String poster = rs.getString(4).substring(0, rs.getString(4).indexOf("^"));
+				vo.setPoster(hotelURL+poster);
+				list.add(vo);
+			}
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return list;
 	}
 }

@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.rating i {
+    color: gold; /* 노란색으로 설정 */
+  }
 a {
   text-decoration: none;
   color: inherit;
@@ -186,8 +189,36 @@ $(function() {
 	  }
 	}, false);
 	
-	
 })
+	function displayRatingIcons() {
+	    const ratingDivs = document.querySelectorAll('.rating');
+	    ratingDivs.forEach((ratingDiv) => {
+	      const score = parseFloat(ratingDiv.dataset.score);
+	      const fullStar = '<i class="fa fa-star" aria-hidden="true"></i>';
+	      const halfStar = '<i class="fa fa-star-half-o" aria-hidden="true"></i>';
+	      const emptyStar = '<i class="fa fa-star-o" aria-hidden="true"></i>';
+
+	      const roundedRating = Math.round(score * 2) / 2; // 반올림하여 0.5단위로 조정
+
+	      let starsHtml = '';
+	      for (let i = 1; i <= 5; i++) {
+	        if (i <= roundedRating) {
+	          starsHtml += fullStar;
+	        } else if (i - 0.5 === roundedRating) {
+	          starsHtml += halfStar;
+	        } else {
+	          starsHtml += emptyStar;
+	        }
+	      }
+
+	      ratingDiv.innerHTML = starsHtml;
+	    });
+	  }
+
+	  // 페이지가 로드되면 평점 아이콘을 표시
+	  document.addEventListener('DOMContentLoaded', () => {
+	    displayRatingIcons();
+	  });
 </script>
 </head>
 <body>
@@ -289,7 +320,7 @@ $(function() {
 					<li class="tab-item"><a href="#item1" class="actived">숙소소개</a></li>
 					<li class="tab-item"><a href="#item2">이용안내</a></li>
 					<li class="tab-item"><a href="#item3">취소/환불규정</a></li>
-					<li class="tab-item"><a href="#item4">평점/리뷰</a></li>
+					<li class="tab-item"><a href="#item4">한줄평</a></li>
 				</ul>
 				<div class="wrapper_tab-content">
 					<article id="item1" class="tab-content content-visible">
@@ -471,7 +502,19 @@ $(function() {
 					</article>
 
 					<article id="item4" class="tab-content">
-						<h1>평점장소</h1>
+						<table class="table">
+							<c:forEach var="rvo" items="${ rlist }">
+								<tr>
+									<td style="width:25%; border-bottom-width:0px;"><strong>${ rvo.name }</strong></td>
+									<td style="width:75%" rowspan="2">
+										${ rvo.content }
+									</td>
+								</tr>
+								<tr>
+									<td style="width:25%"><div class="rating" data-score="${ rvo.score }"></div></td>
+								</tr>
+							</c:forEach>
+						</table>
 					</article>
 				</div>
 			</div>

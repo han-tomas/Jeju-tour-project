@@ -77,6 +77,9 @@ public class MainModel {
 		// Activity 10
 		List<ActivityVO> atList = dao.activityPopList();
 		request.setAttribute("atList", atList);
+		// 호텔 추천
+		List<HotelVO> hhList = hdao.hotelTop10();
+		request.setAttribute("hhList", hhList);
 		
 		request.setAttribute("fList", fList);
 		request.setAttribute("hList", hList);
