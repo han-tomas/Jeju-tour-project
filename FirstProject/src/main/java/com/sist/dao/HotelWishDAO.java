@@ -2,6 +2,9 @@ package com.sist.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.sist.vo.*;
 import com.sist.common.CreateDataBase;
 public class HotelWishDAO {
@@ -9,6 +12,7 @@ public class HotelWishDAO {
 	private PreparedStatement ps;
 	private static HotelWishDAO dao;
 	private CreateDataBase db = new CreateDataBase();
+	private String hotelURL = "http://www.jejutori.com/";
 	
 	public static HotelWishDAO newInstance() {
 		if(dao==null)
@@ -71,4 +75,37 @@ public class HotelWishDAO {
 		}
 	}
 	
+	// mypage 찜목록출력
+		public List<WishReserveVO> hotelWishListData(String id){
+			List<WishReserveVO> list = new ArrayList<WishReserveVO>();
+			try {
+				conn = db.getConnection();
+				String sql = "SELECT no, hdno, jejuHotelPoster(hdno), "
+							+"jejuHotelName(hdno), jejuHotelHuno(hdno) "
+							+"FROM wish_reserve "
+							+"WHERE id=? "
+							+ "AND rcno=2"
+							+"ORDER BY no DESC";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, id);
+				ResultSet rs = ps.executeQuery();
+				while(rs.next()) {
+					WishReserveVO vo = new WishReserveVO();
+					vo.setNo(rs.getInt(1));
+					vo.setHdno(rs.getInt(2));
+					String poster = rs.getString(3);
+					poster = poster.substring(0, poster.indexOf("^"));
+					vo.setMain_poster(hotelURL+poster);
+					vo.setTitle(rs.getString(4));
+					vo.setHuno(Integer.parseInt(rs.getString(5)));
+					list.add(vo);
+				}
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.disConnection(conn, ps);
+			}
+			return list;
+		}
 }

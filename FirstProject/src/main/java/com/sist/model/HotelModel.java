@@ -226,7 +226,7 @@ public class HotelModel {
 	        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
 	        
 	        // 요일 계산
-	        String[] koreanDays = {"일", "월", "화", "수", "목", "금", "토"};
+	        String[] koreanDays = {"", "월", "화", "수", "목", "금", "토", "일"};
 	        DayOfWeek startDateOfWeek = startDate.getDayOfWeek();
 	        DayOfWeek endDateOfWeek = endDate.getDayOfWeek();
 	        int startDateOfWeekValue = startDateOfWeek.getValue();
@@ -328,6 +328,6 @@ public class HotelModel {
 		HotelDAO dao = HotelDAO.newInstance();
 		dao.hotelReserveOk(vo);
 		
-		return "redirect:../mypage/mypage_reserve_list.do";
+		return "redirect:../mypage/mypage_reserve.do";
 	}
 }

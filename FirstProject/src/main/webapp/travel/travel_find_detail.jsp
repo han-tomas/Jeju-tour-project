@@ -44,34 +44,36 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 .container1{
-	border: 1px solid orange;
+	box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-radius: 10px;
 	width: 1200px;
 	margin: 0px auto;
 }
 .row1 {
-	border: 1px solid orange;
+	
 	width: 1200px;
 	margin: 0px auto;
 }
 .row2 {
-	border: 1px solid orange;
 	width: 1200px;
 	margin: 0px auto;
 	background-color: #FFCD28;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
-.row2 table{
-	background-color: white;
+.row1 table{
+	box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 10px;
 }
-.row2 td,.row2 th{
+.row1 td,.row1 th{
 	border:none;
 }
 .map_wrap{
 	height: 380px;
 }
-
+.img{
+	border-radius: 20px;
+}
 </style>
 
 </head>
@@ -97,26 +99,20 @@
 	    </div>
 	    <div class="row row1">
 	    	<div class="col-lg-6">
-	    	<table class="table">
-	    	<tr>
-	    		<td>
-	    			<img src="${vo.poster }"alt="Lights" style="width:100%;height: 410px;margin-top: 10px;border-radius: 7px">
-	    		</td>
-	    	</tr>
-	    	</table>
+	    		<img src="${vo.poster }"alt="Lights" style="width:100%;height: 410px;margin-top: 10px;border-radius: 7px">
 	    	</div>
 	    	<div class="col-lg-6">
-	    	<div style="height: 20px"></div>
+	    	<div style="height: 10px"></div>
 	    	<h3 style="background-color: #FFCD28;color: white; border-top-left-radius: 7px;  border-top-right-radius: 7px" class="text-center">주변 맛집</h3>
-				 <div class="map_wrap">
-						    <div id="map" style="width:100%;height:380px;position:relative;overflow:hidden; border-bottom-left-radius: 7px;  border-bottom-right-radius: 7px "></div>
-						
-						    <div id="menu_wrap" class="bg_white" style="height: 350px">
-						        <ul id="placesList"></ul>
-						        <div id="pagination"></div>
-						    </div>
-				</div>
-						
+			 <div class="map_wrap">
+					    <div id="map" style="width:100%;height:380px;position:relative;overflow:hidden; border-bottom-left-radius: 7px;  border-bottom-right-radius: 7px "></div>
+					
+					    <div id="menu_wrap" class="bg_white" style="height: 350px">
+					        <ul id="placesList"></ul>
+					        <div id="pagination"></div>
+					    </div>
+			</div>
+			<div style="height: 10px"></div>		
 				
 					<script>
 						// 마커를 담을 배열입니다
@@ -330,15 +326,13 @@
 						}
 				</script>
 	    	</div>
-	    	<div class="row row2">
-	    		<table class="table">
-			    	<tr>
-			    		<td class="text-center inline" style="color: white;background-color: #FFCD28;"><h2 style="width: 100%">${vo.title }</h2></td>
-			    	</tr>
-		   		</table>
+	    	<div class="row row1">
     			<table class="table">
     			<!-- no,title,tag,introduction,loc,addr,road,tel,"
 					+ "poster,info,lno " -->
+			    	<tr>
+			    		<td  colspan="2" class="text-center inline" style="color: white;background-color: #FFCD28;"><h2 style="width: 100%">${vo.title }</h2></td>
+			    	</tr>
     				<tr>
     					<th width=20% style="text-align:right;">태그</th>
     					<td width=80%>${vo.tag }</td>

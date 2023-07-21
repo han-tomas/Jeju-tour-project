@@ -24,18 +24,17 @@ function detail(coursename){
 </script>
 <style type="text/css">
 .container1{
-	border: 1px solid orange;
+	box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-radius: 10px;
 	width: 1200px;
 	margin: 0px auto;
 }
 .row1 {
-	border: 1px solid orange;
 	width: 1200px;
 	margin: 0px auto;
 }
 .row2 {
-	border: 1px solid orange;
+	box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	width: 1200px;
 	margin: 0px auto;
 	background-color: #FFCD28;
@@ -153,7 +152,7 @@ function detail(coursename){
    		</table>
    		<table class="table">
    		<tr>
-   			<td class="coursename"><h3>Day1</h3></td>
+   			<td class="coursename"><h3>&nbsp;&nbsp;Day1</h3></td>
    		</tr>
     	<tr>
     		
@@ -179,7 +178,7 @@ function detail(coursename){
             </c:forEach>
         </tr>   
         <tr>
-   			<td class="coursename"><h3>Day2</h3></td>
+   			<td class="coursename"><h3>&nbsp;&nbsp;Day2</h3></td>
    		</tr> 
     	<tr>
 		    <c:forEach var="vo" items="${list}">
@@ -194,7 +193,7 @@ function detail(coursename){
 		</tr>
         <c:if test="${aa[2]!=0 }">
         <tr>
-   			<td class="coursename"><h3>Day3</h3></td>
+   			<td class="coursename"><h3>&nbsp;&nbsp;Day3</h3></td>
    		</tr>   
     	<tr>
     		<c:forEach var="vo" items="${list}">
@@ -211,7 +210,7 @@ function detail(coursename){
         
         <c:if test="${aa[3]!=0 }">
         <tr>
-   			<td class="coursename"><h3>Day4</h3></td>
+   			<td class="coursename"><h3>&nbsp;&nbsp;Day4</h3></td>
    		</tr>    
     	<tr>
     		<c:forEach var="vo" items="${list}">

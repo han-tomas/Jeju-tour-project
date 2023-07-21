@@ -79,10 +79,11 @@ $(function(){
 			  <a class="nav-link dropdown-toggle" href="../contact.html" role="button" data-bs-toggle="dropdown" style="color:black;">Community</a>
 				 <ul class="dropdown-menu">
 				    <li><a class="dropdown-item" href="../notice/notice_list.do">Notice</a></li>
-				    <li><a class="dropdown-item" href="../qna/qna_list.do">QnA</a></li>
 				    <li><a class="dropdown-item" href="../freeboard/list.do">자유게시판</a></li>
-				    <li><a class="dropdown-item" href="../review/list.do">Review</a></li>
-				    <li> </li>
+				    <c:if test="${sessionScope.id!=null }">
+				      <li><a class="dropdown-item" href="../qnaboard/qna_list.do">My QnA</a></li>
+				    </c:if>
+				    <li></li>
 				 </ul>
 			</li> 
 
@@ -98,7 +99,7 @@ $(function(){
 				</c:if>
 				<c:if test="${sessionScope.admin=='y' }">
 					<li class="log" >
-						<a href="../adminpage/adminpage_main.do" class="btn btn-outline-dark btn-block">adminpage</a>
+						<a href="../adminpage/member_list.do" class="btn btn-outline-dark btn-block">adminpage</a>
 						<input type="button" class="btn btn-outline-dark btn-block" id="logoutBtn" value="Logout">
 					</li>
 				</c:if>

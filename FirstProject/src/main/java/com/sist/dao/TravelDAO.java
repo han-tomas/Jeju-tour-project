@@ -29,7 +29,7 @@ public class TravelDAO {
 					+ "FROM (SELECT /*+ INDEX_ASC(travel_detail td_no_pk)*/no,poster,title,tag,loc,lno "
 					+ "FROM travel_detail WHERE title LIKE '%'||?||'%')) "
 					+ "WHERE num BETWEEN ? AND ?";
-			int rowSize=20;
+			int rowSize=10;
 			int start=(rowSize*page)-(rowSize-1);
 			int end=rowSize*page;
 			
@@ -96,7 +96,7 @@ public class TravelDAO {
 					+ "FROM travel_detail WHERE title LIKE '%'||?||'%' AND lno=?)) "
 					+ "WHERE num BETWEEN ? AND ? ";
 					
-			int rowSize=12;
+			int rowSize=10;
 			int start=(rowSize*page)-(rowSize-1);
 			int end=rowSize*page;
 			
@@ -159,7 +159,7 @@ public class TravelDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT CEIL(COUNT(*)/12.0) "
+			String sql="SELECT CEIL(COUNT(*)/10.0) "
 					+ "FROM travel_detail "
 					+ "WHERE title LIKE '%'||?||'%'";
 			ps=conn.prepareStatement(sql);
@@ -185,7 +185,7 @@ public class TravelDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT CEIL(COUNT(*)/12.0) "
+			String sql="SELECT CEIL(COUNT(*)/10.0) "
 					+ "FROM travel_detail "
 					+ "WHERE title LIKE '%'||?||'%' "
 					+ "AND lno=?";
@@ -272,9 +272,9 @@ public class TravelDAO {
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT no,title,hit,rownum "
-					+ "FROM (SELECT fno,name,hit "
-					+ "FROM food_house ORDER BY hit DESC) "
+			String sql="SELECT no,title,hit,poster,rownum "
+					+ "FROM (SELECT no,title,hit,poster "
+					+ "FROM travel_detail ORDER BY hit DESC) "
 					+ "WHERE rownum<=10";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -282,8 +282,14 @@ public class TravelDAO {
 			{
 				TravelVO vo = new TravelVO();
 				vo.setNo(rs.getInt(1));
-				vo.setTitle(rs.getString(2));
+				String title=rs.getString(2);
+				if(title.length()>18)
+				{
+					title=title.substring(0,18)+"...";
+				}
+				vo.setTitle(title);
 				vo.setHit(rs.getInt(3));
+				vo.setPoster(rs.getString(4));
 				list.add(vo);
 			}
 			rs.close();

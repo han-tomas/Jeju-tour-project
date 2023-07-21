@@ -146,4 +146,34 @@ public class FoodDAO {
 		return vo;
 	}
 	
+	//home -> food top 10
+	public List<FoodVO> foodTopListData(){
+		List<FoodVO> list=new ArrayList<FoodVO>();
+		try {
+			conn=db.getConnection();
+			String sql="SELECT mcno,name,score,poster,rownum "
+					+ "FROM (SELECT mcno,name,score,poster "
+					+ "FROM food_info ORDER BY score DESC) "
+					+ "WHERE rownum<=10";
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				FoodVO vo=new FoodVO();
+				vo.setMcno(rs.getInt(1));
+				vo.setName(rs.getString(2));
+				vo.setScore(rs.getDouble(3));
+				String poster=rs.getString(4);
+				poster=poster.substring(0,poster.indexOf("^"));
+				poster=poster.replace("#", "&");
+				vo.setPoster(poster);
+				list.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			db.disConnection(conn, ps);
+		}
+		return list;
+	}
 }

@@ -66,10 +66,6 @@ a {
   padding-bottom: 4px;
   border-bottom: 3px solid #FFA63C;
 }
-.slideImage {
-	width: 600px;
-	height: 400px;
-}
 
 .carousel-inner {
 	border: solid 2px #FF7F31;
@@ -237,7 +233,7 @@ $(function() {
 				<table class="table table1">
 				<tr>
 					<td><h4>${ vo.addr1 }</h4></td>
-					<td style="text-align:right; width:100px;"><i class="fa fa-eye fa-2x"></i><h6 style="padding:5px; display:block;">${ vo.hit }</h6></td>
+					<td style="text-align:right; width:100px;"><i class="fa fa-eye fa-2x"></i><span style="padding-left: 10px; font-size:1.2rem">${ vo.hit }</span></td>
 					<c:if test="${ sessionScope.id!=null }">
 						<c:if test="${ wish_count==0 }">
 							<td style="text-align:right; width:40px;">

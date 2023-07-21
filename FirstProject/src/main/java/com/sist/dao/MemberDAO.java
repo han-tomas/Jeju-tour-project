@@ -439,7 +439,8 @@ public class MemberDAO {
 		try {
 			conn=db.getConnection();
 			String sql="SELECT id,pwd,name,sex,birth,email,post,addr1,addr2,phone,TO_CHAR(regdate,'YYYY-MM-DD'),admin "
-					+ "FROM jeju_member";
+					+ "FROM jeju_member "
+					+ "ORDER BY regdate DESC";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()) {

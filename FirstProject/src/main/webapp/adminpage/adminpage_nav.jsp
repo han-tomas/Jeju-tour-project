@@ -40,6 +40,10 @@
           <li><a href="../adminpage/reserve_rentcar.do">렌터카</a></li>
         </ul>
       </li>
+      <li class="selected">
+          <i class="fa fa-comments-o"></i>
+          <span><a href="../adminpage/adminqna_list.do">QnA관리</a></span>
+      </li>
     </ul>
   </nav>
 </body>

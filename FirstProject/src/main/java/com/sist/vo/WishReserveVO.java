@@ -1,8 +1,14 @@
 package com.sist.vo;
 
 public class WishReserveVO {
-	private int no, hdno, acino, cid, rcno, price;
+	private int no, hdno, acino, cid, rcno, huno;
 	private String id;
+	public int getHuno() {
+		return huno;
+	}
+	public void setHuno(int huno) {
+		this.huno = huno;
+	}
 	private String title, main_poster;
 	
 	public int getRcno() {
@@ -35,12 +41,6 @@ public class WishReserveVO {
 	}
 	public void setHdno(int hdno) {
 		this.hdno = hdno;
-	}
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
 	}
 	public String getId() {
 		return id;

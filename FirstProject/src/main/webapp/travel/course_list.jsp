@@ -10,6 +10,14 @@
 .btn-sm {
 	font-size:0.5rem;
 }
+.card{
+ box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ border-radius: 10px;
+ margin-bottom: 10px;
+}
+.btn{
+	align-content: right;
+}
 </style>
 </head>
 <body>
@@ -27,25 +35,30 @@
     <div class="container">
       <div class="row">
       <c:forEach var="vo" items="${list }">
-      <div class="col-md-4">
-	     <div class="img-thumbnail" style="width: 450px; margin-bottom:30px; background-color: #FFCD28;border-radius:10px">
-	      <a href="course_detail.do?cno=${vo.cno }">
-	        <img src="${vo.poster }" alt="Lights" style="width:100%; height: 250px;border-radius:10px">
-	        <div class="caption">
-	        
-	          <p style="margin-top:10px;text-align: right">
-	          	<i class="fa fa-thumbs-o-up fa-sm" style="color: #3378f0; font-style: bold">&nbsp;추천수(${vo.recommend })&nbsp;</i>
-	          	<i class="fa fa-heart fa-sm" style="color: #f84949;">&nbsp;찜한수&nbsp;(${vo.jjim})</i>
-	          	<%-- <input type=button class="btn btn-sm btn-info" value="복사한수(${vo.copy })"> --%>
-	          	<i class="fa fa-eye fa-sm" style="color:  #acb5c3;"></i>&nbsp;조회수&nbsp;(${vo.views })
-	          </p>
-	          <p class="text-center" style="font-size: 14pt"><a href="course_detail.do?cno=${vo.cno }" style="color: white">${vo.title }</a></p>
-	        </div>
-	      </a>
-    	 </div>
- 	  </div>
-      </c:forEach>
-      </div>
+		<div class="col-md-4">
+			<div class="container mt-3">
+				<div class="card" style="width: 400px">
+					<img class="card-img-top" src="${vo.poster }" alt="Card image"
+						style="width: 100%; height: 250px">
+					<div class="card-body">
+						<h6 class="card-title text-center" style="font-size: 13pt">${vo.title }</h6>
+						<p class="card-text"
+							style="text-align: right; margin-right: 5px">
+							<i class="fa fa-thumbs-o-up fa-sm"
+								style="color: #3378f0; font-style: bold">&nbsp;추천수(${vo.recommend })&nbsp;</i>
+							<i class="fa fa-heart fa-sm" style="color: #f84949;">&nbsp;찜한수&nbsp;(${vo.jjim})</i>
+							<i class="fa fa-eye fa-sm" style="color: #acb5c3;"></i>&nbsp;조회수&nbsp;(${vo.views })
+						</p>
+						<div style="text-align: right">
+						<a href="course_detail.do?cno=${vo.cno }"
+							class="btn btn-warning">Go to detail&nbsp;<i class="fa fa-location-arrow"></i></a>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	 </c:forEach>
+     </div>
     </div>
 </div> 
  

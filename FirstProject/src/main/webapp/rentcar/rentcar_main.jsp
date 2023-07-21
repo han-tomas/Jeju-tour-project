@@ -265,10 +265,10 @@ $(function () {
 											<div class="list_tab_2">전체</div>
 										</div>
 										<div class="list_tab" data-type="1" id="nav_1">
-											<div class="list_tab_2">국산차</div>
+											<div class="list_tab_2">SUV</div>
 										</div>
 										<div class="list_tab" data-type="2" id="nav_2">
-											<div class="list_tab_2">해외차</div>
+											<div class="list_tab_2">외제차</div>
 										</div>
 										<div class="list_tab" data-type="3" id="nav_3">
 											<div class="list_tab_2">소형</div>

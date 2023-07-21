@@ -160,15 +160,22 @@ table td {
 			})
 		})
 		let cid = $('#buyBtn').attr("data-no");
-
-		let price = $('#price').val();
+		//let price = $('#price').val();
 		let tprice = $('#total_price').attr('data-total');
 		let dbday = $('#dbday').val();
+		let startDate = $('#startDate').val();
+		let endDate = $('#endDate').val();
 		
-		$('#buyBtn').click(function() {
-			requestPay()
-		})
-		
+		$('#buyBtn').click(function(){
+			$.ajax({
+				type:'post',
+				url:'../mypage/mypage_rentcar_reserve.do',
+				data:{"cid":cid,"tprice":tprice,"dbday":dbday,"startDate":startDate,"endDate":endDate},
+				success:function(result){
+					requestPay()
+				}
+			})
+	})
 	})
 	var IMP = window.IMP; // 생략 가능
 		IMP.init("imp36806187"); // 예: imp00000000
@@ -187,7 +194,7 @@ table td {
 				pay_method : 'card', // 'card' : 신용카드 | 'trans' : 실시간계좌이체 | 'vbank' : 가상계좌 | 'phone' : 휴대폰소액결제
 				merchant_uid : 'merchant_' + new Date().getTime(),
 				name :  $('#name').text() ,
-				amount : $('#total_price').attr('data-total') ,
+				amount : $('#total_price').attr('data-total'),
 				buyer_email : $('#email').text(),
 				buyer_name : $('#name').text(),
 				buyer_tel : $('#phone').text(),
@@ -271,13 +278,13 @@ table td {
 				<hr>
 				<table class="table">
 					<tr>
-						<td>${name }</td>
+						<td id="name">${name }</td>
 					</tr>
 					<tr>
-						<td>${mvo.email }</td>
+						<td id="email">${mvo.email }</td>
 					</tr>
 					<tr>
-						<td>${mvo.phone }</td>
+						<td id="phone">${mvo.phone }</td>
 					</tr>
 				</table>
 
@@ -303,8 +310,8 @@ table td {
 							</tr>
 							<tr height="60px;"
 								style="vertical-align: middle; font-size: 10pt;">
-								<td>##</td>
-								<td><fmt:formatNumber value="" pattern="#,###" />원</td>
+								<td>주문 금액</td>
+								<td><fmt:formatNumber value="${vo.price*days+insPrice }" pattern="#,###" />원</td>
 							</tr>
 							<tr height="60px;"
 								style="vertical-align: middle; background-color: rgb(246, 251, 255);">
@@ -370,10 +377,12 @@ table td {
 							<tr>
 								<td colspan="2" class="center wishTd">
 									<div class="d-grid">
-										<input type="hidden" id="total_price"
-											data-total="${vo.price*people }"> <input
-											type="hidden" id="post" value="${mvo.post }"> <input
-											type="hidden" id="addr1" value="${mvo.addr1 }">
+										<input type="hidden" id="total_price" data-total="${vo.price*days+insPrice }"> 
+											<input type="hidden" id="post" value="${mvo.post }"> 
+											<input type="hidden" id="addr1" value="${mvo.addr1 }">
+											<input type="hidden" id="dbday" value="${date }">
+											<input type="hidden" id="startDate" value="${startDate }">
+											<input type="hidden" id="endDate" value="${endDate }">
 										<c:if test="${sessionScope.id!=null }">
 											<button class="btn btn-block btn-primary btn-wish"
 												style="height: 50px;" disabled="disabled" id="buyBtn"

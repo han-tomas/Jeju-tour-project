@@ -16,12 +16,15 @@ public class MainModel {
 		TravelDAO tdao=TravelDAO.newInstance();
 		HotelDAO hdao=HotelDAO.newInstance();
 		FoodDAO fdao=FoodDAO.newInstance();
+		RentcarDAO rdao=RentcarDAO.newInstance();
+		String rentcarURL = "https://rentinjeju.com";
 		
 		Cookie[] cookies=request.getCookies();
 		List<ActivityVO> cList=new ArrayList<ActivityVO>();
 		List<TravelVO> tList=new ArrayList<>();
 		List<HotelVO> hList=new ArrayList<>();
 		List<FoodVO> fList=new ArrayList<FoodVO>();
+		List<RentcarVO> rList=new ArrayList<RentcarVO>();
 		
 		if(cookies!=null) {
 			for(int i=cookies.length-1;i>=0;i--) {
@@ -51,13 +54,33 @@ public class MainModel {
 					fList.add(fvo);
 					request.setAttribute("addr1", addr1);
 				}
+				if(cookies[i].getName().startsWith("rentcar_")) {
+					String cid=cookies[i].getValue();
+					RentcarVO rvo=rdao.RentcarDetailData(Integer.parseInt(cid));
+					String poster = rentcarURL+rvo.getImg();
+					rvo.setImg(poster);
+					rList.add(rvo);
+					//System.out.println(rvo.getImg());
+					
+				}
 			}
 		}
+		// 인기 검색어 Top 10
+		TravelDAO ttopdao = TravelDAO.newInstance();
+		List<TravelVO> ttoplist = ttopdao.findTop10();
+		request.setAttribute("ttoplist", ttoplist);
+		
+		// 인기 맛집 list 10
+		List<FoodVO> ffList=fdao.foodTopListData();
+		request.setAttribute("ffList", ffList);
+		
 		request.setAttribute("fList", fList);
 		request.setAttribute("hList", hList);
 		request.setAttribute("cList", cList);
 		request.setAttribute("tList", tList);
+		request.setAttribute("rList", rList);
 		request.setAttribute("main_jsp", "../main/home.jsp");
 		return "../main/main.jsp";
 	}
+	
 }
