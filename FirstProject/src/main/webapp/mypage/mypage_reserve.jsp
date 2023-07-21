@@ -71,7 +71,8 @@ $(function(){
 </script>
 </head>
 <body>
-	<h1>예약페이지</h1>
+	<h2>${sessionScope.name }님의 구매리스트</h2>
+	<div style="height: 30px"></div>
 	<table class="table table-borderless">
 		<tr>
 			<td><c:forEach var="vo" items="${list }">

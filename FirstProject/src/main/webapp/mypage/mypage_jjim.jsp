@@ -180,7 +180,7 @@ $(function(){
 		</c:forEach>
 	</table>
 	<div style="height: 50px"></div>
-	<h2>${sessionScope.name }님의 예약 목록</h2>
+	<h4>예약</h4>
 	<div class="container container2">
 	<div class="row">
 		<ul class="tabs">
@@ -191,7 +191,7 @@ $(function(){
 		<div class="wrapper_tab-content">
 			<article id="item1" class="tab-content content-visible">
 				<table class="table">
-					<tr style="background-color: #fbc6c6">
+					<tr style="background-color: rgb(219,249,216)">
 						<th class="text-center" width="10%">No</th>	
 						<th class="text-center" width="15%"></th>
 						<th class="text-center" width="60%">상품명</th>
@@ -212,7 +212,7 @@ $(function(){
 			
 			<article id="item2" class="tab-content">
 				<table class="table">
-					<tr style="background-color: #fbc6c6">
+					<tr style="background-color: rgb(219,249,216)">
 						<th class="text-center" width="10%">No</th>	
 						<th class="text-center" width="15%"></th>
 						<th class="text-center" width="60%">상품명</th>
@@ -233,7 +233,7 @@ $(function(){
 
 			<article id="item3" class="tab-content">
 				<table class="table">
-					<tr style="background-color: #fbc6c6">
+					<tr style="background-color: rgb(219,249,216)">
 						<th class="text-center" width="10%">No</th>	
 						<th class="text-center" width="15%"></th>
 						<th class="text-center" width="60%">상품명</th>
