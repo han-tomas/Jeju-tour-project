@@ -64,6 +64,11 @@
 	align-items: center; /* 세로 방향 가운데 정렬 */
 	margin: 0 auto; /* 수평 가운데 정렬을 위해 왼쪽과 오른쪽 마진을 자동으로 설정 */
 }
+.payImg{
+	width: 48px;
+	height: 30px;
+	align-items: center;
+}
 
 table {
 	border-collapse: collapse;
@@ -293,7 +298,45 @@ table td {
 					<strong>결제 방법</strong>
 				</h4>
 				<hr>
-				<div style="height: 1000px"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+				  	<label class="form-check-label" for="flexRadioDefault1">
+				    신용/체크카드
+				  	</label>
+				</div>
+				<div style="height: 7px;"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+				  	<label class="form-check-label" for="flexRadioDefault2">
+				    카카오페이
+				 	</label>
+				 	<img src="../assets/images/kakao.png" class="payImg">
+				</div>
+				<div style="height: 7px;"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+				  	<label class="form-check-label" for="flexRadioDefault2">
+				    토스페이
+				 	</label>
+				 	<img src="../assets/images/toss.png" class="payImg">
+				</div>
+				<div style="height: 7px;"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+				  	<label class="form-check-label" for="flexRadioDefault2">
+				    네이버페이
+				 	</label>
+				 	<img src="../assets/images/naver.png" class="payImg">
+				</div>
+				<div style="height: 7px;"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+				  	<label class="form-check-label" for="flexRadioDefault2">
+				    페이코
+				 	</label>
+				 	<img src="../assets/images/payco.png" class="payImg">
+				</div>
+				<div style="height: 100px"></div>
 			</div>
 			<div class="col-sm-4" style="color: black" id="yourDiv">
 				<div class="buyBox">

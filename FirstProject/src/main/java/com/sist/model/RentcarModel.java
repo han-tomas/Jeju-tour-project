@@ -117,6 +117,7 @@ public class RentcarModel {
 		request.setAttribute("vo", vo);
 		//String rc=vo.getCar_size();
 		//RentcarVO rvo=(RentcarVO) dao.RentcarRecommand(rc);
+		//request.setAttribute("rvo", rvo);
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		

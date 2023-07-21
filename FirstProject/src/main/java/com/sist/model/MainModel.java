@@ -81,6 +81,10 @@ public class MainModel {
 		List<HotelVO> hhList = hdao.hotelTop10();
 		request.setAttribute("hhList", hhList);
 		
+		// 렌트카 top 10
+		List<RentcarVO> rtList = rdao.rentcarTop10();
+		request.setAttribute("rtList", rtList);
+		
 		request.setAttribute("fList", fList);
 		request.setAttribute("hList", hList);
 		request.setAttribute("cList", cList);

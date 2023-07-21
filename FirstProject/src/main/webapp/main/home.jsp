@@ -42,11 +42,18 @@
 		$('.acTop10').click(function() {
 			let aimg = $(this).attr("data-aposter")
 			$('#aposter').attr("src", aimg)
-			$('.hotelTop10').css("cursor", "pointer")
-			$('.hotelTop10').click(function() {
-				let himg = $(this).attr("data-poster")
-				$('#hposter').attr("src", himg)
+			
+		$('.hotelTop10').css("cursor", "pointer")
+		$('.hotelTop10').click(function() {
+			let himg = $(this).attr("data-poster")
+			$('#hposter').attr("src", himg)
 			})
+		})
+		
+		$('.rentcarTop10').css("cursor", "pointer")
+		$('.rentcarTop10').click(function() {
+			let rimg = $(this).attr("data-rposter")
+			$('#rentcarposter').attr("src", rimg)
 		})
 	})
 </script>
@@ -249,26 +256,33 @@
 													<div class="row">
 														<div class="col-lg-5 align-self-center">
 															<div class="left-text">
-																<h4>Best car rentals for your trips!</h4>
-																<p>Did you know? You can get the best free HTML
-																	templates on Too CSS blog. Visit the blog pages and
-																	explore fresh and latest website templates.</p>
-																<div class="main-white-button">
-																	<a href="../listing.html"><i class="fa fa-eye"></i>
-																		More Listing</a>
-																</div>
+																<h3 style="color: white">인기 렌트카 TOP 10</h3>
+																<p>
+																	<br>
+																	<c:forEach var="rtop" items="${rtList }" varStatus="s">
+																		<span class="rentcarTop10"
+																			style="font-size: 15pt; color: white; line-height: 2"
+																			data-rposter="${rtop.img }"> <strong>${s.index+1 }.</strong><span
+																			style="font-size: 14pt"> &nbsp;${rtop.car_name }</span>
+																			<span style="font-size: 11pt;">&nbsp;${rtop.hit }</span>
+																		</span>
+																		<br>
+																	</c:forEach>
+																</p>
+
 															</div>
 														</div>
 														<div class="col-lg-7 align-self-center">
 															<div class="right-image">
-																<img src="../assets/images/tabs-image-03.jpg"
-																	alt="cars in the city">
+																<img src="../assets/images/tabs-image-05.jpg" alt=""
+																	id="rentcarposter" style="width: 455px; height: 510px">
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</li>
+										
 										<li>
 											<div>
 												<div class="thumb">

@@ -5,6 +5,7 @@ import java.sql.*;
 
 import com.sist.vo.RentcarVO;
 import com.sist.vo.ReservationVO;
+import com.sist.vo.TravelVO;
 import com.sist.vo.RentcarVO;
 public class RentcarDAO {
 	private Connection conn;
@@ -247,11 +248,13 @@ public class RentcarDAO {
 			  String sql="SELECT cid,img,car_name,car_size,seater,fuel_type,gear_type,brand,price,rcno,hit,like2,num "
 						+ "FROM (SELECT cid,img,car_name,car_size,seater,fuel_type,gear_type,brand,price,rcno,hit,like2,rownum as num "
 						+ "FROM (SELECT cid,img,car_name,car_size,seater,fuel_type,gear_type,brand,price,rcno,hit,like2 "
-						+ "FROM rent_info WHERE car_size LIKE '?' "
+						+ "FROM rent_info WHERE car_size = '%?%' "
 						+ "ORDER BY cid ASC)) "
 						+ "WHERE num BETWEEN 5 AND 10";
-			  
+			  ps=conn.prepareStatement(sql);
+			  ps.setString(1, rc);
 			  ResultSet rs=ps.executeQuery();
+			  
 			  while(rs.next())
 			  {
 				  RentcarVO vo=new RentcarVO();
@@ -342,6 +345,43 @@ public class RentcarDAO {
 		}
 	}
 	
+	public List<RentcarVO> rentcarTop10()
+	{
+		List<RentcarVO> list = new ArrayList<RentcarVO>();
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT cid,car_name,hit,img,rownum "
+					+ "FROM (SELECT cid,car_name,car_size,hit,img "
+					+ "FROM rent_info ORDER BY hit DESC) "
+					+ "WHERE rownum<=10";
+			ps=conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			String rentcarURL ="https://rentinjeju.com";
+			while(rs.next())
+			{
+				RentcarVO vo = new RentcarVO();
+				vo.setCid(rs.getInt(1));
+				String cn=rs.getString(2);
+				//if(car_name.length()>18)
+				//{
+				//	car_name=car_name.substring(0,18)+"...";
+				//}
+				vo.setCar_name(cn);
+				vo.setHit(rs.getInt(3));
+				vo.setImg(rentcarURL+rs.getString(4));
+				list.add(vo);
+			}
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return list;
 	
-		
+	}
 }
