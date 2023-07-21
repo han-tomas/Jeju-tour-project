@@ -258,7 +258,7 @@ $(function() {
     <div class="container">
     	<div class="row">
     		<div class="col-md-12 text-center">
-    			<input class="btn btn-lg btn-danger btn-reservation" value="로그인하세요" style="width: 200px">
+    			<input type="button" class="btn btn-lg btn-danger btn-reservation" value="로그인하세요" style="width: 200px">
     		</div>
     	</div>
     </div>
@@ -266,7 +266,7 @@ $(function() {
     
    <!--  </form> -->
     <br><br>
-    <div class="container">
+    <%-- <div class="container">
   <div class="row">
     <div class="col-md-12">
       <h3 style="text-align: center;">차량 추천</h3>
@@ -305,7 +305,7 @@ $(function() {
       </div>
     </div>
   </div>
-</div>
+</div> --%>
 <br>
     <div class="container">
     	<div class="row">
