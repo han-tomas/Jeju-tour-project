@@ -42,10 +42,10 @@ public class MypageDAO {
 				vo.setDbday(rs.getString(1));
 				vo.setPoster(rs.getString(2));
 				vo.setTitle(rs.getString(3));
-				Date date = rs.getDate(4);
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				String realday = sdf.format(date);
-				vo.setRealDate(realday);
+				Date date = rs.getTimestamp(4); 
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				String realDateTime = sdf.format(date); 
+				vo.setRealDate(realDateTime);
 				vo.setTprice(rs.getInt(5));
 				vo.setJrno(rs.getInt(6));
 				vo.setAcino(rs.getInt(6));
