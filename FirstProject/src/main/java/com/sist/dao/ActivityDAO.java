@@ -198,5 +198,41 @@ public class ActivityDAO {
 			db.disConnection(conn, ps);
 		}
 	}
-	
+	public List<ActivityVO> activityPopList() {
+		List<ActivityVO> list=new ArrayList<ActivityVO>();
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT acino,title,score,review_count,main_poster "
+					+ "FROM activity_info "
+					+ "WHERE accno=5 AND rownum<=10 "
+					+ "ORDER by acino ASC";
+			ps=conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				ActivityVO vo = new ActivityVO();
+				vo.setAcino(rs.getInt(1));
+				String title=rs.getString(2);
+				if(title.length()>15)
+				{
+					title=title.substring(0,15)+"...";
+				}
+				vo.setScore(rs.getDouble(3));
+				vo.setReview_count(rs.getString(4));
+				vo.setTitle(title);
+				vo.setPoster(rs.getString(5));
+				list.add(vo);
+			}
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return list;
+	}
 }

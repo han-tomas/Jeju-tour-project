@@ -31,10 +31,17 @@ $(function(){
 		$('#poster').attr("src",img)
 		
 	})
+	
 	$('.foodTop10').css("cursor","pointer")
 	$('.foodTop10').click(function(){
 		let fimg=$(this).attr("data-poster")
 		$('#fposter').attr("src",fimg)
+	})
+	
+	$('.acTop10').css("cursor","pointer")
+	$('.acTop10').click(function(){
+		let aimg=$(this).attr("data-aposter")
+		$('#aposter').attr("src",aimg)
 	})
 })
 	
@@ -249,19 +256,23 @@ $(function(){
 													<div class="row">
 														<div class="col-lg-5 align-self-center">
 															<div class="left-text">
-																<h4>Shopping List: Images from Unsplash</h4>
-																<p>Image credits go to Unsplash website that
-																	provides free stock photos for anyone. Images used in
-																	this Plot Listing template are from Unsplash.</p>
-																<div class="main-white-button">
-																	<a href="#"><i class="fa fa-eye"></i> Discover More</a>
-																</div>
+																<h3 style="color: white">인기 액티비티 TOP 10</h3>
+																<p>
+																<br>
+																<c:forEach var="atop" items="${atList }" varStatus="s">
+																	<span class="acTop10" style="font-size: 15pt;color: white; line-height: 2" data-aposter="${atop.poster }">
+																	  <strong>${s.index+1 }.</strong><span style="font-size: 14pt"> &nbsp;${atop.title }</span>
+																	   <span style="font-size: 11pt;">&nbsp;${atop.review_count }</span>
+																	</span><br>
+																</c:forEach>
+																</p>
+																
 															</div>
 														</div>
 														<div class="col-lg-7 align-self-center">
 															<div class="right-image">
-																<img src="../assets/images/tabs-image-04.jpg"
-																	alt="Shopping Girl">
+																<img src="../assets/images/tabs-image-05.jpg"
+																	alt="" id="aposter" style="width: 455px;height: 510px">
 															</div>
 														</div>
 													</div>
@@ -287,7 +298,7 @@ $(function(){
 														<div class="col-lg-7 align-self-center">
 															<div class="right-image">
 																<img src="dol.png"
-																	alt="" id="poster" style="width: 455px;height: 540px">
+																	alt="" id="poster" style="width: 455px;height: 510px">
 															</div>
 														</div>
 													</div>

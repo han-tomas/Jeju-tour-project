@@ -74,6 +74,10 @@ public class MainModel {
 		List<FoodVO> ffList=fdao.foodTopListData();
 		request.setAttribute("ffList", ffList);
 		
+		// Activity 10
+		List<ActivityVO> atList = dao.activityPopList();
+		request.setAttribute("atList", atList);
+		
 		request.setAttribute("fList", fList);
 		request.setAttribute("hList", hList);
 		request.setAttribute("cList", cList);
