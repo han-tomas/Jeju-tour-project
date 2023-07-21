@@ -20,22 +20,22 @@
         </div>
         <div class="col-lg-4">
           <div class="helpful-links">
-            <h4>Helpful Links</h4>
+            <h4>Site Map</h4>
             <div class="row">
               <div class="col-lg-6 col-sm-6">
                 <ul>
-                  <li><a href="#">Categories</a></li>
-                  <li><a href="#">Reviews</a></li>
-                  <li><a href="#">Listing</a></li>
-                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="../food/food_list.do">Food</a></li>
+                  <li><a href="../travel/travel_find.do">TravelSearch</a></li>
+                  <li><a href="../travel/course_list.do">TravelCourse</a></li>
+                  <li><a href="../activity/activity_list.do">ActivityReserve</a></li>
                 </ul>
               </div>
               <div class="col-lg-6">
                 <ul>
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Awards</a></li>
-                  <li><a href="#">Useful Sites</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="../hotel/hotel_list.do">HotelReserve</a></li>
+                  <li><a href="../rentcar/rentcar_main.do">RentCarReserve</a></li>
+                  <li><a href="../notice/notice_list.do">NoticeBoard</a></li>
+                  <li><a href="../freeboard/list.do">FreeBoard</a></li>
                 </ul>
               </div>
             </div>
