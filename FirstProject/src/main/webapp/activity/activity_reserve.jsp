@@ -312,14 +312,14 @@ table td {
 				</h4>
 				<hr>
 				<div class="form-check">
-				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
 				  	<label class="form-check-label" for="flexRadioDefault1">
 				    신용/체크카드
 				  	</label>
 				</div>
 				<div style="height: 7px;"></div>
 				<div class="form-check">
-				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
 				  	<label class="form-check-label" for="flexRadioDefault2">
 				    카카오페이
 				 	</label>
@@ -327,7 +327,7 @@ table td {
 				</div>
 				<div style="height: 7px;"></div>
 				<div class="form-check">
-				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
 				  	<label class="form-check-label" for="flexRadioDefault2">
 				    토스페이
 				 	</label>
@@ -335,7 +335,7 @@ table td {
 				</div>
 				<div style="height: 7px;"></div>
 				<div class="form-check">
-				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
 				  	<label class="form-check-label" for="flexRadioDefault2">
 				    네이버페이
 				 	</label>
@@ -343,7 +343,7 @@ table td {
 				</div>
 				<div style="height: 7px;"></div>
 				<div class="form-check">
-				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
 				  	<label class="form-check-label" for="flexRadioDefault2">
 				    페이코
 				 	</label>
