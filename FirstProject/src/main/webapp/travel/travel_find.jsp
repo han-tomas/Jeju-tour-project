@@ -190,22 +190,7 @@ td{
 				</div>
 			</div>
 			<div class="row" style="height: 30px"></div>
-			<div class="row">
-				<h4>최근 검색 목록</h4>
-		      <table class="table">	
-				<tr>
-				 <c:forEach var="vo" items="${cList }" varStatus="s">
-			        <c:if test="${s.index>=0 && s.index<5 }">
-			         <td>
-			           <a href="../travel/travel_find_detail.do?no=${vo.no }">
-			           	<img class="img-thumbnail" src="${vo.poster }" title="${vo.title }" style="width: 185px; height: 150px">
-			           </a>   
-			         </td>
-			        </c:if>
-		       </c:forEach> 
-		      </tr>
-		     </table> 
-		    </div>
+			
 		</div>
 	</div>			
 </div> 
