@@ -36,5 +36,18 @@ public class ActivityWishModel {
 		
 		return "redirect:../activity/activity_detail.do?acino="+acino;
 	}
-	
+
+	@RequestMapping("activity/activityWish_Mycancle.do")
+	public String ActivityWish_Mycancle(HttpServletRequest request, HttpServletResponse response) {
+		String acino=request.getParameter("acino");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		
+		ActivityWishDAO dao=ActivityWishDAO.newInstance();
+		dao.activityWishCancle(Integer.parseInt(acino), id);
+		
+		
+		return "redirect:../mypage/mypage_jjim_list.do";
+	}
 }

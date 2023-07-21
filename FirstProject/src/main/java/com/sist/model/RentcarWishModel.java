@@ -39,4 +39,19 @@ public class RentcarWishModel {
 		
 		return "redirect:../rentcar/rentcar_detail.do?cid="+cid;
 	}
+	
+	@RequestMapping("rentcar/rentcarWish_Mycancel.do")
+	public String rentcarWish_Mycancel(HttpServletRequest request, HttpServletResponse response) {
+		String cid=request.getParameter("cid");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		WishReserveVO vo=new WishReserveVO();
+		vo.setId(id);
+		vo.setCid(Integer.parseInt(cid));
+		RentcarWishDAO dao=RentcarWishDAO.newInstance();
+		dao.rentcarWishCancel(vo);
+		
+		
+		return "redirect:../mypage/mypage_jjim_list.do";
+	}
 }

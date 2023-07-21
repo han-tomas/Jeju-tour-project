@@ -38,4 +38,18 @@ public class HotelWishModel {
 		
 		return "redirect:../hotel/hotel_detail.do?huno="+huno;
 	}
+	
+	@RequestMapping("hotel/hotelWish_Mycancle.do")
+	public String HotelWish_Mycancle(HttpServletRequest request, HttpServletResponse response) {
+		String hdno=request.getParameter("hdno");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		WishReserveVO vo=new WishReserveVO();
+		vo.setId(id);
+		vo.setHdno(Integer.parseInt(hdno));
+		HotelWishDAO dao=HotelWishDAO.newInstance();
+		dao.hotelWishCancle(vo);
+		
+		return "redirect:../mypage/mypage_jjim_list.do";
+	}
 }

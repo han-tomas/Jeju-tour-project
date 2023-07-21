@@ -57,6 +57,9 @@ $(function(){
 })
 </script>
 <style type="text/css">
+.btn-outline-danger {
+	width:74px;
+}
 .a1 {
 	text-decoration: none;
 	color: inherit;
@@ -194,8 +197,8 @@ $(function(){
 					<tr style="background-color: rgb(219,249,216)">
 						<th class="text-center" width="10%">No</th>	
 						<th class="text-center" width="15%"></th>
-						<th class="text-center" width="60%">상품명</th>
-						<th class="text-center" width="15%"></th>
+						<th class="text-center" width="55%">상품명</th>
+						<th class="text-center" width="20%"></th>
 					</tr>
 					<c:forEach var="avo" items="${ alist }" varStatus="ss">
 						<tr>
@@ -203,7 +206,9 @@ $(function(){
 							<td><img src="${ avo.main_poster }" class="listImage"></td>
 							<td class="text-left">${ avo.title }</td>
 							<td>
-						      <a href="../activity/activity_detail.do?acino=${ avo.acino }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+						      <a href="../activity/activity_detail.do?acino=${ avo.acino }"><span class="btn btn-sm btn-outline-warning">상세보기</span></a>
+							  <a href="../activity/activityWish_Mycancle.do?acino=${avo.acino }"  class="btn btn-sm btn-outline-danger" data-acino="${avo.acino}">
+							  삭제</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -215,8 +220,8 @@ $(function(){
 					<tr style="background-color: rgb(219,249,216)">
 						<th class="text-center" width="10%">No</th>	
 						<th class="text-center" width="15%"></th>
-						<th class="text-center" width="60%">상품명</th>
-						<th class="text-center" width="15%"></th>
+						<th class="text-center" width="55%">상품명</th>
+						<th class="text-center" width="20%"></th>
 					</tr>
 					<c:forEach var="hvo" items="${ hlist }" varStatus="ss">
 						<tr>
@@ -224,7 +229,9 @@ $(function(){
 							<td><img src="${ hvo.main_poster }" class="listImage"></td>
 							<td class="text-left">${ hvo.title }</td>
 							<td>
-						      <a href="../hotel/hotel_detail.do?huno=${hvo.huno }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+						      <a href="../hotel/hotel_detail.do?huno=${hvo.huno }"><span class="btn btn-sm btn-outline-warning">상세보기</span></a>
+							  <a href="../hotel/hotelWish_Mycancle.do?hdno=${hvo.hdno }"  class="btn btn-sm btn-outline-danger" data-hdno="${hvo.hdno}">
+							  삭제</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -236,8 +243,8 @@ $(function(){
 					<tr style="background-color: rgb(219,249,216)">
 						<th class="text-center" width="10%">No</th>	
 						<th class="text-center" width="15%"></th>
-						<th class="text-center" width="60%">상품명</th>
-						<th class="text-center" width="15%"></th>
+						<th class="text-center" width="55%">상품명</th>
+						<th class="text-center" width="20%"></th>
 					</tr>
 					<c:forEach var="rvo" items="${rlist }" varStatus="ss">
 						<tr>
@@ -245,7 +252,9 @@ $(function(){
 							<td><img src="${ rvo.main_poster }" class="listImage"></td>
 							<td class="text-left">${ rvo.title }</td>
 							<td>
-						      <a href="../rentcar/rentcar_detail.do?cid=${ rvo.cid }"><span class="btn btn-sm btn-warning">상세보기</span></a>
+						      <a href="../rentcar/rentcar_detail.do?cid=${ rvo.cid }"><span class="btn btn-sm btn-outline-warning">상세보기</span></a>
+							  <a href="../rentcar/rentcarWish_Mycancel.do?cid=${rvo.cid }"  class="btn btn-sm btn-outline-danger" data-cid="${rvo.cid}">
+							  삭제</a>
 							</td>
 						</tr>
 					</c:forEach>
