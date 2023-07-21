@@ -42,12 +42,12 @@
 		$('.acTop10').click(function() {
 			let aimg = $(this).attr("data-aposter")
 			$('#aposter').attr("src", aimg)
-			
+		})
+		
 		$('.hotelTop10').css("cursor", "pointer")
 		$('.hotelTop10').click(function() {
 			let himg = $(this).attr("data-poster")
 			$('#hposter').attr("src", himg)
-			})
 		})
 		
 		$('.rentcarTop10').css("cursor", "pointer")
@@ -190,10 +190,10 @@
 																<br>
 
 
-																<c:forEach var="vo" items="${hhList }" varStatus="f">
+																<c:forEach var="vo" items="${hhList }" varStatus="h">
 																	<span class="hotelTop10"
 																		style="font-size: 15pt; color: white; line-height: 2"
-																		data-poster="${vo.poster }"> <strong>${f.index+1 }.
+																		data-poster="${vo.poster }"> <strong>${h.index+1 }.
 																			&nbsp;${vo.name }</strong>
 																	</span>
 																	<br>
