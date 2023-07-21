@@ -31,6 +31,7 @@
   <%--변경위치 --%>
   <jsp:include page="${adminpage_jsp }"></jsp:include>
 </div>
+<div style="height: 100px;"></div>
 </div>
 </div>
 </body>
