@@ -151,7 +151,7 @@ public class FreeBoardReplyDAO {
 			rs.close();
 			
 			//group_step+1 => update
-			sql="UPDATE project_freeboard_reply SET "
+			sql="UPDATE jeju_freeboard_reply SET "
 					+ "group_step=group_step+1 "
 					+ "WHERE group_id=? AND group_step>?";
 			ps=conn.prepareStatement(sql);
@@ -172,7 +172,7 @@ public class FreeBoardReplyDAO {
 			ps.setInt(8, pno);
 			ps.executeUpdate();
 			//depth => update
-			sql="UPDATE project_freeboard_reply SET "
+			sql="UPDATE jeju_freeboard_reply SET "
 					+ "depth=depth+1 "
 					+ "WHERE no=?";
 			ps=conn.prepareStatement(sql);
@@ -198,7 +198,6 @@ public class FreeBoardReplyDAO {
 			db.disConnection(conn, ps);
 		}
 	}
-	// 댓글 삭제
 	// 댓글 삭제
 	public void replyDelete(int no)
 	{
@@ -230,7 +229,7 @@ public class FreeBoardReplyDAO {
 			{
 				String msg="관리자가 삭제한 댓글입니다.";
 				sql="UPDATE jeju_freeboard_reply SET "
-						+ "msg=? "
+						+ "content=? "
 						+ "WHERE no=?";
 				ps=conn.prepareStatement(sql);
 				ps.setString(1, msg);

@@ -162,14 +162,14 @@ td{
 			        <ul class="pagination" style="white-space: nowrap;">
 			          <!-- startPage: 1, 11, 21, 31 ... -->
 			          
-			        
+			        	<c:if test="${startPage>1 }">
 				          <c:if test="${lno==null }">
 				          	<li class="page-item"><a class="page-link" href="../travel/travel_find.do?page=${startPage>1?startPage-1:startPage }&fd=${fd}">&laquo; Previous</a></li>
 				          </c:if>
 				          <c:if test="${lno!=null }">
 				          	<li class="page-item"><a class="page-link" href="../travel/travel_find.do?page=${startPage>1?startPage-1:startPage }&fd=${fd}&lno=${lno}">&laquo; Previous</a></li>
 				          </c:if>
-
+						</c:if>
 			         <c:forEach var="i" begin="${startPage }" end="${endPage }">
 						  <c:if test="${lno==null }">
 				          <li class="page-item  ${curpage == i?'active':''}"><a class="page-link" href="../travel/travel_find.do?page=${i }&fd=${fd}">${i }</a></li>
