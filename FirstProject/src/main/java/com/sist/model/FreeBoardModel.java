@@ -22,14 +22,15 @@ public class FreeBoardModel {
 		FreeBoardDAO dao = FreeBoardDAO.newInstance();
 		List<FreeboardVO> list = dao.freeboardListData(curpage);
 		int rowtotal = dao.freeboardTotalRow();
+		int total = rowtotal;
 		int totalpage =(int)Math.ceil(rowtotal/10.0);
 		final int BLOCK=5;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-		
+		rowtotal=(rowtotal-((10*curpage)-10));
 		if(endPage>totalpage)
 			endPage=totalpage;
-		
+		request.setAttribute("total", total);
 		request.setAttribute("rowtotal", rowtotal);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
