@@ -102,6 +102,11 @@ table td {
 	border: none;
 	border-radius: 14px;
 }
+.payImg{
+	width: 48px;
+	height: 30px;
+	align-items: center;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript"
@@ -306,7 +311,45 @@ table td {
 					<strong>결제 방법</strong>
 				</h4>
 				<hr>
-				<div style="height: 1000px"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+				  	<label class="form-check-label" for="flexRadioDefault1">
+				    신용/체크카드
+				  	</label>
+				</div>
+				<div style="height: 7px;"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  	<label class="form-check-label" for="flexRadioDefault2">
+				    카카오페이
+				 	</label>
+				 	<img src="../assets/images/kakao.png" class="payImg">
+				</div>
+				<div style="height: 7px;"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  	<label class="form-check-label" for="flexRadioDefault2">
+				    토스페이
+				 	</label>
+				 	<img src="../assets/images/toss.png" class="payImg">
+				</div>
+				<div style="height: 7px;"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  	<label class="form-check-label" for="flexRadioDefault2">
+				    네이버페이
+				 	</label>
+				 	<img src="../assets/images/naver.png" class="payImg">
+				</div>
+				<div style="height: 7px;"></div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+				  	<label class="form-check-label" for="flexRadioDefault2">
+				    페이코
+				 	</label>
+				 	<img src="../assets/images/payco.png" class="payImg">
+				</div>
+				<div style="height: 100px"></div>
 			</div>
 			<div class="col-sm-4" style="color: black" id="yourDiv">
 				<div class="buyBox">

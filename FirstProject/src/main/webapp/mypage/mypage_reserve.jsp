@@ -61,6 +61,11 @@ $(function(){
 		  return text === "리뷰작성" ? "작성취소" : "리뷰작성";
 		});
     });
+	
+	$('.rcanBtn').click(function(){
+		alert("예약이 취소되었습니다.")
+	});
+	
 })
 		
 </script>
@@ -87,7 +92,7 @@ $(function(){
 									class="reserveImg"></td>
 								<td width="65%" style="font-size: 17px; font-weight: bold;"
 									id="title">${vo.title }</td>
-								<td width="15%"><a href="../mypage/mypage_reserve_delete.do?jrno=${vo.jrno }" class="btn btn-outline-danger">예약취소</a></td>
+								<td width="15%"><a href="../mypage/mypage_reserve_delete.do?jrno=${vo.jrno }" class="btn btn-outline-danger rcanBtn">예약취소</a></td>
 							</tr>
 							<tr>
 								<td width="65%" style="color: gray;"><p>${vo.dbday }</p>
