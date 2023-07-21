@@ -253,6 +253,7 @@ $(function() {
 	       </div>
 	   </c:if>
     </form>
+    <br><br>
     <c:if test="${sessionScope.id==null }">
     <div class="container">
     	<div class="row">
@@ -264,8 +265,48 @@ $(function() {
     </c:if>
     
    <!--  </form> -->
-    <br>
-    
+    <br><br>
+    <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 style="text-align: center;">차량 추천</h3>
+      <br>
+      <div class="row">
+        <div class="col-md-2">
+          <div class="var" >
+            <img src="https://rentinjeju.com${vo.img}" style= "border-radius:20px;">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="var">
+            <img src="https://rentinjeju.com${vo.img}" style= "border-radius:20px;">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="var">
+            <img src="https://rentinjeju.com${vo.img}" style= "border-radius:20px;">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="var">
+            <img src="https://rentinjeju.com${vo.img}" style= "border-radius:20px;">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="var">
+            <img src="https://rentinjeju.com${vo.img}" style= "border-radius:20px;">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="var">
+            <img src="https://rentinjeju.com${vo.img}" style= "border-radius:20px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
     <div class="container">
     	<div class="row">
     	<div class="col-md-12">

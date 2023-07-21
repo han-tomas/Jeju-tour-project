@@ -115,8 +115,12 @@ public class RentcarModel {
 		RentcarDAO dao=RentcarDAO.newInstance();
 		RentcarVO vo=dao.RentcarDetailData(Integer.parseInt(cid));
 		request.setAttribute("vo", vo);
+		//String rc=vo.getCar_size();
+		//RentcarVO rvo=(RentcarVO) dao.RentcarRecommand(rc);
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
+		
+		
 		
 		if(id!=null) {
 			RentcarWishDAO wdao=RentcarWishDAO.newInstance();

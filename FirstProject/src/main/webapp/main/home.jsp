@@ -525,7 +525,7 @@ $(function(){
 													</div>	
 														<fmt:formatNumber value="${rvo.price }" pattern="#,###" />원
 													
-												</span> <span class="details"> <em></em>
+												</span> <span class="details"> <br><em>${rvo.car_size}ㆍ${rvo.seater}ㆍ${rvo.fuel_type}ㆍ${rvo.gear_type}ㆍ${rvo.brand}</em>
 												</span> <span> <br>
 												</span>
 												<div class="main-white-button">

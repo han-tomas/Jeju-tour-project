@@ -72,8 +72,7 @@ th,td{
 		<tr>
 			<td colspan="2" class="text-center">
 				<input type = button class="btn btn-sm btn-danger" value="삭제" id="checkBtn">
-				<input type = button class="btn btn-sm btn-secondary" value="취소"
-				 onclick="javascript:history.back()">
+				<a href="../mypage/mypage_detail.do"  class="btn btn-sm btn-secondary">취소</a>
 			</td>
 		</tr>
 	</table>
