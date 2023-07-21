@@ -237,6 +237,45 @@ public class RentcarDAO {
 		  }
 		  return sList;
 	  }
+	
+	public List<RentcarVO> RentcarRecommand(String rc)
+	  {
+		  List<RentcarVO> list=new ArrayList<RentcarVO>();
+		  try
+		  {
+			  conn=db.getConnection();
+			  String sql="SELECT cid,img,car_name,car_size,seater,fuel_type,gear_type,brand,price,rcno,hit,like2,num "
+						+ "FROM (SELECT cid,img,car_name,car_size,seater,fuel_type,gear_type,brand,price,rcno,hit,like2,rownum as num "
+						+ "FROM (SELECT cid,img,car_name,car_size,seater,fuel_type,gear_type,brand,price,rcno,hit,like2 "
+						+ "FROM rent_info WHERE car_size LIKE '?' "
+						+ "ORDER BY cid ASC)) "
+						+ "WHERE num BETWEEN 5 AND 10";
+			  
+			  ResultSet rs=ps.executeQuery();
+			  while(rs.next())
+			  {
+				  RentcarVO vo=new RentcarVO();
+				  vo.setCid(rs.getInt(1));
+				  vo.setImg(rs.getString(2));
+				  vo.setCar_name(rs.getString(3));
+				  vo.setCar_size(rs.getString(4));
+				  vo.setBrand(rs.getString(5));
+				  vo.setPrice(rs.getInt(6));
+				
+				  list.add(vo);
+			  }
+			  rs.close();
+			  
+		  }catch(Exception ex)
+		  {
+			  ex.printStackTrace();
+		  }
+		  finally
+		  {
+			  db.disConnection(conn, ps);
+		  }
+		  return list;
+	  }
 	/*public void RentcarReserveOk(ReservationVO rrvo) 
 	{
 		try 
@@ -302,5 +341,7 @@ public class RentcarDAO {
 			db.disConnection(conn, ps);
 		}
 	}
+	
+	
 		
 }
