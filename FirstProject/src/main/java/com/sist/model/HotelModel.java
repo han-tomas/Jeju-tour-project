@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -101,6 +102,10 @@ public class HotelModel {
 			images[i] = hotelURL + images[i];
 		}
 		
+		// 댓글 가져오기
+		int hdno = dao.hotelHdnoData(Integer.parseInt(huno));
+		List<ReviewVO> rlist = dao.hotelReview(hdno);
+		
 		// 찜여부 확인
 		if(id!=null) {
 			HotelWishDAO wdao=HotelWishDAO.newInstance();
@@ -110,6 +115,7 @@ public class HotelModel {
 		request.setAttribute("imagesLength", imagesLength);
 		request.setAttribute("images", images);
 		request.setAttribute("vo", vo);
+		request.setAttribute("rlist", rlist);
 		
 		request.setAttribute("main_jsp", "../hotel/hotel_detail.jsp");
 		return "../main/main.jsp";
@@ -186,6 +192,7 @@ public class HotelModel {
 		return "../hotel/room_list.jsp";
 	}
 	
+	// 호텔 예약
 	@RequestMapping("hotel/hotel_reserve.do")
 	public String hotel_reserve(HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -287,47 +294,5 @@ public class HotelModel {
 		return "../main/main.jsp";
 	}
 	
-	@RequestMapping("hotel/hotel_reserve_ok.do")
-	public String hotel_reserve_ok(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-		String rno = request.getParameter("rno");
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
-		String inwon = request.getParameter("inwon");
-		String price = request.getParameter("price");
-		String tprice = request.getParameter("tprice");
-		String dbday = request.getParameter("date");
-		String poster = request.getParameter("poster");
-		String title = request.getParameter("title");
-		HttpSession session=request.getSession();
-		String id=(String)session.getAttribute("id");
-		
-		ReservationVO vo = new ReservationVO();
-		vo.setId(id);
-		vo.setRname(name);
-		vo.setRemail(email);
-		vo.setRphone(phone);
-		vo.setRno(Integer.parseInt(rno));
-		vo.setCheckin(startDate);
-		vo.setCheckout(endDate);
-		vo.setInwon(Integer.parseInt(inwon));
-		vo.setPrice(Integer.parseInt(price));
-		vo.setTprice(Integer.parseInt(tprice));
-		vo.setDbday(dbday);
-		vo.setPoster(poster);
-		vo.setTitle(title);
-		
-		// DAO연동
-		HotelDAO dao = HotelDAO.newInstance();
-		dao.hotelReserveOk(vo);
-		
-		return "redirect:../mypage/mypage_reserve.do";
-	}
+	
 }

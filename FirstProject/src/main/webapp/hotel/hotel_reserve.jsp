@@ -166,7 +166,7 @@ $(function(){
 	$('#reserveBtn').click(function(){
 		$.ajax({
 			type:'post',
-			url:'../hotel/hotel_reserve_ok.do',
+			url:'../mypage/mypage_hotel_reserve.do',
 			data:{"name":name,"email":email,"phone":phone,"rno":rno,"startDate":startDate,
 				"endDate":endDate,"inwon":inwon,"price":price,"tprice":tprice,"date":date,
 				"poster":poster,"title":title},

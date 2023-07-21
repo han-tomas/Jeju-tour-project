@@ -17,11 +17,17 @@ REGDATE	DATE
  */
 import java.util.*;
 public class ReservationVO {
-	private int jrno, rno, acino, cid, rcno, inwon, price, tprice;
+	private int jrno, rno, acino, cid, rcno, inwon, price, tprice, hdno;
 	private String checkin, checkout, id, rname, remail, rphone, payment, rok, dbday, poster, title;
 	private Date regdate;
 	private String realDate;
 	
+	public int getHdno() {
+		return hdno;
+	}
+	public void setHdno(int hdno) {
+		this.hdno = hdno;
+	}
 	
 	public String getRealDate() {
 		return realDate;

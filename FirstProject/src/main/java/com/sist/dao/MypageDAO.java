@@ -24,9 +24,9 @@ public class MypageDAO {
 		List<ReservationVO> list=new ArrayList<ReservationVO>();
 		try {
 			conn=db.getConnection();
-			String sql="SELECT dbday,poster,title,regdate,tprice,jrno,num "
-					+ "FROM (SELECT dbday,poster,title,regdate,tprice,jrno,rownum as num "
-					+ "FROM (SELECT /*+ INDEX_DESC(jeju_reserve jr_jrno_pk)*/dbday, poster, title, regdate, tprice,jrno "
+			String sql="SELECT dbday,poster,title,regdate,tprice,NVL(acino,0),NVL(rno,0),NVL(cid,0),rcno,rok,jrno,num "
+					+ "FROM (SELECT dbday,poster,title,regdate,tprice,acino,rno,cid,rcno,rok,jrno,rownum as num "
+					+ "FROM (SELECT /*+ INDEX_DESC(jeju_reserve jr_jrno_pk)*/dbday, poster, title, regdate, tprice,acino,rno,cid, rcno, rok,jrno "
 					+ "FROM jeju_reserve WHERE id=?)) "
 					+ "WHERE num BETWEEN ? AND ?";
 			ps=conn.prepareStatement(sql);
@@ -48,6 +48,12 @@ public class MypageDAO {
 				vo.setRealDate(realday);
 				vo.setTprice(rs.getInt(5));
 				vo.setJrno(rs.getInt(6));
+				vo.setAcino(rs.getInt(6));
+				vo.setRno(rs.getInt(7));
+				vo.setCid(rs.getInt(8));
+				vo.setRcno(rs.getInt(9));
+				vo.setRok(rs.getString(10));
+				vo.setJrno(rs.getInt(11));
 				list.add(vo);
 			}
 			rs.close();
@@ -289,4 +295,83 @@ public class MypageDAO {
 		}
 	}
 	
+	public ReservationVO reserveSearch(int jrno) {
+		ReservationVO vo = new ReservationVO();
+		try {
+			conn=db.getConnection();
+			String sql="SELECT rcno, NVL(acino,0), NVL(rno,0), NVL(cid,0) "
+					+ "FROM jeju_reserve WHERE jrno=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, jrno);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			vo.setJrno(jrno);
+			vo.setRcno(rs.getInt(1));
+			vo.setAcino(rs.getInt(2));
+			vo.setRno(rs.getInt(3));
+			vo.setCid(rs.getInt(4));
+			rs.close();
+			
+			if(vo.getRno()!=0) {
+				sql = "SELECT huno FROM room WHERE rno=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, vo.getRno());
+				rs = ps.executeQuery();
+				rs.next();
+				int huno = rs.getInt(1);
+				rs.close();
+				sql = "SELECT hdno FROM hotel_detail WHERE huno=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, huno);
+				rs = ps.executeQuery();
+				rs.next();
+				vo.setHdno(rs.getInt(1));
+				rs.close();
+			} else {
+				vo.setHdno(0);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.disConnection(conn, ps);
+		}
+		return vo;
+	}
+	
+	public void reviewInsert(ReviewVO vo) {
+		try {
+			conn=db.getConnection();
+			String sql="INSERT INTO reserve_review VALUES("
+					+ "rr_no_seq.nextval,?,?,?,?,?,?,?,?,?)";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, vo.getContent());
+			ps.setString(2, vo.getScore());
+			ps.setString(3, vo.getName());
+			ps.setString(4, vo.getId());
+	        if (vo.getHdno() == 0) {
+	            ps.setNull(5, java.sql.Types.INTEGER);
+	        } else {
+	            ps.setInt(5, vo.getHdno());
+	        }
+	        
+	        if (vo.getAcino() == 0) {
+	            ps.setNull(6, java.sql.Types.INTEGER);
+	        } else {
+	            ps.setInt(6, vo.getAcino());
+	        }
+	        
+	        if (vo.getCid() == 0) {
+	            ps.setNull(7, java.sql.Types.INTEGER);
+	        } else {
+	            ps.setInt(7, vo.getCid());
+	        }
+			ps.setInt(8, vo.getRcno());
+			ps.setInt(9, vo.getJrno());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			db.disConnection(conn, ps);
+		}
+	}
 }

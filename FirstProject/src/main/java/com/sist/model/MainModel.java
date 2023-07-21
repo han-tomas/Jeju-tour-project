@@ -74,6 +74,10 @@ public class MainModel {
 		List<FoodVO> ffList=fdao.foodTopListData();
 		request.setAttribute("ffList", ffList);
 		
+		// 호텔 추천
+		List<HotelVO> hhList = hdao.hotelTop10();
+		request.setAttribute("hhList", hhList);
+		
 		request.setAttribute("fList", fList);
 		request.setAttribute("hList", hList);
 		request.setAttribute("cList", cList);
