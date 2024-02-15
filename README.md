@@ -1,8 +1,10 @@
 <p align="center">
  <img src = "https://github.com/http-kjs/SecondProject/assets/124488773/dfd1ab7f-8389-4276-9ce4-d4f7e9422407">
 </p>
-
-['제주 속으로' 포트폴리오 바로가기](https://www.notion.so/ecf4fc9b31914a57a8cfd691ddd9f522)  
+<p align="right">
+ <a href="https://ten-pond-80a.notion.site/ecf4fc9b31914a57a8cfd691ddd9f522?pvs=4">'제주에 오길' 포트폴리오 바로가기</a>
+</p>  
+  
 ## 📚목차  
   
 1. [소개](#소개)
