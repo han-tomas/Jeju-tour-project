@@ -76,3 +76,25 @@
  
  </ul>
 </details>
+<details>
+ <summary>Model</summary>
+ <ul>
+ <li><a href = "https://github.com/http-kjs/FirstProject/blob/master/FirstProject/src/main/java/com/sist/model/MemberModel.java">MemberModel</a> : 회원가입, 로그인, 아이디/비밀번호 찾기</li>
+ <li><a href = "https://github.com/http-kjs/FirstProject/blob/master/FirstProject/src/main/java/com/sist/model/TravelModel.java">TravelModel</a> : 여행 검색, 상세</li>
+ <li><a href = "https://github.com/http-kjs/FirstProject/blob/master/FirstProject/src/main/java/com/sist/model/CourseModel.java">CourseModel</a> : 여행 코스 추천 페이지</li>
+ <li><a href = "https://github.com/http-kjs/FirstProject/blob/master/FirstProject/src/main/java/com/sist/model/CourseJJimRecommendModel.java">CourseJJimRecommendModel</a> : 여행 코스 찜/추천</li>
+ <li><a href = "https://github.com/http-kjs/FirstProject/blob/master/FirstProject/src/main/java/com/sist/model/FreeBoardModel.java">FreeBoardModel</a> : 자유게시판 CRUD</li> 
+  <li><a href = "https://github.com/http-kjs/FirstProject/blob/master/FirstProject/src/main/java/com/sist/model/FreeBoardReplyModel.java">FreeBoardReplyModel</a> : 자유게시판 댓글/대댓글</li> 
+  <li><a href = "https://github.com/http-kjs/FirstProject/blob/master/FirstProject/src/main/java/com/sist/model/MyPageModel.java">MyPageModel</a> : 마이페이지</li> 
+  
+ </ul>
+</details>
+<details>
+ <summary>View</summary>
+ <ul>
+  <li><a href = "https://github.com/http-kjs/FirstProject/tree/master/FirstProject/src/main/webapp/member">member</a></li>
+  <li><a href = "https://github.com/http-kjs/FirstProject/tree/master/FirstProject/src/main/webapp/travel">travel</a></li>
+  <li><a href = "https://github.com/http-kjs/FirstProject/tree/master/FirstProject/src/main/webapp/freeboard">freeboard</a></li>
+  <li><a href = "https://github.com/http-kjs/FirstProject/tree/master/FirstProject/src/main/webapp/mypage">mypage</a></li>
+ </ul>
+</details>
